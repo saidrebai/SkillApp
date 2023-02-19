@@ -12,4 +12,14 @@ module.exports = () => {
 		console.log(error);
 		console.log("Could not connect database!");
 	}
+	try {
+		// Attempt MongoDB operation
+	  } catch (error) {
+		if (error instanceof ServerSelectionError) {
+		  console.error("Unable to select a MongoDB server:", error.message);
+		} else {
+		  console.error("Unexpected error:", error);
+		}
+	  }
+	  
 };
