@@ -1,8 +1,8 @@
-const router = require("express").Router();
 const { User, validate } = require("../models/user");
 const bcrypt = require("bcrypt");
 
-router.post("/", async (req, res) => {
+module.exports ={
+    signup : async function(req, res){
 	try {
 		const { error } = validate(req.body);
 		if (error)
@@ -20,6 +20,6 @@ router.post("/", async (req, res) => {
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
-});
+},
+};
 
-module.exports = router;
