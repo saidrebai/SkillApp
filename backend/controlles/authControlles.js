@@ -1,10 +1,10 @@
-const { User } = require("../models/user");
+const { User ,validate} = require("../models/user");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
 
 module.exports={
-	authentification : async function(req, res) {
+	authentification :async function(req, res) {
 	try {
 		const { error } = validate(req.body);
 		if (error)
