@@ -40,7 +40,7 @@ const Signup = () => {
           <h1 className="titleButton"> welcome Back</h1>
           <Link to="/login">
             <button type="button" className="white_btn">
-              sign in
+              sign In
             </button>
           </Link>
         </div>
