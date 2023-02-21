@@ -1,4 +1,4 @@
-import styles from "./styles.modules.css";
+import "./styles.modules.css";
 
 const Main = () => {
 	const handleLogout = () => {
@@ -7,10 +7,10 @@ const Main = () => {
 	};
 
 	return (
-		<div className={styles.main_container}>
-			<nav className={styles.navbar}>
+		<div className="main_container">
+			<nav className="navbar">
 				<h1>fakebook</h1>
-				<button className={styles.white_btn} onClick={handleLogout}>
+				<button className="white_btn" onClick={handleLogout}>
 					Logout
 				</button>
 			</nav>
