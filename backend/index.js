@@ -3,9 +3,9 @@ const express = require ("express");
 const app=express();
 const cors=require('cors');
 const connection = require('./db');
-const userRoutes = require("./routes/usersRouters");
-const authRoutes = require("./routes/authRouter");
-const jobAppRoutes = require("./routes/jobAppRouter");
+const AdminRoutes = require("./routes/adminRouters");
+const CandidatRoutes = require("./routes/candidatRouters");
+
 
 //database connection
 connection();
@@ -13,9 +13,8 @@ connection();
 app.use(express.json());
 app.use(cors());
 //routes
-app.use("/api/usersRouters", userRoutes);
-app.use("/api/authRouters", authRoutes);
-app.use("/api/jobAppRouter", jobAppRoutes);
+app.use("/api/adminRouters", AdminRoutes);
+app.use("/api/canidatRouters", CandidatRoutes);
 
 
 const port = process.env.PORT||8080;
