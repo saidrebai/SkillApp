@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const adminControlles = require('../controlles/adminControlles');
+const adminControlles = require("../controlles/adminControlles");
 
-router.post('/signin',adminControlles.authentification);
-router.post('/signup',adminControlles.signup)
+router.post("/signin", adminControlles.authentification);
+router.post("/signup", adminControlles.signup);
 
 module.exports = router;
