@@ -1,4 +1,4 @@
-const { Admin ,validate} = require("../models/adminModel");
+const { Admin ,validate , vall} = require("../models/adminModel");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
@@ -6,7 +6,7 @@ const Joi = require("joi");
 module.exports={
 	authentification :async function(req, res) {
 	try {
-		const { error } = validate(req.body);
+		const { error } = vall(req.body);
 		if (error)
 			return res.status(400).send({ message: error.details[0].message });
 

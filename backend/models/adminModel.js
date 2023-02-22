@@ -62,5 +62,13 @@ const validate = (data) => {
 	});
 	return schema.validate(data);
 };
+const vall = (data) => {
+	const schema = Joi.object({
+        Name: Joi.string().required().label("Name"),
+		email: Joi.string().email().required().label("Email"),
+		password: passwordComplexity().required().label("Password"),
+	});
+	return schema.validate(data);
+};
 
-module.exports ={Admin, validate};
+module.exports ={Admin, validate, vall};
