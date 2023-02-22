@@ -1,6 +1,17 @@
 const { User ,validate} = require("../models/user");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
+const crypto = require('crypto');
+
+const { privateKey } = crypto.generateKeyPairSync('rsa', {
+	modulusLength: 4096,
+	privateKeyEncoding: {
+	  type: 'pkcs8',
+	  format: 'pem'
+	}
+  });
+
+console.log(privateKey); // prints the private key to the console
 
 
 module.exports={
@@ -28,13 +39,13 @@ module.exports={
 	}
 },
 
- validate :function validate (data) {
+ /*validate :function validate (data) {
 	const schema = Joi.object({
 		email: Joi.string().email().required().label("Email"),
 		password: Joi.string().required().label("Password"),
 	});
 	return schema.validate(data);
-},
+},*/
 
 signup : async function(req, res){
 	try {
