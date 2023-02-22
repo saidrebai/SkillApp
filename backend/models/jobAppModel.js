@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const jobApplicationSchema = new mongoose.Schema({
-  userName: {
+  firstName: {
     type: String,
     required: true,
   },
@@ -52,8 +52,8 @@ const jobApp = mongoose.model("jobApp", jobApplicationSchema);
 
 const validate = (data) => {
   const schema = object({
-    userName: string().required().label("First Name"),
-    lastName: string().lastName().required().label("lastName"),
+    firstName: string().required().label("First Name"),
+    lastName: string().required().label("lastName"),
     birthDate: string().required().label("birthDate"),
     gender: string().required().label("gender"),
     country: string().required().label("country"),

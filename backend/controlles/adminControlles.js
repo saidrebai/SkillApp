@@ -1,11 +1,11 @@
-const { Admin, validate } = require("../models/adminModel");
+const { Admin ,validate , vall} = require("../models/adminModel");
 const bcrypt = require("bcrypt");
-const Joi = require("joi");
+
 
 module.exports = {
   authentification: async function (req, res) {
     try {
-      const { error } = validate(req.body);
+      const { error } = vall(req.body);
       if (error)
         return res.status(400).send({ message: error.details[0].message });
 
@@ -27,19 +27,7 @@ module.exports = {
     }
   },
 
-  /*validate :function validate (data) {
-	const schema = Joi.object({
-		Name: Joi.string().required().label("Name"),
-		country: Joi.string().required().label("country"),
-		town: Joi.string().required().label("town"),
-		adresse: Joi.string().required().label("adresse"),
-		Zipcode: Joi.string().required().label("Zipcode"),
-		tel: Joi.number().required().label("tel"),
-		email: Joi.string().email().required().label("Email"),
-		password: Joi.string().required().label("Password"),
-	});
-	return schema.validate(data);
-},*/
+
 
   signup: async function (req, res) {
     try {
