@@ -5,6 +5,7 @@ const cors=require('cors');
 const connection = require('./db');
 const AdminRoutes = require("./routes/adminRouters");
 const CandidatRoutes = require("./routes/candidatRouters");
+const jobAppRoutes = require("./routes/jobAppRouter");
 
 
 //database connection
@@ -14,7 +15,8 @@ app.use(express.json());
 app.use(cors());
 //routes
 app.use("/api/adminRouters", AdminRoutes);
-app.use("/api/canidatRouters", CandidatRoutes);
+app.use("/api/candidatRouters", CandidatRoutes);
+app.use("/api/jobAppRouters", jobAppRoutes);
 
 
 const port = process.env.PORT||8080;

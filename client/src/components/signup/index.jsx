@@ -37,10 +37,10 @@ const Signup = () => {
     <div className="signup_container">
       <div className="signup_from_container">
         <div className="left">
-          <h1> welcome Back</h1>
+          <h1 className="titleButton"> welcome Back</h1>
           <Link to="/login">
             <button type="button" className="white_btn">
-              sign in
+              sign In
             </button>
           </Link>
         </div>

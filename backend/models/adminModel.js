@@ -62,6 +62,7 @@ const validate = (data) => {
 	});
 	return schema.validate(data);
 };
+
 const vall = (data) => {
 	const schema = Joi.object({
         Name: Joi.string().required().label("Name"),

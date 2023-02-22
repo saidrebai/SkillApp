@@ -32,19 +32,10 @@ const Login = () => {
   return (
     <>
       <div className="login_container">
-        <div className="login_form_container">
+        <div className="login_from_container">
           <div className="left">
-            <form className="form_container" onSubmit={handleSubmit}>
+            <form className="from_container" onSubmit={handleSubmit}>
               <h1>Login to Your Account</h1>
-              <input
-                type="text"
-                placeholder="UserName"
-                name="UserName"
-                onChange={handleChange}
-                value={data.UserName}
-                required
-                className="input"
-              />
               <input
                 type="email"
                 placeholder="Email"
