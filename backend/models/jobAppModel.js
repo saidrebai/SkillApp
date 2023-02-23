@@ -48,7 +48,7 @@ const jobApplicationSchema = new mongoose.Schema({
   //   resume :{ type: , required: true },
 });
 
-const jobApp = mongoose.model("jobApp", jobApplicationSchema);
+const jobApp = mongoose.model("JobApp", jobApplicationSchema);
 
 const validate = (data) => {
   const schema = object({
