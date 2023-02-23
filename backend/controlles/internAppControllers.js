@@ -1,4 +1,4 @@
-const {internApp, validate} = require("../models/internAppModel")
+const {internModel, validate} = require("../models/internAppModel")
 
 module.exports = {
     createInternApp: function (req, res) {
@@ -18,13 +18,13 @@ module.exports = {
 			tel: req.body.tel,
 		};
 		console.log('nneww', newIntern);
-		internApp.create(req.body, function (err, intern) {
+		internModel.create(req.body, function (err, intern) {
 			if (err)
 				res.json({
 					message: err,
 					statut: 500,
 				});
-			else
+			else if(validate)
 				res.json({
 					message: 'intern created!',
 					statut: 200,
