@@ -12,7 +12,7 @@ module.exports = {
             country: req.body.country,
             Establishment: req.body.Establishment,
             town: req.body.town,
-            Zipcode: req.body.Zipcode,
+            zipcode: req.body.zipcode,
 			adresse: req.body.adresse,
 			motivation: req.body.motivation,
 			tel: req.body.tel,
