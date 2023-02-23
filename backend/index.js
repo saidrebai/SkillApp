@@ -6,6 +6,7 @@ const connection = require('./db');
 const AdminRoutes = require("./routes/adminRouters");
 const CandidatRoutes = require("./routes/candidatRouters");
 const jobAppRoutes = require("./routes/jobAppRouter");
+const internAppRouter = require("./routes/internAppRouter");
 
 
 //database connection
@@ -17,6 +18,7 @@ app.use(cors());
 app.use("/api/adminRouters", AdminRoutes);
 app.use("/api/candidatRouters", CandidatRoutes);
 app.use("/api/jobAppRouters", jobAppRoutes);
+app.use("/api/internAppRouter", internAppRouter);
 
 
 const port = process.env.PORT||8080;
