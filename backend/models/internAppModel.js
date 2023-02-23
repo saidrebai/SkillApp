@@ -51,14 +51,14 @@ const internApplicationSchema = new mongoose.Schema({
   },
   motivation: {
     type: String,
-    
   },
-  /*resume :{ 
-    type: , 
-    required: true },*/
+ /* resume: {
+    type: file,
+    required: true,
+  },*/
 });
 
-const internApp = mongoose.model("internApp", internApplicationSchema);
+const internModel = mongoose.model("internApp", internApplicationSchema);
 
 const validate = (data) => {
   const schema = object({
@@ -75,9 +75,9 @@ const validate = (data) => {
     level: string().required().label("level"),
     degree: string().required().label("degree"),
     motivations: string().required().label("motivations"),
-    //resume: .required().label("resume"),
+    //resume: file().required().label("resume"),
   });
   return schema.validate(data);
 };
 
-module.exports = { internApp, validate };
+module.exports = { internModel, validate };
