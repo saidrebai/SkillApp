@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const jobApplicationSchema = new mongoose.Schema({
+const internApplicationSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
@@ -25,7 +25,7 @@ const jobApplicationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  jobPosition: {
+  Establishment: {
     type: String,
     required: true,
   },
@@ -37,22 +37,28 @@ const jobApplicationSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  level: {
+    type: String,
+    required: true,
+  },
+  degree: {
+    type: String,
+    required: true,
+  },
   tel: {
     type: Number,
     required: true,
   },
-  yearsExperience: {
+  motivation: {
     type: String,
-    required: true,
+    
   },
-  yourMotivations: {
-    type: String,
-    required: true,
-  },
-  //   resume :{ type: , required: true },
+  /*resume :{ 
+    type: , 
+    required: true },*/
 });
 
-const jobApp = mongoose.model("jobApp", jobApplicationSchema);
+const internApp = mongoose.model("internApp", internApplicationSchema);
 
 const validate = (data) => {
   const schema = object({
@@ -62,15 +68,16 @@ const validate = (data) => {
     gender: string().required().label("gender"),
     country: string().required().label("country"),
     adresse: string().required().label("adresse"),
-    jobPosition: string().required().label("jobPosition"),
+    Establishment: string().required().label("Establishment"),
     town: string().required().label("town"),
     zipCode: number().required().label("zipCode"),
     tel: number().required().label("tel"),
-    yearsExperience: string().required().label("yearsExperience"),
-    yourMotivations: string().required().label("yourMotivations"),
+    level: string().required().label("level"),
+    degree: string().required().label("degree"),
+    motivations: string().required().label("motivations"),
     //resume: .required().label("resume"),
   });
   return schema.validate(data);
 };
 
-module.exports = { jobApp, validate };
+module.exports = { internApp, validate };
