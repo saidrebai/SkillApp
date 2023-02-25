@@ -46,4 +46,4 @@ const validate = (data) => {
     return schema.validate(data);
   };
 
-module.exports = { offerModel,validate};
+module.exports = { offerModel, validate};
