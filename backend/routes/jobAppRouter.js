@@ -1,6 +1,6 @@
 const jobAppControlles = require("../controlles/jobAppControlles");
 const router = require("express").Router();
-
-router.post("/jobApp", jobAppControlles.createJobApp);
+const uploadFile = require("../middleware/multer")
+router.post("/jobApp", [uploadFile.single([{ name: "images" }])], jobAppControlles.createJobApp);
 
 module.exports = router;

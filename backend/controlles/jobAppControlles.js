@@ -1,25 +1,28 @@
-const {jobApp, validate} = require("../models/jobAppModel")
+const { jobApp, validate } = require("../models/jobAppModel");
+const FilesModel = require("../models/filesModels")
 
 module.exports = {
   createJobApp: async function (req, res) {
     try {
-      const { error } = validate(req.body);
-      if (error)
-        return res.status(400).send({ message: error.details[0].message });
-
-      const user = await jobApp.findOne({ firstName: req.body.firstName });
-      if (user)
-        return res
-          .status(409)
-          .send({ message: "User with given name already Exist!" });
-
-      
-
-      await new jobApp({ ...req.body,firstName}).save();
-      res.status(201).send({ message: "Job application created successfully" });
-    } 
-    catch (error) {
-      res.status(500).send({ message: "Internal Server Error" });
+      const fileArray = req?.files?.images;
+      let arrayOfFilesIds = [];
+      if (fileArray) {
+        for (let i = 0; i < fileArray.length; i++) {
+          const fileInfo = await FilesModel.create(fileArray[i]);
+          arrayOfFilesIds.push(fileInfo?._id);
+        }
+      }
+      let inputJobApp = {
+        ...req.body,
+        image: arrayOfFilesIds,
+      };
+      const jobApplications = await jobApp.create(inputJobApp);
+      res.status(200).send({ message: "jobApplications created", jobApplications: jobApplications });
+    } catch (err) {
+      res.status(400).send({ message: "An error occured", err });
     }
-  },
+  }
+
+   
 };
+
