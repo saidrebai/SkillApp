@@ -1,13 +1,24 @@
-var mime = require("mime-types");
 const multer = require("multer");
+const path = require("path");
 
-destination: (req, file, cb) => {
-  if (file.mimetype === "file/pdf") {
-    cb(null, "files");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + path.extname(file.originalname));
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype == "image/pdf" 
+   
+  ) {
+    cb(null, true);
   } else {
-    console.log(file.mimetype);
-    cb({ error: "Mime type not supported" });
+    cb(null, false);
   }
 };
-const upload = multer({ storage: storage, fileFilter: fileFilter });
-module.exports = upload;
+
+module.exports = multer({ storage: storage, fileFilter: fileFilter });

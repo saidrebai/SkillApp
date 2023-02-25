@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const jobApplicationSchema = new mongoose.Schema({
+const jobApplicationSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -49,7 +50,8 @@ const jobApplicationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  //   resume :{ type: , required: true },
+  image: [{ type: Schema.Types.ObjectId, ref: "Files" }]
+  // cv :{ type: file , required: true },
 });
 
 const jobApp = mongoose.model("JobApp", jobApplicationSchema);

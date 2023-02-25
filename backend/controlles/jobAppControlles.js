@@ -1,33 +1,28 @@
 const { jobApp, validate } = require("../models/jobAppModel");
+const FilesModel = require("../models/filesModels")
 
 module.exports = {
-  createJobApp: function (req, res) {
-    const newJob = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      birthDate: req.body.birthDate,
-      gender: req.body.gender,
-      country: req.body.country,
-      adresse: req.body.adresse,
-      jobPosition: req.body.jobPosition,
-      town: req.body.town,
-      zipCode: req.body.zipCode,
-      yearsExperience: req.body.yearsExperience,
-      yourMotivations: req.body.yourMotivations,
-    };
-    console.log("nneww", newJob);
-    jobApp.create(req.body, function (err, job) {
-      if (err)
-        res.json({
-          message: err,
-          statut: 500,
-        });
-      else
-        res.json({
-          message: "User created!",
-          statut: 200,
-          data: job,
-        });
-    });
-  },
+  createJobApp: async function (req, res) {
+    try {
+      const fileArray = req?.files?.images;
+      let arrayOfFilesIds = [];
+      if (fileArray) {
+        for (let i = 0; i < fileArray.length; i++) {
+          const fileInfo = await FilesModel.create(fileArray[i]);
+          arrayOfFilesIds.push(fileInfo?._id);
+        }
+      }
+      let inputJobApp = {
+        ...req.body,
+        image: arrayOfFilesIds,
+      };
+      const jobApplications = await jobApp.create(inputJobApp);
+      res.status(200).send({ message: "jobApplications created", jobApplications: jobApplications });
+    } catch (err) {
+      res.status(400).send({ message: "An error occured", err });
+    }
+  }
+
+   
 };
+
