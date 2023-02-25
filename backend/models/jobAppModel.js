@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+
 const jobApplicationSchema = new Schema({
   firstName: {
     type: String,
@@ -50,8 +51,13 @@ const jobApplicationSchema = new Schema({
     type: String,
     required: true,
   },
-  image: [{ type: Schema.Types.ObjectId, ref: "Files" }]
-  // cv :{ type: file , required: true },
+  image: [{ type: Schema.Types.ObjectId, ref: "image", name : "image"}],
+
+  /*pdfs: [{
+    data: Buffer,
+    contentType: String,
+  }]*/
+  
 });
 
 const jobApp = mongoose.model("JobApp", jobApplicationSchema);
@@ -70,7 +76,8 @@ const validate = (data) => {
     tel: number().required().label("tel"),
     yearsExperience: string().required().label("yearsExperience"),
     yourMotivations: string().required().label("yourMotivations"),
-    //resume: .required().label("resume"),
+    image: contentType().required().label("image")
+   
   });
   return schema.validate(data);
 };

@@ -1,24 +1,36 @@
-const multer = require("multer");
-const path = require("path");
+const multer  = require('multer');
+const path = require('path');
 
+
+
+// Set storage engine for Multer
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + path.extname(file.originalname));
-  },
+  destination: './uploads/',
+  filename: function(req, file, cb){
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
 });
 
-const fileFilter = (req, file, cb) => {
-  if (
-    file.mimetype == "image/pdf" 
-   
-  ) {
-    cb(null, true);
-  } else {
-    cb(null, false);
+// Initialize Multer upload object
+const upload = multer({
+  storage: storage,
+  fileFilter: function(req, file, cb){
+    checkFileType(file, cb);
   }
-};
+}).single('image'); // pdfFile is the name of the file input field in your HTML form
 
-module.exports = multer({ storage: storage, fileFilter: fileFilter });
+// Check file type
+function checkFileType(file, cb){
+  const filetypes = /pdf/;
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = filetypes.test(file.mimetype);
+
+  if(mimetype && extname){
+    return cb(null,true);
+  } else {
+    cb('Error: PDF files only!');
+  }
+}
+
+
+module.exports = upload;
