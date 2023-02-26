@@ -17,7 +17,7 @@ const upload = multer({
   fileFilter: function(req, file, cb){
     checkFileType(file, cb);
   }
-}).single('image'); // pdfFile is the name of the file input field in your HTML form
+}).single('cv'); // pdfFile is the name of the file input field in your HTML form
 
 // Check file type
 function checkFileType(file, cb){
