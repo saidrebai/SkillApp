@@ -4,7 +4,7 @@ const filesModel = require("../models/filesModels")
 module.exports = {
   createJobApp: async function (req, res) {
     try {
-      const fileArray = req?.files?.images;
+      const fileArray = req?.files?.cv;
       let arrayOfFilesIds = [];
       if (fileArray) {
         for (let i = 0; i < fileArray.length; i++) {
@@ -14,10 +14,11 @@ module.exports = {
       }
       let inputJobApp = {
         ...req.body,
-        image: arrayOfFilesIds,
+        cv: arrayOfFilesIds,
       };
+      if(validate){
       const jobApplications = await jobApp.create(inputJobApp);
-      res.status(200).send({ message: "jobApplications created", jobApplications: jobApplications });
+      res.status(200).send({ message: "jobApplications created", jobApplications: jobApplications });}
     } catch (err) {
       res.status(400).send({ message: "An error occured", err });
     }

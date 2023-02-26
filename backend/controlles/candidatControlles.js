@@ -1,6 +1,5 @@
 const { User ,validate} = require("../models/user");
 const bcrypt = require("bcrypt");
-const Joi = require("joi");
 const crypto = require('crypto');
 
 const { privateKey } = crypto.generateKeyPairSync('rsa', {
@@ -39,13 +38,6 @@ module.exports={
 	}
 },
 
- /*validate :function validate (data) {
-	const schema = Joi.object({
-		email: Joi.string().email().required().label("Email"),
-		password: Joi.string().required().label("Password"),
-	});
-	return schema.validate(data);
-},*/
 
 signup : async function(req, res){
 	try {
