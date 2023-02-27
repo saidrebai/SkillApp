@@ -3,7 +3,7 @@ const router = require("express").Router();
 const upload = require("../middleware/multer")
 const PDF = require('../models/filesModels');
 
-
+router.post("/jobApp", jobAppControlles.createJobApp);
 router.post("/upload", upload,async(req,res)=>{
     try {
         // Check if a file was uploaded
@@ -28,6 +28,6 @@ router.post("/upload", upload,async(req,res)=>{
         res.status(500).json({ error: 'Server error' });
       }
 });
-router.post("/jobApp", jobAppControlles.createJobApp);
+
 
 module.exports = router;

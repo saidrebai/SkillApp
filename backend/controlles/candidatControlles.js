@@ -1,6 +1,9 @@
-const { User ,validate} = require("../models/user");
+const { User} = require("../models/user");
+const { vall } = require("../middleware/vall");
 const bcrypt = require("bcrypt");
 const crypto = require('crypto');
+const Joi = require("joi");
+const passwordComplexity = require("joi-password-complexity");
 
 const { privateKey } = crypto.generateKeyPairSync('rsa', {
 	modulusLength: 4096,
@@ -12,11 +15,23 @@ const { privateKey } = crypto.generateKeyPairSync('rsa', {
 
 console.log(privateKey); // prints the private key to the console
 
+const validate = (data) => {
+	const schema = Joi.object({
+	  firstName: Joi.string().required().label("firstName"),
+	  lastName: Joi.string().required().label("lastName"),
+	  adresse: Joi.string().required().label("adresse"),
+	  tel: Joi.number().required().label("tel"),
+	  email: Joi.string().email().required().label("Email"),
+	  password: passwordComplexity().required().label("Password"),
+	});
+	return schema.validate(data);
+  };
+
 
 module.exports={
 	authentification :async function(req, res) {
 	try {
-		const { error } = validate(req.body);
+		const { error } = vall(req.body);
 		if (error)
 			return res.status(400).send({ message: error.details[0].message });
 
