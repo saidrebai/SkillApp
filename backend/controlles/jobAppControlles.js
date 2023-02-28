@@ -22,8 +22,5 @@ module.exports = {
     } catch (err) {
       res.status(400).send({ message: "An error occured", err });
     }
-  }
-
-   
+  },
 };
-
