@@ -1,6 +1,24 @@
-const { Admin ,validate , vall} = require("../models/adminModel");
+const { Admin } = require("../models/adminModel");
+const { vall } = require("../middleware/vall");
 const bcrypt = require("bcrypt");
+const Joi = require("joi");
+const passwordComplexity = require("joi-password-complexity");
 
+const validate = (data) => {
+  const schema = Joi.object({
+    TypeOfUser: Joi.string().required().label("Type of user"),
+    Name: Joi.string().required().label("Name"),
+    country: Joi.string().required().label("country"),
+    town: Joi.string().required().label("town"),
+    adresse: Joi.string().required().label("adresse"),
+    Zipcode: Joi.number().required().label("Zipcode"),
+    tel: Joi.number().required().label("tel"),
+    fiscalCode: Joi.number().required().label("fiscal Code"),
+    email: Joi.string().email().required().label("Email"),
+    password: passwordComplexity().required().label("Password"),
+  });
+  return schema.validate(data);
+};
 
 module.exports = {
   authentification: async function (req, res) {
@@ -26,8 +44,6 @@ module.exports = {
       res.status(500).send({ message: "Internal Server Error" });
     }
   },
-
-
 
   signup: async function (req, res) {
     try {
