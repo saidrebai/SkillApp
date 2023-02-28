@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const internApplicationSchema = new mongoose.Schema({
   firstName: {
@@ -52,10 +53,8 @@ const internApplicationSchema = new mongoose.Schema({
   motivation: {
     type: String,
   },
- /* resume: {
-    type: file,
-    required: true,
-  },*/
+  cv: [{ type: Schema.Types.ObjectId, ref: "cv", name : "cv"}],
+
 });
 
 const internModel = mongoose.model("internApp", internApplicationSchema);
@@ -75,7 +74,7 @@ const validate = (data) => {
     level: string().required().label("level"),
     degree: string().required().label("degree"),
     motivations: string().required().label("motivations"),
-    //resume: file().required().label("resume"),
+    cv: contentType().required().label("cv")
   });
   return schema.validate(data);
 };

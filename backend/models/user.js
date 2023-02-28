@@ -1,22 +1,33 @@
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken"); //pour décryptage et cryptage
-const Joi = require("joi");
-const passwordComplexity = require("joi-password-complexity");
+const jwt = require("jsonwebtoken"); 
+
 
 const userSchema = new mongoose.Schema({
-	userName: { 
-		type: String, 
-		required: true 
-	},
-	email: { 
-		type: String, 
-		required: true 
-	},
-	password: { 
-		type: String, 
-		required: true, 
-		min:8 
-	},
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    min: 8,
+  },
+  tel: {
+    type: Number,
+    required: true,
+  },
+  adresse: {
+    type: String,
+    required: true,
+  },
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -28,13 +39,6 @@ userSchema.methods.generateAuthToken = function () {
 
 const User = mongoose.model("user", userSchema);
 
-const validate = (data) => {
-	const schema = Joi.object({
-		userName: Joi.string().required().label("userName"),
-		email: Joi.string().email().required().label("Email"),
-		password: passwordComplexity().required().label("Password"),
-	});
-	return schema.validate(data);
-};
 
-module.exports = { User, validate };
+
+module.exports = { User };

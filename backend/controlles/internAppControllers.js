@@ -16,6 +16,7 @@ module.exports = {
 			adresse: req.body.adresse,
 			motivation: req.body.motivation,
 			tel: req.body.tel,
+			cv: req.body.cv,
 		};
 		console.log('nneww', newIntern);
 		internModel.create(req.body, function (err, intern) {
