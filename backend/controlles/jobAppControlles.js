@@ -1,5 +1,5 @@
 const { jobApp, validate } = require("../models/jobAppModel");
-const FilesModel = require("../models/filesModels");
+const filesModel = require("../models/filesModels")
 
 module.exports = {
   createJobApp: async function (req, res) {
@@ -8,7 +8,7 @@ module.exports = {
       let arrayOfFilesIds = [];
       if (fileArray) {
         for (let i = 0; i < fileArray.length; i++) {
-          const fileInfo = await FilesModel.create(fileArray[i]);
+          const fileInfo = await filesModel.create(fileArray[i]);
           arrayOfFilesIds.push(fileInfo?._id);
         }
       }
