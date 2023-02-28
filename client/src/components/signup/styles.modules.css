@@ -23,11 +23,12 @@
 }
 
 .left {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #263835;
+  background-color: #3bb19b;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }

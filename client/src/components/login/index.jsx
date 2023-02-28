@@ -14,7 +14,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/api/adminRouters/signin";
+      const url = "http://localhost:8080/api/candidatRouters/signin";
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
       window.location = "/";
@@ -66,13 +66,12 @@ const Login = () => {
               <button type="button" className="white_btn">
                 Sign Up
               </button>
-              
             </Link>
             <br/>
-            <h1>Professional account</h1>
+            <p>click here to create a professional account </p>
             <Link to="/signupAdmin">
               <button type="button" className="white_btn">
-                Sign Up
+                Sign Up 
               </button>
             </Link>
           </div>
