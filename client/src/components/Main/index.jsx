@@ -12,14 +12,13 @@ const Main = () => {
 		<div className="main_container">
 			<ResponsiveAppBar />
 			{/* <nav className="navbar">
-			<div className='container'> */}
-			
-             {/* </div>
-				<h1>Skills</h1>
-				<button className="white_btn" onClick={handleLogout}>
+			</nav>*/}
+			<div className='container'> 
+			<button className="white_btn" onClick={handleLogout}>
 					Logout
 				</button>
-			</nav> */}
+              </div>
+			
 		</div>
 	);
 };
