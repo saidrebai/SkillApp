@@ -44,7 +44,7 @@ module.exports = {
       res.status(500).send({ message: "Internal Server Error" });
     }
   },
-
+  
   signup: async function (req, res) {
     try {
       const { error } = validate(req.body);
