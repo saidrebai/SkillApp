@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./styles.modules.css";
+import "./index.css";
 
 const Signup = () => {
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
+    UserName: "",
     email: "",
     password: "",
-    adresse: "",
-    tel: "",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -18,11 +15,10 @@ const Signup = () => {
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
-  useEffect(()=>{console.log("===>",data);},[data])
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/api/candidatRouters/signup";
+      const url = "http://localhost:8080/api/users";
       const { data: res } = await axios.post(url, data);
       navigate("/login");
       console.log(res.message);
@@ -53,19 +49,10 @@ const Signup = () => {
             <h1>Create Account</h1>
             <input
               type="text"
-              placeholder="firstName"
-              name="firstName"
+              placeholder="UserName"
+              name="UserName"
               onChange={handleChange}
-              value={data.firstName}
-              required
-              className="input"
-            />
-            <input
-              type="text"
-              placeholder="lastName"
-              name="lastName"
-              onChange={handleChange}
-              value={data.lastName}
+              value={data.UserName}
               required
               className="input"
             />
@@ -84,24 +71,6 @@ const Signup = () => {
               name="password"
               onChange={handleChange}
               value={data.password}
-              required
-              className="input"
-            />
-            <input
-              type="text"
-              placeholder="adresse"
-              name="adresse"
-              onChange={handleChange}
-              value={data.adresse}
-              required
-              className="input"
-            />
-            <input
-              type="number"
-              placeholder="tel"
-              name="tel"
-              onChange={handleChange}
-              value={data.tel}
               required
               className="input"
             />
