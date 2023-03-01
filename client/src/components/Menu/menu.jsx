@@ -8,13 +8,12 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 // import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = ['Home', 'About us', 'Offers','Contact'];
-const settings = ['Account', 'Dashboard', 'Logout'];
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -41,6 +40,22 @@ function ResponsiveAppBar() {
   const handleDashboardClick = () => {
     window.location.href = "/Dashboard";
   };
+  const handlelogoutClick = () => {
+    window.location.href = "/login";
+    localStorage.removeItem("token");
+  };
+  const handleHomeClick = () => {
+    window.location.href = "/";
+  };
+  const handleAboutusClick = () => {
+    window.location.href = "/aboutus";
+  };
+  const handleOffersClick = () => {
+    window.location.href = "/offers";
+  };
+  const handleContactClick = () => {
+    window.location.href = "/contact";
+  };
   
 
   return (
@@ -63,7 +78,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Skills
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -100,6 +115,7 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
+              
             </Menu>
           </Box>
           {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
@@ -121,16 +137,19 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>  
+              <MenuItem key="Home" onClick={handleHomeClick}>
+              <Typography textAlign="center">Home</Typography>
+              </MenuItem>
+              <MenuItem key="Aboutus" onClick={handleAboutusClick}>
+              <Typography textAlign="center">About us</Typography>
+              </MenuItem>
+              <MenuItem key="Offers" onClick={handleOffersClick}>
+              <Typography textAlign="center">Offers</Typography>
+              </MenuItem>
+              <MenuItem key="Contact" onClick={handleContactClick}>
+              <Typography textAlign="center">Contact</Typography>
+              </MenuItem> 
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -155,16 +174,15 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              
                <MenuItem key="Account" onClick={handleAccountClick}>
                <Typography textAlign="center">Account</Typography>
                </MenuItem>
                <MenuItem key="Dashboard" onClick={handleDashboardClick}>
                <Typography textAlign="center">Dashboard</Typography>
+               </MenuItem>
+               <MenuItem key="logout" onClick={handlelogoutClick}>
+               <Typography textAlign="center">logout</Typography>
                </MenuItem>
              
             </Menu>
