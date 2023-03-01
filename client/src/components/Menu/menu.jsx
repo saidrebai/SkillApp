@@ -13,8 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 // import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Home', 'About us', 'Offers','Contact'];
+const settings = ['Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -34,6 +34,14 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleAccountClick = () => {
+    window.location.href = "/Account";
+  };
+  const handleDashboardClick = () => {
+    window.location.href = "/Dashboard";
+  };
+  
 
   return (
     <AppBar position="static">
@@ -152,6 +160,13 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
+               <MenuItem key="Account" onClick={handleAccountClick}>
+               <Typography textAlign="center">Account</Typography>
+               </MenuItem>
+               <MenuItem key="Dashboard" onClick={handleDashboardClick}>
+               <Typography textAlign="center">Dashboard</Typography>
+               </MenuItem>
+             
             </Menu>
           </Box>
         </Toolbar>
