@@ -1,21 +1,21 @@
 import "./styles.modules.css";
-import ResponsiveAppBar from "../Menu/menu";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+import RecipeReviewCard from "../offers/offre";
+import "./styles.modules.css";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
+
+
 
 const Main = () => {
   return (
     <div className="main_container">
-      <ResponsiveAppBar />
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-      </ThemeProvider>
+      <div className="offer_cards">
+        <div className="offer_card">
+          <RecipeReviewCard/>
+          <br/>
+          <RecipeReviewCard/>
+          </div>
+      </div>
+      
     </div>
   );
 };
