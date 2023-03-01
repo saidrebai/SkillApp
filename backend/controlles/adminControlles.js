@@ -21,8 +21,6 @@ const validate = (data) => {
   return schema.validate(data);
 };
 
-
-
 module.exports = {
   authentification: async function (req, res) {
     try {
@@ -47,7 +45,6 @@ module.exports = {
       res.status(500).send({ message: "Internal Server Error" });
     }
   },
-
   signup: async function (req, res) {
     try {
       const { error } = validate(req.body);
