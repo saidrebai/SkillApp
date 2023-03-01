@@ -1,6 +1,5 @@
 import "./styles.modules.css";
-
-import ResponsiveAppBar from "../../containers/Menu/menu";
+import ResponsiveAppBar from "../Menu/menu";
 
 const Main = () => {
 	const handleLogout = () => {
@@ -12,12 +11,12 @@ const Main = () => {
 		<div className="main_container">
 			<ResponsiveAppBar />
 			{/* <nav className="navbar">
-			</nav>*/}
+			</nav>
 			<div className='container'> 
 			<button className="white_btn" onClick={handleLogout}>
 					Logout
 				</button>
-              </div>
+              </div>*/}
 			
 		</div>
 	);
