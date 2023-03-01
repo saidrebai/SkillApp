@@ -1,5 +1,7 @@
 import "./styles.modules.css";
 
+import ResponsiveAppBar from "../../containers/Menu/menu";
+
 const Main = () => {
 	const handleLogout = () => {
 		localStorage.removeItem("token");
@@ -8,12 +10,15 @@ const Main = () => {
 
 	return (
 		<div className="main_container">
-			<nav className="navbar">
-				<h1>fakebook</h1>
-				<button className="white_btn" onClick={handleLogout}>
+			<ResponsiveAppBar />
+			{/* <nav className="navbar">
+			</nav>*/}
+			<div className='container'> 
+			<button className="white_btn" onClick={handleLogout}>
 					Logout
 				</button>
-			</nav>
+              </div>
+			
 		</div>
 	);
 };

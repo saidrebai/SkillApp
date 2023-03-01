@@ -10,10 +10,8 @@ const { privateKey } = crypto.generateKeyPairSync('rsa', {
 	privateKeyEncoding: {
 	  type: 'pkcs8',
 	  format: 'pem'
-	}
-  });
-
-console.log(privateKey); // prints the private key to the console
+	}});
+ 
 
 const validate = (data) => {
 	const schema = Joi.object({

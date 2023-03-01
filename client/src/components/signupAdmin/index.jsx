@@ -5,14 +5,7 @@ import "./styles.modules.css";
 
 const Signup = () => {
   const [data, setData] = useState({
-    TypeOfUser: "",
-    Name: "",
-    country: "",
-    town: "",
-    adresse: "",
-    Zipcode: "",
-    tel: "",
-    fiscalCode: "",
+    UserName: "",
     email: "",
     password: "",
   });
@@ -25,7 +18,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/api/adminRouters/signup";
+      const url = "localhost:8080/api/adminRouters/signup";
       const { data: res } = await axios.post(url, data);
       navigate("/login");
       console.log(res.message);
@@ -41,9 +34,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup_admin_container">
-      <div className="signup_admin_from_container">
-        <div className="left-side-signup-admin">
+    <div className="signup_container">
+      <div className="signup_from_container">
+        <div className="left">
           <h1 className="titleButton"> welcome Back</h1>
           <Link to="/login">
             <button type="button" className="white_btn">
@@ -51,85 +44,15 @@ const Signup = () => {
             </button>
           </Link>
         </div>
-        <div className="right-signup-admmin">
+        <div className="right">
           <form className="form_container" onSubmit={handleSubmit}>
             <h1>Create Account</h1>
-            <div class="custom-select">
-              <select className="container-select" name="TypeOfUser" onChange={handleChange} value={data.TypeOfUser} required>
-                <option value="0" disabled selected>Type of user</option>
-                <option value="1">Individuel</option>
-                <option value="2">Société</option>
-              </select>
-            </div>
-            {/* <input
-              type="text"
-              placeholder="TypeOfUser"
-              name="TypeOfUser"
-              onChange={handleChange}
-              value={data.TypeOfUser}
-              required
-              className="input"
-            /> */}
             <input
               type="text"
-              placeholder="Name"
-              name="Name"
+              placeholder="UserName"
+              name="UserName"
               onChange={handleChange}
-              value={data.Name}
-              required
-              className="input"
-            />
-            <input
-              type="text"
-              placeholder="country"
-              name="country"
-              onChange={handleChange}
-              value={data.country}
-              required
-              className="input"
-            />
-            <input
-              type="text"
-              placeholder="town"
-              name="town"
-              onChange={handleChange}
-              value={data.town}
-              required
-              className="input"
-            />
-            <input
-              type="text"
-              placeholder="adresse"
-              name="adresse"
-              onChange={handleChange}
-              value={data.adresse}
-              required
-              className="input"
-            />
-            <input
-              type="number"
-              placeholder="Zipcode"
-              name="Zipcode"
-              onChange={handleChange}
-              value={data.Zipcode}
-              required
-              className="input"
-            />
-            <input
-              type="number"
-              placeholder="tel"
-              name="tel"
-              onChange={handleChange}
-              value={data.tel}
-              required
-              className="input"
-            />
-            <input
-              type="number"
-              placeholder="fiscalCode"
-              name="fiscalCode"
-              onChange={handleChange}
-              value={data.fiscalCode}
+              value={data.UserName}
               required
               className="input"
             />

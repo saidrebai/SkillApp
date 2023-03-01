@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 
+
 const validate = (data) => {
   const schema = Joi.object({
     TypeOfUser: Joi.string().required().label("Type of user"),
@@ -44,7 +45,11 @@ module.exports = {
       res.status(500).send({ message: "Internal Server Error" });
     }
   },
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 39f06f5fc8f871568c1c0006562b547bdf5ea628
   signup: async function (req, res) {
     try {
       const { error } = validate(req.body);
