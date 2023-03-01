@@ -115,7 +115,6 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-              
             </Menu>
           </Box>
           {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
@@ -151,7 +150,6 @@ function ResponsiveAppBar() {
               <Typography textAlign="center">Contact</Typography>
               </MenuItem> 
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -174,7 +172,6 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              
                <MenuItem key="Account" onClick={handleAccountClick}>
                <Typography textAlign="center">Account</Typography>
                </MenuItem>
@@ -184,7 +181,6 @@ function ResponsiveAppBar() {
                <MenuItem key="logout" onClick={handlelogoutClick}>
                <Typography textAlign="center">logout</Typography>
                </MenuItem>
-             
             </Menu>
           </Box>
         </Toolbar>
