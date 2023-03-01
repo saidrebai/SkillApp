@@ -14,7 +14,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/api/candidatRouters/signin";
+      const url = document.querySelector('input[name="option"]:checked').value === "option1"
+      ? "http://localhost:8080/api/adminRouters/signin"
+      : "http://localhost:8080/api/candidatRouters/signin";
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
       window.location = "/";
@@ -35,7 +37,16 @@ const Login = () => {
         <div className="login_from_container">
           <div className="left">
             <form className="from_container" onSubmit={handleSubmit}>
-              <h1>Login to Your Account</h1>
+              <h1>Login to Your Account</h1> 
+              <label>
+              <input type="radio" name="option" value="option1"/>
+               Admin
+              </label>
+              <br/>
+              <label>
+              <input type="radio" name="option" value="option2"/>
+               User
+              </label>
               <input
                 type="email"
                 placeholder="Email"
@@ -67,11 +78,11 @@ const Login = () => {
                 Sign Up
               </button>
             </Link>
-            <br/>
+            <br />
             <p>click here to create a professional account </p>
             <Link to="/signupAdmin">
               <button type="button" className="white_btn">
-                Sign Up 
+                Sign Up
               </button>
             </Link>
           </div>
