@@ -66,4 +66,14 @@ module.exports = {
       res.status(500).send({ message: "Internal Server Error" });
     }
   },
+  getinformation: async function (req, res) {
+    // console.log("aa=a")
+    try {
+      const savedUser = await Admin.findOne({ email: req.body.email });
+
+      res.status(201).send({ message: "Admin created successfully", user: savedUser })
+    } catch (error) {
+      res.status(500).send({ message: "Internal Server Error" });
+    }
+  }
 };
