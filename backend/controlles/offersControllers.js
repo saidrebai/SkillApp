@@ -29,32 +29,13 @@ module.exports = {
 		});
 	},
 
-	getoffer :async function (req, res) {
+	getoffer: async function (req, res) {
 		try {
-		  // Connect to MongoDB
-		  const offer = await offerModel.connect(process.env.DB);
-		  const db = offer.db('test');
-	  
-		  // Retrieve the Name from the request body
-		  const { Name } = req.body;
-	  
-		  // Find the document with the matching Name
-		  const result = await db.collection('offermodels').findOne({ Name });
-	  
-		  if (result) {
-			// Send a response with the retrieved information
-			res.status(200).json(result);
-		  } else {
-			// Send a response indicating that the Name was not found
-			res.status(404).json({ message: 'offer not found' });
-		  }
-	  
-		  // Close the database connection
-		  offer.close();
+		  const offer = await offerModel.findOne({ Name: req.body.Name});
+		  res.status(201).send({ message: "offer Model exists", user:offer })
 		} catch (error) {
-		  // Handle any errors that occur during the database connection or query
-		  console.error(error);
-		  res.status(500).json({ message: 'An error occurred' });
-		}},
+		  res.status(500).send({ message: "Internal Server Error" });
+		}
+	  }
 };
 
