@@ -34,6 +34,9 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const handleLoginClick = () => {
+    window.location.href = "/login";
+  };
   const handleAccountClick = () => {
     window.location.href = "/Account";
   };
@@ -172,6 +175,9 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              <MenuItem key="Login" onClick={handleLoginClick}>
+               <Typography textAlign="center">Login</Typography>
+               </MenuItem>
                <MenuItem key="Account" onClick={handleAccountClick}>
                <Typography textAlign="center">Account</Typography>
                </MenuItem>

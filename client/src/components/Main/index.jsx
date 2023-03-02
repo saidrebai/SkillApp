@@ -1,8 +1,6 @@
 import "./styles.modules.css";
-import RecipeReviewCard from "../offers/offre";
+import RecipeReviewCard from "../Cards/offreCard";
 import "./styles.modules.css";
-
-
 
 
 const Main = () => {
