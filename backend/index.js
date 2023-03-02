@@ -21,6 +21,8 @@ app.use("/api/candidatRouters", CandidatRoutes);
 app.use("/api/jobAppRouters", jobAppRoutes);
 app.use("/api/internAppRouter", internAppRouter);
 app.use("/api/offerRouter", offerRouter);
+app.use("/api/offerRouter", offerRouter);
+
 
 
 const port = process.env.PORT||8080;
