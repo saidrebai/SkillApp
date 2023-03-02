@@ -70,5 +70,14 @@ signup : async function(req, res){
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
-}
+},
+getinfoCondidat: async function (req, res) {
+    try {
+      const savedUser = await User.findOne({ email: req.body.email });
+
+      res.status(201).send({ message: "Admin created successfully", user: savedUser })
+    } catch (error) {
+      res.status(500).send({ message: "Internal Server Error" });
+    }
+  }
 };
