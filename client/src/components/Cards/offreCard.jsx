@@ -47,7 +47,7 @@ export default function RecipeReviewCard() {
         console.error(error);
       });
   },[]);
-  console.log('err',offers);
+  console.log('err',offers)
   return (
     <>
         {offers.length > 0 &&

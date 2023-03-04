@@ -4,6 +4,7 @@ import "./styles.modules.css";
 
 
 
+
 const Main = () => {
   
   return (
@@ -13,7 +14,6 @@ const Main = () => {
           <RecipeReviewCard/>
           </div>
       </div>
-      
     </div>
   );
 };
