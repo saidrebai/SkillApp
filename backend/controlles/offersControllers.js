@@ -28,5 +28,14 @@ module.exports = {
 				});
 		});
 	},
+
+	getoffer: async function (req, res) {
+		try {
+		  const offer = await offerModel.findOne({ Name: req.body.Name});
+		  res.status(201).send({ message: "offer Model exists", user:offer })
+		} catch (error) {
+		  res.status(500).send({ message: "Internal Server Error" });
+		}
+	  }
 };
 
