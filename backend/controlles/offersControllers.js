@@ -31,11 +31,15 @@ module.exports = {
 
 	getoffer: async function (req, res) {
 		try {
-		  const offer = await offerModel.findOne({ Name: req.body.Name});
-		  res.status(201).send({ message: "offer Model exists", user:offer })
+			const offer = await offerModel.findOne({ Name: req.body.Name });
+			if (!offer) {
+				return res.status(404).json({ message: "Offer not found" });
+			}
+			return res.status(200).json({ message: "Offer found", offer });
 		} catch (error) {
-		  res.status(500).send({ message: "Internal Server Error" });
+			console.error(error);
+			return res.status(500).json({ message: "Internal Server Error" });
 		}
-	  }
+	}
 };
 
