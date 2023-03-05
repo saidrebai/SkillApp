@@ -20,7 +20,6 @@ function Footer() {
     <footer>
       <div className='footer_container'>
         <div className='footer_container_Menu'>
-            <h1>Menu</h1>
             <div className='menu_buttons'>
             <button onClick={handleHomeClick}>Home</button>
             <button onClick={handleAboutusClick}>About as</button>
