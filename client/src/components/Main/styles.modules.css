@@ -1,6 +1,7 @@
 .main_container{
 	align-items: center;
     justify-content: center;
+	width: 100%;
 	
 }
 .offer_cards{
@@ -17,6 +18,10 @@
     flex-wrap: wrap;
     flex-direction: row;
     padding: 10px;
+	border-radius: 10px;
+    padding: 10px;
+    justify-content: space-evenly;
+    align-items: center;
 
 }
 .white_btn {
