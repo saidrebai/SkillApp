@@ -8,6 +8,7 @@ const CandidatRoutes = require("./routes/candidatRouters");
 const jobAppRoutes = require("./routes/jobAppRouter");
 const internAppRouter = require("./routes/internAppRouter");
 const offerRouter = require("./routes/offerRouter");
+const morgan = require('morgan');
 
 
 //database connection
@@ -15,6 +16,7 @@ connection();
 //middelwares
 app.use(express.json());
 app.use(cors());
+app.use(morgan('combined'));
 //routes
 app.use("/api/adminRouters", AdminRoutes);
 app.use("/api/candidatRouters", CandidatRoutes);
