@@ -13,9 +13,9 @@ root.render(
     <BrowserRouter>
     <ResponsiveAppBar/>
     <React.StrictMode>
-    <App />
-     </React.StrictMode>
-     <Footer/>
+    <App/>
+    </React.StrictMode>
+    <Footer/>
     </BrowserRouter>
     
  
