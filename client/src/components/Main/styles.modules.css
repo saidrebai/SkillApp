@@ -1,23 +1,8 @@
 .main_container{
 	align-items: center;
     justify-content: center;
+	width: 100%;
 	
-}
-.offer_cards{
-	background-color: rgba(255, 255, 255, 0.968);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-	flex-direction: column;
-	
-}
-.offer_card{
-	border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    padding: 10px;
-
 }
 .white_btn {
 	border: none;
@@ -30,7 +15,4 @@
 	font-size: 14px;
 	cursor: pointer;
 	margin-right: 20px;
-}
-.card{
-	background-color: black;
 }
