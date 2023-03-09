@@ -2,10 +2,11 @@
 	align-items: center;
     justify-content: center;
 	width: 100%;
+    background-color: #f5f5f5;
 	
 }
 .offer_container_cards{
-	background-color: rgba(255, 255, 255, 0.968);
+	background-color:  #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,3 +25,4 @@
     align-items: center;
 
 }
+
