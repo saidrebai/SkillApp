@@ -3,7 +3,7 @@ const { vall } = require("../middleware/vall");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
-
+const jwt = require("jsonwebtoken");
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -40,7 +40,14 @@ module.exports = {
         return res.status(401).send({ message: "Invalid Email or Password" });
 
       const token = user.generateAuthToken();
-      res.status(200).send({ data: token, message: "logged in successfully" });
+      const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
+      // console.log("",decoded)
+      // var userId = decoded.id
+      res.status(200).send({
+        data: token,
+        _id: decoded._id,
+        message: "logged in successfully",
+      });
     } catch (error) {
       res.status(500).send({ message: "Internal Server Error" });
     }
@@ -67,13 +74,46 @@ module.exports = {
     }
   },
 
-  
-  getinformation: async function (req, res) {
-    try {
-      const savedUser = await Admin.find({});
-      res.status(201).send({ message: "Admin exists", user: savedUser })
-    } catch (error) {
-      res.status(500).send({ message: "Internal Server Error" });
-    }
-  }
+  getinformation: function (req, res) {
+    Admin.findById({ _id: req.params.id }).exec(function (err, admin) {
+      if (err) {
+        res.status(500).json({
+          msg: "erreur",
+          status: 500,
+          data: null,
+        });
+      } else {
+        res.status(200).json({
+          msg: "Get admin",
+          status: 200,
+          data: admin,
+        });
+      }
+    });
+  },
+  updateInfoAdmin: function (req, res) {
+    Admin.findByIdAndUpdate(req.params.id, {
+      Name: req.body.Name,
+      country: req.body.country,
+      town: req.body.town,
+      adresse: req.body.adresse,
+      Zipcode: req.body.Zipcode,
+      tel: req.body.tel,
+      fiscalCode: req.body.fiscalCode,
+    }).exec(function (err, admin) {
+      if (err) {
+        res.json({
+          msg: "erreur" + err,
+          status: 500,
+          data: null,
+        });
+      } else {
+        res.status(200).json({
+          msg: "admin updated!",
+          status: 200,
+          data: admin,
+        });
+      }
+    });
+  },
 };
