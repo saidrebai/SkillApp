@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify';
 import "./styles.modules.css";
-
+import 'react-toastify/dist/ReactToastify.css';
 const Account = () => {
   const [newData, setNewData] = useState({});
   const id = localStorage.getItem("id");
+  
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/candidatRouters/getinfo/${id}`)
@@ -31,15 +33,18 @@ const Account = () => {
       .then((response) => {
         // update the newData state with the updated data
         setNewData(response.data.data);
+        toast.success("Updated successfully!");
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Update failed!");
       });
     console.log("yess", updatedData);
   }
 
   return (
     <>
+    
       <div className="center-content">
         <div className="content-container">
           <div className="content-full">
@@ -145,8 +150,9 @@ const Account = () => {
           <div>
             <div className="btn-container">
               <button onClick={handleUpdate} className="style-button">
-                Update
+                Update 
               </button>
+              <ToastContainer/>
             </div>
           </div>
         </div>
