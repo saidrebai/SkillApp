@@ -16,15 +16,14 @@
   box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
     0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
   justify-content: center;
-  align-items: center;  
+  align-items: center;
 }
-.signup_admin_from_container{
-  
+.signup_admin_from_container {
   display: flex;
   flex-direction: row;
   /* padding: 20px; */
   box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
-  0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 }
 .titleButton {
   margin-top: 0;
@@ -116,7 +115,7 @@
   padding-bottom: 5px;
 }
 
-.container-select{
+.container-select {
   font-size: 14px;
   padding: 2px 5px;
   width: 400px;
