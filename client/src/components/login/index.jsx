@@ -81,7 +81,7 @@ const Login = () => {
               </button>
             </Link>
             <br />
-            <p>click here to create a professional account </p>
+            <h1>Professional account : </h1>
             <Link to="/signupAdmin">
               <button type="button" className="white_btn">
                 Sign Up
