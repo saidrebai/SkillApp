@@ -26,6 +26,5 @@ app.use("/api/offerRouter", offerRouter);
 
 
 
-
 const port = process.env.PORT||8080;
 app.listen(port,()=> console.log(`server running on  ${port}..`));
