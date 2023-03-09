@@ -18,7 +18,9 @@ const Login = () => {
       ? "http://localhost:8080/api/adminRouters/signin"
       : "http://localhost:8080/api/candidatRouters/signin";
       const { data: res } = await axios.post(url, data);
+      console.log("azzzzzzz",data)
       localStorage.setItem("token", res.data);
+      localStorage.setItem("id",res.userId)
       window.location = "/";
     } catch (error) {
       if (

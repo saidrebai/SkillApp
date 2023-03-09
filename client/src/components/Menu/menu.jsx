@@ -44,6 +44,8 @@ function ResponsiveAppBar() {
   const handlelogoutClick = () => {
     window.location.href = "/login";
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    
   };
   const handleHomeClick = () => {
     window.location.href = "/";
