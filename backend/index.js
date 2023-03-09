@@ -21,7 +21,6 @@ app.use("/api/candidatRouters", CandidatRoutes);
 app.use("/api/jobAppRouters", jobAppRoutes);
 app.use("/api/internAppRouter", internAppRouter);
 app.use("/api/offerRouter", offerRouter);
-app.use("/api/offerRouter", offerRouter);
 
 
 

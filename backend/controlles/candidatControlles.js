@@ -45,7 +45,7 @@ module.exports={
 			return res.status(401).send({ message: "Invalid Email or Password" });
 
 		const token = user.generateAuthToken();
-		res.status(200).send({ data: token, message: "logged in successfully" });
+		res.status(200).send({ data: token,userId :user._id ,  message: "logged in successfully" });
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
@@ -71,13 +71,42 @@ signup : async function(req, res){
 		res.status(500).send({ message: "Internal Server Error" });
 	}
 },
-getinfoCondidat: async function (req, res) {
-    try {
-      const savedUser = await User.findOne({ email: req.body.email });
 
-      res.status(201).send({ message: "Admin created successfully", user: savedUser })
-    } catch (error) {
-      res.status(500).send({ message: "Internal Server Error" });
-    }
-  }
+getinfoCondidat: function (req, res) {
+	User.findById({ _id: req.params.id })
+		.exec(function (err, candid) {
+			if (err) {
+				res.status(500).json({
+					msg: 'erreur',
+					status: 500,
+					data: null,
+				});
+			} else {
+				res.status(200).json({
+					msg: 'Get candid',
+					status: 200,
+					data: candid,
+				});
+			}
+		});
+},
+updateInfo : function (req, res) {
+	User.findByIdAndUpdate(req.params.id, {firstName: req.body.firstName, lastName: req.body.lastName, tel:req.body.tel, adresse:req.body.adresse })
+		.exec(function (err, candid) {
+			if (err) {
+				res.json({
+					msg: 'erreur' + err,
+					status: 500,
+					data: null,
+				});
+			} else {
+				res.status(200).json({
+					msg: 'candid updated!',
+					status: 200,
+					data: candid,
+				});
+			}
+		});
+}
 };
+
