@@ -1,0 +1,58 @@
+.offer_container{
+    width: 500px;
+    height: 400px;
+    background-color: #99d4f4;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin: 10px;
+    padding: 5px;
+
+}
+.offer_container_img{
+    width: 90%;
+    height: 25%;
+    background: #99d4f4;
+    padding: 10px;
+
+}
+.offer_container_img img{
+    width: 100%;
+}
+.offer_container_info{
+    width: 90%;
+    height: 25%;
+    background-color: rgb#99d4f4;
+    padding: 10px;
+
+}
+.offer_container_description{
+    width: 90%;
+    height: 50%;
+    background-color: #99d4f4;
+    padding: 10px;
+
+}
+.skills_container{
+    background-color: #99d4f4;
+    padding: 10px;
+
+}
+.apply_button{
+    border-radius: 5px;
+    border: none;
+    background-color: #1976d2;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    outline: none;
+    transform: translateY(2px);
+    cursor: pointer;
+    transition-duration: 0.4s;
+    color: white;
+
+}
