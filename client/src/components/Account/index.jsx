@@ -31,12 +31,11 @@ const Account = () => {
       .then((response) => {
         // update the newData state with the updated data
         setNewData(response.data.data);
-      
       })
       .catch((error) => {
         console.log(error);
       });
-      console.log('yess',updatedData);
+    console.log("yess", updatedData);
   }
 
   return (
