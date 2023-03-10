@@ -4,22 +4,23 @@ import { toast, ToastContainer } from "react-toastify";
 import "./styles.modules.css";
 import "react-toastify/dist/ReactToastify.css";
 const AccountAdmin = () => {
-  const [newData, setNewData] = useState({});
+  const [Data, setData] = useState({});
   const id = localStorage.getItem("id");
 
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/adminRouters/getinfoAdmin/${id}`)
       .then((response) => {
-        setNewData(response.data.data);
+        setData(response.data.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [id]);
+
   useEffect(() => {
-    console.log("data is herrrrrrrrrre", newData);
-  }, [newData]);
+    console.log("data is herrrrrrrrrre",Data);
+  }, [Data]);
 
   const [updatedData, setUpdatedData] = useState({});
 
@@ -31,8 +32,8 @@ const AccountAdmin = () => {
         updatedData
       )
       .then((response) => {
-        // update the newData state with the updated data
-        setNewData(response.data.data);
+        // update the Data state with the updated data
+        setData(response.data.data);
         toast.success("Updated successfully!");
       })
       .catch((error) => {
@@ -67,7 +68,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="Name"
-                  value={updatedData.Name || newData.Name}
+                  value={updatedData.Name || Data.Name}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -89,7 +90,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="country"
-                  value={updatedData.country || newData.country}
+                  value={updatedData.country || Data.country}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -111,7 +112,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="town"
-                  value={updatedData.town || newData.town}
+                  value={updatedData.town || Data.town}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -133,7 +134,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="Adresse"
-                  value={updatedData.adresse || newData.adresse}
+                  value={updatedData.adresse || Data.adresse}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -156,7 +157,7 @@ const AccountAdmin = () => {
               <input
                 type="Number"
                 name="Zipcode"
-                value={updatedData.Zipcode || newData.Zipcode}
+                value={updatedData.Zipcode || Data.Zipcode}
                 onChange={(e) =>
                   setUpdatedData({
                     ...updatedData,
@@ -178,7 +179,7 @@ const AccountAdmin = () => {
               <input
                 type="Number"
                 name="tel"
-                value={updatedData.tel || newData.tel}
+                value={updatedData.tel || Data.tel}
                 onChange={(e) =>
                   setUpdatedData({
                     ...updatedData,
@@ -200,7 +201,7 @@ const AccountAdmin = () => {
               <input
                 type="Number"
                 name="fiscalCode"
-                value={updatedData.fiscalCode || newData.fiscalCode}
+                value={updatedData.fiscalCode || Data.fiscalCode}
                 onChange={(e) =>
                   setUpdatedData({
                     ...updatedData,
