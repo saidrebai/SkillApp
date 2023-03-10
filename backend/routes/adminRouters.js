@@ -3,6 +3,7 @@ const adminControlles = require("../controlles/adminControlles");
 
 router.post("/signin", adminControlles.authentification);
 router.post("/signup", adminControlles.signup);
-router.get("/getinfo", adminControlles.getinformation);
+router.get("/getinfoAdmin/:id", adminControlles.getinformation);
+router.put("/updateinfoAdmin/:id", adminControlles.updateInfoAdmin);
 
 module.exports = router;
