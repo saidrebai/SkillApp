@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 import "./styles.modules.css";
-import 'react-toastify/dist/ReactToastify.css';
-const Account = () => {
-  const [newData, setNewData] = useState({});
+import "react-toastify/dist/ReactToastify.css";
+const AccountAdmin = () => {
+  const [Data, setData] = useState({});
   const id = localStorage.getItem("id");
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/candidatRouters/getinfo/${id}`)
+      .get(`http://localhost:8080/api/adminRouters/getinfoAdmin/${id}`)
       .then((response) => {
-        setNewData(response.data.data);
+        setData(response.data.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [id]);
+
   useEffect(() => {
-    console.log("data is herrrrrrrrrre", newData);
-  }, [newData]);
+    console.log("data is herrrrrrrrrre",Data);
+  }, [Data]);
 
   const [updatedData, setUpdatedData] = useState({});
 
@@ -27,12 +28,12 @@ const Account = () => {
     event.preventDefault();
     axios
       .put(
-        `http://localhost:8080/api/candidatRouters/Updateinfo/${id}`,
+        `http://localhost:8080/api/adminRouters/updateinfoAdmin/${id}`,
         updatedData
       )
       .then((response) => {
-        // update the newData state with the updated data
-        setNewData(response.data.data);
+        // update the Data state with the updated data
+        setData(response.data.data);
         toast.success("Updated successfully!");
       })
       .catch((error) => {
@@ -44,7 +45,6 @@ const Account = () => {
 
   return (
     <>
-    
       <div className="center-content">
         <div className="content-container">
           <div className="content-full">
@@ -61,18 +61,18 @@ const Account = () => {
             <div className="form-input-container">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-style">First_Name</label>
+                  <label className="title-style">Name</label>
                 </div>
               </div>
               <div className="input-style">
                 <input
                   type="text"
-                  name="firstName"
-                  value={updatedData.firstName || newData.firstName}
+                  name="Name"
+                  value={updatedData.Name || Data.Name}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
-                      firstName: e.target.value,
+                      Name: e.target.value,
                     })
                   }
                   className="style-input"
@@ -83,18 +83,18 @@ const Account = () => {
             <div className="form-input-container">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-style">Last_Name</label>
+                  <label className="title-style">country</label>
                 </div>
               </div>
               <div className="input-style">
                 <input
                   type="text"
-                  name="lastName"
-                  value={updatedData.lastName || newData.lastName}
+                  name="country"
+                  value={updatedData.country || Data.country}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
-                      lastName: e.target.value,
+                      country: e.target.value,
                     })
                   }
                   className="style-input"
@@ -105,18 +105,18 @@ const Account = () => {
             <div className="form-input-container">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-style">Tel</label>
+                  <label className="title-style">town</label>
                 </div>
               </div>
               <div className="input-style">
                 <input
-                  type="number"
-                  name="Tel"
-                  value={updatedData.tel || newData.tel}
+                  type="text"
+                  name="town"
+                  value={updatedData.town || Data.town}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
-                      tel: e.target.value,
+                      town: e.target.value,
                     })
                   }
                   className="style-input"
@@ -134,7 +134,7 @@ const Account = () => {
                 <input
                   type="text"
                   name="Adresse"
-                  value={updatedData.adresse || newData.adresse}
+                  value={updatedData.adresse || Data.adresse}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -147,12 +147,78 @@ const Account = () => {
             </div>
           </div>
 
+          <div className="form-input-container">
+            <div className="title-input-style">
+              <div className="containertext-input">
+                <label className="title-style">Zipcode</label>
+              </div>
+            </div>
+            <div className="input-style">
+              <input
+                type="Number"
+                name="Zipcode"
+                value={updatedData.Zipcode || Data.Zipcode}
+                onChange={(e) =>
+                  setUpdatedData({
+                    ...updatedData,
+                    Zipcode: e.target.value,
+                  })
+                }
+                className="style-input"
+              />
+            </div>
+          </div>
+
+          <div className="form-input-container">
+            <div className="title-input-style">
+              <div className="containertext-input">
+                <label className="title-style">tel</label>
+              </div>
+            </div>
+            <div className="input-style">
+              <input
+                type="Number"
+                name="tel"
+                value={updatedData.tel || Data.tel}
+                onChange={(e) =>
+                  setUpdatedData({
+                    ...updatedData,
+                    tel: e.target.value,
+                  })
+                }
+                className="style-input"
+              />
+            </div>
+          </div>
+
+          <div className="form-input-container">
+            <div className="title-input-style">
+              <div className="containertext-input">
+                <label className="title-style">fiscalCode</label>
+              </div>
+            </div>
+            <div className="input-style">
+              <input
+                type="Number"
+                name="fiscalCode"
+                value={updatedData.fiscalCode || Data.fiscalCode}
+                onChange={(e) =>
+                  setUpdatedData({
+                    ...updatedData,
+                    fiscalCode: e.target.value,
+                  })
+                }
+                className="style-input"
+              />
+            </div>
+          </div>
+
           <div>
             <div className="btn-container">
               <button onClick={handleUpdate} className="style-button">
-                Update 
+                Update
               </button>
-              <ToastContainer/>
+              <ToastContainer />
             </div>
           </div>
         </div>
@@ -161,4 +227,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default AccountAdmin;

@@ -16,7 +16,7 @@ import './index.css';
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const isAdmin = localStorage.getItem('isAdmin');
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -36,7 +36,12 @@ function ResponsiveAppBar() {
     window.location.href = "/login";
   };
   const handleAccountClick = () => {
-    window.location.href = "/Account";
+    if(isAdmin === "false"){
+      window.location.href = "/Account";
+    }else{
+      window.location.href = "/AccountA";
+
+    }
   };
   const handleDashboardClick = () => {
     window.location.href = "/Dashboard";
@@ -44,7 +49,9 @@ function ResponsiveAppBar() {
   const handlelogoutClick = () => {
     window.location.href = "/login";
     localStorage.removeItem("token");
-    localStorage.removeItem("userId");
+    localStorage.removeItem("id");
+    localStorage.removeItem("isAdmin");
+
     
   };
   const handleHomeClick = () => {
