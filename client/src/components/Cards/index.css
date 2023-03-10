@@ -1,3 +1,9 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    flex-direction: row;
+}
 .offer_container{
     width: 400px;
     height: 400px;

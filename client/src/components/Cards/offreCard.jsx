@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import './index.css';
 import myImage from '../images/arsela-techmologies.png';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 export default function Card() {
 
-  const [offers, setOffers] = useState({});
+  const [offers, setOffers] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -17,28 +19,52 @@ export default function Card() {
   }, []);
   console.log("======>", offers);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  const totalPages = Math.ceil(offers.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const currentOffers = offers.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
   return (
-    <>
-      {Array.isArray(offers) && offers.length > 0 ? (offers.map((offer) => (
-        
-        <div className="offer_container">
-        <div className="offer_container_img">
-        <img src={myImage} alt=""/>
-        </div>
-        <div className="offer_container_info">
-        <div className="Name_container"><label>Title : </label>{offer.Name}</div>
-        <div className="Type_container"><label>Type : </label>{offer.type}</div>
-        <div className="term_container"><label>duration : </label>{offer.term}</div>
-        </div>
-        <div className="offer_container_description">
-        <label>Descritption : </label>{offer.description}
-        </div>
-        <div className="skills_container"><label>Skills : </label>{offer.skills}</div>
-        <button className="apply_button">Apply</button>
+    <><div className="container">
+      {currentOffers.length > 0 ? (
+        currentOffers.map((offer)  => (
+        <div className="offer_container" key={offer.id}>
+          <div className="offer_container_img">
+            <img src={myImage} alt="" />
+          </div>
+          <div className="offer_container_info">
+            <div className="Name_container"><label>Title : </label>{offer.Name}</div>
+            <div className="Type_container"><label>Type : </label>{offer.type}</div>
+            <div className="term_container"><label>duration : </label>{offer.term}</div>
+          </div>
+          <div className="offer_container_description">
+            <label>Descritption : </label>{offer.description}
+          </div>
+          <div className="skills_container"><label>Skills : </label>{offer.skills}</div>
+          <button className="apply_button">Apply</button>
         </div>
       ))) : (
         <div>No offers to display</div>
 
       )}
-      </>);
+      <div className="pagination_container">
+       <Stack spacing={2}>
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+        />
+      </Stack></div></div>
+    </>
+    );
 }

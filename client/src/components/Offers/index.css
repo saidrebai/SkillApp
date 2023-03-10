@@ -3,6 +3,7 @@
     justify-content: center;
 	width: 100%;
     background-color: #f5f5f5;
+    
 	
 }
 .offer_container_cards{
@@ -11,6 +12,7 @@
     align-items: center;
     justify-content: center;
 	flex-direction: column;
+    
 	
 }
 .offer_container_card{

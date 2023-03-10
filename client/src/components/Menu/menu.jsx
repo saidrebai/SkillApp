@@ -13,6 +13,7 @@ import './index.css';
 
 
 
+
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -48,16 +49,19 @@ function ResponsiveAppBar() {
     
   };
   const handleHomeClick = () => {
-    window.location.href = "/";
+    const homeSection = document.getElementById("home");
+    homeSection.scrollIntoView({ behavior: "smooth" });
   };
   const handleAboutusClick = () => {
-    window.location.href = "/aboutus";
+    const aboutusSection = document.getElementById("aboutus");
+    aboutusSection.scrollIntoView({ behavior: "smooth" });
   };
   const handleOffersClick = () => {
     window.location.href = "/offers";
   };
   const handleContactClick = () => {
-    window.location.href = "/contact";
+    const contactSection = document.getElementById("contact");
+    contactSection.scrollIntoView({ behavior: "smooth" });
   };
   
 
@@ -149,6 +153,9 @@ function ResponsiveAppBar() {
               <Typography textAlign="center">Contact</Typography>
               </MenuItem> 
           </Box>
+          <div className='button_signin'>
+            <button type="submit" onClick={handleLoginClick}>Login</button>
+          </div>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -171,9 +178,6 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key="Login" onClick={handleLoginClick}>
-               <Typography textAlign="center">Login</Typography>
-               </MenuItem>
                <MenuItem key="Account" onClick={handleAccountClick}>
                <Typography textAlign="center">Account</Typography>
                </MenuItem>

@@ -61,15 +61,6 @@ const Signup = () => {
                 <option value="2">Société</option>
               </select>
             </div>
-            {/* <input
-              type="text"
-              placeholder="TypeOfUser"
-              name="TypeOfUser"
-              onChange={handleChange}
-              value={data.TypeOfUser}
-              required
-              className="input"
-            /> */}
             <input
               type="text"
               placeholder="Name"
