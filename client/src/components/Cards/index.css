@@ -3,10 +3,11 @@
     flex-wrap: wrap;
     align-items: flex-end;
     flex-direction: row;
+    justify-content: center;
 }
 .offer_container{
-    width: 400px;
-    height: 400px;
+    width: 347px;
+    height: 595px;
     background-color: #ffffff;
     border-radius: 5px;
     display: flex;
@@ -46,6 +47,14 @@
     background-color: #ffffff;
     padding: 10px;
 
+}
+.company_Name_container{
+    background-color: #ffffff;
+    padding: 10px;
+}
+.adresse_container{
+    background-color: #ffffff;
+    padding: 10px;
 }
 .apply_button{
     border-radius: 5px;

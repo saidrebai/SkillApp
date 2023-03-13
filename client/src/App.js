@@ -20,7 +20,6 @@ function App() {
       <Route path="/login" exact element={<Login />} />
       {user && <Route path="/Account" exact element={<Account />} />}
       {!user && <Route path="/Account" exact element={<Login />} />}
-
       {user && <Route path="/AccountA" exact element={<AccountAdmin />} />}
       {!user && <Route path="/AccountA" exact element={<Login />} />}
       <Route path="/offers" exact element={<Offer/>} />
