@@ -53,7 +53,7 @@ const internApplicationSchema = new mongoose.Schema({
   motivation: {
     type: String,
   },
-  cv: [{ type: Schema.Types.ObjectId, ref: "cv", name : "cv"}],
+  cv: [{ type: Schema.Types.ObjectId, ref: "pdfs", name : "pdfs"}],
 
 });
 
