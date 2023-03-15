@@ -19,7 +19,7 @@ const AccountAdmin = () => {
   }, [id]);
 
   useEffect(() => {
-    console.log("data is herrrrrrrrrre",Data);
+    console.log("data is herrrrrrrrrre", Data);
   }, [Data]);
 
   const [updatedData, setUpdatedData] = useState({});

@@ -48,6 +48,7 @@ module.exports = {
       res.status(200).send({
         data: token,
         userId: user._id,
+        firstName: user.firstName,
         message: "logged in successfully",
       });
     } catch (error) {
