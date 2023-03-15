@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 import "./styles.modules.css";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 const Account = () => {
   const [newData, setNewData] = useState({});
   const id = localStorage.getItem("id");
@@ -44,7 +44,6 @@ const Account = () => {
 
   return (
     <>
-    
       <div className="center-content">
         <div className="content-container">
           <div className="content-full">
@@ -54,7 +53,6 @@ const Account = () => {
               alt=""
             />
           </div>
-
           <h2>My Account</h2>
 
           <div className="form-container">
@@ -150,9 +148,9 @@ const Account = () => {
           <div>
             <div className="btn-container">
               <button onClick={handleUpdate} className="style-button">
-                Update 
+                Update
               </button>
-              <ToastContainer/>
+              <ToastContainer />
             </div>
           </div>
         </div>

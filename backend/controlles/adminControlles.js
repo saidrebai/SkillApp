@@ -28,24 +28,23 @@ module.exports = {
       if (error)
         return res.status(400).send({ message: error.details[0].message });
 
-      const user = await Admin.findOne({ email: req.body.email });
-      if (!user)
+      const admin = await Admin.findOne({ email: req.body.email });
+      if (!admin)
         return res.status(401).send({ message: "Invalid Email or Password" });
 
       const validPassword = await bcrypt.compare(
         req.body.password,
-        user.password
+        admin.password
       );
       if (!validPassword)
         return res.status(401).send({ message: "Invalid Email or Password" });
 
-      const token = user.generateAuthToken();
+      const token = admin.generateAuthToken();
       const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
-      // console.log("",decoded)
-      // var userId = decoded.id
       res.status(200).send({
         data: token,
         _id: decoded._id,
+        Name: admin.Name,
         message: "logged in successfully",
       });
     } catch (error) {
