@@ -2,31 +2,29 @@ import React from 'react';
 import './index.css';
 
 
-const handleHomeClick = () => {
-    window.location.href = "/";
-  };
-  const handleAboutusClick = () => {
-    window.location.href = "/aboutus";
-  };
-  const handleOffersClick = () => {
-    window.location.href = "/offers";
-  };
+
   const handleContactClick = () => {
     window.location.href = "/contact";
+  };
+  const handleSkillsClick = () => {
+    window.location.href = "/";
   };
 
 function Footer() {
   return (
     <footer>
       <div className='footer_container'>
-        <div className='footer_container_Menu'>
-            <div className='menu_buttons'>
-            <button onClick={handleHomeClick}>Home</button>
-            <button onClick={handleAboutusClick}>About as</button>
-            <button onClick={handleOffersClick}>Offers</button>
-            <button onClick={handleContactClick}>Contact</button>
-            </div>
+        <div className='information_container'>
+          <h1 onClick={handleSkillsClick}>Skills</h1>
         </div>
+        <div className='footer_container_Menu'>
+            <button onClick={handleContactClick}>Contact</button>
+         </div>
+            <div className='envoyer_container'>
+              <input type="text" placeholder='envoyer email'></input>
+              <button type="submit">Send</button>
+            </div>
+        
         <div className='footer_container_icons'>
             <img src="" alt=""/>
             <img src="" alt=""/>

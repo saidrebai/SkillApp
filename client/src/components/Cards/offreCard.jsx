@@ -36,35 +36,37 @@ export default function Card() {
   return (
     <><div className="container">
       {currentOffers.length > 0 ? (
-        currentOffers.map((offer)  => (
-        <div className="offer_container" key={offer.id}>
-          <div className="offer_container_img">
-            <img src={myImage} alt="" />
+        currentOffers.map((offer) => (
+          <div className="offer_container" key={offer.id}>
+            <div className="offer_container_img">
+              <img src={myImage} alt="" />
+            </div>
+            <div className="offer_container_info">
+              <div className="Name_container"><label>Title : </label>{offer.Name}</div>
+              <div className="Type_container"><label>Type : </label>{offer.type}</div>
+              <div className="time_container"><label>time : </label>{offer.time}</div>
+            </div>
+            <div className="offer_container_description">
+              <label>Descritption : </label>{offer.description}
+            </div>
+            <div className="skills_container"><label>Skills : </label>{offer.skills}</div>
+            <div className="company_Name_container"><label>Entreprise : </label>{offer.company_name}</div>
+            <div className="adresse_container"><label>Adresse : </label>{offer.adresse}</div>
+            <button className="apply_button">Apply</button>
           </div>
-          <div className="offer_container_info">
-            <div className="Name_container"><label>Title : </label>{offer.Name}</div>
-            <div className="Type_container"><label>Type : </label>{offer.type}</div>
-            <div className="term_container"><label>duration : </label>{offer.term}</div>
-          </div>
-          <div className="offer_container_description">
-            <label>Descritption : </label>{offer.description}
-          </div>
-          <div className="skills_container"><label>Skills : </label>{offer.skills}</div>
-          <button className="apply_button">Apply</button>
-        </div>
-      ))) : (
+        ))) : (
         <div>No offers to display</div>
 
-      )}
+      )}</div>
       <div className="pagination_container">
-       <Stack spacing={2}>
-        <Pagination
-          count={totalPages}
-          page={currentPage}
-          onChange={handlePageChange}
-          color="primary"
-        />
-      </Stack></div></div>
+        <Stack spacing={2}>
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+          />
+        </Stack></div>
     </>
-    );
+  );
 }

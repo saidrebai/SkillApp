@@ -5,7 +5,7 @@ module.exports = {
     const newoffer = {
       Name: req.body.Name,
       type: req.body.type,
-      term: req.body.term,
+      time: req.body.time,
       description: req.body.description,
       skills: req.body.skills,
       adresse: req.body.adresse,
