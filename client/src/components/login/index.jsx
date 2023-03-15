@@ -58,6 +58,7 @@ console.log("isadminn",isAdmin)
           <div className="left">
             <form className="from_container" onSubmit={handleSubmit}>
               <h1>Login to Your Account</h1>
+              <div className="radio_group">
               <label>
                 <input type="radio" name="option" value="option1" />
                 Admin
@@ -66,7 +67,7 @@ console.log("isadminn",isAdmin)
               <label>
                 <input type="radio" name="option" value="option2" />
                 User
-              </label>
+              </label></div>
               <input
                 type="email"
                 placeholder="Email"

@@ -5,7 +5,7 @@ const offerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  term: {
+  time: {
     type: String,
     required: true,
   },
@@ -36,7 +36,7 @@ const offerModel = mongoose.model("offerModel", offerSchema);
 const validate = (data) => {
     const schema = object({
       type: string().required().label("type of the offer"),
-      term: string().required().label("term"),
+      time: string().required().label("time"),
       Name: string().required().label("name"),
       description: string().required().label("description"),
       skills: string().required().label("skills"),
