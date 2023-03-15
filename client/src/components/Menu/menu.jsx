@@ -14,10 +14,13 @@ import './index.css';
 
 
 
+
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const isAdmin = localStorage.getItem('isAdmin');
+  const firstName = localStorage.getItem("firstName");
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -39,9 +42,10 @@ function ResponsiveAppBar() {
   const handleAccountClick = () => {
     if(isAdmin === "false"){
       window.location.href = "/Account";
+
     }else{
       window.location.href = "/AccountA";
-
+     
     }
   };
   const handleDashboardClick = () => {
@@ -52,6 +56,7 @@ function ResponsiveAppBar() {
     localStorage.removeItem("token");
     localStorage.removeItem("id");
     localStorage.removeItem("isAdmin");
+    localStorage.removeItem("firstName");
 
     
   };
@@ -169,6 +174,7 @@ function ResponsiveAppBar() {
               <Avatar src="/broken-image.jpg" />
               </IconButton>
             </Tooltip>
+            <div className='name'>{firstName}</div>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

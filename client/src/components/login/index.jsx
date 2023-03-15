@@ -7,6 +7,7 @@ const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [isAdmin,setIsAdmin] = useState(false);
+
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
@@ -17,17 +18,19 @@ const Login = () => {
       if ( document.querySelector('input[name="option"]:checked').value ==="option1"){
         setIsAdmin(true)
         const { data: res } = await axios.post("http://localhost:8080/api/adminRouters/signin", data);
+        console.log("aaaaaaaaaaaaaaaaaaaaaa",res)
         localStorage.setItem("token", res.data);
         localStorage.setItem("id", res._id);
         localStorage.setItem("isAdmin", true);
-
+        localStorage.setItem("firstName", res.Name);
+        
       } else {
         const { data: res } = await axios.post("http://localhost:8080/api/candidatRouters/signin", data);
         setIsAdmin(false)
         localStorage.setItem("token", res.data);
-      localStorage.setItem("id", res.userId);
-      localStorage.setItem("isAdmin", false);
-
+        localStorage.setItem("id", res.userId);
+        localStorage.setItem("isAdmin", false);
+        localStorage.setItem("firstName", res.firstName);
       }
   
       
@@ -46,6 +49,8 @@ useEffect(() => {
 console.log("isadminn",isAdmin)
 }, [isAdmin])
 
+
+
   return (
     <>
       <div className="login_container">
@@ -57,7 +62,7 @@ console.log("isadminn",isAdmin)
                 <input type="radio" name="option" value="option1" />
                 Admin
               </label>
-              <br />
+
               <label>
                 <input type="radio" name="option" value="option2" />
                 User
@@ -88,6 +93,7 @@ console.log("isadminn",isAdmin)
           </div>
           <div className="right">
             <h1>New Here ?</h1>
+
             <Link to="/signup">
               <button type="button" className="white_btn">
                 Sign Up
