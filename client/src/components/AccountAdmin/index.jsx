@@ -3,15 +3,21 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "./styles.modules.css";
 import "react-toastify/dist/ReactToastify.css";
+
+
 const AccountAdmin = () => {
   const [Data, setData] = useState({});
   const id = localStorage.getItem("id");
-
+  const [updatedData, setUpdatedData] = useState({
+    Name: ""
+  });
   useEffect(() => {
+
     axios
       .get(`http://localhost:8080/api/adminRouters/getinfoAdmin/${id}`)
       .then((response) => {
         setData(response.data.data);
+        console.log("rererere------", response);
       })
       .catch((error) => {
         console.log(error);
@@ -22,7 +28,7 @@ const AccountAdmin = () => {
     console.log("data is herrrrrrrrrre", Data);
   }, [Data]);
 
-  const [updatedData, setUpdatedData] = useState({});
+
 
   function handleUpdate(event) {
     event.preventDefault();
@@ -33,7 +39,8 @@ const AccountAdmin = () => {
       )
       .then((response) => {
         // update the Data state with the updated data
-        setData(response.data.data);
+        setData(updatedData);
+        console.log("reeeeeeeeeeeeeeees", response);
         toast.success("Updated successfully!");
       })
       .catch((error) => {
@@ -41,8 +48,9 @@ const AccountAdmin = () => {
         toast.error("Update failed!");
       });
     console.log("yess", updatedData);
+  
   }
-
+  useEffect(() => { Data ? setUpdatedData(Data) : setUpdatedData({ Name: "" }); console.log("Data---------------------", Data); }, [Data])
   return (
     <>
       <div className="center-content">
@@ -68,12 +76,17 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="Name"
-                  value={updatedData.Name || Data.Name}
-                  onChange={(e) =>
+                  value={updatedData.Name}
+                  onChange={(e) => {
+
                     setUpdatedData({
                       ...updatedData,
                       Name: e.target.value,
                     })
+
+
+
+                  }
                   }
                   className="style-input"
                 />
@@ -90,12 +103,14 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="country"
-                  value={updatedData.country || Data.country}
-                  onChange={(e) =>
+                  value={updatedData.country}
+                  onChange={(e) => {
                     setUpdatedData({
                       ...updatedData,
                       country: e.target.value,
-                    })
+                    });
+
+                  }
                   }
                   className="style-input"
                 />
@@ -112,7 +127,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="town"
-                  value={updatedData.town || Data.town}
+                  value={updatedData.town}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -134,7 +149,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="Adresse"
-                  value={updatedData.adresse || Data.adresse}
+                  value={updatedData.adresse}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -157,7 +172,7 @@ const AccountAdmin = () => {
               <input
                 type="Number"
                 name="Zipcode"
-                value={updatedData.Zipcode || Data.Zipcode}
+                value={updatedData.Zipcode}
                 onChange={(e) =>
                   setUpdatedData({
                     ...updatedData,
@@ -179,7 +194,7 @@ const AccountAdmin = () => {
               <input
                 type="Number"
                 name="tel"
-                value={updatedData.tel || Data.tel}
+                value={updatedData.tel}
                 onChange={(e) =>
                   setUpdatedData({
                     ...updatedData,
@@ -201,7 +216,7 @@ const AccountAdmin = () => {
               <input
                 type="Number"
                 name="fiscalCode"
-                value={updatedData.fiscalCode || Data.fiscalCode}
+                value={updatedData.fiscalCode}
                 onChange={(e) =>
                   setUpdatedData({
                     ...updatedData,

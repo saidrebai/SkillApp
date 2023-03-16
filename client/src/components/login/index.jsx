@@ -15,10 +15,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if ( document.querySelector('input[name="option"]:checked').value ==="option1"){
-        setIsAdmin(true)
+      if ( document.querySelector('input[name="option"]:checked').value ==="option1"){   
         const { data: res } = await axios.post("http://localhost:8080/api/adminRouters/signin", data);
-        console.log("aaaaaaaaaaaaaaaaaaaaaa",res)
+        setIsAdmin(true)
         localStorage.setItem("token", res.data);
         localStorage.setItem("id", res._id);
         localStorage.setItem("isAdmin", true);
