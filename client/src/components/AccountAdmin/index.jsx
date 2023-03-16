@@ -45,7 +45,7 @@ const AccountAdmin = () => {
 
   return (
     <>
-      <div className="center-content">
+      <div className="centerr-content">
         <div className="content-container">
           <div className="content-full">
             <img

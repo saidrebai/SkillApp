@@ -7,10 +7,16 @@ const Signup = () => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
+    tel: "",
+    adresse: "",
     email: "",
     password: "",
-    adresse: "",
-    tel: "",
+    town:"",
+    birthDate: "",
+    country: "",
+    gender: "",
+    zipCode:"",
+    Establishment: ""
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -43,7 +49,7 @@ const Signup = () => {
         <div className="left">
           <h1 className="titleButton"> welcome Back</h1>
           <Link to="/login">
-            <button type="button" className="white_btn">
+            <button type="button" className="green_btn">
               sign In
             </button>
           </Link>
@@ -102,6 +108,60 @@ const Signup = () => {
               name="tel"
               onChange={handleChange}
               value={data.tel}
+              required
+              className="input"
+            />
+            <input
+              type="text"
+              placeholder="birthDate"
+              name="birthDate"
+              onChange={handleChange}
+              value={data.birthDate}
+              required
+              className="input"
+            />
+            <input
+              type="text"
+              placeholder="town"
+              name="town"
+              onChange={handleChange}
+              value={data.town}
+              required
+              className="input"
+            />
+            <input
+              type="text"
+              placeholder="country"
+              name="country"
+              onChange={handleChange}
+              value={data.country}
+              required
+              className="input"
+            />
+            <input
+              type="text"
+              placeholder="gender"
+              name="gender"
+              onChange={handleChange}
+              value={data.gender}
+              required
+              className="input"
+            />
+             <input
+              type="text"
+              placeholder="zipCode"
+              name="zipCode"
+              onChange={handleChange}
+              value={data.zipCode}
+              required
+              className="input"
+            />
+            <input
+              type="text"
+              placeholder="Establishment"
+              name="Establishment"
+              onChange={handleChange}
+              value={data.Establishment}
               required
               className="input"
             />
