@@ -107,6 +107,13 @@ module.exports = {
       lastName: req.body.lastName,
       tel: req.body.tel,
       adresse: req.body.adresse,
+      birthDate: req.body.birthDate,
+      town: req.body.town,
+      country: req.body.country,
+      gender: req.body.gender,
+      zipCode: req.body.zipCode,
+      Establishment: req.body.Establishment,
+
     }).exec(function (err, candid) {
       if (err) {
         res.json({
