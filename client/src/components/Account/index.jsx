@@ -143,6 +143,138 @@ const Account = () => {
                 />
               </div>
             </div>
+
+            <div className="form-input-container">
+              <div className="title-input-style">
+                <div className="containertext-input">
+                  <label className="title-style">birthDate</label>
+                </div>
+              </div>
+              <div className="input-style">
+                <input
+                  type="text"
+                  name="birthDate"
+                  value={updatedData.birthDate || newData.birthDate}
+                  onChange={(e) =>
+                    setUpdatedData({
+                      ...updatedData,
+                      birthDate: e.target.value,
+                    })
+                  }
+                  className="style-input"
+                />
+              </div>
+            </div>
+
+            <div className="form-input-container">
+              <div className="title-input-style">
+                <div className="containertext-input">
+                  <label className="title-style">town</label>
+                </div>
+              </div>
+              <div className="input-style">
+                <input
+                  type="text"
+                  name="town"
+                  value={updatedData.town || newData.town}
+                  onChange={(e) =>
+                    setUpdatedData({
+                      ...updatedData,
+                      town: e.target.value,
+                    })
+                  }
+                  className="style-input"
+                />
+              </div>
+            </div>
+
+            <div className="form-input-container">
+              <div className="title-input-style">
+                <div className="containertext-input">
+                  <label className="title-style">country</label>
+                </div>
+              </div>
+              <div className="input-style">
+                <input
+                  type="text"
+                  name="country"
+                  value={updatedData.country || newData.country}
+                  onChange={(e) =>
+                    setUpdatedData({
+                      ...updatedData,
+                      country: e.target.value,
+                    })
+                  }
+                  className="style-input"
+                />
+              </div>
+            </div>
+
+            <div className="form-input-container">
+              <div className="title-input-style">
+                <div className="containertext-input">
+                  <label className="title-style">gender</label>
+                </div>
+              </div>
+              <div className="input-style">
+                <input
+                  type="text"
+                  name="gender"
+                  value={updatedData.gender || newData.gender}
+                  onChange={(e) =>
+                    setUpdatedData({
+                      ...updatedData,
+                      gender: e.target.value,
+                    })
+                  }
+                  className="style-input"
+                />
+              </div>
+            </div>
+
+            <div className="form-input-container">
+              <div className="title-input-style">
+                <div className="containertext-input">
+                  <label className="title-style">zipCode</label>
+                </div>
+              </div>
+              <div className="input-style">
+                <input
+                  type="number"
+                  name="zipCode"
+                  value={updatedData.zipCode || newData.zipCode}
+                  onChange={(e) =>
+                    setUpdatedData({
+                      ...updatedData,
+                      zipCode: e.target.value,
+                    })
+                  }
+                  className="style-input"
+                />
+              </div>
+            </div>
+
+            <div className="form-input-container">
+              <div className="title-input-style">
+                <div className="containertext-input">
+                  <label className="title-style">Establishment</label>
+                </div>
+              </div>
+              <div className="input-style">
+                <input
+                  type="text"
+                  name="Establishment"
+                  value={updatedData.Establishment || newData.Establishment}
+                  onChange={(e) =>
+                    setUpdatedData({
+                      ...updatedData,
+                      Establishment: e.target.value,
+                    })
+                  }
+                  className="style-input"
+                />
+              </div>
+            </div>
           </div>
 
           <div>
