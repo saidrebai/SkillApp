@@ -46,7 +46,7 @@ const Signup = () => {
         <div className="left-side-signup-admin">
           <h1 className="titleButton"> welcome Back</h1>
           <Link to="/login">
-            <button type="button" className="white_btn">
+            <button type="button" className="green_btn">
               sign In
             </button>
           </Link>

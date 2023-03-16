@@ -8,9 +8,8 @@
   /* background-color: lightblue; */
   padding-left: 15px;
 }
-
 .center-content {
-  height: 100vh;
+  height: 112vh;
   display: flex;
   align-items: center;
   justify-content: center;

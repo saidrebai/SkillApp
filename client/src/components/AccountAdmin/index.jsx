@@ -53,7 +53,7 @@ const AccountAdmin = () => {
   useEffect(() => { Data ? setUpdatedData(Data) : setUpdatedData({ Name: "" }); console.log("Data---------------------", Data); }, [Data])
   return (
     <>
-      <div className="center-content">
+      <div className="centerr-content">
         <div className="content-container">
           <div className="content-full">
             <img

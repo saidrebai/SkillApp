@@ -17,10 +17,16 @@ const validate = (data) => {
   const schema = Joi.object({
     firstName: Joi.string().required().label("firstName"),
     lastName: Joi.string().required().label("lastName"),
-    adresse: Joi.string().required().label("adresse"),
     tel: Joi.number().required().label("tel"),
+    adresse: Joi.string().required().label("adresse"),
     email: Joi.string().email().required().label("Email"),
     password: passwordComplexity().required().label("Password"),
+    town: Joi.string().required().label("Town"),
+    birthDate: Joi.string().required().label("birthDate"),
+    country: Joi.string().required().label("country"),
+    gender: Joi.string().required().label("gender"),
+    zipCode: Joi.number().required().label("zipCode"),
+    Establishment: Joi.string().required().label("Establishment"),
   });
   return schema.validate(data);
 };
@@ -101,6 +107,13 @@ module.exports = {
       lastName: req.body.lastName,
       tel: req.body.tel,
       adresse: req.body.adresse,
+      birthDate: req.body.birthDate,
+      town: req.body.town,
+      country: req.body.country,
+      gender: req.body.gender,
+      zipCode: req.body.zipCode,
+      Establishment: req.body.Establishment,
+
     }).exec(function (err, candid) {
       if (err) {
         res.json({
