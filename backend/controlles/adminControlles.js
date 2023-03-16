@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 const jwt = require("jsonwebtoken");
+const { User } = require("../models/user");
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -115,4 +116,16 @@ module.exports = {
       }
     });
   },
+  getAll: async function (req, res) {
+  	try {
+  		const admins = await Admin.find();
+  		if (!admins) {
+  			return res.status(404).json({ message: "admins not found" });
+  		}
+  		return res.status(200).json({ message: "admins found", admins });
+  	} catch (error) {
+  		console.error(error);
+  		return res.status(500).json({ message: "Internal Server Error" });
+  	}
+  }
 };
