@@ -5,5 +5,6 @@ router.post("/signin", candidatControlles.authentification);
 router.post("/signup", candidatControlles.signup);
 router.get("/getinfo/:id", candidatControlles.getinfoCondidat);
 router.put("/Updateinfo/:id", candidatControlles.updateInfo);
+router.get("/getAll", candidatControlles.getAll)
 
 module.exports = router;

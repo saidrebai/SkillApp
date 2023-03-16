@@ -4,7 +4,7 @@ import axios from "axios";
 import "./styles.modules.css";
 
 const Login = () => {
-  const [data, setData] = useState({ email: "", password: "" });
+  const [data, setData] = useState({ email:"" ,password: "" });
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -15,15 +15,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (
-        document.querySelector('input[name="option"]:checked').value ===
-        "option1"
-      ) {
-        setIsAdmin(true);
-        const { data: res } = await axios.post(
-          "http://localhost:8080/api/adminRouters/signin",
-          data
-        );
+      if (document.querySelector('input[name="option"]:checked').value === "option1") {
+        const { data: res } = await axios.post("http://localhost:8080/api/adminRouters/signin", data);
+        setIsAdmin(true)
         localStorage.setItem("token", res.data);
         localStorage.setItem("id", res._id);
         localStorage.setItem("isAdmin", true);
@@ -113,8 +107,8 @@ const Login = () => {
             </form>
           </div>
           <div className="right">
-          <h1>New here ?</h1>
-            <div className="radio_grp"> 
+            <h1>New here ?</h1>
+            <div className="radio_grp">
               <label>
                 <input type="radio" name="opt" value="opt1" />
                 Admin
@@ -135,5 +129,6 @@ const Login = () => {
     </>
   );
 };
+
 
 export default Login;

@@ -20,6 +20,7 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const isAdmin = localStorage.getItem('isAdmin');
   const firstName = localStorage.getItem("firstName");
+  
 
 
   const handleOpenNavMenu = (event) => {
@@ -70,13 +71,14 @@ function ResponsiveAppBar() {
     aboutusSection.scrollIntoView({ behavior: "smooth" });
   };
   const handleOffersClick = () => {
-    window.location.href = "/offers";
+      window.location.href = "/offers";
+
   };
   const handleContactClick = () => {
     const contactSection = document.getElementById("contact");
     contactSection.scrollIntoView({ behavior: "smooth" });
   };
-  
+
 
   return (
     <>
@@ -163,9 +165,9 @@ function ResponsiveAppBar() {
               <MenuItem key="Aboutus" onClick={handleAboutusClick}>
               <Typography textAlign="center">About us</Typography>
               </MenuItem>
-              <MenuItem key="Offers" onClick={handleOffersClick}>
+              {(!isAdmin||isAdmin==='false')&&<MenuItem key="Offers" onClick={handleOffersClick}>
               <Typography textAlign="center">Offers</Typography>
-              </MenuItem>
+              </MenuItem>}
               <MenuItem key="Contact" onClick={handleContactClick}>
               <Typography textAlign="center">Contact</Typography>
               </MenuItem> 
@@ -199,9 +201,9 @@ function ResponsiveAppBar() {
                <MenuItem key="Account" onClick={handleAccountClick}>
                <Typography textAlign="center">Account</Typography>
                </MenuItem>
-               <MenuItem key="Dashboard" onClick={handleDashboardClick}>
+               {isAdmin==='true' &&<MenuItem key="Dashboard" onClick={handleDashboardClick}>
                <Typography textAlign="center">Dashboard</Typography>
-               </MenuItem>
+               </MenuItem>}
                <MenuItem key="logout" onClick={handlelogoutClick}>
                <Typography textAlign="center">logout</Typography>
                </MenuItem>

@@ -3,9 +3,14 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "./styles.modules.css";
 import "react-toastify/dist/ReactToastify.css";
+
+
 const Account = () => {
   const [newData, setNewData] = useState({});
   const id = localStorage.getItem("id");
+  const [updatedData, setUpdatedData] = useState({
+    firstName: ""
+  });
 
   useEffect(() => {
     axios
@@ -21,7 +26,7 @@ const Account = () => {
     console.log("data is herrrrrrrrrre", newData);
   }, [newData]);
 
-  const [updatedData, setUpdatedData] = useState({});
+
 
   function handleUpdate(event) {
     event.preventDefault();
@@ -32,7 +37,8 @@ const Account = () => {
       )
       .then((response) => {
         // update the newData state with the updated data
-        setNewData(response.data.data);
+        setNewData(updatedData);
+        console.log("reeeeeeeeeeeeeeees", response);
         toast.success("Updated successfully!");
       })
       .catch((error) => {
@@ -41,7 +47,7 @@ const Account = () => {
       });
     console.log("yess", updatedData);
   }
-
+  useEffect(() => { newData ? setUpdatedData(newData) : setUpdatedData({ Name: "" }); console.log("Data---------------------", newData); }, [newData])
   return (
     <>
       <div className="center-content">
@@ -66,12 +72,12 @@ const Account = () => {
                 <input
                   type="text"
                   name="firstName"
-                  value={updatedData.firstName || newData.firstName}
-                  onChange={(e) =>
+                  value={updatedData.firstName}
+                  onChange={(e) =>{
                     setUpdatedData({
                       ...updatedData,
                       firstName: e.target.value,
-                    })
+                    })}
                   }
                   className="style-input"
                 />
@@ -88,12 +94,12 @@ const Account = () => {
                 <input
                   type="text"
                   name="lastName"
-                  value={updatedData.lastName || newData.lastName}
-                  onChange={(e) =>
+                  value={updatedData.lastName}
+                  onChange={(e) =>{
                     setUpdatedData({
                       ...updatedData,
                       lastName: e.target.value,
-                    })
+                    })}
                   }
                   className="style-input"
                 />
@@ -110,12 +116,12 @@ const Account = () => {
                 <input
                   type="number"
                   name="Tel"
-                  value={updatedData.tel || newData.tel}
-                  onChange={(e) =>
+                  value={updatedData.tel}
+                  onChange={(e) =>{
                     setUpdatedData({
                       ...updatedData,
                       tel: e.target.value,
-                    })
+                    })}
                   }
                   className="style-input"
                 />
@@ -133,11 +139,11 @@ const Account = () => {
                   type="text"
                   name="Adresse"
                   value={updatedData.adresse || newData.adresse}
-                  onChange={(e) =>
+                  onChange={(e) =>{
                     setUpdatedData({
                       ...updatedData,
                       adresse: e.target.value,
-                    })
+                    })}
                   }
                   className="style-input"
                 />
