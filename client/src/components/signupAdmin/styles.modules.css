@@ -103,11 +103,11 @@
   cursor: pointer;
 }
 
-.green_btn {
+/* .green_btn {
   background-color: #3bb19b;
   color: white;
   margin: 10px;
-}
+} */
 .custom-select {
   font-family: sans-serif;
   font-size: 14px;

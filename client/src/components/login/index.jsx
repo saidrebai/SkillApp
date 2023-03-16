@@ -55,16 +55,16 @@ const Login = () => {
     console.log("isadminn", isAdmin);
   }, [isAdmin]);
 
-
   const handleClick = async () => {
-    const selectedOption = document.querySelector('input[name="option"]:checked').value;
+    const selectedOption = document.querySelector(
+      'input[name="opt"]:checked'
+    ).value;
     try {
       if (selectedOption === "opt1") {
-        await axios.post("http://localhost:8080/api/adminRouters/signup");
+        window.location = "/signupAdmin";
       } else {
-        await axios.post("http://localhost:8080/api/candidatRouters/signup");
+        window.location = "/signup";
       }
-      window.location = "/"; 
     } catch (error) {
       console.log(error);
     }
@@ -113,34 +113,22 @@ const Login = () => {
             </form>
           </div>
           <div className="right">
-            <div className="radio_group">
+          <h1>New here ?</h1>
+            <div className="radio_grp"> 
               <label>
-                <input type="radio" name="option" value="opt1" />
+                <input type="radio" name="opt" value="opt1" />
                 Admin
               </label>
               <label>
-                <input type="radio" name="option" value="opt2" />
+                <input type="radio" name="opt" value="opt2" />
                 User
               </label>
             </div>
             <div>
-              <button onClick={handleClick} type="button" className="white_btn" >
+              <button onClick={handleClick} type="button" className="whitee_btn">
                 Sign Up
               </button>
             </div>
-
-            {/* <Link to="/signup">
-              <button type="button" className="white_btn">
-                Sign Up
-              </button>
-            </Link>
-            <br />
-            <h1>Professional account : </h1>
-            <Link to="/signupAdmin">
-              <button type="button" className="white_btn">
-                Sign Up
-              </button>
-            </Link>  */}
           </div>
         </div>
       </div>
