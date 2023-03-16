@@ -27,11 +27,35 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  town: {
+    type: String,
+    required: true,
+  },
+  zipCode: {
+    type: Number,
+    required: true,
+  },
+  birthDate: {
+    type: String,
+    required: true,
+  },
+  gender: {
+    type: String,
+    required: true,
+  },
+  country: {
+    type: String,
+    required: true,
+  },
+  Establishment: {
+    type: String,
+    required: true,
+  },
 });
 
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
-    expiresIn: "5m",
+    expiresIn: "30m",
   });
   return token;
 };

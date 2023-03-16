@@ -1,12 +1,12 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "./styles.modules.css";
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-  const [isAdmin,setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -15,25 +15,31 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if ( document.querySelector('input[name="option"]:checked').value ==="option1"){
-        setIsAdmin(true)
-        const { data: res } = await axios.post("http://localhost:8080/api/adminRouters/signin", data);
-        console.log("aaaaaaaaaaaaaaaaaaaaaa",res)
+      if (
+        document.querySelector('input[name="option"]:checked').value ===
+        "option1"
+      ) {
+        setIsAdmin(true);
+        const { data: res } = await axios.post(
+          "http://localhost:8080/api/adminRouters/signin",
+          data
+        );
         localStorage.setItem("token", res.data);
         localStorage.setItem("id", res._id);
         localStorage.setItem("isAdmin", true);
         localStorage.setItem("firstName", res.Name);
-        
       } else {
-        const { data: res } = await axios.post("http://localhost:8080/api/candidatRouters/signin", data);
-        setIsAdmin(false)
+        const { data: res } = await axios.post(
+          "http://localhost:8080/api/candidatRouters/signin",
+          data
+        );
+        setIsAdmin(false);
         localStorage.setItem("token", res.data);
         localStorage.setItem("id", res.userId);
         localStorage.setItem("isAdmin", false);
         localStorage.setItem("firstName", res.firstName);
       }
-  
-      
+
       window.location = "/";
     } catch (error) {
       if (
@@ -45,11 +51,24 @@ const Login = () => {
       }
     }
   };
-useEffect(() => {
-console.log("isadminn",isAdmin)
-}, [isAdmin])
+  useEffect(() => {
+    console.log("isadminn", isAdmin);
+  }, [isAdmin]);
 
 
+  const handleClick = async () => {
+    const selectedOption = document.querySelector('input[name="option"]:checked').value;
+    try {
+      if (selectedOption === "opt1") {
+        await axios.post("http://localhost:8080/api/adminRouters/signup");
+      } else {
+        await axios.post("http://localhost:8080/api/candidatRouters/signup");
+      }
+      window.location = "/"; 
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -59,15 +78,16 @@ console.log("isadminn",isAdmin)
             <form className="from_container" onSubmit={handleSubmit}>
               <h1>Login to Your Account</h1>
               <div className="radio_group">
-              <label>
-                <input type="radio" name="option" value="option1" />
-                Admin
-              </label>
+                <label>
+                  <input type="radio" name="option" value="option1" />
+                  Admin
+                </label>
 
-              <label>
-                <input type="radio" name="option" value="option2" />
-                User
-              </label></div>
+                <label>
+                  <input type="radio" name="option" value="option2" />
+                  User
+                </label>
+              </div>
               <input
                 type="email"
                 placeholder="Email"
@@ -93,9 +113,23 @@ console.log("isadminn",isAdmin)
             </form>
           </div>
           <div className="right">
-            <h1>New Here ?</h1>
+            <div className="radio_group">
+              <label>
+                <input type="radio" name="option" value="opt1" />
+                Admin
+              </label>
+              <label>
+                <input type="radio" name="option" value="opt2" />
+                User
+              </label>
+            </div>
+            <div>
+              <button onClick={handleClick} type="button" className="white_btn" >
+                Sign Up
+              </button>
+            </div>
 
-            <Link to="/signup">
+            {/* <Link to="/signup">
               <button type="button" className="white_btn">
                 Sign Up
               </button>
@@ -106,7 +140,7 @@ console.log("isadminn",isAdmin)
               <button type="button" className="white_btn">
                 Sign Up
               </button>
-            </Link>
+            </Link>  */}
           </div>
         </div>
       </div>
