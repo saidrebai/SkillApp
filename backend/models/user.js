@@ -51,6 +51,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  cv: [{ type: mongoose.Schema.Types.ObjectId, ref: "pdfs"}]
 });
 
 userSchema.methods.generateAuthToken = function () {

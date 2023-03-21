@@ -9,6 +9,18 @@ import Stack from '@mui/material/Stack';
 export default function Card() {
 
   const [offers, setOffers] = useState([]);
+  const[popup, setPopup] = useState(false);
+    
+    const toggleModel= () =>{
+        setPopup(!popup);
+        console.log("gggg",popup);
+    }
+
+    if(popup){
+      document.body.classList.add('active-popup')
+    }else{
+      document.body.classList.remove('active-popup')
+    }  
 
   useEffect(() => {
     async function fetchData() {
@@ -37,7 +49,7 @@ export default function Card() {
     <><div className="container">
       {currentOffers.length > 0 ? (
         currentOffers.map((offer) => (
-          <div className="offer_container" key={offer.id}>
+          <div className="offer_container" key={offer._id}>
             <div className="offer_container_img">
               <img src={myImage} alt="" />
             </div>
@@ -52,7 +64,23 @@ export default function Card() {
             <div className="skills_container"><label>Skills : </label>{offer.skills}</div>
             <div className="company_Name_container"><label>Entreprise : </label>{offer.company_name}</div>
             <div className="adresse_container"><label>Adresse : </label>{offer.adresse}</div>
-            <button className="apply_button">Apply</button>
+            <button className="apply_button" onClick={toggleModel}>Apply</button>
+            {popup && (
+              <div className="popup_container">
+              <div className="overlay" onClick={toggleModel} >
+               </div> 
+               <div className="popup_content">
+                   <h1>Enter your CV here : </h1>
+                   <input type="file" />
+                   <button 
+                   className ="close_popup"
+                   type='button'
+                   onClick={toggleModel}>close</button>
+                   <button type="submit">send</button>
+               </div>
+               
+           </div>
+            )}
           </div>
         ))) : (
         <div>No offers to display</div>

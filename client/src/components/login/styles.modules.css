@@ -109,7 +109,7 @@
 .radio_grp {
   justify-content: center;
   align-items: center;
-  margin: 50px;
+  margin: 25px
 }
 .whitee_btn {
   padding: 12px 20px;
@@ -120,4 +120,5 @@
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
+  border: none;
 }

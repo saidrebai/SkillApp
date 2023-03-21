@@ -20,6 +20,7 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const isAdmin = localStorage.getItem('isAdmin');
   const firstName = localStorage.getItem("firstName");
+  const token = localStorage.getItem("token");
   
 
 
@@ -172,9 +173,9 @@ function ResponsiveAppBar() {
               <Typography textAlign="center">Contact</Typography>
               </MenuItem> 
           </Box>
-          <div className='button_signin'>
+          {!token &&<div className='button_signin'>
             <button type="submit" onClick={handleLoginClick}>Login</button>
-          </div>
+          </div>}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

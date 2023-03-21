@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models/user");
+
 
 const validate = (data) => {
   const schema = Joi.object({
