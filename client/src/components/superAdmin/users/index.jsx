@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Avatar from '@mui/material/Avatar';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import './index.css';
+import Avatar from "@mui/material/Avatar";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import "./index.css";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -25,23 +25,25 @@ const Users = () => {
     }
 
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await axios.get('http://localhost:8080/api/candidatRouters/getAll');
-            setUsers(response.data?.users);
-            setUserCount(response.data.users.length);
-        }
-        fetchData();
-    }, []);
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 4;
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        "http://localhost:8080/api/candidatRouters/getAll"
+      );
+      setUsers(response.data?.users);
+      setUserCount(response.data.users.length);
+    }
+    fetchData();
+  }, []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
 
-    const totalPages = Math.ceil(users.length / itemsPerPage);
+  const totalPages = Math.ceil(users.length / itemsPerPage);
 
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
-    const currentUsers = users.slice(startIndex, endIndex);
+  const currentUsers = users.slice(startIndex, endIndex);
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);

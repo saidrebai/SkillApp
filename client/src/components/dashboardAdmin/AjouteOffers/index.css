@@ -1,0 +1,51 @@
+.ajoute_offer_container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  flex-direction: row;
+  justify-content: left;
+}
+.popup_contain {
+  border-radius: 5px;
+}
+.popup_contain,
+.over {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+.over {
+  background: rgba(49, 49, 49, 0.284);
+}
+.popup_cont {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 400px;
+}
+.cls_popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+}
+body.active-popup {
+  overflow-y: hidden;
+}
+.input_container {
+  margin: 10px;
+}
+.btn_submit {
+  margin: 10px;
+  padding: 8px 25px;
+}

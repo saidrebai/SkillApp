@@ -9,9 +9,12 @@ import Stack from '@mui/material/Stack';
 export default function Card() {
 
   const user = localStorage.getItem("token");
+  const id = localStorage.getItem('id');
 
   const [offers, setOffers] = useState([]);
   const [popup, setPopup] = useState(false);
+  const [error, setError] = useState("");
+  const [cv, setCv] = useState({user:id});
     
     const toggleModel= () =>{
       if(user){
@@ -51,6 +54,27 @@ export default function Card() {
     setCurrentPage(value);
   };
 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:8080/api/internAppRouter/upload";
+      const { data: res } = await axios.post(url, cv);
+      console.log(res.message);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
+  const handleChange = ({ currentTarget: input }) => {
+    setCv({ ...cv, [input.name]: input.value });
+  };
+
   return (
     <><div className="container">
       {currentOffers.length > 0 ? (
@@ -72,19 +96,23 @@ export default function Card() {
             <div className="adresse_container"><label>Adresse : </label>{offer.adresse}</div>
             <button className="apply_button" onClick={toggleModel}>Apply</button>
             {popup && (
-              <div className="popup_container">
+              <div className="popup_container">             
               <div className="overlay" onClick={toggleModel} >
                </div> 
+               <form className="form_container" onSubmit={handleSubmit}>
                <div className="popup_contnt">
                    <h1>Enter your CV here : </h1>
-                   <input type="file" />
+                   <input type="file" 
+                   name="id"
+                  //  value={cv.id}
+                   onChange={handleChange} />
                    <button 
                    className ="close_popup"
                    type='button'
                    onClick={toggleModel}>close</button>
                    <button type="submit">send</button>
                </div>
-               
+               </form>
            </div>
             )}
           </div>

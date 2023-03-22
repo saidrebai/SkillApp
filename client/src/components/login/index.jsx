@@ -7,7 +7,8 @@ const Login = () => {
 
   const user = localStorage.getItem("token");
 
-  const [data, setData] = useState({ email:"" ,password: "" });
+  const [type, setType] = useState("password");
+  const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -19,9 +20,15 @@ const Login = () => {
     e.preventDefault();
     if (!user){
     try {
-      if (document.querySelector('input[name="option"]:checked').value === "option1") {
-        const { data: res } = await axios.post("http://localhost:8080/api/adminRouters/signin", data);
-        setIsAdmin(true)
+      if (
+        document.querySelector('input[name="option"]:checked').value ===
+        "option1"
+      ) {
+        const { data: res } = await axios.post(
+          "http://localhost:8080/api/adminRouters/signin",
+          data
+        );
+        setIsAdmin(true);
         localStorage.setItem("token", res.data);
         localStorage.setItem("id", res._id);
         localStorage.setItem("isAdmin", true);
@@ -70,6 +77,14 @@ const Login = () => {
     }
   };
 
+  const handleToggle = () => {
+    if (type === "password") {
+      setType("text");
+    } else {
+      setType("password");
+    }
+  };
+
   return (
     <>
       <div className="login_container">
@@ -98,7 +113,8 @@ const Login = () => {
                 className="input"
               />
               <input
-                type="password"
+                type={type}
+                // type='password'
                 placeholder="Password"
                 name="password"
                 onChange={handleChange}
@@ -106,7 +122,14 @@ const Login = () => {
                 required
                 className="input"
               />
+
+              <div className=" afficher">
+                <input type="checkbox" onClick={handleToggle} />
+                show password
+              </div>
+
               {error && <div className="error_msg">{error}</div>}
+
               <button type="submit" className="green_btn">
                 Sign In
               </button>
@@ -125,7 +148,11 @@ const Login = () => {
               </label>
             </div>
             <div>
-              <button onClick={handleClick} type="button" className="whitee_btn">
+              <button
+                onClick={handleClick}
+                type="button"
+                className="whitee_btn"
+              >
                 Sign Up
               </button>
             </div>
@@ -135,6 +162,5 @@ const Login = () => {
     </>
   );
 };
-
 
 export default Login;

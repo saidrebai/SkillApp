@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Avatar from '@mui/material/Avatar';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import './index.css';
+import Avatar from "@mui/material/Avatar";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import "./index.css";
 
 const Admins = () => {
     const [admins, setAdmins] = useState([]);
@@ -35,12 +35,12 @@ const Admins = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4;
 
-    const totalPages = Math.ceil(admins.length / itemsPerPage);
+  const totalPages = Math.ceil(admins.length / itemsPerPage);
 
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
-    const currentAdmins = admins.slice(startIndex, endIndex);
+  const currentAdmins = admins.slice(startIndex, endIndex);
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);

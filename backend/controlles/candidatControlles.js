@@ -101,6 +101,7 @@ module.exports = {
       }
     });
   },
+  
   updateInfo: function (req, res) {
     User.findByIdAndUpdate(req.params.id, {
       firstName: req.body.firstName,
