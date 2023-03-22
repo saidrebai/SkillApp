@@ -4,6 +4,9 @@ import axios from "axios";
 import "./styles.modules.css";
 
 const Login = () => {
+
+  const user = localStorage.getItem("token");
+
   const [data, setData] = useState({ email:"" ,password: "" });
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
@@ -14,6 +17,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user){
     try {
       if (document.querySelector('input[name="option"]:checked').value === "option1") {
         const { data: res } = await axios.post("http://localhost:8080/api/adminRouters/signin", data);
@@ -43,6 +47,8 @@ const Login = () => {
       ) {
         setError(error.response.data.message);
       }
+    }}else{
+      alert("you are already connected");
     }
   };
   useEffect(() => {

@@ -8,12 +8,18 @@ import Stack from '@mui/material/Stack';
 
 export default function Card() {
 
+  const user = localStorage.getItem("token");
+
   const [offers, setOffers] = useState([]);
-  const[popup, setPopup] = useState(false);
+  const [popup, setPopup] = useState(false);
     
     const toggleModel= () =>{
+      if(user){
         setPopup(!popup);
-        console.log("gggg",popup);
+        console.log("gggg",popup);}
+        else{
+          window.location.href = "/login";
+        }
     }
 
     if(popup){
@@ -69,7 +75,7 @@ export default function Card() {
               <div className="popup_container">
               <div className="overlay" onClick={toggleModel} >
                </div> 
-               <div className="popup_content">
+               <div className="popup_contnt">
                    <h1>Enter your CV here : </h1>
                    <input type="file" />
                    <button 

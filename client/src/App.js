@@ -23,9 +23,9 @@ function App() {
       {!user && <Route path="/Account" exact element={<Login />} />}
       {user && <Route path="/AccountA" exact element={<AccountAdmin />} />}
       {!user && <Route path="/AccountA" exact element={<Login />} />}
-      <Route path="/offers" exact element={<Offer />} />
+      {(isAdmin === "false" || !isAdmin)  &&<Route path="/offers" exact element={<Offer />} />}
       <Route path="//" element={<Navigate replace to="/login" />} />
-      <Route path="/dashboard" exact element={<Dashboard />} />
+      {isAdmin === "true" && <Route path="/dashboard" exact element={<Dashboard />} />}
     </Routes>
   );
 }
