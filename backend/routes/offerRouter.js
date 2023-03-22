@@ -5,6 +5,6 @@ router.post("/offers", offersControlles.createOffer);
 router.get("/getoffer", offersControlles.getoffer);
 router.put("/updateoffer/:id", offersControlles.updateoffer);
 router.delete("/deleteOfferr/:id", offersControlles.deleteOffer);
-router.get("/getofferAdmin/:id", offersControlles.getofferAdmin);
+// router.get("/getofferAdmin/:id", offersControlles.getofferAdmin);
 
 module.exports = router;

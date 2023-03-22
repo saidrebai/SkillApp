@@ -10,6 +10,7 @@ module.exports = {
       skills: req.body.skills,
       adresse: req.body.adresse,
       company_name: req.body.company_name,
+      admin: req.body.admin,
     };
 
     console.log("nneww", newoffer);
@@ -86,16 +87,16 @@ module.exports = {
       }
     });
   },
-  getofferAdmin: async function (req, res) {
-    try {
-      const offer = await offerModel.findById({ _id: req.params.id });
-      if (!offer) {
-        return res.status(404).json({ message: "Offer not found" });
-      }
-      return res.status(200).json({ message: "Offer found", offer });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: "Internal Server Error" });
-    }
-  },
+  // getofferAdmin: async function (req, res) {
+  //   try {
+  //     const offer = await offerModel.findById({ _id: req.params.id });
+  //     if (!offer) {
+  //       return res.status(404).json({ message: "Offer not found" });
+  //     }
+  //     return res.status(200).json({ message: "Offer found", offer });
+  //   } catch (error) {
+  //     console.error(error);
+  //     return res.status(500).json({ message: "Internal Server Error" });
+  //   }
+  // },
 };
