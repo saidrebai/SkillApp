@@ -138,15 +138,13 @@ const Signup = () => {
               required
               className="input"
             />
-            <input
-              type="text"
-              placeholder="gender"
-              name="gender"
-              onChange={handleChange}
-              value={data.gender}
-              required
-              className="input"
-            />
+            <div class="custom-select">
+              <select className="container-select" name="gender" onChange={handleChange} value={data.gender} required>
+                <option value="0" disabled selected>Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
              <input
               type="text"
               placeholder="zipCode"

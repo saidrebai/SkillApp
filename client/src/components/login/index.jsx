@@ -4,6 +4,9 @@ import axios from "axios";
 import "./styles.modules.css";
 
 const Login = () => {
+
+  const user = localStorage.getItem("token");
+
   const [type, setType] = useState("password");
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -15,6 +18,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user){
     try {
       if (
         document.querySelector('input[name="option"]:checked').value ===
@@ -50,6 +54,8 @@ const Login = () => {
       ) {
         setError(error.response.data.message);
       }
+    }}else{
+      alert("you are already connected");
     }
   };
   useEffect(() => {

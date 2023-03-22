@@ -57,8 +57,8 @@ const Signup = () => {
             <div class="custom-select">
               <select className="container-select" name="TypeOfUser" onChange={handleChange} value={data.TypeOfUser} required>
                 <option value="0" disabled selected>Type of user</option>
-                <option value="1">Individuel</option>
-                <option value="2">Société</option>
+                <option value="Individuel">Individuel</option>
+                <option value="Société">Société</option>
               </select>
             </div>
             <input

@@ -8,7 +8,7 @@ import AccountAdmin from "./components/AccountAdmin";
 import Offers from "./components/Offers";
 import Dashboard from "./components/superAdmin/dashboard";
 import AjouteOffers from"./components/dashboardAdmin/AjouteOffers";
-import Offer from "./components/dashboardAdmin/Offer";
+// import Offer from "./components/dashboardAdmin/Offer";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -25,10 +25,10 @@ function App() {
       {!user && <Route path="/Account" exact element={<Login />} />}
       {user && <Route path="/AccountA" exact element={<AccountAdmin />} />}
       {!user && <Route path="/AccountA" exact element={<Login />} />}
-      <Route path="/offers" exact element={<Offers />} />
+      {(isAdmin === "false" || !isAdmin)  &&<Route path="/offers" exact element={<Offers />} />}
       <Route path="//" element={<Navigate replace to="/login" />} />
-      <Route path="/dashboard" exact element={<Dashboard />} />
-      <Route path="/dashboardAdmin" exact element={<Offer />} />
+      {isAdmin === "true" && <Route path="/dashboard" exact element={<Dashboard />} />}
+      {/* <Route path="/dashboardAdmin" exact element={<Offer />} /> */}
       <Route path="/AjouteOffers" exact element={<AjouteOffers />} />
     </Routes>
   );
