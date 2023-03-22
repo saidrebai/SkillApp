@@ -5,10 +5,10 @@ import SignupAdmin from "./components/signupAdmin";
 import Login from "./components/login";
 import Account from "./components/Account";
 import AccountAdmin from "./components/AccountAdmin";
-import Offer from "./components/Offers";
+import Offers from "./components/Offers";
 import Dashboard from "./components/superAdmin/dashboard";
-import Offers from "./components/dashboardAdmin/offer";
 import AjouteOffers from"./components/dashboardAdmin/AjouteOffers";
+// import Offer from "./components/dashboardAdmin/Offer";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -25,10 +25,10 @@ function App() {
       {!user && <Route path="/Account" exact element={<Login />} />}
       {user && <Route path="/AccountA" exact element={<AccountAdmin />} />}
       {!user && <Route path="/AccountA" exact element={<Login />} />}
-      {(isAdmin === "false" || !isAdmin)  &&<Route path="/offers" exact element={<Offer />} />}
+      {(isAdmin === "false" || !isAdmin)  &&<Route path="/offers" exact element={<Offers />} />}
       <Route path="//" element={<Navigate replace to="/login" />} />
       {isAdmin === "true" && <Route path="/dashboard" exact element={<Dashboard />} />}
-      <Route path="/dashboardAdmin" exact element={<Offers />} />
+      {/* <Route path="/dashboardAdmin" exact element={<Offer />} /> */}
       <Route path="/AjouteOffers" exact element={<AjouteOffers />} />
     </Routes>
   );

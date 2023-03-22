@@ -4,6 +4,7 @@
   align-items: flex-end;
   flex-direction: row;
   justify-content: left;
+  margin: 10px;
 }
 .popup_contain {
   border-radius: 5px;
