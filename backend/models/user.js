@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -51,7 +52,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cv: [{ type: mongoose.Schema.Types.ObjectId, ref: "pdfs"}]
+  cv: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'pdfs',
+		},
+	],
 });
 
 userSchema.methods.generateAuthToken = function () {

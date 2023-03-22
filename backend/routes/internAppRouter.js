@@ -15,7 +15,8 @@ router.post("/upload", upload,async(req,res)=>{
         const pdf = new PDF({
           name: req.file.originalname,
           contentType: req.file.mimetype,
-          data: req.file.buffer
+          data: req.file.buffer,
+          user : req.file.user
         });
     
         // Save the PDF document to the database
