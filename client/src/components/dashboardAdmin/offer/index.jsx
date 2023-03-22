@@ -1,53 +1,54 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import "./index.css";
 
-const Users = () => {
-  const [users, setUsers] = useState([]);
-  const [userCount, setUserCount] = useState(0);
+const Offers = () => {
+  const [offers, setOffers] = useState([]);
+  const [offerCount, setOfferCount] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        "http://localhost:8080/api/candidatRouters/getAll"
+        "http://localhost:8080/api/offerRouter/getofferAdmin/:id"
       );
-      setUsers(response.data?.users);
-      setUserCount(response.data.users.length);
+      setOffers(response.data?.offers);
+      setOfferCount(response.data.offers.length);
     }
     fetchData();
   }, []);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
-
-  const totalPages = Math.ceil(users.length / itemsPerPage);
-
+  const totalPages = Math.ceil(offerCount / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-
-  const currentUsers = users.slice(startIndex, endIndex);
+  const currentOffers = offers.slice(startIndex, endIndex);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
+
   return (
     <>
-      <div className="users_gird">
-        <div className="number_of_users">
-          <p>Number of users : {userCount}</p>
+      <div className="Offer_grid">
+        <div className="number_of_offers">
+          <p>Number of Offers : {offerCount}</p>
         </div>
-        <div className="users">
-          {currentUsers.length > 0 ? (
-            currentUsers.map((user) => (
-              <div className="users_container" key={user.id}>
-                <div className="users_avatar">
+        <div className="Offer">
+          {currentOffers.length > 0 ? (
+            currentOffers.map((offerModel) => (
+              <div className="Offer_container" key={offerModel._id}>
+                <div className="Offer_avatar">
                   <Avatar src="/broken-image.jpg" />
                 </div>
-                <div className="users_infromation">
-                  <div className="users_email">{user.email}</div>
+                <div className="Offer_information">
+                  <div className="Offer_title">{offerModel.title}</div>
+                  <div className="Offer_description">
+                    {offerModel.description}
+                  </div>
                 </div>
                 <div className="button_display">
                   <button type="submit">Display</button>
@@ -55,7 +56,7 @@ const Users = () => {
               </div>
             ))
           ) : (
-            <div>No users to display</div>
+            <div>No offers to display</div>
           )}
         </div>
         <div className="pagination_container">
@@ -73,4 +74,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Offers;
