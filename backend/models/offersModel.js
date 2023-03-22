@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema
 
 const offerSchema = new mongoose.Schema({
   type: {
@@ -28,6 +29,10 @@ const offerSchema = new mongoose.Schema({
   company_name: {
     type: String,
     required: true,
+  },
+  admin : {
+    type: Schema.Types.ObjectId,
+    ref: 'admin',
   },
 });
 
