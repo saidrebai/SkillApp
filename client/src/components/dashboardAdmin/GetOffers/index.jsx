@@ -65,17 +65,17 @@ const GetOffer = () => {
     }
     return (
         <>
-        <div className='offer_gird'>
+        <div className='offerr_gird'>
             <div className='number_of_offer'>
                 <p>Number of offer : {offerCount}</p>
             </div>
-            <div className='offer'>
+            <div className='offerr'>
                 {currentoffer.length > 0 ? (
                     currentoffer.map((offer) => (
-                        <div className='offer_container' key={offer._id}>
-                            <div className='offer_avatar'><Avatar src="/broken-image.jpg" /></div>
-                            <div className='offer_infromation'>
-                                <div className='offer_name'>{offer.Name}</div>
+                        <div className='offerr_container' key={offer._id}>
+                            <div className='offerr_avatar'><Avatar src="/broken-image.jpg" /></div>
+                            <div className='offerr_infromation'>
+                                <div className='offerr_name'>{offer.Name}</div>
                             </div>
                             <div className='button_display'>
                                 <button type="submit" onClick={() => toggleModel(offer)}>Display</button>
