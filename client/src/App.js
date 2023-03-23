@@ -28,8 +28,8 @@ function App() {
       {(isAdmin === "false" || !isAdmin)  &&<Route path="/offers" exact element={<Offers />} />}
       <Route path="//" element={<Navigate replace to="/login" />} />
       {isAdmin === "true" && <Route path="/dashboard" exact element={<Dashboard />} />}
-      <Route path="/addoffers" exact element={<AddOffers />} />
-      <Route path="/getofferbyid" exact element={<GetOffer />} />
+      {isAdmin === "true" && <Route path="/addoffers" exact element={<AddOffers />} />}
+      {isAdmin === "true" && <Route path="/getofferbyid" exact element={<GetOffer />} />}
     </Routes>
   );
 }
