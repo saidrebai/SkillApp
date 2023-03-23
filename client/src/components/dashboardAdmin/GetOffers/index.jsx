@@ -40,16 +40,6 @@ const GetOffer = () => {
       }, []);
       console.log("testtttt",offerCount)
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const response = await axios.get(`http://localhost:8080/api/offerRouter/getofferbyid/${id}`);
-    //         setOffers(response.data?.offers);
-    //         setOfferCount(response.data?.offers.length);
-    //         console.log("response=========>",response);
-    //     }
-    //     fetchData();
-    // }, []);
-
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4;
 
