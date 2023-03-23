@@ -110,6 +110,7 @@ export default function Card() {
                    className ="close_popup"
                    type='button'
                    onClick={toggleModel}>close</button>
+                   {error && <div className="error_msg">{error}</div>}
                    <button type="submit">send</button>
                </div>
                </form>

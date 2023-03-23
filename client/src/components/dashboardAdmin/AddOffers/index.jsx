@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./index.css";
 import axios from "axios";
 
-const AjouteOffers = () => {
+const AddOffers = () => {
   const id = localStorage.getItem("id");
   const [data, setData] = useState({
     Name: "",
@@ -165,4 +165,4 @@ const AjouteOffers = () => {
   );
 };
 
-export default AjouteOffers;
+export default AddOffers;
