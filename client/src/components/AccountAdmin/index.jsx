@@ -4,15 +4,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "./styles.modules.css";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const AccountAdmin = () => {
   const [Data, setData] = useState({});
   const id = localStorage.getItem("id");
-  const [updatedData, setUpdatedData] = useState({
-    Name: ""
-  });
+  const [updatedData, setUpdatedData] = useState({ Name: "" });
+  
   useEffect(() => {
-
     axios
       .get(`http://localhost:8080/api/adminRouters/getinfoAdmin/${id}`)
       .then((response) => {
@@ -27,8 +24,6 @@ const AccountAdmin = () => {
   useEffect(() => {
     console.log("data is herrrrrrrrrre", Data);
   }, [Data]);
-
-
 
   function handleUpdate(event) {
     event.preventDefault();
@@ -48,9 +43,11 @@ const AccountAdmin = () => {
         toast.error("Update failed!");
       });
     console.log("yess", updatedData);
-  
   }
-  useEffect(() => { Data ? setUpdatedData(Data) : setUpdatedData({ Name: "" }); console.log("Data---------------------", Data); }, [Data])
+  useEffect(() => {
+    Data ? setUpdatedData(Data) : setUpdatedData({ Name: "" });
+    console.log("Data---------------------", Data);
+  }, [Data]);
   return (
     <>
       <div className="centerr-content">
@@ -78,16 +75,11 @@ const AccountAdmin = () => {
                   name="Name"
                   value={updatedData.Name}
                   onChange={(e) => {
-
                     setUpdatedData({
                       ...updatedData,
                       Name: e.target.value,
-                    })
-
-
-
-                  }
-                  }
+                    });
+                  }}
                   className="style-input"
                 />
               </div>
@@ -109,9 +101,7 @@ const AccountAdmin = () => {
                       ...updatedData,
                       country: e.target.value,
                     });
-
-                  }
-                  }
+                  }}
                   className="style-input"
                 />
               </div>
