@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./index.css";
+import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 
 const AddOffers = () => {
@@ -32,6 +33,7 @@ const AddOffers = () => {
       const url = "http://localhost:8080/api/offerRouter/offers";
       const { data: res } = await axios.post(url, data);
       console.log(res.message);
+      toast.success("Adding successfully!");
     } catch (error) {
       if (
         error.response &&
@@ -39,6 +41,7 @@ const AddOffers = () => {
         error.response.status <= 500
       ) {
         setError(error.response.data.message);
+        toast.error("Adding failed!");
       }
     }
   };
@@ -156,6 +159,7 @@ const AddOffers = () => {
                 <button className="btn_submit" type="submit">
                   send
                 </button>
+                <ToastContainer />
               </div>
             </form>
           </div>
