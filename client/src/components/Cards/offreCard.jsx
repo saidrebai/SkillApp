@@ -5,31 +5,39 @@ import './index.css';
 import myImage from '../images/arsela-techmologies.png';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import "react-toastify/dist/ReactToastify.css";
+// import { toast, ToastContainer } from "react-toastify";
 
 export default function Card() {
 
   const user = localStorage.getItem("token");
   const id = localStorage.getItem('id');
+  // const idpdf = localStorage.getItem("idpdf");
+  // const idOffer = localStorage.getItem("idOffer");
 
   const [offers, setOffers] = useState([]);
   const [popup, setPopup] = useState(false);
   const [error, setError] = useState("");
-  const [cv, setCv] = useState({user:id});
-    
-    const toggleModel= () =>{
-      if(user){
-        setPopup(!popup);
-        console.log("gggg",popup);}
-        else{
-          window.location.href = "/login";
-        }
-    }
+  const [pdfs, setPdfs] = useState(null);
+  // const [updatedData,setUpdatedData] = useState({cv:idpdf})
 
-    if(popup){
-      document.body.classList.add('active-popup')
-    }else{
-      document.body.classList.remove('active-popup')
-    }  
+  const toggleModel = () => {
+    if (user) {
+      setPopup(!popup);
+      console.log("gggg", popup);
+      // localStorage.setItem("idOffer",idOffer);
+      
+    }
+    else {
+      window.location.href = "/login";
+    }
+  }
+
+  if (popup) {
+    document.body.classList.add('active-popup')
+  } else {
+    document.body.classList.remove('active-popup')
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -57,10 +65,14 @@ export default function Card() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('pdfs', pdfs);
+    formData.append("id",id);
+    
     try {
-      const url = "http://localhost:8080/api/internAppRouter/upload";
-      const { data: res } = await axios.post(url, cv);
-      console.log(res.message);
+      const { data: res } = await axios.post("http://localhost:8080/api/internAppRouter/upload", formData);
+      console.log("===>",res);
+      localStorage.setItem("idpdf",res.idpdf);
     } catch (error) {
       if (
         error.response &&
@@ -70,9 +82,28 @@ export default function Card() {
         setError(error.response.data.message);
       }
     }
+
+
+    // axios
+    //   .put(
+    //     `http://localhost:8080/api/offerRouter/updateoffer/${id}`,
+    //     updatedData
+    //   )
+    //   .then((response) => {
+    //     // update the newData state with the updated data
+    //     setOffers(updatedData);
+    //     console.log("reeeeeeeeeeeeeeees", response);
+    //     toast.success("Updated successfully!");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     toast.error("Update failed!");
+    //   });
   };
-  const handleChange = ({ currentTarget: input }) => {
-    setCv({ ...cv, [input.name]: input.value });
+
+
+  const handleFileChange = (event) => {
+    setPdfs(event.target.files[0]);
   };
 
   return (
@@ -96,25 +127,25 @@ export default function Card() {
             <div className="adresse_container"><label>Adresse : </label>{offer.adresse}</div>
             <button className="apply_button" onClick={toggleModel}>Apply</button>
             {popup && (
-              <div className="popup_container">             
-              <div className="overlay" onClick={toggleModel} >
-               </div> 
-               <form className="form_container" onSubmit={handleSubmit}>
-               <div className="popup_contnt">
-                   <h1>Enter your CV here : </h1>
-                   <input type="file" 
-                   name="id"
-                  //  value={cv.id}
-                   onChange={handleChange} />
-                   <button 
-                   className ="close_popup"
-                   type='button'
-                   onClick={toggleModel}>close</button>
-                   {error && <div className="error_msg">{error}</div>}
-                   <button type="submit">send</button>
-               </div>
-               </form>
-           </div>
+              <div className="popup_container">
+                <div className="overlay" onClick={toggleModel} >
+                </div>
+                <form className="form_container" method="POST" onSubmit={handleSubmit}>
+                  <div className="popup_contnt">
+                    <h1>Enter your CV here : </h1>
+                    <input type="file"
+                      name='pdfs'
+                      onChange={handleFileChange}
+                    />
+                    <button
+                      className="close_popup"
+                      type='button'
+                      onClick={toggleModel}>close</button>
+                    {error && <div className="error_msg">{error}</div>}
+                    <button type="submit" >send</button>
+                  </div>
+                </form>
+              </div>
             )}
           </div>
         ))) : (
