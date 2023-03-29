@@ -16,14 +16,14 @@ router.post("/upload", upload,async(req,res)=>{
           name: req.file.originalname,
           contentType: req.file.mimetype,
           data: req.file.buffer,
-          user : req.file.user
+          user : req.body.id
         });
     
         // Save the PDF document to the database
         await pdf.save();
 
         // Return a success response
-        res.status(200).json({ message: 'File uploaded successfully' });
+        res.status(200).json({ message: 'File uploaded successfully' , pdf , idpdf: pdf._id });
       } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Server error' });

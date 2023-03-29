@@ -10,7 +10,8 @@ module.exports = {
       skills: req.body.skills,
       adresse: req.body.adresse,
       company_name: req.body.company_name,
-      admin: req.body.admin,
+      admin: req.body.id,
+      cv: req.body.id,
     };
 
     console.log("nneww", newoffer);
@@ -26,6 +27,7 @@ module.exports = {
           message: "offer created!",
           statut: 200,
           data: offer,
+          idOffer:offer._id,
         });
     });
   },
@@ -52,6 +54,7 @@ module.exports = {
         skills: req.body.skills,
         adresse: req.body.adresse,
         company_name: req.body.company_name,
+        cv:req.body.id
       })
       .exec(function (err, offer) {
         if (err) {
@@ -65,6 +68,7 @@ module.exports = {
             msg: "offer updated!",
             status: 200,
             data: offer,
+            
           });
         }
       });
