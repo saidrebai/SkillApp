@@ -44,22 +44,6 @@ const GetOffer = () => {
   }, []);
   console.log("testtttt", offers);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/offerRouter/getofferbyid/${id}`)
-      .then((response) => {
-        setOffers(response.offers.offers);
-        console.log("rererere------", response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id]);
-
-  useEffect(() => {
-    console.log("data is herrrrrrrrrre", offers);
-  }, [offers]);
-
   const handleUpdate = () => {
     axios
       .put(
@@ -85,10 +69,6 @@ const GetOffer = () => {
     console.log("yeeeessssssssssssss", updatedOffer);
   };
 
-  // useEffect(() => {
-  //   offers ? setUpdatedOffer(offers) : setUpdatedOffer({ Name: "" });
-  //   console.log("Offer--------", offers);
-  // }, [offers]);
   useEffect(() => {
     if (selectedOffer) {
       setUpdatedOffer(selectedOffer);
@@ -178,9 +158,9 @@ const GetOffer = () => {
         </div>
       </div>
       {popup && (
-        <div className="popup_container" style={{zIndex:"1"}}>
-          <div className="overlay"  onClick={() => toggleModel(null)}></div>
-          <div className="popup_content" >
+        <div className="popup_container" style={{ zIndex: "1" }}>
+          <div className="overlay" onClick={() => toggleModel(null)}></div>
+          <div className="popup_content">
             <div className="offer_info">
               <div className="offer_data">
                 <Avatar src="/broken-image.jpg" />
