@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const offerSchema = new mongoose.Schema({
   type: {
@@ -30,31 +30,31 @@ const offerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  admin : {
+  admin: {
     type: Schema.Types.ObjectId,
-    ref: 'admin',
+    ref: "admin",
   },
   cv: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: 'pdfs',
-		},
-	],
+    {
+      type: Schema.Types.ObjectId,
+      ref: "pdfs",
+    },
+  ],
 });
 
 const offerModel = mongoose.model("offerModel", offerSchema);
 
 const validate = (data) => {
-    const schema = object({
-      type: string().required().label("type of the offer"),
-      time: string().required().label("time"),
-      Name: string().required().label("name"),
-      description: string().required().label("description"),
-      skills: string().required().label("skills"),
-      adresse: string().required().label("adresse"),
-      company_name: string().required().label("company_name"),
-    });
-    return schema.validate(data);
-  };
+  const schema = object({
+    type: string().required().label("type of the offer"),
+    time: string().required().label("time"),
+    Name: string().required().label("name"),
+    description: string().required().label("description"),
+    skills: string().required().label("skills"),
+    adresse: string().required().label("adresse"),
+    company_name: string().required().label("company_name"),
+  });
+  return schema.validate(data);
+};
 
-module.exports = { offerModel, validate};
+module.exports = { offerModel, validate };
