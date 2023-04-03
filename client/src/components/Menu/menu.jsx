@@ -14,7 +14,7 @@ import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 
-const pages = ['Home', 'About us', 'Offers','Contact'];
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -97,7 +97,7 @@ function ResponsiveAppBar() {
     }
   };
   const handleDashboardClick = () => {
-    window.location.href = "/Dashboard";
+    window.location.href = "/getofferbyid";
   };
   const handlelogoutClick = () => {
     window.location.href = "/login";
@@ -109,6 +109,7 @@ function ResponsiveAppBar() {
     
   };
   const handleHomeClick = () => {
+    window.location.href = "/";
     const homeSection = document.getElementById("home");
     homeSection.scrollIntoView({ behavior: "smooth" });
   };
@@ -179,11 +180,18 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-          {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem key="Home" onClick={handleHomeClick} >
+              <Typography textAlign="center">Home</Typography>
+              </MenuItem>
+              <MenuItem key="Aboutus" onClick={handleAboutusClick}>
+              <Typography textAlign="center">About us</Typography>
+              </MenuItem>
+              {(!isAdmin||isAdmin==='false')&&<MenuItem key="Offers" onClick={handleOffersClick}>
+              <Typography textAlign="center">Offers</Typography>
+              </MenuItem>}
+              <MenuItem key="Contact" onClick={handleContactClick}>
+              <Typography textAlign="center">Contact</Typography>
+              </MenuItem> 
             </Menu>
           </Box>
           <Typography
