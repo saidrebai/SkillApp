@@ -5,31 +5,44 @@ import './index.css';
 import myImage from '../images/arsela-techmologies.png';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Card() {
 
   const user = localStorage.getItem("token");
   const id = localStorage.getItem('id');
+  const idpdf = localStorage.getItem("idpdf");
+  // const idOffer = localStorage.getItem("idOffer");
 
   const [offers, setOffers] = useState([]);
   const [popup, setPopup] = useState(false);
   const [error, setError] = useState("");
-  const [cv, setCv] = useState({user:id});
-    
-    const toggleModel= () =>{
-      if(user){
-        setPopup(!popup);
-        console.log("gggg",popup);}
-        else{
-          window.location.href = "/login";
-        }
-    }
+  const [pdfs, setPdfs] = useState(null);
+  // const [updatedData,setUpdatedData] = useState({cv:idpdf})
+  const [selectedOffer, setSelectedOffer] = useState(null);
+  const [updatedOffer, setUpdatedOffer] = useState();
 
-    if(popup){
-      document.body.classList.add('active-popup')
-    }else{
-      document.body.classList.remove('active-popup')
-    }  
+  const toggleModel = (offer) => {
+    if (user) {
+      setPopup(!popup);
+      console.log("gggg", popup);
+      // localStorage.setItem("idOffer",idOffer);
+      setSelectedOffer(offer);
+      localStorage.removeItem("idpdf",idpdf);
+
+
+    }
+    else {
+      window.location.href = "/login";
+    }
+  }
+
+  if (popup) {
+    document.body.classList.add('active-popup')
+  } else {
+    document.body.classList.remove('active-popup')
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -57,10 +70,14 @@ export default function Card() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('pdfs', pdfs);
+    formData.append("id", id);
+
     try {
-      const url = "http://localhost:8080/api/internAppRouter/upload";
-      const { data: res } = await axios.post(url, cv);
-      console.log(res.message);
+      const { data: res } = await axios.post("http://localhost:8080/api/internAppRouter/upload", formData);
+      console.log("===>", res);
+      localStorage.setItem("idpdf", res.idpdf);
     } catch (error) {
       if (
         error.response &&
@@ -70,51 +87,96 @@ export default function Card() {
         setError(error.response.data.message);
       }
     }
+
   };
-  const handleChange = ({ currentTarget: input }) => {
-    setCv({ ...cv, [input.name]: input.value });
+
+  const handleUpdate = () => {
+    const updatedOfferWithCV = { ...updatedOffer, cv: [idpdf] }; // add the cv attribute to the updated offer
+    axios
+      .put(
+        `http://localhost:8080/api/offerRouter/updatecv/:${updatedOffer._id}`,
+        updatedOfferWithCV
+      )
+      .then((response) => {
+        setOffers((prevOffers) =>
+          prevOffers.map((o) => {
+            if (o._id === updatedOffer._id) {
+              return updatedOfferWithCV;
+            }
+            return o;
+          })
+        );
+        console.log("updated successfully", updatedOfferWithCV);
+        toast.success("Updated successfully!");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Update failed!");
+      });
+    console.log("yeeeessssssssssssss", updatedOfferWithCV);
+  };
+
+  useEffect(() => {
+    if (selectedOffer) {
+      setUpdatedOffer(selectedOffer);
+    }
+  }, [selectedOffer]);
+
+
+  const handleFileChange = (event) => {
+    setPdfs(event.target.files[0]);
   };
 
   return (
     <><div className="container">
       {currentOffers.length > 0 ? (
-        currentOffers.map((offer) => (
-          <div className="offer_container" key={offer._id}>
+        currentOffers.map((selectedOffer) => (
+          <div className="offer_container" key={selectedOffer._id}>
             <div className="offer_container_img">
               <img src={myImage} alt="" />
             </div>
             <div className="offer_container_info">
-              <div className="Name_container"><label>Title : </label>{offer.Name}</div>
-              <div className="Type_container"><label>Type : </label>{offer.type}</div>
-              <div className="time_container"><label>time : </label>{offer.time}</div>
+              <div className="Name_container"><label>Title : </label>{selectedOffer.Name}</div>
+              <div className="Type_container"><label>Type : </label>{selectedOffer.type}</div>
+              <div className="time_container"><label>time : </label>{selectedOffer.time}</div>
             </div>
             <div className="offer_container_description">
-              <label>Descritption : </label>{offer.description}
+              <label>Descritption : </label>{selectedOffer.description}
             </div>
-            <div className="skills_container"><label>Skills : </label>{offer.skills}</div>
-            <div className="company_Name_container"><label>Entreprise : </label>{offer.company_name}</div>
-            <div className="adresse_container"><label>Adresse : </label>{offer.adresse}</div>
-            <button className="apply_button" onClick={toggleModel}>Apply</button>
+            <div className="skills_container"><label>Skills : </label>{selectedOffer.skills}</div>
+            <div className="company_Name_container"><label>Entreprise : </label>{selectedOffer.company_name}</div>
+            <div className="adresse_container"><label>Adresse : </label>{selectedOffer.adresse}</div>
+            <button className="apply_button" onClick={() => {
+              toggleModel(selectedOffer);
+            }}>Apply</button>
             {popup && (
-              <div className="popup_container">             
-              <div className="overlay" onClick={toggleModel} >
-               </div> 
-               <form className="form_container" onSubmit={handleSubmit}>
-               <div className="popup_contnt">
-                   <h1>Enter your CV here : </h1>
-                   <input type="file" 
-                   name="id"
-                  //  value={cv.id}
-                   onChange={handleChange} />
-                   <button 
-                   className ="close_popup"
-                   type='button'
-                   onClick={toggleModel}>close</button>
-                   {error && <div className="error_msg">{error}</div>}
-                   <button type="submit">send</button>
-               </div>
-               </form>
-           </div>
+              <div className="popup_container" style={{ zIndex: "1" }} >
+                <div className="overlay" onClick={() => toggleModel(null)} >
+                </div>
+                <form className="form_container" method="POST" onSubmit={handleSubmit}>
+                  <div className="popup_contnt">
+                    <div className="popup_id" value={selectedOffer?._id}></div>
+                    <h1>Enter your CV here : </h1>
+                    <input
+                      type="file"
+                      name='pdfs'
+                      onChange={handleFileChange}
+                    />
+                    {/* <div className="pdf_id" value ={updatedOffer.cv=idpdf}></div> */}
+                    <button
+                      className="close_popup"
+                      type='button'
+                      onClick={toggleModel}>close</button>
+                    {error && <div className="error_msg">{error}</div>}
+                    <button type="submit">send</button>
+                    <button type="button" onClick={() => {
+                      handleUpdate();
+                    }}
+                    >Save</button>
+                    <ToastContainer />
+                  </div>
+                </form>
+              </div>
             )}
           </div>
         ))) : (

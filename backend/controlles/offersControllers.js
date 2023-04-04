@@ -1,4 +1,5 @@
 const { offerModel, validate } = require("../models/offersModel");
+const mongoose = require("mongoose");
 
 module.exports = {
   createOffer: function (req, res) {
@@ -10,7 +11,8 @@ module.exports = {
       skills: req.body.skills,
       adresse: req.body.adresse,
       company_name: req.body.company_name,
-      admin: req.body.admin,
+      admin: req.body.id,
+      cv: req.body.id,
     };
 
     console.log("nneww", newoffer);
@@ -26,6 +28,7 @@ module.exports = {
           message: "offer created!",
           statut: 200,
           data: offer,
+          idOffer: offer._id,
         });
     });
   },
@@ -52,6 +55,7 @@ module.exports = {
         skills: req.body.skills,
         adresse: req.body.adresse,
         company_name: req.body.company_name,
+        cv: req.body.id,
       })
       .exec(function (err, offer) {
         if (err) {
@@ -93,10 +97,32 @@ module.exports = {
       if (!offer) {
         return res.status(404).json({ message: "Offers not found" });
       }
-      return res.status(200).json({ message: "Offers found", offer , offerCount :  offer.length });
+      return res
+        .status(200)
+        .json({ message: "Offers found", offer, offerCount: offer.length });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
     }
+  },
+
+  updateOfferWithCV: async function (req, res) {
+    offerModel
+      .findByIdAndUpdate(req.params.id, {$push : {cv: req.body.cv}})
+      .exec(function (err, offer) {
+        if (err) {
+          res.json({
+            msg: "erreur" + err,
+            status: 500,
+            data: null,
+          });
+        } else {
+          res.status(200).json({
+            msg: "offer updated!",
+            status: 200,
+            data: offer,
+          });
+        }
+      });
   },
 };
