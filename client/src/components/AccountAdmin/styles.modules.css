@@ -32,7 +32,7 @@
     flex-direction: column;
     width: 100%;
   }
-  .form-input-container {
+  .from-input-container {
     padding: 10px 0 10px 0;
     /* background-color: #32a590; */
     width: 100%;
@@ -89,4 +89,6 @@
     border-radius: "100%";
     margin-bottom: "15px";
   }
-  
+  .titlee{
+    padding: 15px 279px 10px;
+  }
