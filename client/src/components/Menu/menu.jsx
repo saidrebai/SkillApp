@@ -97,7 +97,7 @@ function ResponsiveAppBar() {
     }
   };
   const handleDashboardClick = () => {
-    window.location.href = "/getofferbyid";
+    window.location.href = "/dashboardA";
   };
   const handlelogoutClick = () => {
     window.location.href = "/login";
