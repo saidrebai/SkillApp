@@ -54,11 +54,11 @@ const AddOffers = () => {
   return (
     <>
       <div className="ajoute_offer_container">
-        <button type="submit" onClick={toggleModel}>
+        <button  type="submit" className="Ajoutt_offerr" onClick={toggleModel}>
           ajoute
         </button>
         {popup && (
-          <div className="popup_contain">
+          <div className="popup_contain" style={{ zIndex: "1" }}>
             <form className="add_offer_from" onSubmit={handleCreate}>
               <div className="over" onClick={toggleModel}></div>
               <div className="popup_cont">
@@ -69,6 +69,7 @@ const AddOffers = () => {
                     <input
                       type="Text"
                       name="type"
+                      required
                       onChange={handleChange}
                       value={data.type}
                     />
@@ -81,6 +82,7 @@ const AddOffers = () => {
                     <input
                       type="Text"
                       name="time"
+                      required
                       onChange={handleChange}
                       value={data.time}
                     />
@@ -93,6 +95,7 @@ const AddOffers = () => {
                     <input
                       type="Text"
                       name="Name"
+                      required
                       onChange={handleChange}
                       value={data.Name}
                     />
@@ -105,6 +108,7 @@ const AddOffers = () => {
                     <input
                       type="Text"
                       name="description"
+                      required
                       onChange={handleChange}
                       value={data.description}
                     />
@@ -117,6 +121,7 @@ const AddOffers = () => {
                     <input
                       type="Text"
                       name="skills"
+                      required
                       onChange={handleChange}
                       value={data.skills}
                     />
@@ -129,6 +134,7 @@ const AddOffers = () => {
                     <input
                       type="Text"
                       name="adresse"
+                      required
                       onChange={handleChange}
                       value={data.adresse}
                     />
@@ -141,6 +147,7 @@ const AddOffers = () => {
                     <input
                       type="Text"
                       name="company_name"
+                      required
                       onChange={handleChange}
                       value={data.company_name}
                     />
