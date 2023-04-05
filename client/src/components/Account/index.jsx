@@ -35,8 +35,10 @@ const Account = () => {
       .then((response) => {
         // update the newData state with the updated data
         setNewData(updatedData);
+        localStorage.setItem("firstName",updatedData.firstName)
         console.log("reeeeeeeeeeeeeeees", response);
         toast.success("Updated successfully!");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
@@ -134,8 +136,9 @@ const Account = () => {
                       gender: e.target.value,
                     })
                   }
-                  required>
-                  <option value="" disabled selected>Gender</option>
+                  required
+                  defaultValue="Gender">
+                  <option disabled hidden value="Gender">Gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
@@ -220,8 +223,9 @@ const Account = () => {
                       country: e.target.value,
                     })
                   }
-                  required>
-                  <option value="" disabled selected>Country</option>
+                  required
+                  defaultValue="Country">
+                  <option disabled hidden value="Country">Country</option>
                   <option value="Afghanistan">Afghanistan</option>
                   <option value="Åland Islands">Åland Islands</option>
                   <option value="Albania">Albania</option>
