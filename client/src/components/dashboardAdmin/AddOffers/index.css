@@ -28,28 +28,76 @@
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
-  background: #f1f1f1;
+  background: #E6E1DD;
   padding: 14px 28px;
   border-radius: 3px;
-  max-width: 600px;
-  min-width: 400px;
+  max-width: 850px;
+  min-width: 550px;
+  min-height: 400px;
 }
 .cls_popup {
   position: absolute;
   top: 10px;
   right: 10px;
   padding: 5px 7px;
+  border-radius: 5px;
+  border: none;
+  width: 100px;
+  height: 40px;
+  margin: 10px;
+  background-color: #304F6D;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 body.active-popup {
   overflow-y: hidden;
 }
 .input_container {
-  margin: 10px;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .btn_submit {
+  border-radius: 5px;
+  border: none;
+  width: 100px;
+  height: 40px;
   margin: 10px;
-  padding: 8px 25px;
+  background-color: #304F6D;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 .Ajoutt_offerr{
-  
+  background-color: #304F6D;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  transform: translateY(2px);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  color: white;
+
+}
+.table{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+.inputt {
+  outline: none;
+  border: none;
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+td{
+  margin: 5px 5px;
 }

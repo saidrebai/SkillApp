@@ -6,6 +6,8 @@ import axios from "axios";
 
 const AddOffers = () => {
   const id = localStorage.getItem("id");
+  const firstName = localStorage.getItem("firstName");
+
   const [data, setData] = useState({
     Name: "",
     type: "",
@@ -13,7 +15,7 @@ const AddOffers = () => {
     description: "",
     skills: "",
     adresse: "",
-    company_name: "",
+    company_name: firstName,
     admin: id,
   });
   const [popup, setPopup] = useState(false);
@@ -54,7 +56,7 @@ const AddOffers = () => {
   return (
     <>
       <div className="ajoute_offer_container">
-        <button  type="submit" className="Ajoutt_offerr" onClick={toggleModel}>
+        <button type="submit" className="Ajoutt_offerr" onClick={toggleModel}>
           ajoute
         </button>
         {popup && (
@@ -63,97 +65,131 @@ const AddOffers = () => {
               <div className="over" onClick={toggleModel}></div>
               <div className="popup_cont">
                 <h2>Enter your offers : </h2>
-                <div className="input_container">
-                  <label>
-                    type:
-                    <input
-                      type="Text"
-                      name="type"
-                      required
-                      onChange={handleChange}
-                      value={data.type}
-                    />
-                    <br />
-                  </label>
-                </div>
-                <div className="input_container">
-                  <label>
-                    time:
-                    <input
-                      type="Text"
-                      name="time"
-                      required
-                      onChange={handleChange}
-                      value={data.time}
-                    />
-                    <br />
-                  </label>
-                </div>
-                <div className="input_container">
-                  <label>
-                    Name:
-                    <input
-                      type="Text"
-                      name="Name"
-                      required
-                      onChange={handleChange}
-                      value={data.Name}
-                    />
-                    <br />
-                  </label>
-                </div>
-                <div className="input_container">
-                  <label>
-                    description:
-                    <input
-                      type="Text"
-                      name="description"
-                      required
-                      onChange={handleChange}
-                      value={data.description}
-                    />
-                    <br />
-                  </label>
-                </div>
-                <div className="input_container">
-                  <label>
-                    skills :
-                    <input
-                      type="Text"
-                      name="skills"
-                      required
-                      onChange={handleChange}
-                      value={data.skills}
-                    />
-                    <br />
-                  </label>
-                </div>
-                <div className="input_container">
-                  <label>
-                    adresse:
-                    <input
-                      type="Text"
-                      name="adresse"
-                      required
-                      onChange={handleChange}
-                      value={data.adresse}
-                    />
-                    <br />
-                  </label>
-                </div>
-                <div className="input_container">
-                  <label>
-                    company_name:
-                    <input
-                      type="Text"
-                      name="company_name"
-                      required
-                      onChange={handleChange}
-                      value={data.company_name}
-                    />
-                    <br />
-                  </label>
-                </div>
+
+                <table className="table">
+                  <table>
+                    <tr>
+                      <div className="input_container">
+                        <td>
+                          <label>Type : </label>
+                        </td>
+                        <td>
+                          <select
+                            className="inputt"
+                            name="type"
+                            onChange={handleChange}
+                            value={data.type}
+                            required
+                          >
+                            <option value="" disabled selected>
+                              Type
+                            </option>
+                            <option value="Job">Job</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Alternation">Alternation</option>
+                          </select>
+                        </td>
+                      </div>
+                    </tr>
+
+                    <tr>
+                      <div className="input_container">
+                        <td>
+                          <label>Time : </label>
+                        </td>
+                        <td>
+                          <select
+                            className="inputt"
+                            name="time"
+                            onChange={handleChange}
+                            value={data.time}
+                            required
+                          >
+                            <option value="" disabled selected>
+                              Time
+                            </option>
+                            <option value="Full Time Job">Full Time Job</option>
+                            <option value="Part Time Job">Part Time Job</option>
+                          </select>
+                        </td>
+                      </div>
+                    </tr>
+
+                    <tr>
+                      <div className="input_container">
+                        <td>
+                          <label>Name: </label>
+                        </td>
+                        <td>
+                          <input
+                            type="Text"
+                            name="Name"
+                            required
+                            onChange={handleChange}
+                            value={data.Name}
+                            className="inputt"
+                          />
+                        </td>
+                      </div>
+                    </tr>
+                  </table>
+
+                  <table>
+                    <tr>
+                      <div className="input_container">
+                        <td>
+                          <label>Description: </label>
+                        </td>
+                        <td>
+                          <input
+                            type="Text"
+                            name="description"
+                            required
+                            onChange={handleChange}
+                            value={data.description}
+                            className="inputt"
+                          />
+                        </td>
+                      </div>
+                    </tr>
+
+                    <tr>
+                      <div className="input_container">
+                        <td>
+                          <label> skills : </label>
+                        </td>
+                        <td>
+                          <input
+                            type="Text"
+                            name="skills"
+                            required
+                            onChange={handleChange}
+                            value={data.skills}
+                            className="inputt"
+                          />
+                        </td>
+                      </div>
+                    </tr>
+
+                    <tr>
+                      <div className="input_container">
+                        <td>
+                          <label>adresse : </label>
+                        </td>
+                        <td>
+                          <input
+                            type="Text"
+                            name="adresse"
+                            required
+                            onChange={handleChange}
+                            value={data.adresse}
+                            className="inputt"
+                          />
+                        </td>
+                      </div>
+                    </tr>
+                  </table>
+                </table>
 
                 <button
                   className="cls_popup"

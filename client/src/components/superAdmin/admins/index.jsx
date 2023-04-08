@@ -53,12 +53,12 @@ const Admins = () => {
             <div className='Admin'>
                 {currentAdmins.length > 0 ? (
                     currentAdmins.map((admin) => (
-                        <div className='Admin_container' key={admin._id} >
+                        <div className='Admin_container' key={admin._id}>
                             <div className='Admin_avatar'><Avatar src="/broken-image.jpg" /></div>
-                            <div className='Admin_infromation'  >
-                                <div className='Admin_email' >{admin.email}</div>
+                            <div className='Admin_infromation'>
+                                <div className='Admin_email'>{admin.email}</div>
                             </div>
-                            <div className='button_display' >
+                            <div className='button_display'>
                                 <button type="submit" onClick={() => toggleModel(admin)}>Display</button>
                             </div>
 
@@ -81,10 +81,10 @@ const Admins = () => {
                 </Stack></div>
         </div>
             {popup && (
-                <div className="popup_container" style={{ zIndex: "100" }}>
+                <div className="popup_container">
                     <div className="overlay" onClick={() => toggleModel(null)} >
                     </div>
-                    <div className="popup_content"  >
+                    <div className="popup_content">
                         <div className="admin_info" >
                             <div className="admin_data">
                                 <Avatar src="/broken-image.jpg" />

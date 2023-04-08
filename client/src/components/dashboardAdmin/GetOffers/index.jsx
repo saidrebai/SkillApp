@@ -27,6 +27,8 @@ const GetOffer = () => {
   } else {
     document.body.classList.remove("active-popup");
   }
+
+  
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -43,6 +45,8 @@ const GetOffer = () => {
     fetchData();
   }, []);
   console.log("testtttt", offers);
+
+ 
 
   const handleUpdate = () => {
     axios
@@ -69,11 +73,14 @@ const GetOffer = () => {
     console.log("yeeeessssssssssssss", updatedOffer);
   };
 
+ 
   useEffect(() => {
     if (selectedOffer) {
       setUpdatedOffer(selectedOffer);
     }
   }, [selectedOffer]);
+
+
 
   const handleDelete = (selectedOffer) => {
     axios

@@ -12,24 +12,19 @@ export default function Card() {
 
   const user = localStorage.getItem("token");
   const id = localStorage.getItem('id');
-  const idpdf = localStorage.getItem("idpdf");
-  // const idOffer = localStorage.getItem("idOffer");
+
 
   const [offers, setOffers] = useState([]);
   const [popup, setPopup] = useState(false);
   const [error, setError] = useState("");
   const [pdfs, setPdfs] = useState(null);
-  // const [updatedData,setUpdatedData] = useState({cv:idpdf})
-  const [selectedOffer, setSelectedOffer] = useState(null);
-  const [updatedOffer, setUpdatedOffer] = useState();
+  const [updatedOffer, setUpdatedOffer] = useState({user:[id]});
 
   const toggleModel = (offer) => {
     if (user) {
       setPopup(!popup);
       console.log("gggg", popup);
-      // localStorage.setItem("idOffer",idOffer);
-      setSelectedOffer(offer);
-      localStorage.removeItem("idpdf",idpdf);
+      setUpdatedOffer(offer);
 
 
     }
@@ -91,36 +86,32 @@ export default function Card() {
   };
 
   const handleUpdate = () => {
-    const updatedOfferWithCV = { ...updatedOffer, cv: [idpdf] }; // add the cv attribute to the updated offer
+    const updatedOfferWithUser = { ...updatedOffer, user: [...updatedOffer.user, id] }; // add the user attribute to the updated offer
     axios
       .put(
-        `http://localhost:8080/api/offerRouter/updatecv/:${updatedOffer._id}`,
-        updatedOfferWithCV
+        `http://localhost:8080/api/offerRouter/updatecv/:${offers._id}`,
+        updatedOfferWithUser
       )
       .then((response) => {
         setOffers((prevOffers) =>
           prevOffers.map((o) => {
             if (o._id === updatedOffer._id) {
-              return updatedOfferWithCV;
+              return updatedOfferWithUser;
             }
             return o;
           })
         );
-        console.log("updated successfully", updatedOfferWithCV);
+        console.log("updated successfully", updatedOfferWithUser);
         toast.success("Updated successfully!");
       })
       .catch((error) => {
         console.log(error);
         toast.error("Update failed!");
       });
-    console.log("yeeeessssssssssssss", updatedOfferWithCV);
+    console.log("yeeeessssssssssssss", updatedOfferWithUser);
   };
 
-  useEffect(() => {
-    if (selectedOffer) {
-      setUpdatedOffer(selectedOffer);
-    }
-  }, [selectedOffer]);
+
 
 
   const handleFileChange = (event) => {
@@ -130,24 +121,25 @@ export default function Card() {
   return (
     <><div className="container">
       {currentOffers.length > 0 ? (
-        currentOffers.map((selectedOffer) => (
-          <div className="offer_container" key={selectedOffer._id}>
+        currentOffers.map((offers) => (
+          <div className="offer_container" key={offers._id}>
             <div className="offer_container_img">
               <img src={myImage} alt="" />
             </div>
             <div className="offer_container_info">
-              <div className="Name_container"><label>Title : </label>{selectedOffer.Name}</div>
-              <div className="Type_container"><label>Type : </label>{selectedOffer.type}</div>
-              <div className="time_container"><label>time : </label>{selectedOffer.time}</div>
+              <div className="Name_container"><label>Title : </label>{offers.Name}</div>
+              <div className="Type_container"><label>Type : </label>{offers.type}</div>
+              <div className="time_container"><label>time : </label>{offers.time}</div>
             </div>
             <div className="offer_container_description">
-              <label>Descritption : </label>{selectedOffer.description}
+              <label>Descritption : </label>{offers.description}
             </div>
-            <div className="skills_container"><label>Skills : </label>{selectedOffer.skills}</div>
-            <div className="company_Name_container"><label>Entreprise : </label>{selectedOffer.company_name}</div>
-            <div className="adresse_container"><label>Adresse : </label>{selectedOffer.adresse}</div>
+            <div className="skills_container"><label>Skills : </label>{offers.skills}</div>
+            <div className="company_Name_container"><label>Entreprise : </label>{offers.company_name}</div>
+            <div className="adresse_container"><label>Adresse : </label>{offers.adresse}</div>
+            {/* <div className="user_id" value = {updatedOffer.user||offers?.user}/> */}
             <button className="apply_button" onClick={() => {
-              toggleModel(selectedOffer);
+              toggleModel(offers);
             }}>Apply</button>
             {popup && (
               <div className="popup_container" style={{ zIndex: "1" }} >
@@ -155,7 +147,7 @@ export default function Card() {
                 </div>
                 <form className="form_container" method="POST" onSubmit={handleSubmit}>
                   <div className="popup_contnt">
-                    <div className="popup_id" value={selectedOffer?._id}></div>
+                    <div className="popup_id" value={offers?._id}></div>
                     <h1>Enter your CV here : </h1>
                     <input
                       type="file"

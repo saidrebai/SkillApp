@@ -34,12 +34,10 @@ const offerSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "admin",
   },
-  cv: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "pdfs",
-    },
-  ],
+  user : [{
+    type: Schema.Types.ObjectId,
+    ref: 'user',
+  }]
 });
 
 const offerModel = mongoose.model("offerModel", offerSchema);

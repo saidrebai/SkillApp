@@ -12,7 +12,7 @@ module.exports = {
       adresse: req.body.adresse,
       company_name: req.body.company_name,
       admin: req.body.id,
-      cv: req.body.id,
+      user: req.body.id,
     };
 
     console.log("nneww", newoffer);
@@ -55,7 +55,7 @@ module.exports = {
         skills: req.body.skills,
         adresse: req.body.adresse,
         company_name: req.body.company_name,
-        cv: req.body.id,
+        user: req.body.id,
       })
       .exec(function (err, offer) {
         if (err) {
@@ -106,9 +106,9 @@ module.exports = {
     }
   },
 
-  updateOfferWithCV: async function (req, res) {
+  updateOfferWithUser: async function (req, res) {
     offerModel
-      .findByIdAndUpdate(req.params.id, {$push : {cv: req.body.cv}})
+      .findByIdAndUpdate(req.params.id, {$push : {user: req.body.user}})
       .exec(function (err, offer) {
         if (err) {
           res.json({

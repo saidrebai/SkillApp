@@ -4,6 +4,7 @@ import axios from "axios";
 import "./styles.modules.css";
 
 const Login = () => {
+
   const user = localStorage.getItem("token");
 
   const [type, setType] = useState("password");
@@ -17,44 +18,43 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!user) {
-      try {
-        if (
-          document.querySelector('input[name="option"]:checked').value ===
-          "option1"
-        ) {
-          const { data: res } = await axios.post(
-            "http://localhost:8080/api/adminRouters/signin",
-            data
-          );
-          setIsAdmin(true);
-          localStorage.setItem("token", res.data);
-          localStorage.setItem("id", res._id);
-          localStorage.setItem("isAdmin", true);
-          localStorage.setItem("firstName", res.Name);
-        } else {
-          const { data: res } = await axios.post(
-            "http://localhost:8080/api/candidatRouters/signin",
-            data
-          );
-          setIsAdmin(false);
-          localStorage.setItem("token", res.data);
-          localStorage.setItem("id", res.userId);
-          localStorage.setItem("isAdmin", false);
-          localStorage.setItem("firstName", res.firstName);
-        }
-
-        window.location = "/";
-      } catch (error) {
-        if (
-          error.response &&
-          error.response.status >= 400 &&
-          error.response.status <= 500
-        ) {
-          setError(error.response.data.message);
-        }
+    if (!user){
+    try {
+      if (
+        document.querySelector('input[name="option"]:checked').value ===
+        "option1"
+      ) {
+        const { data: res } = await axios.post(
+          "http://localhost:8080/api/adminRouters/signin",
+          data
+        );
+        setIsAdmin(true);
+        localStorage.setItem("token", res.data);
+        localStorage.setItem("id", res._id);
+        localStorage.setItem("isAdmin", true);
+        localStorage.setItem("firstName", res.Name);
+      } else {
+        const { data: res } = await axios.post(
+          "http://localhost:8080/api/candidatRouters/signin",
+          data
+        );
+        setIsAdmin(false);
+        localStorage.setItem("token", res.data);
+        localStorage.setItem("id", res.userId);
+        localStorage.setItem("isAdmin", false);
+        localStorage.setItem("firstName", res.firstName);
       }
-    } else {
+
+      window.location = "/";
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }}else{
       alert("you are already connected");
     }
   };
@@ -114,6 +114,7 @@ const Login = () => {
               />
               <input
                 type={type}
+                // type='password'
                 placeholder="Password"
                 name="password"
                 onChange={handleChange}
@@ -122,8 +123,9 @@ const Login = () => {
                 className="input"
               />
 
-              <div className="afficherPass">
+              <div className=" afficher">
                 <input type="checkbox" onClick={handleToggle} />
+                show password
               </div>
 
               {error && <div className="error_msg">{error}</div>}

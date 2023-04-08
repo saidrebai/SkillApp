@@ -83,7 +83,7 @@ const Users = () => {
                 </Stack></div>
         </div>
             {popup && (
-                <div className="popup_container" style={{ zIndex: "100" }}>
+                <div className="popup_container">
                     <div className="overlay" onClick={() => toggleModel(null)} >
                     </div>
                     <div className="popup_content">
