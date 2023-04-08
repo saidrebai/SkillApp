@@ -35,8 +35,10 @@ const AccountAdmin = () => {
       .then((response) => {
         // update the Data state with the updated data
         setData(updatedData);
+        localStorage.setItem("firstName",updatedData.Name)
         console.log("reeeeeeeeeeeeeeees", response);
         toast.success("Updated successfully!");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
@@ -59,8 +61,9 @@ const AccountAdmin = () => {
               alt=""
             />
           </div>
+          <form onSubmit={handleUpdate}>
 
-          <h2>My Account</h2>
+          <h2 className="titlee">My Account</h2>
 
           <div className="form-container">
             <div className="form-input-container">
@@ -73,6 +76,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="Name"
+                  required = {true}
                   value={updatedData.Name}
                   onChange={(e) => {
                     setUpdatedData({
@@ -372,6 +376,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="town"
+                  required = {true}
                   value={updatedData.town}
                   onChange={(e) =>
                     setUpdatedData({
@@ -394,6 +399,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="Adresse"
+                  required = {true}
                   value={updatedData.adresse}
                   onChange={(e) =>
                     setUpdatedData({
@@ -417,6 +423,7 @@ const AccountAdmin = () => {
               <input
                 type="Number"
                 name="Zipcode"
+                required = {true}
                 value={updatedData.Zipcode}
                 onChange={(e) =>
                   setUpdatedData({
@@ -437,8 +444,10 @@ const AccountAdmin = () => {
             </div>
             <div className="input-style">
               <input
-                type="Number"
+                type="tel"
                 name="tel"
+                required = {true}
+                maxLength={8}
                 value={updatedData.tel}
                 onChange={(e) =>
                   setUpdatedData({
@@ -459,8 +468,9 @@ const AccountAdmin = () => {
             </div>
             <div className="input-style">
               <input
-                type="Number"
+                type="text"
                 name="fiscalCode"
+                required = {true}
                 value={updatedData.fiscalCode}
                 onChange={(e) =>
                   setUpdatedData({
@@ -475,12 +485,13 @@ const AccountAdmin = () => {
 
           <div>
             <div className="btn-container">
-              <button onClick={handleUpdate} className="style-button">
+              <button type="submit" className="style-button">
                 Update
               </button>
               <ToastContainer />
             </div>
           </div>
+          </form>
         </div>
       </div>
     </>

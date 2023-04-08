@@ -25,6 +25,8 @@ const Signup = () => {
     setData({ ...data, [input.name]: input.value });
   };
   useEffect(()=>{console.log("===>",data);},[data])
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -103,11 +105,12 @@ const Signup = () => {
               className="input"
             />
             <input
-              type="number"
+              type="tel"
               placeholder="tel"
               name="tel"
               onChange={handleChange}
               value={data.tel}
+              maxLength={8}
               required
               className="input"
             />
@@ -119,15 +122,7 @@ const Signup = () => {
               required
               className="input"
             />
-             {/* <input
-              type="text"
-              placeholder="country"
-              name="country"
-              onChange={handleChange}
-              value={data.country}
-              required
-              className="input"
-            /> */}
+
             <div class="custom-select">
               <select className="container-select" name="country" onChange={handleChange} value={data.country} required>
                 <option value = "" disabled selected>Country</option>

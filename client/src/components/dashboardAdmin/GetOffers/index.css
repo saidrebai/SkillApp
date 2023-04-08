@@ -3,10 +3,11 @@
   border-color: #35e5c4;
   border-radius: 5px;
   border-style: solid;
-  width: 1500px;
+  width: 1100px;
   display: flex;
   flex-direction: column;
   background-color: white;
+  margin: 52px -65px 53px;
 }
 .offerr {
   display: flex;
@@ -34,7 +35,7 @@
     margin:10px;
 }
 .button_display button {
-  background-color: rgb(69, 205, 230);
+  background-color: #304F6D;
   border: none;
   border-radius: 5px;
   font-size: 15px;
@@ -111,7 +112,4 @@
     margin:10px;
     padding: 10px 25px;
     font-size: 17px;
-    /* display: flex;
-    align-items: center;
-    align-content: stretch; */
 }

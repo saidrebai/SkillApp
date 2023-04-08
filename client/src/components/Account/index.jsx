@@ -61,7 +61,9 @@ const Account = () => {
               alt=""
             />
           </div>
-          <h2>My Account</h2>
+          <form onSubmit={handleUpdate}>
+
+          <h2 className="title">My Account</h2>
 
           <div className="form-container">
             <div className="form-input-container">
@@ -74,6 +76,7 @@ const Account = () => {
                 <input
                   type="text"
                   name="firstName"
+                  required = {true}
                   value={updatedData.firstName}
                   onChange={(e) => {
                     setUpdatedData({
@@ -96,6 +99,7 @@ const Account = () => {
                 <input
                   type="text"
                   name="lastName"
+                  required = {true}
                   value={updatedData.lastName}
                   onChange={(e) => {
                     setUpdatedData({
@@ -136,7 +140,7 @@ const Account = () => {
                       gender: e.target.value,
                     })
                   }
-                  required
+                  required = {true}
                   defaultValue="Gender">
                   <option disabled hidden value="Gender">Gender</option>
                   <option value="Male">Male</option>
@@ -157,6 +161,7 @@ const Account = () => {
                   type="date"
                   name="birthDate"
                   value={updatedData.birthDate || newData.birthDate}
+                  required = {true}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -176,9 +181,11 @@ const Account = () => {
               </div>
               <div className="input-style">
                 <input
-                  type="number"
+                  type="tel"
                   name="Tel"
                   value={updatedData.tel}
+                  required = {true}
+                  maxLength={8}
                   onChange={(e) => {
                     setUpdatedData({
                       ...updatedData,
@@ -217,13 +224,14 @@ const Account = () => {
                 /> */}
                 <select className="style-input" name="country"
                   value={updatedData.country || newData.country}
+                  
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
                       country: e.target.value,
                     })
                   }
-                  required
+                  required = {true}
                   defaultValue="Country">
                   <option disabled hidden value="Country">Country</option>
                   <option value="Afghanistan">Afghanistan</option>
@@ -485,6 +493,7 @@ const Account = () => {
                   type="text"
                   name="town"
                   value={updatedData.town || newData.town}
+                  required = {true}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -507,6 +516,7 @@ const Account = () => {
                   type="text"
                   name="Adresse"
                   value={updatedData.adresse || newData.adresse}
+                  required = {true}
                   onChange={(e) => {
                     setUpdatedData({
                       ...updatedData,
@@ -529,6 +539,7 @@ const Account = () => {
                   type="number"
                   name="zipCode"
                   value={updatedData.zipCode || newData.zipCode}
+                  required = {true}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -551,6 +562,7 @@ const Account = () => {
                   type="text"
                   name="Establishment"
                   value={updatedData.Establishment || newData.Establishment}
+                  required = {true}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -565,12 +577,13 @@ const Account = () => {
 
           <div>
             <div className="btn-container">
-              <button onClick={handleUpdate} className="style-button">
+              <button type ="submit" className="style-button">
                 Update
               </button>
               <ToastContainer />
             </div>
           </div>
+          </form>
         </div>
       </div>
     </>

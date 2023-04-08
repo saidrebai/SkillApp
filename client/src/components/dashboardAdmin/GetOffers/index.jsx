@@ -27,6 +27,8 @@ const GetOffer = () => {
   } else {
     document.body.classList.remove("active-popup");
   }
+
+  
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -44,21 +46,7 @@ const GetOffer = () => {
   }, []);
   console.log("testtttt", offers);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/offerRouter/getofferbyid/${id}`)
-      .then((response) => {
-        setOffers(response.offers.offers);
-        console.log("rererere------", response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id]);
-
-  useEffect(() => {
-    console.log("data is herrrrrrrrrre", offers);
-  }, [offers]);
+ 
 
   const handleUpdate = () => {
     axios
@@ -85,15 +73,14 @@ const GetOffer = () => {
     console.log("yeeeessssssssssssss", updatedOffer);
   };
 
-  // useEffect(() => {
-  //   offers ? setUpdatedOffer(offers) : setUpdatedOffer({ Name: "" });
-  //   console.log("Offer--------", offers);
-  // }, [offers]);
+ 
   useEffect(() => {
     if (selectedOffer) {
       setUpdatedOffer(selectedOffer);
     }
   }, [selectedOffer]);
+
+
 
   const handleDelete = (selectedOffer) => {
     axios
@@ -178,135 +165,139 @@ const GetOffer = () => {
         </div>
       </div>
       {popup && (
-        <div className="popup_container" style={{zIndex:"1"}}>
-          <div className="overlay"  onClick={() => toggleModel(null)}></div>
-          <div className="popup_content" >
-            <div className="offer_info">
-              <div className="offer_data">
-                <Avatar src="/broken-image.jpg" />
-              </div>
-              <div className="offer_data">
-                type :
-                <input
-                  type="text"
-                  name="Type"
-                  value={updatedOffer.type || selectedOffer?.type}
-                  onChange={(e) => {
-                    setUpdatedOffer({
-                      ...updatedOffer,
-                      type: e.target.value,
-                    });
-                  }}
-                />
-              </div>
+        <div className="popup_container" style={{ zIndex: "1" }}>
+          <div className="overlay" onClick={() => toggleModel(null)}></div>
+          <div className="popup_content">
+            <form
+              onSubmit={() => {
+                handleUpdate();
+                toggleModel(null);
+              }}
+            >
+              <div className="offer_info">
+                <div className="offer_data">
+                  <Avatar src="/broken-image.jpg" />
+                </div>
+                <div className="offer_data">
+                  type :
+                  <input
+                    type="text"
+                    name="Type"
+                    required={true}
+                    value={updatedOffer.type }
+                    onChange={(e) => {
+                      setUpdatedOffer({
+                        ...updatedOffer,
+                        type: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
 
-              <div className="offer_data">
-                time :
-                <input
-                  type="text"
-                  name="time"
-                  value={updatedOffer.time || selectedOffer?.time}
-                  onChange={(e) => {
-                    setUpdatedOffer({
-                      ...updatedOffer,
-                      time: e.target.value,
-                    });
-                  }}
-                />
-              </div>
+                <div className="offer_data">
+                  time :
+                  <input
+                    type="text"
+                    name="time"
+                    required={true}
+                    value={updatedOffer.time }
+                    onChange={(e) => {
+                      setUpdatedOffer({
+                        ...updatedOffer,
+                        time: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
 
-              <div className="offer_data">
-                Name :
-                <input
-                  type="text"
-                  name="Name"
-                  value={updatedOffer.Name || selectedOffer?.Name}
-                  onChange={(e) => {
-                    setUpdatedOffer({
-                      ...updatedOffer,
-                      Name: e.target.value,
-                    });
-                  }}
-                />
-              </div>
+                <div className="offer_data">
+                  Name :
+                  <input
+                    type="text"
+                    name="Name"
+                    required={true}
+                    value={updatedOffer.Name }
+                    onChange={(e) => {
+                      setUpdatedOffer({
+                        ...updatedOffer,
+                        Name: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
 
-              <div className="offer_data">
-                description :
-                <input
-                  type="text"
-                  name="description"
-                  value={updatedOffer.description || selectedOffer?.description}
-                  onChange={(e) => {
-                    setUpdatedOffer({
-                      ...updatedOffer,
-                      description: e.target.value,
-                    });
-                  }}
-                />
+                <div className="offer_data">
+                  description :
+                  <input
+                    type="text"
+                    name="description"
+                    required={true}
+                    value={updatedOffer.description}
+                    onChange={(e) => {
+                      setUpdatedOffer({
+                        ...updatedOffer,
+                        description: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+                <div className="offer_data">
+                  skills :
+                  <input
+                    type="text"
+                    name="skills"
+                    required={true}
+                    value={updatedOffer.skills}
+                    onChange={(e) => {
+                      setUpdatedOffer({
+                        ...updatedOffer,
+                        skills: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+                <div className="offer_data">
+                  adresse :
+                  <input
+                    type="text"
+                    name="adresse"
+                    required={true}
+                    value={updatedOffer.adresse }
+                    onChange={(e) => {
+                      setUpdatedOffer({
+                        ...updatedOffer,
+                        adresse: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+                <div className="offer_data">
+                  company Name :
+                  <input
+                    type="text"
+                    name="company Name"
+                    required={true}
+                    value={updatedOffer.company_name }
+                    onChange={(e) => {
+                      setUpdatedOffer({
+                        ...updatedOffer,
+                        company_name: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
               </div>
-              <div className="offer_data">
-                skills :
-                <input
-                  type="text"
-                  name="skills"
-                  value={updatedOffer.skills || selectedOffer?.skills}
-                  onChange={(e) => {
-                    setUpdatedOffer({
-                      ...updatedOffer,
-                      skills: e.target.value,
-                    });
-                  }}
-                />
+              <div className="close_popup">
+                <button type="button" onClick={() => toggleModel(null)}>
+                  close
+                </button>
               </div>
-              <div className="offer_data">
-                adresse :
-                <input
-                  type="text"
-                  name="adresse"
-                  value={updatedOffer.adresse || selectedOffer?.adresse}
-                  onChange={(e) => {
-                    setUpdatedOffer({
-                      ...updatedOffer,
-                      adresse: e.target.value,
-                    });
-                  }}
-                />
+              <div>
+                <button className="Save_popup" type="submit">
+                  Save
+                </button>
               </div>
-              <div className="offer_data">
-                company Name :
-                <input
-                  type="text"
-                  name="company Name"
-                  value={
-                    updatedOffer.company_name || selectedOffer?.company_name
-                  }
-                  onChange={(e) => {
-                    setUpdatedOffer({
-                      ...updatedOffer,
-                      company_name: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="close_popup">
-              <button type="button" onClick={() => toggleModel(null)}>
-                close
-              </button>
-            </div>
-            <div>
-              <button
-                className="Save_popup"
-                type="button"
-                onClick={() => {
-                  handleUpdate();
-                  toggleModel(null);
-                }}
-              >
-                Save
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       )}
