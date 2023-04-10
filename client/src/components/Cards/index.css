@@ -112,3 +112,11 @@
 body.active-popup{
     overflow-y: hidden;
 }
+.table1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 60px;
+}

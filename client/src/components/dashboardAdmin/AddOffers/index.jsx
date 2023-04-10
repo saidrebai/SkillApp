@@ -57,7 +57,7 @@ const AddOffers = () => {
     <>
       <div className="ajoute_offer_container">
         <button type="submit" className="Ajoutt_offerr" onClick={toggleModel}>
-          ajoute
+          add
         </button>
         {popup && (
           <div className="popup_contain" style={{ zIndex: "1" }}>
@@ -200,7 +200,7 @@ const AddOffers = () => {
                 </button>
                 {error && <div className="error_msg">{error}</div>}
                 <button className="btn_submit" type="submit">
-                  send
+                  add
                 </button>
                 <ToastContainer />
               </div>
