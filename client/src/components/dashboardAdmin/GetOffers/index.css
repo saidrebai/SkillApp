@@ -34,7 +34,7 @@
 .offerr_name{
     margin:10px;
 }
-.button_display button {
+.update_botton button{
   background-color: #304F6D;
   border: none;
   border-radius: 5px;
@@ -75,41 +75,62 @@
 }
 .popup_content {
   position: absolute;
-  top: 40%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
-  background: #f1f1f1;
+  background: #E6E1DD;
   padding: 14px 28px;
   border-radius: 3px;
-  max-width: 600px;
-  min-width: 300px;
-  width: 500px;
-  height: 500px;
+  max-width: 850px;
+  min-width: 900px;
+  min-height: 400px;
+  max-height: 100px;
 }
 .close_popup {
   position: absolute;
   top: 10px;
   right: 10px;
   padding: 5px 7px;
+  border-radius: 5px;
+  border: none;
+  width: 100px;
+  height: 40px;
+  margin: 10px;
+  background-color: #304F6D;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 .Save_popup{
-  right: 10px;
-  padding: 5px 7px;
+  border-radius: 5px;
+  border: none;
+  width: 100px;
+  height: 40px;
+  margin: 10px;
+  background-color: #304F6D;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 
 .body.active-popup {
   overflow-y: hidden;
 }
-.offer_info {
-  padding: 20px;
-}
 .offer_data {
-  width: 300px;
-  margin: 10px;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .button_display{
     margin:10px;
     padding: 10px 25px;
     font-size: 17px;
+}
+.table{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+td{
+  margin: 5px 5px;
 }

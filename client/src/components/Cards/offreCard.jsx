@@ -120,6 +120,8 @@ export default function Card() {
 
   return (
     <><div className="container">
+      <table>
+        <tr className="table1">
       {currentOffers.length > 0 ? (
         currentOffers.map((offers) => (
           <div className="offer_container" key={offers._id}>
@@ -174,7 +176,8 @@ export default function Card() {
         ))) : (
         <div>No offers to display</div>
 
-      )}</div>
+      )}</tr>
+      </table></div>
       <div className="pagination_container">
         <Stack spacing={2}>
           <Pagination
