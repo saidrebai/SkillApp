@@ -36,6 +36,7 @@ const AddOffers = () => {
       const { data: res } = await axios.post(url, data);
       console.log(res.message);
       toast.success("Adding successfully!");
+      window.location.reload();
     } catch (error) {
       if (
         error.response &&
@@ -60,10 +61,10 @@ const AddOffers = () => {
           add
         </button>
         {popup && (
-          <div className="popup_contain" style={{ zIndex: "1" }}>
-            <form className="add_offer_from" onSubmit={handleCreate}>
+          <div className="popup_contain" style={{ zIndex: "1" }}>            
               <div className="over" onClick={toggleModel}></div>
               <div className="popup_cont">
+                <form className="add_offer_from" onSubmit={handleCreate}>
                 <h2>Enter your offers : </h2>
 
                 <table className="table">
@@ -203,8 +204,9 @@ const AddOffers = () => {
                   add
                 </button>
                 <ToastContainer />
+                </form>
               </div>
-            </form>
+            
           </div>
         )}
       </div>

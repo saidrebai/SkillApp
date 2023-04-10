@@ -28,7 +28,6 @@ const GetOffer = () => {
     document.body.classList.remove("active-popup");
   }
 
-  
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -45,8 +44,6 @@ const GetOffer = () => {
     fetchData();
   }, []);
   console.log("testtttt", offers);
-
- 
 
   const handleUpdate = () => {
     axios
@@ -73,14 +70,11 @@ const GetOffer = () => {
     console.log("yeeeessssssssssssss", updatedOffer);
   };
 
- 
   useEffect(() => {
     if (selectedOffer) {
       setUpdatedOffer(selectedOffer);
     }
   }, [selectedOffer]);
-
-
 
   const handleDelete = (selectedOffer) => {
     axios
@@ -129,7 +123,7 @@ const GetOffer = () => {
                   <div className="offerr_name">{selectedOffer.Name}</div>
                 </div>
 
-                <div className="button_display">
+                <div className="update_botton">
                   <button
                     type="submit"
                     onClick={() => {
@@ -145,13 +139,13 @@ const GetOffer = () => {
                   >
                     Delete
                   </button>
-                  <ToastContainer />
                 </div>
               </div>
             ))
           ) : (
             <div>No offer to display</div>
           )}
+          <ToastContainer />
         </div>
         <div className="pagination_container">
           <Stack spacing={2}>
@@ -174,129 +168,174 @@ const GetOffer = () => {
                 toggleModel(null);
               }}
             >
-              <div className="offer_info">
-                <div className="offer_data">
-                  <Avatar src="/broken-image.jpg" />
-                </div>
-                <div className="offer_data">
-                  type :
-                  <input
-                    type="text"
-                    name="Type"
-                    required={true}
-                    value={updatedOffer.type }
-                    onChange={(e) => {
-                      setUpdatedOffer({
-                        ...updatedOffer,
-                        type: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
+              <h2>Enter your offers : </h2>
 
-                <div className="offer_data">
-                  time :
-                  <input
-                    type="text"
-                    name="time"
-                    required={true}
-                    value={updatedOffer.time }
-                    onChange={(e) => {
-                      setUpdatedOffer({
-                        ...updatedOffer,
-                        time: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
+              <table className="table">
+                <table>
+                  <tr>
+                    <div className="offer_data">
+                      <td>
+                        <label>Type : </label>
+                      </td>
+                      <td>
+                        <select
+                          className="inputt"
+                          name="Type"
+                          required={true}
+                          value={updatedOffer.type}
+                          onChange={(e) => {
+                            setUpdatedOffer({
+                              ...updatedOffer,
+                              type: e.target.value,
+                            });
+                          }}
+                        >
+                          <option value="" disabled selected>
+                            Type
+                          </option>
+                          <option value="Job">Job</option>
+                          <option value="Internship">Internship</option>
+                          <option value="Alternation">Alternation</option>
+                        </select>
+                      </td>
+                    </div>
+                  </tr>
 
-                <div className="offer_data">
-                  Name :
-                  <input
-                    type="text"
-                    name="Name"
-                    required={true}
-                    value={updatedOffer.Name }
-                    onChange={(e) => {
-                      setUpdatedOffer({
-                        ...updatedOffer,
-                        Name: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
+                  <tr>
+                    <div className="offer_data">
+                      <td>
+                        <label>Time : </label>
+                      </td>
+                      <td>
+                        <select
+                          className="inputt"
+                          name="time"
+                          required={true}
+                          value={updatedOffer.time}
+                          onChange={(e) => {
+                            setUpdatedOffer({
+                              ...updatedOffer,
+                              time: e.target.value,
+                            });
+                          }}
+                        >
+                          <option value="" disabled selected>
+                            Time
+                          </option>
+                          <option value="Full Time Job">Full Time Job</option>
+                          <option value="Part Time Job">Part Time Job</option>
+                        </select>
+                      </td>
+                    </div>
+                  </tr>
 
-                <div className="offer_data">
-                  description :
-                  <input
-                    type="text"
-                    name="description"
-                    required={true}
-                    value={updatedOffer.description}
-                    onChange={(e) => {
-                      setUpdatedOffer({
-                        ...updatedOffer,
-                        description: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
-                <div className="offer_data">
-                  skills :
-                  <input
-                    type="text"
-                    name="skills"
-                    required={true}
-                    value={updatedOffer.skills}
-                    onChange={(e) => {
-                      setUpdatedOffer({
-                        ...updatedOffer,
-                        skills: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
-                <div className="offer_data">
-                  adresse :
-                  <input
-                    type="text"
-                    name="adresse"
-                    required={true}
-                    value={updatedOffer.adresse }
-                    onChange={(e) => {
-                      setUpdatedOffer({
-                        ...updatedOffer,
-                        adresse: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
-                <div className="offer_data">
-                  company Name :
-                  <input
-                    type="text"
-                    name="company Name"
-                    required={true}
-                    value={updatedOffer.company_name }
-                    onChange={(e) => {
-                      setUpdatedOffer({
-                        ...updatedOffer,
-                        company_name: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="close_popup">
-                <button type="button" onClick={() => toggleModel(null)}>
-                  close
-                </button>
-              </div>
-              <div>
-                <button className="Save_popup" type="submit">
-                  Save
-                </button>
-              </div>
+                  <tr>
+                    <div className="offer_data">
+                      <td>
+                        <labael>Name :</labael>
+                      </td>
+                      <td>
+                        <input
+                          className="inputt"
+                          type="text"
+                          name="Name"
+                          required={true}
+                          value={updatedOffer.Name}
+                          onChange={(e) => {
+                            setUpdatedOffer({
+                              ...updatedOffer,
+                              Name: e.target.value,
+                            });
+                          }}
+                        />
+                      </td>
+                    </div>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <div className="offer_data">
+                      <td>
+                        <label>Description: </label>
+                      </td>
+                      <td>
+                        <input
+                          className="inputt"
+                          type="text"
+                          name="description"
+                          required={true}
+                          value={updatedOffer.description}
+                          onChange={(e) => {
+                            setUpdatedOffer({
+                              ...updatedOffer,
+                              description: e.target.value,
+                            });
+                          }}
+                        />
+                      </td>
+                    </div>
+                  </tr>
+
+                  <tr>
+                    <div className="offer_data">
+                      <td>
+                        <label> skills : </label>
+                      </td>
+                      <td>
+                        <input
+                          className="inputt"
+                          type="text"
+                          name="skills"
+                          required={true}
+                          value={updatedOffer.skills}
+                          onChange={(e) => {
+                            setUpdatedOffer({
+                              ...updatedOffer,
+                              skills: e.target.value,
+                            });
+                          }}
+                        />
+                      </td>
+                    </div>
+                  </tr>
+
+                  <tr>
+                    <div className="offer_data">
+                      <td>
+                        <label>adresse : </label>
+                      </td>
+                      <td>
+                        <input
+                          className="inputt"
+                          type="text"
+                          name="adresse"
+                          required={true}
+                          value={updatedOffer.adresse}
+                          onChange={(e) => {
+                            setUpdatedOffer({
+                              ...updatedOffer,
+                              adresse: e.target.value,
+                            });
+                          }}
+                        />
+                      </td>
+                    </div>
+                  </tr>
+                </table>
+              </table>
+
+              <button
+                type="button"
+                className="close_popup"
+                onClick={() => toggleModel(null)}
+              >
+                close
+              </button>
+
+              <button className="Save_popup" type="submit">
+                Save
+              </button>
             </form>
           </div>
         </div>
