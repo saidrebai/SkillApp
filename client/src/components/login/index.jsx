@@ -125,7 +125,7 @@ const Login = () => {
 
               <div className=" afficher">
                 <input type="checkbox" onClick={handleToggle} />
-                show password
+                
               </div>
 
               {error && <div className="error_msg">{error}</div>}

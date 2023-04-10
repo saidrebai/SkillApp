@@ -81,10 +81,10 @@ const Admins = () => {
                 </Stack></div>
         </div>
             {popup && (
-                <div className="popup_container">
+                <div className="popup_container" style={{ zIndex: "10" }}>
                     <div className="overlay" onClick={() => toggleModel(null)} >
                     </div>
-                    <div className="popup_content">
+                    <div className="popup_content" >
                         <div className="admin_info" >
                             <div className="admin_data">
                                 <Avatar src="/broken-image.jpg" />

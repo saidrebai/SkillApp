@@ -8,7 +8,7 @@ import AccountAdmin from "./components/AccountAdmin";
 import Offers from "./components/Offers";
 import Dashboard from "./components/superAdmin/dashboard";
 import DashboardA from "./components/dashboardAdmin/DashboardA";
-import AccountSuperAdmin from "./components/AccountSuperAdmin";
+import SignInSuperAdmin from "./components/superAdmin/SignIn";
 
 function App() {
   const SuperAdmin = localStorage.getItem("isSuperAdmin");
@@ -37,7 +37,7 @@ function App() {
       {SuperAdmin === "true" && (
         <Route path="/dashboard" exact element={<Dashboard />} />
       )}
-      <Route path="/signIn" exact element={<AccountSuperAdmin />} />
+      <Route path="/SignInSuperAdmin" exact element={<SignInSuperAdmin />} />
     </Routes>
   );
 }

@@ -62,6 +62,7 @@ function ResponsiveAppBar() {
   const isAdmin = localStorage.getItem("isAdmin");
   const firstName = localStorage.getItem("firstName");
   const token = localStorage.getItem("token");
+  const isSuperAdmin = localStorage.getItem("isSuperAdmin")
   
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -88,12 +89,6 @@ function ResponsiveAppBar() {
       window.location.href = "/AccountA";
     }
   };
-  // const handleLoginClicked = () => {
-  //   window.location.href = "/signIn";
-  // localStorage.removeItem("token");
-  // localStorage.removeItem("id");
-  // localStorage.removeItem("userName");
-  // };
   const handleDashboardClick = () => {
     window.location.href = "/dashboardA";
   };
@@ -267,21 +262,14 @@ function ResponsiveAppBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <MenuItem key="Account" onClick={handleAccountClick}>
+                  {!isSuperAdmin &&(<MenuItem key="Account" onClick={handleAccountClick}>
                     <Typography textAlign="center">Account</Typography>
-                  </MenuItem>
+                  </MenuItem>)}
                   {isAdmin === "true" && (
                     <MenuItem key="Dashboard" onClick={handleDashboardClick}>
                       <Typography textAlign="center">Dashboard</Typography>
                     </MenuItem>
                   )}
-                  {/* {!token && (
-                    <div className="button_signIn">
-                      <button type="submit" onClick={handleLoginClicked}>
-                        LoginSuperAdmin
-                      </button>
-                    </div>
-                  )} */}
                   <MenuItem key="logout" onClick={handlelogoutClick}>
                     <Typography textAlign="center">logout</Typography>
                   </MenuItem>
