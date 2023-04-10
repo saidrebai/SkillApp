@@ -119,19 +119,6 @@ const Account = () => {
                 </div>
               </div>
               <div className="input-style">
-                {/* <input
-                  type="text"
-                  name="gender"
-                  value={updatedData.gender || newData.gender}
-                  onChange={(e) =>
-                    setUpdatedData({
-                      ...updatedData,
-                      gender: e.target.value,
-                    })
-                  }
-                  className="style-input"
-                /> */}
-
                 <select className="style-input" name="gender"
                   value={updatedData.gender || newData.gender}
                   onChange={(e) =>
@@ -210,18 +197,6 @@ const Account = () => {
                 </div>
               </div>
               <div className="input-style">
-                {/* <input
-                  type="text"
-                  name="country"
-                  value={updatedData.country || newData.country}
-                  onChange={(e) =>
-                    setUpdatedData({
-                      ...updatedData,
-                      country: e.target.value,
-                    })
-                  }
-                  className="style-input"
-                /> */}
                 <select className="style-input" name="country"
                   value={updatedData.country || newData.country}
                   

@@ -8,10 +8,8 @@
 }
 
 .signup_admin_container {
-  /* width: 900px; */
-  /* height: 500px; */
   display: flex;
-  /* flex-direction: row; */
+  
   border-radius: 10px;
   box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
     0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
@@ -22,7 +20,6 @@
   display: flex;
   flex-direction: row;
   margin: 20px;
-  /* padding: 20px; */
   box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
     0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
     
@@ -47,7 +44,6 @@
 }
 
 .right-signup-admmin {
-  /* flex: 2; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,17 +51,17 @@
   background-color: #05a79e;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  /* padding: 80px; */
   padding: 25px 20px 25px 20px;
 }
 
-.form_container {
+.form_containerr {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 500px;
 }
 
-.form_container h1 {
+.form_containerr h1 {
   font-size: 40px;
   margin-top: 0;
   color: #2d4948;
@@ -104,12 +100,6 @@
   font-size: 14px;
   cursor: pointer;
 }
-
-/* .green_btn {
-  background-color: #3bb19b;
-  color: white;
-  margin: 10px;
-} */
 .custom-select {
   font-family: sans-serif;
   font-size: 14px;
@@ -120,7 +110,7 @@
 .container-select {
   font-size: 14px;
   padding: 2px 5px;
-  width: 400px;
+  width: 240px;
   height: 50px;
   margin-left: 10px;
   border-radius: 10px;
@@ -128,7 +118,7 @@
 .white_btn{
   border: none;
   outline: none;
-  padding: 12px 0;
+  padding: 16px 18px 10px;
   background-color: white;
   border-radius: 20px;
   width: 180px;
@@ -136,5 +126,9 @@
   font-size: 14px;
   cursor: pointer;
   color: #05a79e;
-  margin: 5px;
+  margin: 27px;
+}
+.afficherrPassw {
+  margin-left: 202px;
+  margin-top: -39px;
 }

@@ -84,11 +84,6 @@
   align-self: center;
 }
 
-/* .white_btn {
-  color: rgb(255, 255, 255);
-  font-size: 25px;
-  background-color: gray;
-} */
 .green_btn {
   border: none;
   outline: none;
@@ -104,12 +99,12 @@
 .green_btn {
   background-color: #3bb19b;
   color: white;
-  margin: 10px;
+  margin: 24px;
 }
 .radio_grp {
   justify-content: center;
   align-items: center;
-  margin: 25px
+  margin: 25px;
 }
 .whitee_btn {
   padding: 12px 20px;
@@ -121,4 +116,8 @@
   font-size: 14px;
   cursor: pointer;
   border: none;
+}
+.afficher {
+  margin-left: 209px;
+  margin-top: -37px;
 }
