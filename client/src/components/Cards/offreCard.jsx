@@ -89,7 +89,7 @@ export default function Card() {
     const updatedOfferWithUser = { ...updatedOffer, user: [...updatedOffer.user, id] }; // add the user attribute to the updated offer
     axios
       .put(
-        `http://localhost:8080/api/offerRouter/updatecv/:${offers._id}`,
+        `http://localhost:8080/api/offerRouter/updatecv/:${updatedOffer._id}`,
         updatedOfferWithUser
       )
       .then((response) => {
@@ -101,14 +101,13 @@ export default function Card() {
             return o;
           })
         );
-        console.log("updated successfully", updatedOfferWithUser);
+        console.log("updated successfully", response.data);
         toast.success("Updated successfully!");
       })
       .catch((error) => {
         console.log(error);
         toast.error("Update failed!");
       });
-    console.log("yeeeessssssssssssss", updatedOfferWithUser);
   };
 
 
@@ -149,7 +148,7 @@ export default function Card() {
                 </div>
                 <form className="form_container" method="POST" onSubmit={handleSubmit}>
                   <div className="popup_contnt">
-                    <div className="popup_id" value={offers?._id}></div>
+                    {/* <div className="popup_id" value={offers?._id}></div> */}
                     <h1>Enter your CV here : </h1>
                     <input
                       type="file"

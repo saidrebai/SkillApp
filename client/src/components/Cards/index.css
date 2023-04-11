@@ -100,7 +100,7 @@
     padding: 14px 28px;
     border-radius: 3px;
     max-width: 600px;
-    min-width: 300px;
+    min-width: 550px;
     height: 150px;
 }
 .close_popup {
@@ -119,4 +119,37 @@ body.active-popup{
     flex-direction: row;
     flex-wrap: wrap;
     padding: 60px;
+}
+.submit_button{
+    border-radius: 5px;
+    border: none;
+    width: 100px;
+    height: 40px;
+    margin: 10px;
+    background-color: #304F6D;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 120px;
+    padding: 5px 7px;
+    
+}
+.save_button{
+    border-radius: 5px;
+    border: none;
+    width: 100px;
+    height: 40px;
+    margin: 10px;
+    background-color: #304F6D;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 5px 7px;
+
+}
+.title_cv{
+    margin:20px;
 }
