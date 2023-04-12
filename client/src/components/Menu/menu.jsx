@@ -62,8 +62,8 @@ function ResponsiveAppBar() {
   const isAdmin = localStorage.getItem("isAdmin");
   const firstName = localStorage.getItem("firstName");
   const token = localStorage.getItem("token");
-  const isSuperAdmin = localStorage.getItem("isSuperAdmin")
-  
+  const isSuperAdmin = localStorage.getItem("isSuperAdmin");
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -98,6 +98,7 @@ function ResponsiveAppBar() {
     localStorage.removeItem("id");
     localStorage.removeItem("isAdmin");
     localStorage.removeItem("firstName");
+    localStorage.removeItem("isSuperAdmin");
   };
   const handleHomeClick = () => {
     window.location.href = "/";
@@ -175,7 +176,7 @@ function ResponsiveAppBar() {
                   <MenuItem key="Aboutus" onClick={handleAboutusClick}>
                     <Typography textAlign="center">About us</Typography>
                   </MenuItem>
-                  {(!isAdmin || isAdmin === "false") && (
+                  {(!isAdmin || isAdmin === "false") && (!isSuperAdmin) && (
                     <MenuItem key="Offers" onClick={handleOffersClick}>
                       <Typography textAlign="center">Offers</Typography>
                     </MenuItem>
@@ -210,12 +211,12 @@ function ResponsiveAppBar() {
                 <MenuItem key="Aboutus" onClick={handleAboutusClick}>
                   <Typography textAlign="center">About us</Typography>
                 </MenuItem>
-                {(!isAdmin || isAdmin === "false") && (
-                  <MenuItem key="Offers" onClick={handleOffersClick}>
-                    <Typography textAlign="center">Offers</Typography>
-                  </MenuItem>
-                )}
-                <MenuItem key="Contact" onClick={handleContactClick}>
+                {(isAdmin === "false" || !isAdmin) && (!isSuperAdmin) && (
+                    <MenuItem key="Offers" onClick={handleOffersClick}>
+                      <Typography textAlign="center">Offers</Typography>
+                    </MenuItem>
+                  )}
+                 <MenuItem key="Contact" onClick={handleContactClick}>
                   <Typography textAlign="center">Contact</Typography>
                 </MenuItem>
               </Box>
@@ -245,7 +246,9 @@ function ResponsiveAppBar() {
                     </IconButton>
                   </Tooltip>
                 )}
+
                 <div className="name">{firstName}</div>
+
                 <Menu
                   sx={{ mt: "45px" }}
                   id="menu-appbar"
@@ -262,9 +265,10 @@ function ResponsiveAppBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {!isSuperAdmin &&(<MenuItem key="Account" onClick={handleAccountClick}>
+                  {!isSuperAdmin && (
+                  <MenuItem key="Account" onClick={handleAccountClick}>
                     <Typography textAlign="center">Account</Typography>
-                  </MenuItem>)}
+                  </MenuItem>)} 
                   {isAdmin === "true" && (
                     <MenuItem key="Dashboard" onClick={handleDashboardClick}>
                       <Typography textAlign="center">Dashboard</Typography>

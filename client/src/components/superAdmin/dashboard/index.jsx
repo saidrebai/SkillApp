@@ -7,6 +7,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="dashboard_container">
+        <h1 className="dash_content">Dashboard super Admin :</h1>
         <div className="dashboard_admins">
           <Admins />
         </div>
