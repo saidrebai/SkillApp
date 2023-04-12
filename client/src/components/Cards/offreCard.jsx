@@ -74,7 +74,7 @@ export default function Card() {
     formData.append("id", id);
 
     try {
-      const { data: res } = await axios.post("http://localhost:8080/api/internAppRouter/upload", formData);
+      const { data: res } = await axios.post("http://localhost:8080/api/uploadRouter/upload", formData);
       console.log("===>", res);
       localStorage.setItem("idpdf", res.idpdf);
     } catch (error) {
@@ -142,7 +142,6 @@ export default function Card() {
             <div className="skills_container"><label>Skills : </label>{selectedOffer.skills}</div>
             <div className="company_Name_container"><label>Entreprise : </label>{selectedOffer.company_name}</div>
             <div className="adresse_container"><label>Adresse : </label>{selectedOffer.adresse}</div>
-            {/* <div className="user_id" value = {updatedOffer.user||offers?.user}/> */}
             <button className="apply_button" onClick={() => {
               toggleModel(selectedOffer);
             }}>Apply</button>
@@ -159,12 +158,6 @@ export default function Card() {
                       name='pdfs'
                       onChange={handleFileChange}
                     />
-                    {/* <div className="userid" value ={updatedOffer.user} 
-                    onChange={(e) => {setUpdatedOffer({
-                      ...updatedOffer,
-                      user: [...updatedOffer.user, id]
-                    })}}
-                    ></div> */}
                     <button
                       className="close_popup"
                       type='button'
@@ -173,10 +166,6 @@ export default function Card() {
                     <button className="submit_button" type="submit" onClick={() => {
                       handleUpdate();
                     }}>Send</button>
-                    {/* <button className="save_button" type="button" onClick={() => {
-                      handleUpdate();
-                    }}
-                    >Save</button> */}
                     <ToastContainer />
                   </div>
                 </form>
