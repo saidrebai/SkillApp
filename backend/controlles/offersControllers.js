@@ -106,23 +106,40 @@ module.exports = {
     }
   },
 
-  updateOfferWithUser: async function (req, res) {
-    offerModel
-      .findByIdAndUpdate(req.params.id, {$push : {user: req.body.user}})
-      .exec(function (err, offer) {
-        if (err) {
-          res.json({
-            msg: "erreur" + err,
-            status: 500,
-            data: null,
-          });
-        } else {
-          res.status(200).json({
-            msg: "offer updated!",
-            status: 200,
-            data: offer,
-          });
-        }
-      });
+  // updateOfferWithUser: async function (req, res) {
+  //   offerModel
+  //     .findByIdAndUpdate(req.params.id, {$push : {user: req.body.user}})
+  //     .exec(function (err, offer) {
+  //       if (err) {
+  //         res.json({
+  //           msg: "erreur" + err,
+  //           status: 500,
+  //           data: null,
+  //         });
+  //       } else {
+  //         res.status(200).json({
+  //           msg: "offer updated!",
+  //           status: 200,
+  //           data: offer,
+  //         });
+  //       }
+  //     });
+  // },
+  addUserIdToOffer : async function (req, res) {
+    // const { offerId } = req.params.id; // Extract the offer ID and user ID from the request parameters
+    // const {userId} = req.body.user;
+    try {
+      const updatedOffer = await offerModel.findByIdAndUpdate(
+        req.params.id,
+        { $push: { user: req.body.user } },
+        { new: true }
+      );
+      // The `updatedOffer` variable now contains the updated document
+      // console.log(`User with ID ${userId} added to offer with ID ${offerId}`);
+      res.status(200).json({msg : "offer updated",status : 200, updatedOffer}); // Send the updated document back in the response
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error adding user to offer'); // Send an error response
+    }
   },
 };
