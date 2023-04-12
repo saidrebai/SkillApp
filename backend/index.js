@@ -5,8 +5,7 @@ const cors=require('cors');
 const connection = require('./db');
 const AdminRoutes = require("./routes/adminRouters");
 const CandidatRoutes = require("./routes/candidatRouters");
-const jobAppRoutes = require("./routes/jobAppRouter");
-const internAppRouter = require("./routes/internAppRouter");
+const uploadRouter = require("./routes/uploadRouter");
 const offerRouter = require("./routes/offerRouter");
 const superAdminRoutes = require("./routes/superAdminRouters");
 const morgan = require('morgan');
@@ -21,8 +20,7 @@ app.use(morgan('combined'));
 //routes
 app.use("/api/adminRouters", AdminRoutes);
 app.use("/api/candidatRouters", CandidatRoutes);
-app.use("/api/jobAppRouters", jobAppRoutes);
-app.use("/api/internAppRouter", internAppRouter);
+app.use("/api/uploadRouter", uploadRouter);
 app.use("/api/offerRouter", offerRouter);
 app.use("/api/superAdminRouters", superAdminRoutes);
 
