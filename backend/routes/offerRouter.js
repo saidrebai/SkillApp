@@ -6,6 +6,6 @@ router.get("/getoffer", offersControlles.getoffer);
 router.put("/updateoffer/:id", offersControlles.updateoffer);
 router.delete("/deleteOffer/:id", offersControlles.deleteOffer);
 router.get("/getofferbyid/:id", offersControlles.getOfferById);
-router.put("/updatecv/:id",offersControlles.updateOfferWithUser);
+router.put("/updateofferwithid/:id",offersControlles.addUserIdToOffer);
 
 module.exports = router;
