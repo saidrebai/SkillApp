@@ -4,3 +4,8 @@
     min-height: 617px;
     background-color: #f5f5f5;
 }
+.dash_content{
+    margin: 10px;
+    padding: 3px 32px 43px;
+    color: darkcyan;
+}
