@@ -105,17 +105,19 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
-  addUserIdToOffer: async function (req, res) {
+
+  addUserIdToOffer : async function (req, res) {
     try {
       const updatedOffer = await offerModel.findByIdAndUpdate(
         req.params.id,
         { $push: { user: req.body.user } },
         { new: true }
       );
-      res.status(200).json({ msg: "offer updated", status: 200, updatedOffer }); // Send the updated document back in the response
+
+      res.status(200).json({msg : "offer updated",status : 200, updatedOffer}); 
     } catch (error) {
       console.error(error);
-      res.status(500).send("Error adding user to offer"); // Send an error response
+      res.status(500).send('Error adding user to offer');
     }
   },
 };

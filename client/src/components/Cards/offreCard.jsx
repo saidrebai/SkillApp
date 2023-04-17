@@ -68,7 +68,7 @@ export default function Card() {
 
     try {
       const { data: res } = await axios.post(
-        "http://localhost:8080/api/internAppRouter/upload",
+        "http://localhost:8080/api/uploadRouter/upload",
         formData
       );
       console.log("===>", res);
@@ -83,7 +83,7 @@ export default function Card() {
       }
     }
   };
-  
+
   const handleUpdate = async () => {
     try {
       const response = await axios.put(

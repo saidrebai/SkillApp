@@ -1,9 +1,9 @@
-const internAppControlles = require("../controlles/internAppControllers");
+// const internAppControlles = require("../controlles/internAppControllers");
 const router = require("express").Router();
 const upload = require("../middleware/multer")
 const PDF = require('../models/filesModels');
 
-router.post("/internApp", internAppControlles.createInternApp);
+// router.post("/internApp", internAppControlles.createInternApp);
 router.post("/upload", upload,async(req,res)=>{
     try {
         // Check if a file was uploaded

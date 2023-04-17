@@ -120,7 +120,7 @@ const Account = () => {
               </div>
               <div className="input-style">
                 <select className="style-input" name="gender"
-                  value={updatedData.gender || newData.gender}
+                  value={updatedData.gender}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
@@ -147,7 +147,7 @@ const Account = () => {
                 <input
                   type="date"
                   name="birthDate"
-                  value={updatedData.birthDate || newData.birthDate}
+                  value={updatedData.birthDate}
                   required = {true}
                   onChange={(e) =>
                     setUpdatedData({
@@ -198,14 +198,16 @@ const Account = () => {
               </div>
               <div className="input-style">
                 <select className="style-input" name="country"
-                  value={updatedData.country || newData.country}
+                  value={updatedData.country}
                   
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
                       country: e.target.value,
                     })
+                    
                   }
+                  
                   required = {true}
                   defaultValue="Country">
                   <option disabled hidden value="Country">Country</option>
@@ -454,6 +456,7 @@ const Account = () => {
                   <option value="Zambia">Zambia</option>
                   <option value="Zimbabwe">Zimbabwe</option>
                 </select>
+                
               </div>
             </div>
 
@@ -467,7 +470,7 @@ const Account = () => {
                 <input
                   type="text"
                   name="town"
-                  value={updatedData.town || newData.town}
+                  value={updatedData.town}
                   required = {true}
                   onChange={(e) =>
                     setUpdatedData({
@@ -490,7 +493,7 @@ const Account = () => {
                 <input
                   type="text"
                   name="Adresse"
-                  value={updatedData.adresse || newData.adresse}
+                  value={updatedData.adresse}
                   required = {true}
                   onChange={(e) => {
                     setUpdatedData({
@@ -513,7 +516,7 @@ const Account = () => {
                 <input
                   type="number"
                   name="zipCode"
-                  value={updatedData.zipCode || newData.zipCode}
+                  value={updatedData.zipCode}
                   required = {true}
                   onChange={(e) =>
                     setUpdatedData({
@@ -536,7 +539,7 @@ const Account = () => {
                 <input
                   type="text"
                   name="Establishment"
-                  value={updatedData.Establishment || newData.Establishment}
+                  value={updatedData.Establishment}
                   required = {true}
                   onChange={(e) =>
                     setUpdatedData({
