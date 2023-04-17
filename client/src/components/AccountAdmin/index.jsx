@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 const AccountAdmin = () => {
   const [Data, setData] = useState({});
   const id = localStorage.getItem("id");
+  const [isDeleted, setIsDeleted] = useState(false);
   const [updatedData, setUpdatedData] = useState({ Name: "" });
   
   useEffect(() => {
@@ -50,6 +51,33 @@ const AccountAdmin = () => {
     Data ? setUpdatedData(Data) : setUpdatedData({ Name: "" });
     console.log("Data---------------------", Data);
   }, [Data]);
+
+    const deleteAdmin = () => {
+    const confirmed = window.confirm("Are you sure you want to delete your Account?");
+  if (!confirmed) {
+    return;
+  }
+    axios
+      .delete(`http://localhost:8080/api/adminRouters/deleteadmin/${id}`)
+      .then((response) => {
+        setIsDeleted(true);
+        console.log("Deleted", response);
+        toast.success("Deleted successfully!");
+        localStorage.removeItem('id');
+        localStorage.removeItem('token');
+        localStorage.removeItem('firstName');
+        localStorage.removeItem('isAdmin');
+      })
+      .catch((error) => {
+        console.log(error.response.data); // Log the error response data
+        console.log(error.response.status); // Log the error status code
+        console.log(error.response.headers); // Log the error headers
+      });
+  };
+
+  if (isDeleted) {
+    window.location.href = '/login';
+  }
   return (
     <>
       <div className="centerr-content">
@@ -487,6 +515,9 @@ const AccountAdmin = () => {
             <div className="btn-container">
               <button type="submit" className="style-button">
                 Update
+              </button>
+              <button type="button" className="style-button" onClick={deleteAdmin}>
+                Delete
               </button>
               <ToastContainer />
             </div>

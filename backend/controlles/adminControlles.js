@@ -127,5 +127,23 @@ module.exports = {
   		console.error(error);
   		return res.status(500).json({ message: "Internal Server Error" });
   	}
-  }
+  },
+  deleteAdmin: function (req, res) {
+    Admin.findByIdAndRemove({ _id: req.params.id }, (err, Admin) => {
+      if (err) {
+        res.status(500),
+          json({
+            msg: "erreur",
+            status: 500,
+            data: null,
+          });
+      } else {
+        res.status(200).json({
+          msg: "Admin deleted!",
+          status: 200,
+          data: Admin,
+        });
+      }
+    });
+  },
 };
