@@ -20,12 +20,12 @@ function App() {
   return (
     <Routes>
       <Route path="/" exact element={<Main />} />
-      <Route path="/signup" exact element={<Signup />} />
-      <Route path="/signupAdmin" exact element={<SignupAdmin />} />
+      {!user &&<Route path="/signup" exact element={<Signup />} />}
+      {!user &&<Route path="/signupAdmin" exact element={<SignupAdmin />} />}
       {!user && <Route path="/login" exact element={<Login />} />}
-      {user && <Route path="/Account" exact element={<Account />} />}
+      {user && isAdmin === "false" && <Route path="/Account" exact element={<Account />} />}
       {!user && <Route path="/Account" exact element={<Login />} />}
-      {user && <Route path="/AccountA" exact element={<AccountAdmin />} />}
+      {user && isAdmin === "true" &&<Route path="/AccountA" exact element={<AccountAdmin />} />}
       {!user && <Route path="/AccountA" exact element={<Login />} />}
       {(isAdmin === "false" || !isAdmin) && (
         <Route path="/offers" exact element={<Offers />} />
@@ -37,7 +37,7 @@ function App() {
       {SuperAdmin === "true" && (
         <Route path="/dashboard" exact element={<Dashboard />} />
       )}
-      <Route path="/SignInSuperAdmin" exact element={<SignInSuperAdmin />} />
+      {!user &&<Route path="/SignInSuperAdmin" exact element={<SignInSuperAdmin />} />}
     </Routes>
   );
 }
