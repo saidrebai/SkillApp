@@ -12,6 +12,7 @@ export default function Card() {
 
   const user = localStorage.getItem("token");
   const id = localStorage.getItem('id');
+  const idpdf = localStorage.getItem('idpdf');
 
 
   const [offers, setOffers] = useState([]);
@@ -20,12 +21,15 @@ export default function Card() {
   const [pdfs, setPdfs] = useState(null);
   const [updatedOffer, setUpdatedOffer] = useState({});
   const [selectedOffer, setSelectedOffer] = useState(null);
+  const [users,setUsers] = useState({cv:[]});
 
   const toggleModel = (offer) => {
     if (user) {
       setPopup(!popup);
       console.log("gggg", popup);
       setSelectedOffer(offer);
+      // localStorage.removeItem('idpdf');
+      
 
 
     }
@@ -99,8 +103,26 @@ export default function Card() {
         }
       );
       console.log("lala",response.data);
-      toast.success("Updated successfully!");
+      // toast.success("Updated successfully!");
       setUpdatedOffer(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+  const updateUser = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/candidatRouters/updateuserwithcv/${id}`,
+        {
+          ...users,
+          cv: [idpdf],
+        }
+      );
+      console.log("=>",response.data);
+      // toast.success("Updated successfully!");
+      setUsers(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -161,10 +183,12 @@ export default function Card() {
                     <button
                       className="close_popup"
                       type='button'
-                      onClick={toggleModel}>Close</button>
+                      onClick={()=>{toggleModel();updateUser();}}>Close</button>
                     {error && <div className="error_msg">{error}</div>}
                     <button className="submit_button" type="submit" onClick={() => {
                       handleUpdate();
+                    
+                      
                     }}>Send</button>
                     <ToastContainer />
                   </div>

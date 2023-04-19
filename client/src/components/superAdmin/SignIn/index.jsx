@@ -54,31 +54,36 @@ const AccountSuperAdmin = () => {
     <div className="login_container">
       <div className="Account_from_container">
         <div className="left">
-          <form onSubmit={handleSubmit}>
+          <form className="signin_container" onSubmit={handleSubmit}>
             <h1>Account Super_Admin</h1>
-            <label>User Name :</label>
-            <input
-              type="text"
-              placeholder="user name"
-              name="userName"
-              onChange={handleChange}
-              value={formData.userName}
-              required
-              className="input"
-            />
-            <br />
-            <label>Password :</label>
-            <input
-              type={type}
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-              value={formData.password}
-              required
-              className="input"
-            />
-            <div className="afficherPassw">
+            <label>
+              User Name : 
+              <input
+                type="text"
+                placeholder="user name"
+                name="userName"
+                onChange={handleChange}
+                value={formData.userName}
+                required
+                className="input"
+              />
+            </label>
+            <label>
+              Password : 
+              <input
+                type={type}
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+                value={formData.password}
+                required
+                className="input"
+              />
+            </label>
+            <br/>
+            <div className="show-password">
               <input type="checkbox" onClick={handleToggle} />
+              show password
             </div>
             {error && <div className="error_msg">{error}</div>}
             <button type="submit" className="btn">
