@@ -27,6 +27,7 @@ const validate = (data) => {
     gender: Joi.string().required().label("gender"),
     zipCode: Joi.number().required().label("zipCode"),
     Establishment: Joi.string().required().label("Establishment"),
+    // cv: Joi.ref().label("cv"),
   });
   return schema.validate(data);
 };
@@ -114,6 +115,7 @@ module.exports = {
       gender: req.body.gender,
       zipCode: req.body.zipCode,
       Establishment: req.body.Establishment,
+      cv: req.body.id,
 
     }).exec(function (err, candid) {
       if (err) {
@@ -160,5 +162,28 @@ module.exports = {
         });
       }
     });
+  },
+  addCvIdToUser: async function (req, res) {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.id,
+        { $set: { cv: req.body.cv } },
+        { new: true }
+      );
+
+      res.status(200).json({msg : "user updated",status : 200, updatedUser}); 
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error adding cv to user');
+    }
+  },
+  searchItems : async function (req, res) {
+    try {
+      const filteredItems = await User.find({ firstName: { $regex: req.query.q, $options: "i" } });
+      res.status(200).json({ msg: "Items found", status: 200, data: filteredItems });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Error searching for items in database");
+    }
   },
 };

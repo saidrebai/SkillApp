@@ -52,12 +52,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cv: [
+  cv: 
 		{
 			type: Schema.Types.ObjectId,
 			ref: 'pdfs',
 		},
-	],
 });
 
 userSchema.methods.generateAuthToken = function () {

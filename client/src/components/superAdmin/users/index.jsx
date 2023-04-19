@@ -6,12 +6,69 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { toast, ToastContainer } from "react-toastify";
 import "./index.css";
+import { styled, alpha } from "@mui/material/styles";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
+}));
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [userCount, setUserCount] = useState(0);
   const [popup, setPopup] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await fetch(
+      `http://localhost:8080/api/candidatRouters/searchuser?q=${searchQuery}`
+    );
+    const data = await response.json();
+    setSearchResults(data.data);
+    // setSearchResults(currentUsers.filter(selectedUser => selectedUser.firstName.toLowerCase().includes(searchQuery.toLowerCase())));
+  };
 
   const toggleModel = (user) => {
     setSelectedUser(user);
@@ -81,14 +138,60 @@ const Users = () => {
         <div className="number_of_users">
           <p>Number of users : {userCount}</p>
         </div>
+        <div className="search_container">
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <form onSubmit={handleSubmit}>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                type="text"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+              />
+              <button type="submit">Search</button>
+            </form>
+          </Search>
+          <ul>
+            {searchResults.map((item) => (
+              <div className="users_containerr" key={item._id}>
+                <div className="users_infromation">
+                <div className="users_avatar">
+                  <Avatar src="/broken-image.jpg" />
+                </div>
+                  <div className="users_email">{item.email}</div>
+                </div>{" "}
+                <div className="buttons">
+                  <button
+                    className="button_display"
+                    type="submit"
+                    onClick={() => toggleModel(selectedUser)}
+                  >
+                    Display
+                  </button>
+                  <button
+                    className="button_display"
+                    type="submit"
+                    onClick={() => handleDelete(selectedUser)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </ul>
+        </div>
         <div className="users">
           {currentUsers.length > 0 ? (
             currentUsers.map((selectedUser) => (
               <div className="users_container" key={selectedUser._id}>
-                <div className="users_avatar">
+                 <div className="users_infromation">
+                  <div className="users_avatar">
                   <Avatar src="/broken-image.jpg" />
                 </div>
-                <div className="users_infromation">
+               
                   <div className="users_email">{selectedUser.email}</div>
                 </div>
                 <div className="buttons">
@@ -127,7 +230,7 @@ const Users = () => {
       {popup && (
         <div className="popup_container" style={{ zIndex: "1" }}>
           <div className="overlay" onClick={() => toggleModel(null)}></div>
-          <div className="popup_content">
+          <div className="popu_content">
             <div className="user_info">
               <div className="user_data">
                 <Avatar src="/broken-image.jpg" />
