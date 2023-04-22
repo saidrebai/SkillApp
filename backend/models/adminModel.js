@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 
 const adminSchema = new mongoose.Schema({
@@ -44,8 +43,6 @@ const adminSchema = new mongoose.Schema({
     required: true,
     min: 8,
   },
-  resetPasswordToken: String,
-  resetPasswordExpires: Date,
 });
 
 adminSchema.methods.generateAuthToken = function () {

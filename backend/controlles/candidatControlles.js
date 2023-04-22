@@ -142,5 +142,23 @@ module.exports = {
   		console.error(error);
   		return res.status(500).json({ message: "Internal Server Error" });
   	}
-  }
+  },
+  deleteUser: function (req, res) {
+    User.findByIdAndRemove({ _id: req.params.id }, (err, user) => {
+      if (err) {
+        res.status(500),
+          json({
+            msg: "erreur",
+            status: 500,
+            data: null,
+          });
+      } else {
+        res.status(200).json({
+          msg: "user deleted!",
+          status: 200,
+          data: user,
+        });
+      }
+    });
+  },
 };

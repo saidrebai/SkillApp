@@ -4,26 +4,26 @@ import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { toast, ToastContainer } from "react-toastify";
 import "./index.css";
 
 const Users = () => {
-    const [users, setUsers] = useState([]);
-    const [userCount, setUserCount] = useState(0);
-    const [popup, setPopup] = useState(false);
-    const [selectedUser, setSelectedUser] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [userCount, setUserCount] = useState(0);
+  const [popup, setPopup] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
-    const toggleModel = (user) => {
-        setSelectedUser(user);
-        setPopup(!popup);
-        console.log("gggg", popup);
-    }
+  const toggleModel = (user) => {
+    setSelectedUser(user);
+    setPopup(!popup);
+    console.log("gggg", popup);
+  };
 
-    if (popup) {
-        document.body.classList.add('activee-popup')
-    } else {
-        document.body.classList.remove('activee-popup')
-    }
-
+  if (popup) {
+    document.body.classList.add("activee-popup");
+  } else {
+    document.body.classList.remove("activee-popup");
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -45,97 +45,126 @@ const Users = () => {
 
   const currentUsers = users.slice(startIndex, endIndex);
 
-    const handlePageChange = (event, value) => {
-        setCurrentPage(value);
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const handleDelete = (selectedUser) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this Admin ?"
+    );
+    if (!confirmed) {
+      return;
     }
-    return (
-        <><div className='users_gird'>
-            <div className='number_of_users'>
-                <p>Number of users : {userCount}</p>
-            </div>
-            <div className='users'>
-                {currentUsers.length > 0 ? (
-                    currentUsers.map((user) => (
-                        <div className='users_container' key={user._id}>
-                            <div className='users_avatar'><Avatar src="/broken-image.jpg" /></div>
-                            <div className='users_infromation'>
-                                <div className='users_email'>{user.email}</div>
-                            </div>
-                            <div className='button_display'>
-                                <button type="submit" onClick={() => toggleModel(user)}>Display</button>
-                            </div>
+    axios
+      .delete(
+        `http://localhost:8080/api/candidatRouters/deleteuser/${selectedUser._id}`
+      )
+      .then((response) => {
+        setUserCount(userCount - 1);
+        setUsers((prevUsers) =>
+          prevUsers.filter((o) => o._id !== selectedUser._id)
+        );
+        console.log("Deleted", response);
+        toast.success("Deleted successfully!");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Deletion failed!");
+      });
+  };
 
-                        </div>
-                    ))
-
-                ) : (
-                    <div>No users to display</div>
-                )}
-            </div>
-            <div className="pagination_container">
-                <Stack spacing={2}>
-                    <Pagination
-                        count={totalPages}
-                        page={currentPage}
-                        onChange={handlePageChange}
-                        color="primary"
-                    />
-                </Stack></div>
+  return (
+    <>
+      <ToastContainer />
+      <div className="users_gird">
+        <div className="number_of_users">
+          <p>Number of users : {userCount}</p>
         </div>
-            {popup && (
-                <div className="popup_container" style={{ zIndex: "1" }}>
-                    <div className="overlay" onClick={() => toggleModel(null)} >
-                    </div>
-                    <div className="popup_content">
-                        <div className="user_info">
-                            <div className="user_data">
-                                <Avatar src="/broken-image.jpg" />
-                            </div>
-                            <div className="user_data">
-                                Email :  {selectedUser?.email}
-                            </div>
-                            <div className="user_data">
-                                First Name : {selectedUser?.firstName}
-                            </div>
-                            <div className="user_data">
-                                Last Name : {selectedUser?.lastName}
-                            </div>
-                            <div className="user_data">
-                                Country : {selectedUser?.country}
-                            </div>
-                            <div className="user_data">
-                                Town : {selectedUser?.town}
-                            </div>
-                            <div className="user_data">
-                                Adresse : {selectedUser?.adresse}
-                            </div>
-                            <div className="user_data">
-                                Zipcode : {selectedUser?.zipCode}
-                            </div>
-                            <div className="user_data">
-                                Telephone : {selectedUser?.tel}
-                            </div>
-                            <div className="user_data">
-                                Gender : {selectedUser?.gender}
-                            </div>
-                            <div className="user_data">
-                                Birthday : {selectedUser?.birthDate}
-                            </div>
-                            <div className="user_data">
-                                Establishment : {selectedUser?.Establishment}
-                            </div>
-
-                        </div>
-
-                        <button
-                            className="close_popup"
-                            type='button'
-                            onClick={() => toggleModel(null)}>close</button>
-                    </div>
-
+        <div className="users">
+          {currentUsers.length > 0 ? (
+            currentUsers.map((selectedUser) => (
+              <div className="users_container" key={selectedUser._id}>
+                <div className="users_avatar">
+                  <Avatar src="/broken-image.jpg" />
                 </div>
-            )}</>
-    )
-}
+                <div className="users_infromation">
+                  <div className="users_email">{selectedUser.email}</div>
+                </div>
+                <div className="buttons">
+                  <button
+                    className="button_display"
+                    type="submit"
+                    onClick={() => toggleModel(selectedUser)}
+                  >
+                    Display
+                  </button>
+                  <button
+                    className="button_display"
+                    type="submit"
+                    onClick={() => handleDelete(selectedUser)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div>No users to display</div>
+          )}
+        </div>
+        <div className="pagination_container">
+          <Stack spacing={2}>
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Stack>
+        </div>
+      </div>
+      {popup && (
+        <div className="popup_container" style={{ zIndex: "1" }}>
+          <div className="overlay" onClick={() => toggleModel(null)}></div>
+          <div className="popup_content">
+            <div className="user_info">
+              <div className="user_data">
+                <Avatar src="/broken-image.jpg" />
+              </div>
+              <div className="user_data">Email : {selectedUser?.email}</div>
+              <div className="user_data">
+                First Name : {selectedUser?.firstName}
+              </div>
+              <div className="user_data">
+                Last Name : {selectedUser?.lastName}
+              </div>
+              <div className="user_data">Country : {selectedUser?.country}</div>
+              <div className="user_data">Town : {selectedUser?.town}</div>
+              <div className="user_data">Adresse : {selectedUser?.adresse}</div>
+              <div className="user_data">Zipcode : {selectedUser?.zipCode}</div>
+              <div className="user_data">Telephone : {selectedUser?.tel}</div>
+              <div className="user_data">Gender : {selectedUser?.gender}</div>
+              <div className="user_data">
+                Birthday : {selectedUser?.birthDate}
+              </div>
+              <div className="user_data">
+                Establishment : {selectedUser?.Establishment}
+              </div>
+            </div>
+
+            <button
+              className="close_popup"
+              type="button"
+              onClick={() => toggleModel(null)}
+            >
+              close
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
 export default Users;

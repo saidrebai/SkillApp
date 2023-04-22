@@ -36,9 +36,8 @@ const Signup = () => {
     try {
       const url = "http://localhost:8080/api/candidatRouters/signup";
       const { data: res } = await axios.post(url, data);
-      navigate("/login");
       toast.success("Updated successfully!");
-
+      navigate("/login");
       console.log(res.message);
     } catch (error) {
       toast.error("Update failed!");
@@ -53,6 +52,8 @@ const Signup = () => {
   };
 
   return (
+    <>
+    <ToastContainer />
     <div className="signup_container">
       <div className="signup_from_container">
         <div className="left">
@@ -498,11 +499,12 @@ const Signup = () => {
             <button type="submit" className="white_btn">
               Sign Up
             </button>
-            <ToastContainer />
+            
           </form>
         </div>
       </div>
     </div>
+    </>
   );
 };
 export default Signup;
