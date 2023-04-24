@@ -1,10 +1,13 @@
+const randomString = require("../utils/utils");
+const sendPasswordToEmployee = require("../utils/utils");
+const checkDuplicateEmail = require("../utils/utils");
 const { Admin } = require("../models/adminModel");
 const { vall } = require("../middleware/vall");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 const jwt = require("jsonwebtoken");
-
+const nodemailer = require("nodemailer");
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -117,16 +120,16 @@ module.exports = {
     });
   },
   getAll: async function (req, res) {
-  	try {
-  		const admins = await Admin.find();
-  		if (!admins) {
-  			return res.status(404).json({ message: "admins not found" });
-  		}
-  		return res.status(200).json({ message: "admins found", admins });
-  	} catch (error) {
-  		console.error(error);
-  		return res.status(500).json({ message: "Internal Server Error" });
-  	}
+    try {
+      const admins = await Admin.find();
+      if (!admins) {
+        return res.status(404).json({ message: "admins not found" });
+      }
+      return res.status(200).json({ message: "admins found", admins });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
   },
   deleteAdmin: function (req, res) {
     Admin.findByIdAndRemove({ _id: req.params.id }, (err, Admin) => {
@@ -145,5 +148,54 @@ module.exports = {
         });
       }
     });
+  },
+
+  resetPassword: async (req, res, next) => {
+    try {
+      const password = randomString(8, "01234567");
+      console.log(password);
+      let email = {};
+      email["email"] = req.body.email;
+      let adminFinded = await Admin.findOne(email);
+      console.log("adminfind===>", adminFinded);
+      if (adminFinded !== null) {
+        adminFinded.password = password;
+        adminFinded
+          .save()
+          .then(async (savedAdmin) => {
+            const email_content =
+              "Bonjour " +
+              savedAdmin.Name +
+              " " +
+              ", Votre nouveau mot de passe est : " +
+              password;
+            const dataEmail = {
+              email_content: email_content,
+            };
+            // TODO send email to manager given her password to authentificate
+            await sendPasswordToEmployee(
+              savedAdmin.email,
+              dataEmail,
+              "SkillApp"
+            );
+            res.json(savedAdmin.toJSON());
+          })
+          .catch((e) =>
+            checkDuplicateEmail(e, (result) => {
+              if (result) {
+                res.status(400).json({ message: "Duplicate email address" });
+              } else {
+                next(e);
+              }
+            })
+          );
+      } else {
+        res
+          .status(404)
+          .json({ message: "Aucun administrateur trouvé avec l'ID fourni" });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   },
 };

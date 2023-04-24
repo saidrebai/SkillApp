@@ -1,5 +1,5 @@
 const { offerModel, validate } = require("../models/offersModel");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 module.exports = {
   createOffer: function (req, res) {

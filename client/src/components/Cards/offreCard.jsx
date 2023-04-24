@@ -13,8 +13,6 @@ export default function Card() {
   const user = localStorage.getItem("token");
   const id = localStorage.getItem('id');
   const idpdf = localStorage.getItem('idpdf');
-
-
   const [offers, setOffers] = useState([]);
   const [popup, setPopup] = useState(false);
   const [error, setError] = useState("");
@@ -29,9 +27,6 @@ export default function Card() {
       console.log("gggg", popup);
       setSelectedOffer(offer);
       // localStorage.removeItem('idpdf');
-      
-
-
     }
     else {
       window.location.href = "/login";
@@ -55,21 +50,15 @@ export default function Card() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-
   const totalPages = Math.ceil(offers.length / itemsPerPage);
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
- 
   const currentOffers = offers.slice(startIndex, endIndex);
   
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
-
-  
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -128,15 +117,11 @@ export default function Card() {
     }
   };
 
-
-
   useEffect(() => {
     if (selectedOffer) {
       setUpdatedOffer(selectedOffer);
     }
   }, [selectedOffer]);
-
-
 
 
   const handleFileChange = (event) => {

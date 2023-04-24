@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom"
 import "./styles.modules.css";
 
 const Login = () => {
@@ -134,6 +134,9 @@ const Login = () => {
               <button type="submit" className="green_btn">
                 Sign In
               </button>
+              <div className="ForgotPass">
+              <p>Forgot Password  <NavLink to="/password-reset">Click Here</NavLink> </p>
+              </div>
             </form>
           </div>
           <div className="right">
@@ -156,6 +159,7 @@ const Login = () => {
               >
                 Sign Up
               </button>
+             
             </div>
           </div>
         </div>

@@ -232,11 +232,11 @@ function ResponsiveAppBar() {
                 </Search>
               </div>
               {!token && (
-                <div className="button_signin">
-                  <button type="submit" onClick={handleLoginClick}>
-                    Login
-                  </button>
-                </div>
+                
+                  <h3 className="title_signin" onClick={handleLoginClick}>
+                    Sign In
+                  </h3>
+                
               )}
               <Box sx={{ flexGrow: 0 }}>
                 {token && (
