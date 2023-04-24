@@ -3,7 +3,7 @@
     border-color: #35e5c4;
     border-radius: 10px;
     border-style: solid;
-    width: 500px;
+    width: 600px;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -17,7 +17,7 @@
     justify-content: space-between;
 }
 .Admin_container{
-    width: 500px;
+    width: 600px;
     background-color: #f5f5f5;
     border-width: 14px;
     border-radius: 7px;
@@ -25,6 +25,10 @@
     justify-content: space-between;
     padding: 4px;
     margin: 2px;
+}
+.Admin_infromation{
+    display: flex;
+    align-items: center;
 }
 .Admin_avatar{
     padding: 3px;
@@ -65,7 +69,7 @@
 .overlay{
     background: rgba(49, 49, 49, 0.284);
 }
-.popup_content {
+.popu_content {
     position: absolute;
     top: 40%;
     left: 50%;

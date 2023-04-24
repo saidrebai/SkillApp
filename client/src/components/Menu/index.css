@@ -1,15 +1,16 @@
 .menu_container_text{
     color:#000000;
 }
-.button_signin button{
+.title_signin{
     border-radius: 5px;
     border: none;
-    width: 100px;
-    height: 40px;
-    margin: 10px;
-    background-color: #899481;
-    color: rgb(255, 255, 255);
+    width: 83px;
+    height: 29px;
+    margin: 21px;
+    color: #1564bf;
     cursor: pointer;
+    font-family: emoji;
+    font-size: 25px;
 }
 .search_container{
     background-color: #f5f5f5;

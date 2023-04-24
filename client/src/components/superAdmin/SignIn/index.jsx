@@ -55,7 +55,7 @@ const AccountSuperAdmin = () => {
       <div className="Account_from_container">
         <div className="left">
           <form onSubmit={handleSubmit}>
-            <h1>SignIn Super_Admin</h1>
+            <h1>Account Super_Admin</h1>
             <label>User Name :</label>
             <input
               type="text"
@@ -79,6 +79,7 @@ const AccountSuperAdmin = () => {
             />
             <div className="afficherPassw">
               <input type="checkbox" onClick={handleToggle} />
+              show password
             </div>
             {error && <div className="error_msg">{error}</div>}
             <button type="submit" className="btn">

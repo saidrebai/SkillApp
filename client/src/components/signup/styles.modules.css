@@ -17,7 +17,7 @@
 }
 .titleButton {
   margin-top: 0;
-  color: rgb(5, 167, 158);
+  color: #010101;
   font-size: 35px;
   align-self: center;
 }
@@ -28,7 +28,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #3bb19b;
+  background-color: #E67F4F;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
@@ -64,7 +64,7 @@
   width: 370px;
   padding: 15px;
   border-radius: 10px;
-  background-color: #edf5f3;
+  background-color: #f5ede4;
   margin: 5px 0;
   font-size: 14px;
 }
@@ -103,6 +103,6 @@
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
-  color: #05a79e;
+  color: #E67F4F;
   margin: 5px;
 }

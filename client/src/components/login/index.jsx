@@ -9,7 +9,7 @@ const Login = () => {
   const user = localStorage.getItem("token");
 
   const [type, setType] = useState("password");
-  const [data, setData] = useState({ email: "", password: "" });
+  const [data, setData] = useState({ email: "" , password: "" });
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -124,9 +124,9 @@ const Login = () => {
                 className="input"
               />
 
-              <div className=" afficher">
+              <div className="show-password">
                 <input type="checkbox" onClick={handleToggle} />
-                
+                show password
               </div>
 
               {error && <div className="error_msg">{error}</div>}

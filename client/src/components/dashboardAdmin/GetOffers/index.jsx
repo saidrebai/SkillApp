@@ -13,16 +13,29 @@ const GetOffer = () => {
   const [offers, setOffers] = useState([]);
   const [offerCount, setOfferCount] = useState(0);
   const [popup, setPopup] = useState(false);
+  const [modal, setModal] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState(null);
   const [updatedOffer, setUpdatedOffer] = useState({ Name: "" });
+  const [user, setUser] = useState({});
 
   const toggleModel = (offer) => {
     setSelectedOffer(offer);
     setPopup(!popup);
     console.log("gggg", popup);
   };
+  const toggleModal = (offer) => {
+    setSelectedOffer(offer);
+    setModal(!modal)
+    console.log("gggg", modal);
+  };
 
   if (popup) {
+    document.body.classList.add("active-popup");
+  } else {
+    document.body.classList.remove("active-popup");
+  }
+
+  if (modal) {
     document.body.classList.add("active-popup");
   } else {
     document.body.classList.remove("active-popup");
@@ -44,6 +57,18 @@ const GetOffer = () => {
     fetchData();
   }, []);
   console.log("testtttt", offers);
+
+  // const fetchUser = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:8080/api/candidatRouters/getinfo/${id}`
+  //     );
+  //     setUser(response.data.data);
+  //     console.log("response", response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const handleUpdate = () => {
     axios
@@ -77,11 +102,18 @@ const GetOffer = () => {
   }, [selectedOffer]);
 
   const handleDelete = (selectedOffer) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this Admin ?"
+    );
+    if (!confirmed) {
+      return;
+    }
     axios
       .delete(
         `http://localhost:8080/api/offerRouter/deleteOffer/${selectedOffer._id}`
       )
       .then((response) => {
+        setOfferCount(offerCount-1)
         // remove the deleted offer from the state
         setOffers((prevOffers) =>
           prevOffers.filter((o) => o._id !== selectedOffer._id)
@@ -131,6 +163,15 @@ const GetOffer = () => {
                     }}
                   >
                     Update
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      toggleModal(selectedOffer);
+                      // fetchUser()
+                    }}
+                  >
+                    candidats
                   </button>
 
                   <button
@@ -322,6 +363,13 @@ const GetOffer = () => {
                       </td>
                     </div>
                   </tr>
+                  <div className="id_users"
+                    value ={updatedOffer.user.map((userId) => (
+                      <div key={userId} className="id_users">
+                        {userId}
+                      </div>
+                    ))}>
+                  </div>
                 </table>
               </table>
 
@@ -340,6 +388,21 @@ const GetOffer = () => {
           </div>
         </div>
       )}
+      {modal && (
+        <div className="popup_container" style={{ zIndex: "1" }}>
+          <div className="overlay" onClick={() => toggleModal(null)}></div>
+          <div className="popup_content">
+          <button
+                type="button"
+                className="close_popup"
+                onClick={() => toggleModal(null)}
+              >
+                close
+              </button>
+
+              <button className="Save_popup" type="submit">
+                Save
+              </button></div></div>)}
     </>
   );
 };

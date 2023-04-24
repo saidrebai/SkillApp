@@ -18,7 +18,7 @@ function Footer() {
           <h1 onClick={handleSkillsClick}>Skills</h1>
         </div>
         <div className='footer_container_Menu'>
-            <button onClick={handleContactClick}>Contact</button>
+            <h3 onClick={handleContactClick}>Contact</h3>
          </div>
             <div className='envoyer_container'>
               <input type="text" placeholder='envoyer email'></input>
