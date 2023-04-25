@@ -179,7 +179,8 @@ module.exports = {
   },
   searchItems : async function (req, res) {
     try {
-      const filteredItems = await User.find({ firstName: { $regex: req.query.q, $options: "i" } });
+      const ids = req.query.q.split(","); // Convert comma-separated string of ids into an array
+      const filteredItems = await User.find({ _id: { $in: ids } });
       res.status(200).json({ msg: "Items found", status: 200, data: filteredItems });
     } catch (error) {
       console.error(error);
