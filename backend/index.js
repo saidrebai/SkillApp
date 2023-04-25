@@ -9,6 +9,7 @@ const uploadRouter = require("./routes/uploadRouter");
 const offerRouter = require("./routes/offerRouter");
 const superAdminRoutes = require("./routes/superAdminRouters");
 const morgan = require('morgan');
+const path = require("path");
 
 
 //database connection
@@ -23,7 +24,7 @@ app.use("/api/candidatRouters", CandidatRoutes);
 app.use("/api/uploadRouter", uploadRouter);
 app.use("/api/offerRouter", offerRouter);
 app.use("/api/superAdminRouters", superAdminRoutes);
-
+app.use("/uploads",express.static(path.join("uploads")))
 
 
 

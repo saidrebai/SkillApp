@@ -16,7 +16,8 @@ const GetOffer = () => {
   const [modal, setModal] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState(null);
   const [updatedOffer, setUpdatedOffer] = useState({ Name: "" });
-  const [user, setUser] = useState({});
+  const [users, setUsers] = useState([]);
+  const [pdf, setPdf] = useState({});
 
   const toggleModel = (offer) => {
     setSelectedOffer(offer);
@@ -25,7 +26,7 @@ const GetOffer = () => {
   };
   const toggleModal = (offer) => {
     setSelectedOffer(offer);
-    setModal(!modal)
+    setModal(!modal);
     console.log("gggg", modal);
   };
 
@@ -53,22 +54,53 @@ const GetOffer = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
   console.log("testtttt", offers);
 
-  // const fetchUser = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://localhost:8080/api/candidatRouters/getinfo/${id}`
-  //     );
-  //     setUser(response.data.data);
-  //     console.log("response", response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  
+  const fetchUser = async (selectedOffer) => {
+    try {
+      const ids = selectedOffer?.user?.join(",");
+      console.log("ids", ids);
+      const response = await axios.get(
+        "http://localhost:8080/api/candidatRouters/searchuser",
+        { params: { q: ids } }
+      );
+      setUsers(response.data.data);
+      console.log("response", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+const fetchPdf = async (cvId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/uploadRouter/pdf/${cvId}`
+      );
+      setPdf(response.data.pdf);
+      // localStorage.setItem("filename",response.filename)
+      console.log("response", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchCv = async () => {
+    try {
+      const filename = pdf?.filename;
+      console.log("cv", filename);
+      const response = await axios.get(`http://localhost:8080/uploads/${filename}`);
+      window.open(`http://localhost:8080/uploads/${filename}`, "_blank");
+      console.log("response", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   const handleUpdate = () => {
     axios
@@ -113,7 +145,7 @@ const GetOffer = () => {
         `http://localhost:8080/api/offerRouter/deleteOffer/${selectedOffer._id}`
       )
       .then((response) => {
-        setOfferCount(offerCount-1)
+        setOfferCount(offerCount - 1);
         // remove the deleted offer from the state
         setOffers((prevOffers) =>
           prevOffers.filter((o) => o._id !== selectedOffer._id)
@@ -168,7 +200,7 @@ const GetOffer = () => {
                     type="button"
                     onClick={() => {
                       toggleModal(selectedOffer);
-                      // fetchUser()
+                      fetchUser(selectedOffer);
                     }}
                   >
                     candidats
@@ -363,13 +395,6 @@ const GetOffer = () => {
                       </td>
                     </div>
                   </tr>
-                  <div className="id_users"
-                    value ={updatedOffer.user.map((userId) => (
-                      <div key={userId} className="id_users">
-                        {userId}
-                      </div>
-                    ))}>
-                  </div>
                 </table>
               </table>
 
@@ -392,17 +417,38 @@ const GetOffer = () => {
         <div className="popup_container" style={{ zIndex: "1" }}>
           <div className="overlay" onClick={() => toggleModal(null)}></div>
           <div className="popup_content">
-          <button
-                type="button"
-                className="close_popup"
-                onClick={() => toggleModal(null)}
-              >
-                close
-              </button>
-
-              <button className="Save_popup" type="submit">
-                Save
-              </button></div></div>)}
+            <button
+              type="button"
+              className="close_popup"
+              onClick={() => toggleModal(null)}
+            >
+              close
+            </button>
+            <div className="id_users">
+              {users.length > 0 ? (
+                users.map((user) => (
+                  <div key={user._id} className="user">
+                    {user.firstName}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        fetchPdf(user.cv);
+                        fetchCv();
+                       
+                      }}
+                    >
+                      View CV
+                    </button>
+                    
+                  </div>
+                ))
+              ) : (
+                <div>No users to display</div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
