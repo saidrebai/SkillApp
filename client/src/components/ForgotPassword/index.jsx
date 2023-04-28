@@ -16,6 +16,7 @@ function ForgotPassword() {
     } catch (error) {
       setMessage("Erreur lors de l'envoi de l'e-mail");
     }
+    console.log("helloooooo")
     window.location.href = "/resetpassword";
   };
 
