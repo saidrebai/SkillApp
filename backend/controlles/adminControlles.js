@@ -1,6 +1,7 @@
 const randomString = require("../utils/utils");
-const sendPasswordToEmployee = require("../utils/utils");
 const checkDuplicateEmail = require("../utils/utils");
+// const { transporter } = require("../utils/utils");
+// const { sendEmail } = require("../utils/utils");
 const { Admin } = require("../models/adminModel");
 const { vall } = require("../middleware/vall");
 const bcrypt = require("bcrypt");
@@ -149,41 +150,64 @@ module.exports = {
       }
     });
   },
-
-  resetPassword: async (req, res, next) => {
+  ResetPassword: async (req, res, next) => {
     try {
-      const password = randomString(8, "01234567");
+      const password = randomString(
+        10,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};':\"\\|,.<>/?"
+      );
       console.log(password);
       let email = {};
       email["email"] = req.body.email;
       let adminFinded = await Admin.findOne(email);
       console.log("adminfind===>", adminFinded);
       if (adminFinded !== null) {
-        adminFinded.password = password;
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        adminFinded.password = hashedPassword;
+        const token = jwt.sign(
+          { _id: adminFinded._id },
+          process.env.RESET_PASSWORD_KEY,
+          { expiresIn: "20m" }
+        );
+        const transporter = nodemailer.createTransport({
+          service: "Gmail",
+          auth: {
+            user: process.env.MAIL_USERNAME, // generated ethereal user
+            pass: process.env.MAIL_PASSWORD, // generated ethereal password
+          },
+        });
+        const email_content =
+          "Bonjour " +
+          adminFinded.Name +
+          ",<br><br>Vous avez demandé la réinitialisation de votre mot de passe <br><br>" +
+          password +
+          "<br><br>Cordialement,<br>Le service clientèle de SkillApp";
+        const mailOptions = {
+          from: "Openjavascript <test@openjavascript.info>",
+          to: adminFinded.email,
+          subject: "Réinitialisation de votre mot de passe SkillApp",
+          html: email_content,
+        };
         adminFinded
           .save()
           .then(async (savedAdmin) => {
-            const email_content =
-              "Bonjour " +
-              savedAdmin.Name +
-              " " +
-              ", Votre nouveau mot de passe est : " +
-              password;
-            const dataEmail = {
-              email_content: email_content,
-            };
-            // TODO send email to manager given her password to authentificate
-            await sendPasswordToEmployee(
-              savedAdmin.email,
-              dataEmail,
-              "SkillApp"
-            );
-            res.json(savedAdmin.toJSON());
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+                res
+                  .status(500)
+                  .json({ message: "Problème lors de l'envoi de l'e-mail" });
+              } else {
+                console.log("Email sent: " + info.response);
+                res.json(savedAdmin.toJSON());
+              }
+            });
           })
           .catch((e) =>
             checkDuplicateEmail(e, (result) => {
               if (result) {
-                res.status(400).json({ message: "Duplicate email address" });
+                res.status(400).json({ message: "Adresse e-mail en double" });
               } else {
                 next(e);
               }

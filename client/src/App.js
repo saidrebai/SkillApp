@@ -9,6 +9,8 @@ import Offers from "./components/Offers";
 import Dashboard from "./components/superAdmin/dashboard";
 import DashboardA from "./components/dashboardAdmin/DashboardA";
 import SignInSuperAdmin from "./components/superAdmin/SignIn";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
   const SuperAdmin = localStorage.getItem("isSuperAdmin");
@@ -20,12 +22,16 @@ function App() {
   return (
     <Routes>
       <Route path="/" exact element={<Main />} />
-      {!user &&<Route path="/signup" exact element={<Signup />} />}
-      {!user &&<Route path="/signupAdmin" exact element={<SignupAdmin />} />}
+      {!user && <Route path="/signup" exact element={<Signup />} />}
+      {!user && <Route path="/signupAdmin" exact element={<SignupAdmin />} />}
       {!user && <Route path="/login" exact element={<Login />} />}
-      {user && isAdmin === "false" && <Route path="/Account" exact element={<Account />} />}
+      {user && isAdmin === "false" && (
+        <Route path="/Account" exact element={<Account />} />
+      )}
       {!user && <Route path="/Account" exact element={<Login />} />}
-      {user && isAdmin === "true" &&<Route path="/AccountA" exact element={<AccountAdmin />} />}
+      {user && isAdmin === "true" && (
+        <Route path="/AccountA" exact element={<AccountAdmin />} />
+      )}
       {!user && <Route path="/AccountA" exact element={<Login />} />}
       {(isAdmin === "false" || !isAdmin) && (
         <Route path="/offers" exact element={<Offers />} />
@@ -37,7 +43,11 @@ function App() {
       {SuperAdmin === "true" && (
         <Route path="/dashboard" exact element={<Dashboard />} />
       )}
-      {!user &&<Route path="/SignInSuperAdmin" exact element={<SignInSuperAdmin />} />}
+      {!user && (
+        <Route path="/SignInSuperAdmin" exact element={<SignInSuperAdmin />} />
+      )}
+      <Route path="/ForgotPassword" exact element={<ForgotPassword />} />
+      <Route path="/resetpassword" exact element={<ResetPassword />} />
     </Routes>
   );
 }
