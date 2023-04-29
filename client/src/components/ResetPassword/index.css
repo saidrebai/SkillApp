@@ -1,0 +1,46 @@
+section {
+    width: 100%;
+    padding: 70px 0px;
+    min-height: calc(100vh - 80px);
+  }
+  
+  section .form_data {
+    max-width: 550px;
+    margin: 25px auto;
+    padding: 35px 10px;
+    box-shadow: 0 0 15px -10px #2d3748;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .form_heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 9px 21px;
+  }
+  .form_data h1 {
+    font-size: 29px;
+    color: #2a4365;
+  }
+  form .btn_sub {
+    display: block;
+    width: 120px;
+    padding: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #1a365d;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 10px;
+    cursor: pointer;
+    /* transition: all 0.3s; */
+  }
+  
+  form .btn_sub :hover {
+    background-color: #97a1b1;
+  }
+  
