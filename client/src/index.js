@@ -7,19 +7,24 @@ import ResponsiveAppBar from "./components/Menu/menu";
 import Footer from "./components/Footer/index";
 import ResponsiveApp from "./components/MenuSupAdmin/menu";
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const isAdmin = localStorage.getItem("isAdmin");
 const isSuperAdmin = localStorage.getItem("isSuperAdmin");
-const token = localStorage.getItem("token");
+// const token = localStorage.getItem("token");
 // const isVisit = localStorage.getItem("isvisit");
 
 root.render(
   <BrowserRouter>
     {isSuperAdmin && <ResponsiveApp />}
-    {(isAdmin || !token) && <ResponsiveAppBar />}
+    {(window.location.pathname !== "/login" &&
+      window.location.pathname !== "/signupAdmin" &&
+      window.location.pathname !== "/signup") && <ResponsiveAppBar />}
     <React.StrictMode>
       <App />
     </React.StrictMode>
-    {(isAdmin || !token) && <Footer />}
+    {(window.location.pathname !== "/login" &&
+      window.location.pathname !== "/signupAdmin" &&
+      window.location.pathname !== "/signup") && <Footer />}
   </BrowserRouter>
 );
