@@ -7,7 +7,7 @@ router.get("/getinfoAdmin/:id", adminControlles.getinformation);
 router.put("/updateinfoAdmin/:id", adminControlles.updateInfoAdmin);
 router.get("/getAll", adminControlles.getAll);
 router.delete("/deleteadmin/:id", adminControlles.deleteAdmin);
-router.post("/resetPassword", adminControlles.ResetPassword);
+router.post("/ResetPassword", adminControlles.ResetPassword);
 
 
 module.exports = router;
