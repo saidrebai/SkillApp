@@ -10,6 +10,7 @@ const offerRouter = require("./routes/offerRouter");
 const superAdminRoutes = require("./routes/superAdminRouters");
 const morgan = require('morgan');
 const path = require("path");
+const fs = require('fs');
 
 
 //database connection
@@ -25,6 +26,30 @@ app.use("/api/uploadRouter", uploadRouter);
 app.use("/api/offerRouter", offerRouter);
 app.use("/api/superAdminRouters", superAdminRoutes);
 app.use("/uploads",express.static(path.join("uploads")))
+
+app.get('/api', function(req, res) {
+    if (req.url === '/favicon.ico') {
+      res.end();
+    } 
+  
+    const json = fs.readFileSync('count.json', 'utf-8');
+    const obj = JSON.parse(json);
+  
+    if (req.query.type === 'pageview') {
+      obj.pageviews = obj.pageviews+1;
+    }
+  
+    if (req.query.type === 'visit-pageview') {
+      obj.visits = obj.visits+1;
+      obj.pageviews = obj.pageviews+1;
+    }
+  
+    const newJSON = JSON.stringify(obj);
+  
+    fs.writeFileSync('count.json', newJSON);
+    res.send(newJSON);
+  });
+  
 
 
 
