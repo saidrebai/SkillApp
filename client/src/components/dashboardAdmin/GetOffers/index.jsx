@@ -71,6 +71,7 @@ const GetOffer = () => {
       );
       setUsers(response.data.data);
       console.log("response", response.data);
+      localStorage.setItem("ids",ids);
     } catch (error) {
       console.error(error);
     }
@@ -84,6 +85,7 @@ const fetchPdf = async (cvId) => {
       setPdf(response.data.pdf);
       // localStorage.setItem("filename",response.filename)
       console.log("response", response.data);
+      localStorage.setItem("cvId",cvId);
     } catch (error) {
       console.error(error);
     }
@@ -174,6 +176,7 @@ const fetchPdf = async (cvId) => {
   };
   return (
     <>
+    <div className="getoffer_container">
       <div className="offerr_gird">
         <div className="number_of_offer">
           <p>Number of offer : {offerCount}</p>
@@ -189,6 +192,7 @@ const fetchPdf = async (cvId) => {
 
                 <div className="update_botton">
                   <button
+                    className="buttons"
                     type="submit"
                     onClick={() => {
                       toggleModel(selectedOffer);
@@ -197,6 +201,7 @@ const fetchPdf = async (cvId) => {
                     Update
                   </button>
                   <button
+                    className="buttons"
                     type="button"
                     onClick={() => {
                       toggleModal(selectedOffer);
@@ -207,6 +212,7 @@ const fetchPdf = async (cvId) => {
                   </button>
 
                   <button
+                    className="buttons"
                     type="submit"
                     onClick={() => handleDelete(selectedOffer)}
                   >
@@ -448,7 +454,7 @@ const fetchPdf = async (cvId) => {
             </div>
           </div>
         </div>
-      )}
+      )}</div>
     </>
   );
 };

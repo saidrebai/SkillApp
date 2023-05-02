@@ -99,6 +99,7 @@ function ResponsiveAppBar() {
     localStorage.removeItem("isAdmin");
     localStorage.removeItem("firstName");
     localStorage.removeItem("isSuperAdmin");
+    localStorage.removeItem("ids");
   };
   const handleHomeClick = () => {
     window.location.href = "/";

@@ -32,6 +32,7 @@ const Login = () => {
           localStorage.setItem("id", res._id);
           localStorage.setItem("isAdmin", true);
           localStorage.setItem("firstName", res.Name);
+          window.location = "/dashboardA";
         } else {
           const { data: res } = await axios.post(
             "http://localhost:8080/api/candidatRouters/signin",
@@ -42,8 +43,10 @@ const Login = () => {
           localStorage.setItem("id", res.userId);
           localStorage.setItem("isAdmin", false);
           localStorage.setItem("firstName", res.firstName);
+          window.location = "/";
         }
-        window.location = "/";
+
+        // window.location = "/";
       } catch (error) {
         if (
           error.response &&
