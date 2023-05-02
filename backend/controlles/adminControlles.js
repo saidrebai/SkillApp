@@ -1,7 +1,5 @@
 const randomString = require("../utils/utils");
 const checkDuplicateEmail = require("../utils/utils");
-// const { transporter } = require("../utils/utils");
-// const { sendEmail } = require("../utils/utils");
 const { Admin } = require("../models/adminModel");
 const { vall } = require("../middleware/vall");
 const bcrypt = require("bcrypt");

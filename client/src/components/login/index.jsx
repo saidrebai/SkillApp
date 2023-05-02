@@ -43,7 +43,6 @@ const Login = () => {
           localStorage.setItem("isAdmin", false);
           localStorage.setItem("firstName", res.firstName);
         }
-
         window.location = "/";
       } catch (error) {
         if (
