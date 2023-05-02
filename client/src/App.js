@@ -8,9 +8,7 @@ import Login from "./components/login";
 import Account from "./components/Account";
 import AccountAdmin from "./components/AccountAdmin";
 import Offers from "./components/Offers";
-import Dashboard from "./components/superAdmin/dashboard";
 import DashboardA from "./components/dashboardAdmin/DashboardA";
-import SignInSuperAdmin from "./components/superAdmin/SignIn";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Sidebar from "./components/dashboardAdmin/global/Sidebar";
@@ -20,10 +18,9 @@ import { ColorModeContext, useMode } from "./theme";
 import GetOffer from "./components/dashboardAdmin/GetOffers";
 
 function App() {
-  const SuperAdmin = localStorage.getItem("isSuperAdmin");
+
   const user = localStorage.getItem("token");
   const isAdmin = localStorage.getItem("isAdmin");
-  // const ids = localStorage.getItem("ids");
 
   console.log("isssss", isAdmin);
 
@@ -53,24 +50,12 @@ function App() {
       {user && isAdmin === "false" && (
         <Route path="/Account" exact element={<Account />} />
       )}
-      {/* {!user && <Route path="/Account" exact element={<Login />} />}
-      {user && isAdmin === "true" && (
-        <Route path="/AccountA" exact element={<AccountAdmin />} />
-      )} */}
       {!user && <Route path="/AccountA" exact element={<Login />} />}
       {(isAdmin === "false" || !isAdmin) && (
         <Route path="/offers" exact element={<Offers />} />
       )}
       <Route path="//" element={<Navigate replace to="/login" />} />
-      {/* {isAdmin === "true" && (
-        <Route path="/dashboardA" exact element={<DashboardA />} />
-      )} */}
-      {SuperAdmin === "true" && (
-        <Route path="/dashboard" exact element={<Dashboard />} />
-      )}
-      {!user && (
-        <Route path="/SignInSuperAdmin" exact element={<SignInSuperAdmin />} />
-      )}
+
       <Route path="/ForgotPassword" exact element={<ForgotPassword />} />
       <Route path="/resetpassword" exact element={<ResetPassword />} />
     </Routes></>
