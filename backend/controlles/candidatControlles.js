@@ -1,9 +1,13 @@
 const { User } = require("../models/user");
 const { vall } = require("../middleware/vall");
+const randomString = require("../utils/utils");
+const checkDuplicateEmail = require("../utils/utils");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
+const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 const { privateKey } = crypto.generateKeyPairSync("rsa", {
   modulusLength: 4096,
@@ -185,6 +189,78 @@ module.exports = {
     } catch (error) {
       console.error(error);
       res.status(500).send("Error searching for items in database");
+    }
+  },
+  ResetPassword: async (req, res, next) => {
+    try {
+      const password = randomString(
+        10,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};':\"\\|,.<>/?"
+      );
+      console.log(password);
+      let email = {};
+      email["email"] = req.body.email;
+      let UserFinded = await User.findOne(email);
+      console.log("userfind===>", UserFinded);
+      if (UserFinded !== null) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        UserFinded.password = hashedPassword;
+        const token = jwt.sign(
+          { _id: UserFinded._id },
+          process.env.RESET_PASSWORD_KEY,
+          { expiresIn: "20m" }
+        );
+        const transporter = nodemailer.createTransport({
+          service: "Gmail",
+          auth: {
+            user: process.env.MAIL_USERNAME, // generated ethereal user
+            pass: process.env.MAIL_PASSWORD, // generated ethereal password
+          },
+        });
+        const email_content =
+          "Bonjour " +
+          UserFinded.firstName +
+          ",<br><br>Vous avez demandé la réinitialisation de votre mot de passe <br><br>" +
+          password +
+          "<br><br>Cordialement,<br>Le service clientèle de SkillApp";
+        const mailOptions = {
+          from: "Openjavascript <test@openjavascript.info>",
+          to: UserFinded.email,
+          subject: "Réinitialisation de votre mot de passe SkillApp",
+          html: email_content,
+        };
+        UserFinded
+          .save()
+          .then(async (savedUser) => {
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+                res
+                  .status(500)
+                  .json({ message: "Problème lors de l'envoi de l'e-mail" });
+              } else {
+                console.log("Email sent: " + info.response);
+                res.json(savedUser.toJSON());
+              }
+            });
+          })
+          .catch((e) =>
+            checkDuplicateEmail(e, (result) => {
+              if (result) {
+                res.status(400).json({ message: "Adresse e-mail en double" });
+              } else {
+                next(e);
+              }
+            })
+          );
+      } else {
+        res
+          .status(404)
+          .json({ message: "Aucun utilisateur trouvé avec l'ID fourni" });
+      }
+    } catch (error) {
+      console.error(error);
     }
   },
 };
