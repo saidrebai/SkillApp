@@ -1,13 +1,12 @@
+.getoffer_container{
+  display: flex;
+}
 .offerr_gird {
-  border-width: 4px;
-  border-color: #35e5c4;
-  border-radius: 5px;
-  border-style: solid;
-  width: 1100px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background-color: white;
-  margin: 52px -65px 53px;
+  margin: 10px;
 }
 .offerr {
   display: flex;
@@ -17,7 +16,7 @@
 }
 .offerr_container {
   width: 100%;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   border-width: 14px;
   border-radius: 7px;
   display: flex;
@@ -35,7 +34,7 @@
     margin:10px;
 }
 .update_botton button{
-  background-color: #304F6D;
+  background-color: #389b5f;
   border: none;
   border-radius: 5px;
   font-size: 15px;
@@ -133,4 +132,12 @@
 }
 td{
   margin: 5px 5px;
+}
+.inputt {
+  outline: none;
+  border: none;
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
 }
