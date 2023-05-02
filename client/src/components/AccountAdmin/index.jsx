@@ -10,6 +10,7 @@ const AccountAdmin = () => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [updatedData, setUpdatedData] = useState({ Name: "" });
   
+  
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/adminRouters/getinfoAdmin/${id}`)
@@ -88,16 +89,17 @@ const AccountAdmin = () => {
               src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
               alt=""
             />
+            <h2 >My Account</h2>
           </div>
           <form onSubmit={handleUpdate}>
 
-          <h2 className="titlee">My Account</h2>
+          {/* <h2 className="titlee">My Account</h2> */}
 
           <div className="form-container">
-            <div className="form-input-container">
+            <div className="form-input-container-Name">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-style">Name</label>
+                  <label className="title-stylee">Name</label>
                 </div>
               </div>
               <div className="input-style">
@@ -117,10 +119,10 @@ const AccountAdmin = () => {
               </div>
             </div>
 
-            <div className="form-input-container">
+            <div className="form-input-container-country">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-style">country</label>
+                  <label className="title-stylee">country</label>
                 </div>
               </div>
               <div className="input-style">
@@ -394,10 +396,10 @@ const AccountAdmin = () => {
               </div>
             </div>
 
-            <div className="form-input-container">
+            <div className="form-input-container-town">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-style">town</label>
+                  <label className="title-stylee">town</label>
                 </div>
               </div>
               <div className="input-style">
@@ -417,10 +419,10 @@ const AccountAdmin = () => {
               </div>
             </div>
 
-            <div className="form-input-container">
+            <div className="form-input-container-Adresse">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-style">Adresse</label>
+                  <label className="title-stylee">Adresse</label>
                 </div>
               </div>
               <div className="input-style">
@@ -441,10 +443,10 @@ const AccountAdmin = () => {
             </div>
           </div>
 
-          <div className="form-input-container">
+          <div className="form-input-container-Zipcode">
             <div className="title-input-style">
               <div className="containertext-input">
-                <label className="title-style">Zipcode</label>
+                <label className="title-stylee">Zipcode</label>
               </div>
             </div>
             <div className="input-style">
@@ -464,10 +466,10 @@ const AccountAdmin = () => {
             </div>
           </div>
 
-          <div className="form-input-container">
+          <div className="form-input-container-tel">
             <div className="title-input-style">
               <div className="containertext-input">
-                <label className="title-style">tel</label>
+                <label className="title-stylee">tel</label>
               </div>
             </div>
             <div className="input-style">
@@ -488,10 +490,10 @@ const AccountAdmin = () => {
             </div>
           </div>
 
-          <div className="form-input-container">
+          <div className="form-input-container-fiscalCode">
             <div className="title-input-style">
               <div className="containertext-input">
-                <label className="title-style">fiscalCode</label>
+                <label className="title-stylee">fiscalCode</label>
               </div>
             </div>
             <div className="input-style">

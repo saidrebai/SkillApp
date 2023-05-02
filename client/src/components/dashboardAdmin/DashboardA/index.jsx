@@ -1,6 +1,6 @@
 import React from "react";
 
-import './index.css'
+import "./index.css";
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
 // import { mockTransactions } from "../../data/mockData";
@@ -14,7 +14,7 @@ import LineChart from "../../dashboardAdmin/components/LineChart";
 // import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../dashboardAdmin/components/BarChart";
 import StatBox from "../../dashboardAdmin/components/StatBox";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 // import ProgressCircle from "../../components/ProgressCircle";
 import axios from "axios";
 
@@ -26,13 +26,10 @@ const DashboardA = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-
   const [offersCount, setOffersCount] = useState(0);
   const [userCount, setUserCount] = useState(0);
   const [pdfCount, setPdfCount] = useState(0);
 
-  
-  
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
@@ -108,8 +105,8 @@ const DashboardA = () => {
             increase="+14%"
             icon={
               <PersonAddIcon
-              sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-            />
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
             }
           />
         </Box>
@@ -151,7 +148,7 @@ const DashboardA = () => {
             }
           />
         </Box>
- 
+
         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
@@ -265,7 +262,7 @@ const DashboardA = () => {
         </Box> */}
 
         {/* ROW 3 */}
-              <Box
+        <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -307,7 +304,7 @@ const DashboardA = () => {
             <Typography>Includes extra misc expenditures and costs</Typography>
           </Box>
         </Box> */}
-  
+
         {/* <Box
           gridColumn="span 4"
           gridRow="span 2"
