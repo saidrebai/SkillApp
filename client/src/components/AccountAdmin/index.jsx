@@ -84,11 +84,11 @@ const AccountAdmin = () => {
       <div className="centerr-content">
         <div className="content-container">
           <div className="content-full">
-            <img
+            {/* <img
               className="full"
               src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
               alt=""
-            />
+            /> */}
             <h2 >My Account</h2>
           </div>
           <form onSubmit={handleUpdate}>
