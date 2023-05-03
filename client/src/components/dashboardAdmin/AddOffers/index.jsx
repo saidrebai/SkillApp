@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./index.css";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
+import AddIcon from '@mui/icons-material/Add';
 
 const AddOffers = () => {
   const id = localStorage.getItem("id");
@@ -57,9 +58,10 @@ const AddOffers = () => {
   return (
     <>
       <div className="ajoute_offer_container">
-        <button type="submit" className="Ajoutt_offerr" onClick={toggleModel}>
+      <ToastContainer />
+        <AddIcon fontSize="large" type="submit" className="Ajoutt_offerr" onClick={toggleModel}>
           add
-        </button>
+        </AddIcon>
         {popup && (
           <div className="popup_contain" style={{ zIndex: "1" }}>            
               <div className="over" onClick={toggleModel}></div>
@@ -203,7 +205,7 @@ const AddOffers = () => {
                 <button className="btn_submit" type="submit">
                   add
                 </button>
-                <ToastContainer />
+                
                 </form>
               </div>
             

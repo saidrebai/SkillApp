@@ -49,7 +49,7 @@ const DashboardA = () => {
         "http://localhost:8080/api/candidatRouters/searchuser",
         { params: { q: ids } }
       );
-      setUserCount(response.data.users.length);
+      setUserCount(response.data.usercount);
     }
     fetchData();
   }, []);
@@ -57,9 +57,10 @@ const DashboardA = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `http://localhost:8080/api/uploadRouter/pdf/${cvId}`
+        "http://localhost:8080/api/uploadRouter/pdfs",
+        { params: { q: ids } }
       );
-      setPdfCount(response.data.pdfCount);
+      setPdfCount(response.data.pdfcount);
     }
     fetchData();
   }, []);
@@ -141,7 +142,7 @@ const DashboardA = () => {
         >
           <StatBox
             title={pdfCount}
-            subtitle="Views"
+            subtitle="CV"
             progress="0.50"
             increase="+21%"
             icon={
@@ -161,7 +162,7 @@ const DashboardA = () => {
         >
           <StatBox
             title="{visits}"
-            subtitle="Traffic Received"
+            subtitle="Quiz"
             progress="0.80"
             increase="+43%"
             icon={
