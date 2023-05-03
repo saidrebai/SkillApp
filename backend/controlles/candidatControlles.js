@@ -185,7 +185,7 @@ module.exports = {
     try {
       const ids = req.query.q.split(","); // Convert comma-separated string of ids into an array
       const filteredItems = await User.find({ _id: { $in: ids } });
-      res.status(200).json({ msg: "Items found", status: 200, data: filteredItems });
+      res.status(200).json({ msg: "Items found", status: 200, data: filteredItems, usercount:filteredItems.length});
     } catch (error) {
       console.error(error);
       res.status(500).send("Error searching for items in database");

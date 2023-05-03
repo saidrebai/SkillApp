@@ -4,6 +4,7 @@ const pdfController = require("../controlles/pdfController");
 
 router.post("/upload", upload,pdfController.uploads);
 router.get("/pdf/:id",pdfController.getPdfById);
+router.get("/pdfs",pdfController.getPdfByUser);
 
 
 module.exports = router;
