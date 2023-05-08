@@ -8,6 +8,7 @@ const CandidatRoutes = require("./routes/candidatRouters");
 const uploadRouter = require("./routes/uploadRouter");
 const offerRouter = require("./routes/offerRouter");
 const superAdminRoutes = require("./routes/superAdminRouters");
+const scoreRouter = require("./routes/scoreRouter");
 const morgan = require('morgan');
 const path = require("path");
 const fs = require('fs');
@@ -25,6 +26,7 @@ app.use("/api/candidatRouters", CandidatRoutes);
 app.use("/api/uploadRouter", uploadRouter);
 app.use("/api/offerRouter", offerRouter);
 app.use("/api/superAdminRouters", superAdminRoutes);
+app.use("/api/scoreRouter", scoreRouter);
 app.use("/uploads",express.static(path.join("uploads")))
 
 app.get('/api', function(req, res) {

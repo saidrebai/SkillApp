@@ -1,5 +1,5 @@
 const { offerModel, validate } = require("../models/offersModel");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 module.exports = {
   createOffer: function (req, res) {
@@ -108,16 +108,44 @@ module.exports = {
 
   addUserIdToOffer : async function (req, res) {
     try {
+      // const user = await offerModel.find({ user: req.body.user });
+      // if (user)
+      //   return res
+      //     .status(409)
+      //     .send({ message: "User already Exist!" });
+        
+      // if(!user){
       const updatedOffer = await offerModel.findByIdAndUpdate(
         req.params.id,
         { $push: { user: req.body.user } },
         { new: true }
       );
 
-      res.status(200).json({msg : "offer updated",status : 200, updatedOffer}); 
+      res.status(200).json({msg : "offer updated",status : 200, updatedOffer});
+    // } 
     } catch (error) {
       console.error(error);
       res.status(500).send('Error adding user to offer');
     }
   },
+  getOfferUsersCount: async function (req, res) {
+    try {
+      const offerId = req.params.id;
+      const result = await offerModel.aggregate([
+        { $match: { admin: mongoose.Types.ObjectId(offerId) } },
+        { $project: { userCount: { $size: "$user" } } }
+      ]);
+  
+      if (!result || result.length === 0) {
+        return res.status(404).json({ message: "Offer not found" });
+      }
+  
+      const count = result[0].userCount;
+      return res.status(200).json({ message: "User count found", count });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+  
 };
