@@ -60,6 +60,7 @@ export default function Card() {
   };
 
   const handleSubmit = async (e) => {
+    if(e){
     e.preventDefault();
     const formData = new FormData();
     formData.append("pdfs", pdfs);
@@ -79,15 +80,16 @@ export default function Card() {
         toast.error("PDF file only");
       } else {
         console.error(error);
+        toast.error("PDF file only");
       }
       }
-    
+    }
     return false;
   };
 
   const handleUpdate = async () => {
-    const submissionSuccessful = await handleSubmit(); // call handleSubmit and store its return value
-    if (submissionSuccessful) {
+    // const submissionSuccessful = await handleSubmit(); // call handleSubmit and store its return value
+    // if (submissionSuccessful) {
       // check if submission was successful
       try {
         const response = await axios.put(
@@ -100,17 +102,18 @@ export default function Card() {
         console.log("lala", response.data);
         // toast.success("Updated successfully!");
         setUpdatedOffer(response.data);
+        localStorage.setItem('offerId',updatedOffer._id);
         return true;
       } catch (error) {
         console.error(error);
       }
       return false;
-    }
+    // }
   };
 
   const updateUser = async () => {
-    const offerUpdated = await handleUpdate(); // call handleSubmit and store its return value
-    if (offerUpdated) {
+    // const offerUpdated = await handleUpdate(); // call handleSubmit and store its return value
+    // if (offerUpdated) {
     try {
       const response = await axios.put(
         `http://localhost:8080/api/candidatRouters/updateuserwithcv/${id}`,
@@ -122,10 +125,11 @@ export default function Card() {
       console.log("=>", response.data);
       // toast.success("Updated successfully!");
       setUsers(response.data);
+      window.location="/answerquiz";
     } catch (error) {
       console.error(error);
     }
-  };
+  // };
 }
 
   useEffect(() => {

@@ -96,6 +96,7 @@ const GetOffer = () => {
       window.open(`http://localhost:8080/uploads/${filename}`, "_blank");
     } catch (error) {
       console.error(error);
+      toast.error("PDF file not found")
     }
   };
 
