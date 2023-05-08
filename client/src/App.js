@@ -15,8 +15,9 @@ import Sidebar from "./components/dashboardAdmin/global/Sidebar";
 import Topbar from "./components/dashboardAdmin/global/Topbar";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import GetOffer from "./components/dashboardAdmin/GetOffers";
 import Offer from "./components/dashboardAdmin/Offer";
+import Quiz from "./components/Quiz/";
+
 
 function App() {
 
@@ -59,6 +60,8 @@ function App() {
 
       <Route path="/ForgotPassword" exact element={<ForgotPassword />} />
       <Route path="/resetpassword" exact element={<ResetPassword />} />
+      <Route path="/answerquiz" exact element={<Quiz />} />
+
     </Routes></>
   );
 }

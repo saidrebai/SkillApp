@@ -1,5 +1,4 @@
 import React from "react";
-
 import './index.css'
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
@@ -46,10 +45,9 @@ const DashboardA = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        "http://localhost:8080/api/candidatRouters/searchuser",
-        { params: { q: ids } }
+        `http://localhost:8080/api/offerRouter/countuserbyofferid/${id}`
       );
-      setUserCount(response.data.usercount);
+      setUserCount(response.data.count);
     }
     fetchData();
   }, []);
