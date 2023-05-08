@@ -60,7 +60,6 @@ const GetOffer = () => {
   }, []);
   console.log("testtttt", offers);
 
-  
   const fetchUser = async (selectedOffer) => {
     try {
       const ids = selectedOffer?.user?.join(",");
@@ -71,21 +70,20 @@ const GetOffer = () => {
       );
       setUsers(response.data.data);
       console.log("response", response.data);
-      localStorage.setItem("ids",ids);
+      localStorage.setItem("ids", ids);
     } catch (error) {
       console.error(error);
     }
   };
 
-const fetchPdf = async (cvId) => {
+  const fetchPdf = async (cvId) => {
     try {
       const response = await axios.get(
         `http://localhost:8080/api/uploadRouter/pdf/${cvId}`
       );
       setPdf(response.data.pdf);
-      // localStorage.setItem("filename",response.filename)
       console.log("response", response.data);
-      localStorage.setItem("cvId",cvId);
+      localStorage.setItem("cvId", cvId);
     } catch (error) {
       console.error(error);
     }
@@ -94,15 +92,12 @@ const fetchPdf = async (cvId) => {
   const fetchCv = async () => {
     try {
       const filename = pdf?.filename;
-      console.log("cv", filename);
-      const response = await axios.get(`http://localhost:8080/uploads/${filename}`);
+      if (!filename) throw new Error("PDF file not found");
       window.open(`http://localhost:8080/uploads/${filename}`, "_blank");
-      console.log("response", response.data);
     } catch (error) {
       console.error(error);
     }
   };
-
 
   const handleUpdate = () => {
     axios
@@ -176,285 +171,295 @@ const fetchPdf = async (cvId) => {
   };
   return (
     <>
-    <div className="getoffer_container">
-      <div className="offerr_gird">
-        <div className="number_of_offer">
-          <p>Number of offer : {offerCount}</p>
-        </div>
-        <div className="offerr">
-          {currentoffer.length > 0 ? (
-            currentoffer.map((selectedOffer) => (
-              <div className="offerr_container" key={selectedOffer._id}>
-                <div className="offerr_avatar">
-                  <Avatar src="/broken-image.jpg" />
-                  <div className="offerr_name">{selectedOffer.Name}</div>
+      <div className="getoffer_container">
+        <div className="offerr_gird">
+          <div className="number_of_offer">
+            <p>Number of offer : {offerCount}</p>
+          </div>
+          <div className="offerr">
+            {currentoffer.length > 0 ? (
+              currentoffer.map((selectedOffer) => (
+                <div className="offerr_container" key={selectedOffer._id}>
+                  <div className="offerr_avatar">
+                    <Avatar src="/broken-image.jpg" />
+                    <div className="offerr_name">{selectedOffer.Name}</div>
+                  </div>
+
+                  <div className="update_botton">
+                    <button
+                      className="buttons"
+                      type="submit"
+                      onClick={() => {
+                        toggleModel(selectedOffer);
+                      }}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className="buttons"
+                      type="button"
+                      onClick={() => {
+                        toggleModal(selectedOffer);
+                        fetchUser(selectedOffer);
+                      }}
+                    >
+                      candidats
+                    </button>
+
+                    <button
+                      className="buttons"
+                      type="submit"
+                      onClick={() => handleDelete(selectedOffer)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
-
-                <div className="update_botton">
-                  <button
-                    className="buttons"
-                    type="submit"
-                    onClick={() => {
-                      toggleModel(selectedOffer);
-                    }}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="buttons"
-                    type="button"
-                    onClick={() => {
-                      toggleModal(selectedOffer);
-                      fetchUser(selectedOffer);
-                    }}
-                  >
-                    candidats
-                  </button>
-
-                  <button
-                    className="buttons"
-                    type="submit"
-                    onClick={() => handleDelete(selectedOffer)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div>No offer to display</div>
-          )}
-          <ToastContainer />
+              ))
+            ) : (
+              <div>No offer to display</div>
+            )}
+            <ToastContainer />
+          </div>
+          <div className="pagination_container">
+            <Stack spacing={2}>
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+              />
+            </Stack>
+          </div>
         </div>
-        <div className="pagination_container">
-          <Stack spacing={2}>
-            <Pagination
-              count={totalPages}
-              page={currentPage}
-              onChange={handlePageChange}
-              color="primary"
-            />
-          </Stack>
-        </div>
-      </div>
-      {popup && (
-        <div className="popup_container" style={{ zIndex: "1" }}>
-          <div className="overlay" onClick={() => toggleModel(null)}></div>
-          <div className="popup_content">
-            <form
-              onSubmit={() => {
-                handleUpdate();
-                toggleModel(null);
-              }}
-            >
-              <h2>Enter your offers : </h2>
+        {popup && (
+          <div className="popup_container" style={{ zIndex: "1" }}>
+            <div className="overlay" onClick={() => toggleModel(null)}></div>
+            <div className="popup_content">
+              <form
+                onSubmit={() => {
+                  handleUpdate();
+                  toggleModel(null);
+                }}
+              >
+                <h2>Enter your offers : </h2>
 
-              <table className="table">
-                <table>
-                  <tr>
-                    <div className="offer_data">
-                      <td>
-                        <label>Type : </label>
-                      </td>
-                      <td>
-                        <select
-                          className="inputt"
-                          name="Type"
-                          required={true}
-                          value={updatedOffer.type}
-                          onChange={(e) => {
-                            setUpdatedOffer({
-                              ...updatedOffer,
-                              type: e.target.value,
-                            });
-                          }}
-                        >
-                          <option value="" disabled selected>
-                            Type
-                          </option>
-                          <option value="Job">Job</option>
-                          <option value="Internship">Internship</option>
-                          <option value="Alternation">Alternation</option>
-                        </select>
-                      </td>
-                    </div>
-                  </tr>
+                <table className="table">
+                  <table>
+                    <tr>
+                      <div className="offer_data">
+                        <td>
+                          <label>Type : </label>
+                        </td>
+                        <td>
+                          <select
+                            className="inputt"
+                            name="Type"
+                            required={true}
+                            value={updatedOffer.type}
+                            onChange={(e) => {
+                              setUpdatedOffer({
+                                ...updatedOffer,
+                                type: e.target.value,
+                              });
+                            }}
+                          >
+                            <option value="" disabled selected>
+                              Type
+                            </option>
+                            <option value="Job">Job</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Alternation">Alternation</option>
+                          </select>
+                        </td>
+                      </div>
+                    </tr>
 
-                  <tr>
-                    <div className="offer_data">
-                      <td>
-                        <label>Time : </label>
-                      </td>
-                      <td>
-                        <select
-                          className="inputt"
-                          name="time"
-                          required={true}
-                          value={updatedOffer.time}
-                          onChange={(e) => {
-                            setUpdatedOffer({
-                              ...updatedOffer,
-                              time: e.target.value,
-                            });
-                          }}
-                        >
-                          <option value="" disabled selected>
-                            Time
-                          </option>
-                          <option value="Full Time Job">Full Time Job</option>
-                          <option value="Part Time Job">Part Time Job</option>
-                        </select>
-                      </td>
-                    </div>
-                  </tr>
+                    <tr>
+                      <div className="offer_data">
+                        <td>
+                          <label>Time : </label>
+                        </td>
+                        <td>
+                          <select
+                            className="inputt"
+                            name="time"
+                            required={true}
+                            value={updatedOffer.time}
+                            onChange={(e) => {
+                              setUpdatedOffer({
+                                ...updatedOffer,
+                                time: e.target.value,
+                              });
+                            }}
+                          >
+                            <option value="" disabled selected>
+                              Time
+                            </option>
+                            <option value="Full Time Job">Full Time Job</option>
+                            <option value="Part Time Job">Part Time Job</option>
+                          </select>
+                        </td>
+                      </div>
+                    </tr>
 
-                  <tr>
-                    <div className="offer_data">
-                      <td>
-                        <labael>Name :</labael>
-                      </td>
-                      <td>
-                        <input
-                          className="inputt"
-                          type="text"
-                          name="Name"
-                          required={true}
-                          value={updatedOffer.Name}
-                          onChange={(e) => {
-                            setUpdatedOffer({
-                              ...updatedOffer,
-                              Name: e.target.value,
-                            });
-                          }}
-                        />
-                      </td>
-                    </div>
-                  </tr>
+                    <tr>
+                      <div className="offer_data">
+                        <td>
+                          <labael>Name :</labael>
+                        </td>
+                        <td>
+                          <input
+                            className="inputt"
+                            type="text"
+                            name="Name"
+                            required={true}
+                            value={updatedOffer.Name}
+                            onChange={(e) => {
+                              setUpdatedOffer({
+                                ...updatedOffer,
+                                Name: e.target.value,
+                              });
+                            }}
+                          />
+                        </td>
+                      </div>
+                    </tr>
+                  </table>
+
+                  <table>
+                    <tr>
+                      <div className="offer_data">
+                        <td>
+                          <label>Description: </label>
+                        </td>
+                        <td>
+                          <input
+                            className="inputt"
+                            type="text"
+                            name="description"
+                            required={true}
+                            value={updatedOffer.description}
+                            onChange={(e) => {
+                              setUpdatedOffer({
+                                ...updatedOffer,
+                                description: e.target.value,
+                              });
+                            }}
+                          />
+                        </td>
+                      </div>
+                    </tr>
+
+                    <tr>
+                      <div className="offer_data">
+                        <td>
+                          <label> skills : </label>
+                        </td>
+                        <td>
+                          <input
+                            className="inputt"
+                            type="text"
+                            name="skills"
+                            required={true}
+                            value={updatedOffer.skills}
+                            onChange={(e) => {
+                              setUpdatedOffer({
+                                ...updatedOffer,
+                                skills: e.target.value,
+                              });
+                            }}
+                          />
+                        </td>
+                      </div>
+                    </tr>
+
+                    <tr>
+                      <div className="offer_data">
+                        <td>
+                          <label>adresse : </label>
+                        </td>
+                        <td>
+                          <input
+                            className="inputt"
+                            type="text"
+                            name="adresse"
+                            required={true}
+                            value={updatedOffer.adresse}
+                            onChange={(e) => {
+                              setUpdatedOffer({
+                                ...updatedOffer,
+                                adresse: e.target.value,
+                              });
+                            }}
+                          />
+                        </td>
+                      </div>
+                    </tr>
+                  </table>
                 </table>
 
-                <table>
-                  <tr>
-                    <div className="offer_data">
-                      <td>
-                        <label>Description: </label>
-                      </td>
-                      <td>
-                        <input
-                          className="inputt"
-                          type="text"
-                          name="description"
-                          required={true}
-                          value={updatedOffer.description}
-                          onChange={(e) => {
-                            setUpdatedOffer({
-                              ...updatedOffer,
-                              description: e.target.value,
-                            });
-                          }}
-                        />
-                      </td>
-                    </div>
-                  </tr>
+                <button
+                  type="button"
+                  className="close_popup"
+                  onClick={() => toggleModel(null)}
+                >
+                  close
+                </button>
 
-                  <tr>
-                    <div className="offer_data">
-                      <td>
-                        <label> skills : </label>
-                      </td>
-                      <td>
-                        <input
-                          className="inputt"
-                          type="text"
-                          name="skills"
-                          required={true}
-                          value={updatedOffer.skills}
-                          onChange={(e) => {
-                            setUpdatedOffer({
-                              ...updatedOffer,
-                              skills: e.target.value,
-                            });
-                          }}
-                        />
-                      </td>
-                    </div>
-                  </tr>
-
-                  <tr>
-                    <div className="offer_data">
-                      <td>
-                        <label>adresse : </label>
-                      </td>
-                      <td>
-                        <input
-                          className="inputt"
-                          type="text"
-                          name="adresse"
-                          required={true}
-                          value={updatedOffer.adresse}
-                          onChange={(e) => {
-                            setUpdatedOffer({
-                              ...updatedOffer,
-                              adresse: e.target.value,
-                            });
-                          }}
-                        />
-                      </td>
-                    </div>
-                  </tr>
-                </table>
-              </table>
-
+                <button className="Save_popup" type="submit">
+                  Save
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+        {modal && (
+          <div className="popup_container" style={{ zIndex: "1" }}>
+            <div className="overlay" onClick={() => toggleModal(null)}></div>
+            <div className="popup_content">
               <button
                 type="button"
                 className="close_popup"
-                onClick={() => toggleModel(null)}
+                onClick={() => toggleModal(null)}
               >
                 close
               </button>
-
-              <button className="Save_popup" type="submit">
-                Save
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-      {modal && (
-        <div className="popup_container" style={{ zIndex: "1" }}>
-          <div className="overlay" onClick={() => toggleModal(null)}></div>
-          <div className="popup_content">
-            <button
-              type="button"
-              className="close_popup"
-              onClick={() => toggleModal(null)}
-            >
-              close
-            </button>
-            <div className="id_users">
-              {users.length > 0 ? (
-                users.map((user) => (
-                  <div key={user._id} className="user">
-                    {user.firstName}
-                    <button
-                      type="button"
-                      onClick={() => {
-                        fetchPdf(user.cv);
-                        fetchCv();
-                       
-                      }}
-                    >
-                      View CV
-                    </button>
-                    
-                  </div>
-                ))
-              ) : (
-                <div>No users to display</div>
-              )}
+              <div className="id_users">
+                {users.length > 0 ? (
+                  users.map((user) => (
+                    <div key={user._id} className="user">
+                      {user.email}
+                      <div className="cv_buttons">
+                        <button
+                          className="button"
+                          type="submit"
+                          onClick={() => {
+                            fetchPdf(user.cv);
+                          }}
+                        >
+                          display
+                        </button>
+                        <button
+                          className="button"
+                          type="button"
+                          onClick={() => {
+                            fetchCv();
+                          }}
+                        >
+                          View CV
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div>No users to display</div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      )}</div>
+        )}
+      </div>
     </>
   );
 };

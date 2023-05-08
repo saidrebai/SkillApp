@@ -45,5 +45,21 @@ uploads: async function (req, res) {
       console.error(error);
       res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  },
+
+  getPdfByUser: async function (req, res) {
+    try {
+      const ids = req.query.q.split(",");
+      const pdf = await PDF.find({user: { $in: ids }});
+      if (!pdf) {
+        return res.status(404).json({ message: "pdf not found" });
+      }
+      return res
+        .status(200)
+        .json({ message: "pdf found", pdf, pdfcount: pdf.length });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
 }

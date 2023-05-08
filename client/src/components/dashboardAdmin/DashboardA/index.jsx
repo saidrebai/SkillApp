@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./index.css";
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
@@ -46,7 +45,7 @@ const DashboardA = () => {
         "http://localhost:8080/api/candidatRouters/searchuser",
         { params: { q: ids } }
       );
-      setUserCount(response.data.users.length);
+      setUserCount(response.data.usercount);
     }
     fetchData();
   }, []);
@@ -54,9 +53,10 @@ const DashboardA = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `http://localhost:8080/api/uploadRouter/pdf/${cvId}`
+        "http://localhost:8080/api/uploadRouter/pdfs",
+        { params: { q: ids } }
       );
-      setPdfCount(response.data.pdfCount);
+      setPdfCount(response.data.pdfcount);
     }
     fetchData();
   }, []);
@@ -138,7 +138,7 @@ const DashboardA = () => {
         >
           <StatBox
             title={pdfCount}
-            subtitle="Views"
+            subtitle="CV"
             progress="0.50"
             increase="+21%"
             icon={
@@ -158,7 +158,7 @@ const DashboardA = () => {
         >
           <StatBox
             title="{visits}"
-            subtitle="Traffic Received"
+            subtitle="Quiz"
             progress="0.80"
             increase="+43%"
             icon={
@@ -168,6 +168,7 @@ const DashboardA = () => {
             }
           />
         </Box>
+        
 
         {/* ROW 2 */}
         <Box
@@ -210,58 +211,6 @@ const DashboardA = () => {
             <LineChart isDashboard={true} />
           </Box>
         </Box>
-        {/* <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          overflow="auto"
-        >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            borderBottom={`4px solid ${colors.primary[500]}`}
-            colors={colors.grey[100]}
-            p="15px"
-          >
-            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Transactions
-            </Typography>
-          </Box>
-          {mockTransactions.map((transaction, i) => (
-            <Box
-              key={`${transaction.txId}-${i}`}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
-              p="15px"
-            >
-              <Box>
-                <Typography
-                  color={colors.greenAccent[500]}
-                  variant="h5"
-                  fontWeight="600"
-                >
-                  {transaction.txId}
-                </Typography>
-                <Typography color={colors.grey[100]}>
-                  {transaction.user}
-                </Typography>
-              </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
-              <Box
-                backgroundColor={colors.greenAccent[500]}
-                p="5px 10px"
-                borderRadius="4px"
-              >
-                ${transaction.cost}
-              </Box>
-            </Box>
-          ))}
-        </Box> */}
-
-        {/* ROW 3 */}
         <Box
           gridColumn="span 4"
           gridRow="span 2"
@@ -278,50 +227,6 @@ const DashboardA = () => {
             <BarChart isDashboard={true} />
           </Box>
         </Box>
-        {/* <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              $48,352 revenue generated
-            </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
-          </Box>
-        </Box> */}
-
-        {/* <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          padding="30px"
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
-          >
-            Geography Based Traffic
-          </Typography>
-          <Box height="200px">
-            <GeographyChart isDashboard={true} />
-          </Box>
-        </Box> */}
       </Box>
     </Box>
   );

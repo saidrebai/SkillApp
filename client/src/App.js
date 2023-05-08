@@ -16,6 +16,7 @@ import Topbar from "./components/dashboardAdmin/global/Topbar";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import GetOffer from "./components/dashboardAdmin/GetOffers";
+import Offer from "./components/dashboardAdmin/Offer";
 
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
       <Topbar setIsSidebar={setIsSidebar} />
       <Routes>
       <Route path="/dashboardA" exact element={<DashboardA />} />
-      <Route path="/getoffers" exact element={<GetOffer />} />
+      <Route path="/getoffers" exact element={<Offer />} />
       {user &&<Route path="/AccountA" exact element={<AccountAdmin />} />}
       </Routes></main></div>
       </ThemeProvider>

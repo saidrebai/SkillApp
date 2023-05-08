@@ -1,34 +1,25 @@
 import * as React from "react";
+import { useState } from "react";
 import { Box, IconButton, useTheme } from "@mui/material";
-// import { useContext } from "react";
-// import { ColorModeContext, tokens } from "../../../theme";
 import { tokens } from "../../../theme";
 import InputBase from "@mui/material/InputBase";
-// import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-// import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
+import Popper from "@mui/material/Popper";
+import Paper from "@mui/material/Paper";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-//   const colorMode = useContext(ColorModeContext);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handlelogoutClick = () => {
     window.location.href = "/login";
@@ -40,6 +31,32 @@ const Topbar = () => {
     localStorage.removeItem("ids");
   };
 
+  const handleNotificationClick = (event) => {
+    setNotificationsOpen(!notificationsOpen);
+    setAnchorEl(event.currentTarget);
+  };
+  const handleNotificationClose = () => {
+    setNotificationsOpen(false);
+    setAnchorEl(null);
+  };
+  const notifications = [
+    {
+      id: 1,
+      text: "New order received",
+      date: "2023-05-07T09:30:00Z",
+    },
+    {
+      id: 2,
+      text: "New message from customer",
+      date: "2023-05-06T15:20:00Z",
+    },
+    {
+      id: 3,
+      text: "Server maintenance scheduled for next week",
+      date: "2023-05-05T13:15:00Z",
+    },
+  ];
+
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
       {/* SEARCH BAR */}
@@ -47,7 +64,7 @@ const Topbar = () => {
         display="flex"
         backgroundColor={colors.primary[400]}
         borderRadius="3px"
-        height= "50px"
+        height="50px"
       >
         <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
         <IconButton type="button" sx={{ p: 1 }}>
@@ -57,48 +74,34 @@ const Topbar = () => {
 
       {/* ICONS */}
       <Box display="flex">
-        {/* <IconButton onClick={colorMode.toggleColorMode} >
-          {theme.palette.mode === "light" ? (
-            // <DarkModeOutlinedIcon /> 
-            <LightModeOutlinedIcon />
-          ) : (
-            // <LightModeOutlinedIcon />
-            <DarkModeOutlinedIcon /> 
-          )}
-        </IconButton> */}
-        <IconButton >
+        <IconButton onClick={handleNotificationClick}>
           <NotificationsOutlinedIcon />
         </IconButton>
         <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>
+        <Popper open={notificationsOpen} anchorEl={anchorEl}>
+          <Paper>
+            <List>
+              {notifications.map((notification) => (
+                <ListItem key={notification.id}>
+                  <ListItemText
+                    primary={notification.text}
+                    secondary={new Date(notification.date).toLocaleString()}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Paper>
+        </Popper>
+
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} >
-                <PersonOutlinedIcon />
+            <Tooltip title="logout">
+              <IconButton onClick={handlelogoutClick}>
+                <ExitToAppIcon />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem key="logout" onClick={handlelogoutClick}>
-                <Typography textAlign="center">logout</Typography>
-              </MenuItem>
-            </Menu>
           </Box>
         </Toolbar>
       </Box>
