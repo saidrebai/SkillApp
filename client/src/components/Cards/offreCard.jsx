@@ -25,7 +25,6 @@ export default function Card() {
       setPopup(!popup);
       console.log("gggg", popup);
       setSelectedOffer(offer);
-      // localStorage.removeItem('idpdf');
     } else {
       window.location.href = "/login";
     }
@@ -60,12 +59,14 @@ export default function Card() {
   };
 
   const handleSubmit = async (e) => {
+
     if(e){
     e.preventDefault();
     const formData = new FormData();
     formData.append("pdfs", pdfs);
     formData.append("id", id);
-
+    const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
+    if (submissionSuccessful) {
     try {
       const { data: res } = await axios.post(
         "http://localhost:8080/api/uploadRouter/upload",
@@ -81,16 +82,14 @@ export default function Card() {
       } else {
         console.error(error);
         toast.error("PDF file only");
-      }
+      }return false;
       }
     }
-    return false;
+    }
+    
   };
 
   const handleUpdate = async () => {
-    // const submissionSuccessful = await handleSubmit(); // call handleSubmit and store its return value
-    // if (submissionSuccessful) {
-      // check if submission was successful
       try {
         const response = await axios.put(
           `http://localhost:8080/api/offerRouter/updateofferwithid/${updatedOffer._id}`,
@@ -100,7 +99,7 @@ export default function Card() {
           }
         );
         console.log("lala", response.data);
-        // toast.success("Updated successfully!");
+
         setUpdatedOffer(response.data);
         localStorage.setItem('offerId',updatedOffer._id);
         return true;
@@ -112,8 +111,8 @@ export default function Card() {
   };
 
   const updateUser = async () => {
-    // const offerUpdated = await handleUpdate(); // call handleSubmit and store its return value
-    // if (offerUpdated) {
+    // const submissionSuccessful = await handleSubmit(); // call handleSubmit and store its return value
+    // if (submissionSuccessful) {
     try {
       const response = await axios.put(
         `http://localhost:8080/api/candidatRouters/updateuserwithcv/${id}`,
@@ -220,7 +219,7 @@ export default function Card() {
                             type="button"
                             onClick={() => {
                               toggleModel();
-                              updateUser();
+                              // updateUser();
                             }}
                           >
                             Close
@@ -231,6 +230,7 @@ export default function Card() {
                             type="submit"
                             onClick={() => {
                               handleUpdate();
+                              updateUser();
                             }}
                           >
                             Send

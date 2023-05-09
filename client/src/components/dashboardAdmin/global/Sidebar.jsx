@@ -14,6 +14,8 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Avatar from "@mui/material/Avatar";
+import ArticleIcon from '@mui/icons-material/Article';
+import DonutSmallIcon from '@mui/icons-material/DonutSmall';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -145,7 +147,14 @@ const Sidebar = () => {
             <Item
               title="Offers"
               to="/getoffers"
-              icon={<ContactsOutlinedIcon />}
+              icon={<ArticleIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Score"
+              to="/getscore"
+              icon={<DonutSmallIcon />}
               selected={selected}
               setSelected={setSelected}
             />

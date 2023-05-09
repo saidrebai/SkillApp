@@ -3,7 +3,6 @@ import { Box, IconButton, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
 import InputBase from "@mui/material/InputBase";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import Toolbar from "@mui/material/Toolbar";
@@ -42,9 +41,6 @@ const Topbar = () => {
       <Box display="flex">
         <IconButton>
           <NotificationsOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <SettingsOutlinedIcon />
         </IconButton>
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 0 }}>
