@@ -10,10 +10,8 @@ const Main = () => {
   const [visits, setVisits] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [tel, setTel] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
-
-
 
   function updateCounter() {
     const type =
@@ -36,100 +34,108 @@ const Main = () => {
     updateCounter();
   }, []);
 
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+
+  //   axios
+  //     .post("http://localhost:8080/api/contactRouter/sendMessageToAdmin", {
+  //       email,
+  //     })
+  //     .then((response) => {
+  //       // console.log(response.data);
+  //       // alert("Email sent successfully");
+  //       setMessage(`Un e-mail a été envoyé à ${email}`);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       // alert("Failed to send email");
+  //       setMessage("Erreur lors de l'envoi de l'e-mail");
+  //     });
+  // }
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:8080/api?/send-message", {
-      name,
-      email,
-      tel,
-      message,
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    axios
+      .post("http://localhost:8080/api/contactRouter/sendMessageToAdmin", {
+        Name: name,
+        email,
+        phoneNumber,
+        message,
+      })
+      .then((response) => {
+        console.log(response.data);
+        //Afficher un message de confirmation
+      })
+      .catch((error) => {
+        console.log(error);
+        //Afficher un message d'erreur
+      });
   };
+
   return (
     <>
       <div className="maiin_container">
         <div className="maiin_content">
           {/* <h1>SkillApp</h1> */}
           <div id="home">
-           
             <h2>Home : </h2>
-            
-            
             <p>
-              Welcome, <br/>  We are delighted to welcome you on our website ! <br/>
-               We hope you find all the information you need and that you will spend <br/>
-               a pleasant time browsing our site.
+              Welcome, <br /> We are delighted to welcome you on our website !{" "}
+              <br />
+              We hope you find all the information you need and that you will
+              spend <br />a pleasant time browsing our site.
             </p>
-           
-           
-              <img src={myImg} alt="" />
-           
+            <img src={myImg} alt="" />
           </div>
           <div id="aboutus">
             <h2>About us : </h2>
-            
-              <img src={ImgAu} alt="" />
-            
+
+            <img src={ImgAu} alt="" />
           </div>
           <div id="contact">
-      <h2>Contact : </h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="nom">Name : </label>
-        <input
-          type="text"
-          id="nom"
-          name="user_nom"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <br />
-        <br />
-
-        <label htmlFor="email">Email : </label>
-        <input
-          type="email"
-          id="email"
-          name="user_email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
-        <br />
-
-        <label htmlFor="tel">Phone number : </label>
-        <input
-          type="tel"
-          id="tel"
-          name="user_tel"
-          value={tel}
-          onChange={(e) => setTel(e.target.value)}
-        />
-        <br />
-        <br />
-
-        <label htmlFor="message">Message : </label>
-        <input
-          type="text"
-          id="message"
-          name="user_message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <br />
-        <br />
-
-        <button type="submit" className="btn_send">
-          Send
-        </button>
-      </form>
-    </div>
-
+            <h2>Contact : </h2>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="name">Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="phoneNumber">Phone Number:</label>
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="message">Message:</label>
+                <textarea
+                  id="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="btn_send">Send Message</button>
+            </form>
+          </div>
         </div>
       </div>
     </>

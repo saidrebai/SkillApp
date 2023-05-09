@@ -1,4 +1,6 @@
 const PDF = require("../models/filesModels");
+const ocrSpace = require("../middleware/OCRSpace");
+const getCVData = require("../middleware/getCVData");
 
 
 module.exports={
@@ -60,6 +62,53 @@ uploads: async function (req, res) {
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+
+  parseFile : async function(req, res, filePath) {
+    try {
+      // const isCreateSearchablePdf = req.body.isCreateSearchablePdf;
+      // const isSearchablePdfHideTextLayer = req.body.isSearchablePdfHideTextLayer;
+      // const isTable = req.body.isTable;
+      // const language = req.body.language;
+      const isCreateSearchablePdf = false;
+      const isSearchablePdfHideTextLayer = false;
+      const isTable = true;
+      const language = req.body.language;
+      if (!filePath) {
+        const FilePath = String(filePath);
+        var result = await ocrSpace(FilePath, {
+          language,
+          isCreateSearchablePdf,
+          isSearchablePdfHideTextLayer,
+          isTable,
+        });
+      } else
+        var result = await ocrSpace(filePath.path, {
+          language,
+          isCreateSearchablePdf,
+          isSearchablePdfHideTextLayer,
+          isTable,
+        });
+      return (result);
+    } catch (err) {
+      console.log("you have an error " + err);
+      return (err);
+    }
+  },
+  
+  cvParser : async function(req, res) {
+    try{
+     var filePath = req.file;
+     const result =  await parseFile(req, res, filePath);
+     console.log(result.ParsedResults[0].TextOverlay);
+     const DATA = await getCVData (result.ParsedResults[0].TextOverlay);
+    // console.log(result.ParsedResults[0].TextOverlay);
+   // console.log(result.SearchablePDFURL);
+   console.log(DATA)
+     res.json(DATA);
+    } catch (err){
+      res.send(err);
     }
   },
 }
