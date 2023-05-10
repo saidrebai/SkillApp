@@ -8,7 +8,7 @@
 .offer_container{
     width: 347px;
     height: 595px;
-    background-color: #ffffff;
+    background-color: #ffffff94;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
 .offer_container_img{
     width: 90%;
     height: 25%;
-    background: #ffffff;
+    /* background: #ffffff; */
     padding: 10px;
 
 }
@@ -31,30 +31,34 @@
 }
 .offer_container_info{
     width: 90%;
-    height: 25%;
-    background-color: rgb#ffffff;
+    height: 10%;
+    /* background-color: rgb#ffffff; */
     padding: 10px;
 
 }
 .offer_container_description{
     width: 90%;
     height: 50%;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     padding: 10px;
+
 
 }
 .skills_container{
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     padding: 10px;
+
 
 }
 .company_Name_container{
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     padding: 10px;
+
 }
 .adresse_container{
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     padding: 10px;
+
 }
 .apply_button{
     border-radius: 5px;
@@ -152,4 +156,8 @@ body.active-popup{
 }
 .title_cv{
     margin:20px;
+}
+.offre_label{
+    font-size: large;
+    font-family: emoji;
 }

@@ -44,7 +44,7 @@ const Topbar = () => {
 
       {/* ICONS */}
       <Box display="flex">
-        <IconButton onClick={handleNotificationClick}>
+        <IconButton>
           <NotificationsOutlinedIcon />
         </IconButton>
 

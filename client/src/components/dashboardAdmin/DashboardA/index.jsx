@@ -4,13 +4,10 @@ import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
 // import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-// import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../dashboardAdmin/components/Header";
 import LineChart from "../../dashboardAdmin/components/LineChart";
-// import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../dashboardAdmin/components/BarChart";
 import StatBox from "../../dashboardAdmin/components/StatBox";
 import ContactPageIcon from '@mui/icons-material/ContactPage';
@@ -37,6 +34,12 @@ const DashboardA = () => {
       const response = await axios.get(
         `http://localhost:8080/api/offerRouter/getofferbyid/${id}`
       );
+       const idOffers = response.data.offer.map((offer) => offer._id).join(",");
+      const responseScores = await axios.get(
+        "http://localhost:8080/api/scoreRouter/getscorebyid",
+        { params: { q: idOffers } }
+      );
+      setCountScores(responseScores.data?.scoreCount);
       setOffersCount(response.data.offer.length);
       // setIdOffers(response.data._id)
       // console.log("==>",idOffers);
@@ -172,7 +175,7 @@ const DashboardA = () => {
           justifyContent="center"
         >
           <StatBox
-            title="{visits}"
+            title={countScores}
             subtitle="Quiz"
             progress="0.80"
             increase="+43%"

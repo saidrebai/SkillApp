@@ -170,7 +170,7 @@
   }
   
   /* Define some styles for the headings */
-  h2 {
+  .h2_main {
 	font-size: 24px;
 	font-weight: bold;
 	color: var(--primary-color);
@@ -197,17 +197,17 @@
   }
   
   /* Define some styles for the contact form */
-  form {
+  .form_main {
 	max-width: 400px;
 	margin: 0 auto;
   }
   
-  label {
+  .label_main {
 	font-family: var(--font-family);
 	font-size: 16px;
   }
   
-  input {
+  .input_main {
 	padding: 8px;
 	margin-bottom: 16px;
 	border: 1px solid #ccc;

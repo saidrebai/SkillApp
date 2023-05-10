@@ -13,6 +13,7 @@ export default function Score() {
   const [countScores, setCountScores] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [idOffer, setIdOffer] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil(scores.length / itemsPerPage);
@@ -24,36 +25,7 @@ export default function Score() {
     setCurrentPage(value);
   };
 
-//   useEffect(() => {
-//     async function fetchData() {
-//      const ids = idOffer.map((offer) => offer._id).join(",");
-//      console.log("ids", ids);
-//       const response = await axios.get(
-//         "http://localhost:8080/api/scoreRouter/getscorebyid",
-//         { params: { q: ids } }
-//         );
 
-//       setScores(response.data?.score);
-//       setCountScores(response.data?.scoreCount);
-//     }
-//     fetchData();
-//   }, []);
-//   console.log("======>", scores);
-//   console.log("number of scores is", countScores);
-
-
-//   useEffect(() => {
-//     async function fetchData() {
-//       const response = await axios.get(
-//         `http://localhost:8080/api/offerRouter/getofferbyid/${id}`
-//       );
-//       setIdOffer(response.data.offer);
-     
-//       console.log("offre",response.data);
-//     }
-//     fetchData();
-//   }, []);
-//  console.log("cc",idOffer);
 
 useEffect(() => {
   async function fetchData() {
@@ -66,9 +38,18 @@ useEffect(() => {
         "http://localhost:8080/api/scoreRouter/getscorebyid",
         { params: { q: idOffers } }
       );
+      const idUsers = responseScores.data?.scores?.map((score)=> score.user).join(",");
+      const responseUser = await axios.get(
+        "http://localhost:8080/api/candidatRouters/searchuser",
+        { params: { q: idUsers } }
+      )
+      console.log("psps",idUsers);
       setScores(responseScores.data?.scores);
       setCountScores(responseScores.data?.scoreCount);
       setIdOffer(response.data.offer);
+      setUsers(responseUser.data?.data)
+      console.log(users);
+      console.log(idOffer);
     } catch (error) {
       console.error(error);
     }
@@ -88,7 +69,7 @@ useEffect(() => {
                 {
                   <ReactStoreIndicator
                     value={score.result}
-                    maxValue="20"
+                    maxValue={20}
                     stepColors={[
                       "#271a1a",
                       "#ed8d00",
@@ -102,7 +83,8 @@ useEffect(() => {
                     style={{ color: "#aaa" }}
                   />
                 }
-                <h2>{idOffer.find((offer) => offer._id === score.offer)?.Name}</h2>
+                <h3>{idOffer.find((offer) => offer._id === score.offer)?.Name}</h3>
+                <h3>{users.find((user) => user._id === score.user)?.email}</h3>
               </div>
             ))
           ) : (

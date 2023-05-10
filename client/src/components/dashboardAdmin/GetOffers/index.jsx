@@ -18,6 +18,11 @@ const GetOffer = () => {
   const [updatedOffer, setUpdatedOffer] = useState({ Name: "" });
   const [users, setUsers] = useState([]);
   const [pdf, setPdf] = useState({});
+  const [isSelected, setIsSelected] = useState(null);
+
+  function handleSelecUser(user){
+    setIsSelected(user);
+  }
 
   const toggleModel = (offer) => {
     setSelectedOffer(offer);
@@ -429,18 +434,20 @@ const GetOffer = () => {
               <div className="id_users">
                 {users.length > 0 ? (
                   users.map((user) => (
-                    <div key={user._id} className="user">
+                    <div key={user._id} className={`user ${user ===isSelected ? 'selected' : ''}`}
+                    onClick={() => {handleSelecUser(user);fetchPdf(user.cv);}}>
                       {user.email}
+                      {user === isSelected && (
                       <div className="cv_buttons">
-                        <button
+                        {/* <button
                           className="button"
                           type="submit"
                           onClick={() => {
-                            fetchPdf(user.cv);
+                            // fetchPdf(user.cv);
                           }}
                         >
                           display
-                        </button>
+                        </button> */}
                         <button
                           className="button"
                           type="button"
@@ -450,7 +457,7 @@ const GetOffer = () => {
                         >
                           View CV
                         </button>
-                      </div>
+                      </div>)}
                     </div>
                   ))
                 ) : (
