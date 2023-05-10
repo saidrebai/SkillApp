@@ -77,7 +77,7 @@ const Main = () => {
         <div className="maiin_content">
           {/* <h1>SkillApp</h1> */}
           <div id="home">
-            <h2>Home : </h2>
+            <h2 className="h2_main">Home : </h2>
             <p>
               Welcome, <br /> We are delighted to welcome you on our website !{" "}
               <br />
@@ -87,16 +87,17 @@ const Main = () => {
             <img src={myImg} alt="" />
           </div>
           <div id="aboutus">
-            <h2>About us : </h2>
+            <h2 className="h2_main" >About us : </h2>
 
             <img src={ImgAu} alt="" />
           </div>
           <div id="contact">
-            <h2>Contact : </h2>
-            <form onSubmit={handleSubmit}>
+            <h2 className="h2_main">Contact : </h2>
+            <form className="form_main" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="name">Name:</label>
+                <label className="label_main" htmlFor="name">Name:</label>
                 <input
+                className="input_main"
                   type="text"
                   id="name"
                   value={name}
@@ -105,8 +106,9 @@ const Main = () => {
                 />
               </div>
               <div>
-                <label htmlFor="email">Email:</label>
+                <label className="label_main" htmlFor="email">Email:</label>
                 <input
+                className="input_main"
                   type="email"
                   id="email"
                   value={email}
@@ -115,8 +117,9 @@ const Main = () => {
                 />
               </div>
               <div>
-                <label htmlFor="phoneNumber">Phone Number:</label>
+                <label className="label_main" htmlFor="phoneNumber">Phone Number:</label>
                 <input
+                className="input_main"
                   type="tel"
                   id="phoneNumber"
                   value={phoneNumber}
@@ -125,7 +128,7 @@ const Main = () => {
                 />
               </div>
               <div>
-                <label htmlFor="message">Message:</label>
+                <label className="label_main" htmlFor="message">Message:</label>
                 <textarea
                   id="message"
                   value={message}

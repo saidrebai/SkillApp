@@ -19,13 +19,13 @@ const dimensions = async (result, dataToSearch) => {
   
   const getCVData = async (result) => {
     try {
-      const dimensionsName = await dimensions(result, "LANGUAGES");
+      // const dimensionsName = await dimensions(result, "LANGUAGES");
       const dimensionsSkills = await dimensions(result, "PRINCIPALES COMPÉTENCES");
       
       const relevantLines = result.Lines.slice(1).filter(line =>
         line.Words[0].Top > dimensionsSkills.DimensionTop &&
-        line.Words[0].Left < dimensionsSkills.DimensionLeft && 
-        line.Words[0].Top < dimensionsName.DimensionTop
+        line.Words[0].Left < dimensionsSkills.DimensionLeft 
+        // line.Words[0].Top < dimensionsName.DimensionTop
       );
   
       const lines = relevantLines.map(line => line.LineText.trim());

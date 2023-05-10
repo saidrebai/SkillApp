@@ -7,13 +7,14 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Avatar from "@mui/material/Avatar";
+import ArticleIcon from '@mui/icons-material/Article';
+import DonutSmallIcon from '@mui/icons-material/DonutSmall';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -145,7 +146,14 @@ const Sidebar = () => {
             <Item
               title="Offers"
               to="/getoffers"
-              icon={<ContactsOutlinedIcon />}
+              icon={<ArticleIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Score"
+              to="/getscore"
+              icon={<DonutSmallIcon />}
               selected={selected}
               setSelected={setSelected}
             />

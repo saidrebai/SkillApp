@@ -142,20 +142,23 @@ td{
   font-size: 14px;
 }
 .user{
-  width: 80%;
+    width: 80%;
     height: 50px;
-    font-size: x-large;
+    font-size: large;
     border-radius: 5px;
     padding-left: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
+    margin: 2px;
+    background-color: #d8d8d8;
 }
 .button{
   border-radius: 5px;
   border: none;
-  background-color: #304F6D;
+  background-color: #3185d6;
   color: rgb(255, 255, 255);
   cursor: pointer; 
   height: 30px;

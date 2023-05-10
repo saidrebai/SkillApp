@@ -12,7 +12,6 @@ import { toast, ToastContainer } from "react-toastify";
 export default function Quiz() {
   const id = localStorage.getItem("id");
   const offerId = localStorage.getItem("offerId");
-  // const resultat = localStorage.getItem("score");
 
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -20,7 +19,7 @@ export default function Quiz() {
   const [newScore, setNewScore] = useState({
     offer: offerId,
     user: id,
-    // result: resultat,
+
   });
 
   const addScore = async (e) => {
@@ -49,7 +48,7 @@ export default function Quiz() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `https://quizapi.io/api/v1/questions?apiKey=RagtV5CzaEV00JLC6aII3iivhHatMPsWgg6wAXDl&limit=20`
+        `https://quizapi.io/api/v1/questions?apiKey=Aw9rwqe0uBihndUdtI5DtGpPuNqeDURVQeaLqLKN&difficulty=Hard&limit=20`
       );
       setQuiz(response.data);
       console.log("==>", response.data.length);

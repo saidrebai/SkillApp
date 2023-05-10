@@ -5,7 +5,7 @@ const pdfController = require("../controlles/pdfController");
 router.post("/upload", upload,pdfController.uploads);
 router.get("/pdf/:id",pdfController.getPdfById);
 router.get("/pdfs",pdfController.getPdfByUser);
-router.post("/cvParser",pdfController.cvParser);
+router.post("/cvParser",upload,pdfController.cvParser);
 
 
 module.exports = router;

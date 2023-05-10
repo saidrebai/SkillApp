@@ -25,7 +25,6 @@ export default function Card() {
       setPopup(!popup);
       console.log("gggg", popup);
       setSelectedOffer(offer);
-      // localStorage.removeItem('idpdf');
     } else {
       window.location.href = "/login";
     }
@@ -60,77 +59,76 @@ export default function Card() {
   };
 
   const handleSubmit = async (e) => {
-    if(e){
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("pdfs", pdfs);
-    formData.append("id", id);
-
-    try {
-      const { data: res } = await axios.post(
-        "http://localhost:8080/api/uploadRouter/upload",
-        formData
-      );
-      console.log("===>", res);
-      localStorage.setItem("idpdf", res.idpdf);
-      toast.success("uploaded succesfuly")
-      return true;
-    } catch (error) {
-      if (error.response && error.response.status === 415) {
-        toast.error("PDF file only");
-      } else {
-        console.error(error);
-        toast.error("PDF file only");
-      }
+    if (e) {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("pdfs", pdfs);
+      formData.append("id", id);
+      const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
+      if (submissionSuccessful) {
+        try {
+          const { data: res } = await axios.post(
+            "http://localhost:8080/api/uploadRouter/upload",
+            formData
+          );
+          console.log("===>", res);
+          localStorage.setItem("idpdf", res.idpdf);
+          toast.success("uploaded succesfuly");
+          return true;
+        } catch (error) {
+          if (error.response && error.response.status === 415) {
+            toast.error("PDF file only");
+          } else {
+            console.error(error);
+            toast.error("PDF file only");
+          }
+          return false;
+        }
       }
     }
-    return false;
   };
 
   const handleUpdate = async () => {
-    // const submissionSuccessful = await handleSubmit(); // call handleSubmit and store its return value
-    // if (submissionSuccessful) {
-      // check if submission was successful
-      try {
-        const response = await axios.put(
-          `http://localhost:8080/api/offerRouter/updateofferwithid/${updatedOffer._id}`,
-          {
-            ...updatedOffer,
-            user: [...updatedOffer.user, id],
-          }
-        );
-        console.log("lala", response.data);
-        // toast.success("Updated successfully!");
-        setUpdatedOffer(response.data);
-        localStorage.setItem('offerId',updatedOffer._id);
-        return true;
-      } catch (error) {
-        console.error(error);
-      }
-      return false;
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/offerRouter/updateofferwithid/${updatedOffer._id}`,
+        {
+          ...updatedOffer,
+          user: [...updatedOffer.user, id],
+        }
+      );
+      console.log("lala", response.data);
+
+      setUpdatedOffer(response.data);
+      localStorage.setItem("offerId", updatedOffer._id);
+      return true;
+    } catch (error) {
+      console.error(error);
+    }
+    return false;
     // }
   };
 
   const updateUser = async () => {
-    // const offerUpdated = await handleUpdate(); // call handleSubmit and store its return value
-    // if (offerUpdated) {
-    try {
-      const response = await axios.put(
-        `http://localhost:8080/api/candidatRouters/updateuserwithcv/${id}`,
-        {
-          ...users,
-          cv: [idpdf],
-        }
-      );
-      console.log("=>", response.data);
-      // toast.success("Updated successfully!");
-      setUsers(response.data);
-      window.location="/answerquiz";
-    } catch (error) {
-      console.error(error);
+    const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
+    if (submissionSuccessful) {
+      try {
+        const response = await axios.put(
+          `http://localhost:8080/api/candidatRouters/updateuserwithcv/${id}`,
+          {
+            ...users,
+            cv: [idpdf],
+          }
+        );
+        console.log("=>", response.data);
+        // toast.success("Updated successfully!");
+        setUsers(response.data);
+        window.location = "/answerquiz";
+      } catch (error) {
+        console.error(error);
+      }
     }
-  // };
-}
+  };
 
   useEffect(() => {
     if (selectedOffer) {
@@ -153,34 +151,37 @@ export default function Card() {
                   <div className="offer_container_img">
                     <img src={myImage} alt="" />
                   </div>
+                  {/* <label className="offre_label">information : </label> */}
                   <div className="offer_container_info">
-                    <div className="Name_container">
-                      <label>Title : </label>
-                      {selectedOffer.Name}
-                    </div>
-                    <div className="Type_container">
-                      <label>Type : </label>
-                      {selectedOffer.type}
-                    </div>
-                    <div className="time_container">
-                      <label>time : </label>
-                      {selectedOffer.time}
-                    </div>
+                    <label className="offre_label">Title : </label>
+                    {selectedOffer.Name}
                   </div>
+                  <div className="offer_container_info">
+                    <label className="offre_label">Type : </label>
+                    {selectedOffer.type}
+                  </div>
+                  <div className="offer_container_info">
+                    <label className="offre_label">Time : </label>
+                    {selectedOffer.time}
+                  </div>
+
                   <div className="offer_container_description">
-                    <label>Descritption : </label>
+                    <label className="offre_label">Descritption : </label>
                     {selectedOffer.description}
                   </div>
+
                   <div className="skills_container">
-                    <label>Skills : </label>
+                    <label className="offre_label">Skills : </label>
                     {selectedOffer.skills}
                   </div>
+
                   <div className="company_Name_container">
-                    <label>Entreprise : </label>
+                    <label className="offre_label">Entreprise : </label>
                     {selectedOffer.company_name}
                   </div>
+
                   <div className="adresse_container">
-                    <label>Adresse : </label>
+                    <label className="offre_label">Adresse : </label>
                     {selectedOffer.adresse}
                   </div>
                   <button
@@ -192,7 +193,6 @@ export default function Card() {
                     Apply
                   </button>
                   {popup && (
-                    
                     <div className="popup_container" style={{ zIndex: "1" }}>
                       <div
                         className="overlay"
@@ -220,7 +220,7 @@ export default function Card() {
                             type="button"
                             onClick={() => {
                               toggleModel();
-                              updateUser();
+                              // updateUser();
                             }}
                           >
                             Close
@@ -231,11 +231,11 @@ export default function Card() {
                             type="submit"
                             onClick={() => {
                               handleUpdate();
+                              updateUser();
                             }}
                           >
                             Send
                           </button>
-                          
                         </div>
                       </form>
                       <ToastContainer />

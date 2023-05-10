@@ -99,35 +99,37 @@ module.exports = {
       }
       return res
         .status(200)
-        .json({ message: "Offers found", offer, offerCount: offer.length });
+        .json({ message: "Offers found", offer, offerCount: offer.length});
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
 
-  addUserIdToOffer : async function (req, res) {
+  addUserIdToOffer: async function (req, res) {
     try {
-      // const user = await offerModel.find({ user: req.body.user });
-      // if (user)
-      //   return res
-      //     .status(409)
-      //     .send({ message: "User already Exist!" });
-        
-      // if(!user){
-      const updatedOffer = await offerModel.findByIdAndUpdate(
-        req.params.id,
-        { $push: { user: req.body.user } },
-        { new: true }
-      );
-
-      res.status(200).json({msg : "offer updated",status : 200, updatedOffer});
-    // } 
+      const offer = await offerModel.findOne({ _id: req.params.id });
+      if (!offer) {
+        return res.status(404).send({ message: "Offer not found" });
+      }
+  
+      const userIds = req.body.user.map((id) => mongoose.Types.ObjectId(id));
+      const userExists = userIds.every((id) => offer.user.includes(id));
+  
+      if (userExists) {
+        return res.status(409).send({ message: "User already exists for this offer" });
+      }
+  
+      offer.user.push(...userIds);
+      await offer.save();
+      res.status(200).json({ msg: "Offer updated", status: 200, offer });
     } catch (error) {
       console.error(error);
-      res.status(500).send('Error adding user to offer');
+      res.status(500).send("Error adding user to offer");
     }
-  },
+  }
+  
+  ,
   getOfferUsersCount: async function (req, res) {
     try {
       const offerId = req.params.id;
