@@ -1,11 +1,11 @@
-.main_container{
-	align-items: center;
-    justify-content: center;
-	width: 100%;
-	background-color: #f5f5f5;
-	
-}
-.white_btn {
+/* .main_container {
+  align-items: center;
+  justify-content: center;
+  width: 100%; */
+  /* height: 100%; */
+  /* background-color: #c4e69e; */
+/* } */
+/* .white_btn {
 	border: none;
 	outline: none;
 	padding: 12px 0;
@@ -16,4 +16,218 @@
 	font-size: 14px;
 	cursor: pointer;
 	margin-right: 20px;
+} */
+/* .img_home {
+  margin-left: 78%;
 }
+.prgr_vis{
+	color: rgb(17, 34, 34);
+	text-align: left;
+	padding: 22px 85px 163px;
+}
+.title_home{
+	color: burlywood;
+	
+} */
+/* Style pour le formulaire */
+/* form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	margin: 0 auto;
+  }
+  
+  form label {
+	font-size: 1.2rem;
+  }
+  
+  form input,
+  form textarea {
+	width: 100%;
+	padding: 0.5rem;
+	margin: 0.5rem 0;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+  }
+  
+  form button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+  }
+  
+  form button:hover {
+	background-color: #3e8e41;
+  }
+   */
+  /* Style pour le contenu de la page */
+  /* .main_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .main_content {
+	width: 80%;
+	margin: 0 auto;
+  }
+  
+  .title_home {
+	text-align: center;
+	margin-bottom: 2rem;
+  }
+  
+  .title_home h2 {
+	font-size: 2rem;
+	color: #333;
+  }
+  
+  .prgr_vis {
+	margin-bottom: 2rem;
+  }
+  
+  .prgr_vis p {
+	font-size: 1.2rem;
+	line-height: 1.5;
+	color: #666;
+  }
+  
+  .img_home {
+	text-align: center;
+	margin-bottom: 2rem;
+  }
+  
+  .img_home img {
+	width: 50%;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  #aboutus {
+	margin: 4rem 0;
+  }
+  
+  #aboutus h2 {
+	font-size: 2rem;
+	color: #333;
+	text-align: center;
+	margin-bottom: 2rem;
+  }
+  
+  .imgAboutUs {
+	text-align: center;
+	margin-bottom: 2rem;
+  }
+  
+  .imgAboutUs img {
+	width: 50%;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  #contact {
+	margin: 4rem 0;
+  }
+  
+  #contact h2 {
+	font-size: 2rem;
+	color: #333;
+	text-align: center;
+	margin-bottom: 2rem;
+  }
+  
+  .btn_send {
+	background-color: #4CAF50;
+	color: white;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+  }
+  
+  .btn_send:hover {
+	background-color: #3e8e41;
+  }
+   */
+   /* Define some CSS variables */
+:root {
+	--primary-color: #007bff;
+	--font-family: Arial, sans-serif;
+  }
+  
+  /* Define some styles for the main container */
+  .maiin_container {
+	max-width: 800px;
+	margin: 0 auto;
+  }
+  
+  /* Define some styles for the headings */
+  h2 {
+	font-size: 24px;
+	font-weight: bold;
+	color: var(--primary-color);
+	font-family: var(--font-family);
+  }
+  
+  /* Define some styles for the home section */
+  #home {
+	padding: 20px;
+	background-color: #f0f0f0;
+  }
+  
+  #home p {
+	font-size: 16px;
+	line-height: 1.5;
+	font-family: var(--font-family);
+  }
+  
+  /* Define some styles for the about us section */
+  #aboutus {
+	padding: 20px;
+	background-color: #fff;
+	margin-left: -341px;
+  }
+  
+  /* Define some styles for the contact form */
+  form {
+	max-width: 400px;
+	margin: 0 auto;
+  }
+  
+  label {
+	font-family: var(--font-family);
+	font-size: 16px;
+  }
+  
+  input {
+	padding: 8px;
+	margin-bottom: 16px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-family: var(--font-family);
+	font-size: 16px;
+  }
+  
+  .btn_send {
+	background-color: var(--primary-color);
+	color: #fff;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	font-family: var(--font-family);
+	font-size: 16px;
+	cursor: pointer;
+  }
+  
+  .btn_send:hover {
+	background-color: #0056b3;
+  }
+  

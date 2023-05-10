@@ -26,15 +26,12 @@ const DashboardA = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-
   const [offersCount, setOffersCount] = useState(0);
   const [userCount, setUserCount] = useState(0);
   const [pdfCount, setPdfCount] = useState(0);
   const [countScores, setCountScores] = useState(0);
   // const [idOffers,setIdOffers] = useState({});
 
-  
-  
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
@@ -123,8 +120,8 @@ const DashboardA = () => {
             increase="+14%"
             icon={
               <PersonAddIcon
-              sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-            />
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
             }
           />
         </Box>
@@ -166,7 +163,7 @@ const DashboardA = () => {
             }
           />
         </Box>
- 
+
         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
@@ -186,6 +183,7 @@ const DashboardA = () => {
             }
           />
         </Box>
+        
 
         {/* ROW 2 */}
         <Box

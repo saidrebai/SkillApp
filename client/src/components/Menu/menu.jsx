@@ -171,19 +171,19 @@ function ResponsiveAppBar() {
                     display: { xs: "block", md: "none" },
                   }}
                 >
-                  <MenuItem key="Home" onClick={handleHomeClick}>
-                    <Typography textAlign="center">Home</Typography>
+                  <MenuItem key="Home" onClick={handleHomeClick} href="#home">
+                    <Typography textAlign="center" >Home</Typography>
                   </MenuItem>
-                  <MenuItem key="Aboutus" onClick={handleAboutusClick}>
-                    <Typography textAlign="center">About us</Typography>
+                  <MenuItem key="Aboutus" onClick={handleAboutusClick} href="#About_us">
+                    <Typography textAlign="center" >About us</Typography>
                   </MenuItem>
                   {(!isAdmin || isAdmin === "false") && (!isSuperAdmin) && (
                     <MenuItem key="Offers" onClick={handleOffersClick}>
-                      <Typography textAlign="center">Offers</Typography>
+                      <Typography textAlign="center" >Offers</Typography>
                     </MenuItem>
                   )}
-                  <MenuItem key="Contact" onClick={handleContactClick}>
-                    <Typography textAlign="center">Contact</Typography>
+                  <MenuItem key="Contact" onClick={handleContactClick} href="#Contact">
+                    <Typography textAlign="center" >Contact</Typography>
                   </MenuItem>
                 </Menu>
               </Box>

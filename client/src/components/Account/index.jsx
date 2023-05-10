@@ -85,10 +85,10 @@ const Account = () => {
   return (
     <>
       <div className="center-content">
-        <div className="content-container">
-          <div className="content-full">
+        <div className="content-containerr">
+          <div className="content-fulll">
             <img
-              className="full"
+              className="fulll"
               src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
               alt=""
             />
@@ -100,7 +100,7 @@ const Account = () => {
               <div className="form-input-container">
                 <div className="userid" value={updatedData._id}></div>
                 <div className="title-input-style">
-                  <div className="containertext-input">
+                  <div className="container-text-input">
                     <label className="title-style">First_Name</label>
                   </div>
                 </div>
@@ -116,7 +116,7 @@ const Account = () => {
                         firstName: e.target.value,
                       });
                     }}
-                    className="style-input"
+                    className="style-inputt"
                   />
                 </div>
               </div>
@@ -139,7 +139,7 @@ const Account = () => {
                         lastName: e.target.value,
                       });
                     }}
-                    className="style-input"
+                    className="style-inputt"
                   />
                 </div>
               </div>
@@ -152,7 +152,7 @@ const Account = () => {
                 </div>
                 <div className="input-style">
                   <select
-                    className="style-input"
+                    className="style-inputt"
                     name="gender"
                     value={updatedData.gender || newData.gender}
                     onChange={(e) =>
@@ -191,7 +191,7 @@ const Account = () => {
                         birthDate: e.target.value,
                       })
                     }
-                    className="style-input"
+                    className="style-inputt"
                   />
                 </div>
               </div>
@@ -215,7 +215,7 @@ const Account = () => {
                         tel: e.target.value,
                       });
                     }}
-                    className="style-input"
+                    className="style-inputt"
                   />
                 </div>
               </div>
@@ -228,7 +228,7 @@ const Account = () => {
                 </div>
                 <div className="input-style">
                   <select
-                    className="style-input"
+                    className="style-inputt"
                     name="country"
                     value={updatedData.country || newData.country}
                     onChange={(e) =>
@@ -583,7 +583,7 @@ const Account = () => {
                         town: e.target.value,
                       })
                     }
-                    className="style-input"
+                    className="style-inputt"
                   />
                 </div>
               </div>
@@ -606,7 +606,7 @@ const Account = () => {
                         adresse: e.target.value,
                       });
                     }}
-                    className="style-input"
+                    className="style-inputt"
                   />
                 </div>
               </div>
@@ -629,7 +629,7 @@ const Account = () => {
                         zipCode: e.target.value,
                       })
                     }
-                    className="style-input"
+                    className="style-inputt"
                   />
                 </div>
               </div>
@@ -652,7 +652,7 @@ const Account = () => {
                         Establishment: e.target.value,
                       })
                     }
-                    className="style-input"
+                    className="style-inputt"
                   />
                 </div>
               </div>
