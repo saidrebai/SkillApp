@@ -34,24 +34,6 @@ const Main = () => {
     updateCounter();
   }, []);
 
-  // function handleSubmit(event) {
-  //   event.preventDefault();
-
-  //   axios
-  //     .post("http://localhost:8080/api/contactRouter/sendMessageToAdmin", {
-  //       email,
-  //     })
-  //     .then((response) => {
-  //       // console.log(response.data);
-  //       // alert("Email sent successfully");
-  //       setMessage(`Un e-mail a été envoyé à ${email}`);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       // alert("Failed to send email");
-  //       setMessage("Erreur lors de l'envoi de l'e-mail");
-  //     });
-  // }
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -74,7 +56,7 @@ const Main = () => {
   return (
     <>
       <div className="maiin_container">
-        <div className="maiin_content">
+        <div className="main_content">
           {/* <h1>SkillApp</h1> */}
           <div id="home">
             <h2>Home : </h2>
@@ -88,52 +70,67 @@ const Main = () => {
           </div>
           <div id="aboutus">
             <h2>About us : </h2>
-
             <img src={ImgAu} alt="" />
           </div>
           <div id="contact">
             <h2>Contact : </h2>
-            <form onSubmit={handleSubmit}>
+            <form className="Form_contact" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="name">Name:</label>
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
+                <div>
+                  <label htmlFor="name" className="label_contact">
+                    Name:
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    className="input_contact"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="label_contact">
+                    Email:
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="input_contact"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phoneNumber" className="label_contact">
+                    Phone Number:
+                  </label>
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    required
+                    className="input_contact"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="label_contact">
+                    Message:
+                  </label>
+                  <textarea
+                    id="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
+                    className="input_contact"
+                  />
+                </div>
               </div>
-              <div>
-                <label htmlFor="email">Email:</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="phoneNumber">Phone Number:</label>
-                <input
-                  type="tel"
-                  id="phoneNumber"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="message">Message:</label>
-                <textarea
-                  id="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  required
-                />
-              </div>
-              <button type="submit" className="btn_send">Send Message</button>
+              <button type="submit" className="btn_send">
+                Send Message
+              </button>
             </form>
           </div>
         </div>

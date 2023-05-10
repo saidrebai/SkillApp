@@ -197,17 +197,17 @@
   }
   
   /* Define some styles for the contact form */
-  form {
+  .Form_contact {
 	max-width: 400px;
 	margin: 0 auto;
   }
   
-  label {
+  .label_contact {
 	font-family: var(--font-family);
 	font-size: 16px;
   }
   
-  input {
+  .input_contact {
 	padding: 8px;
 	margin-bottom: 16px;
 	border: 1px solid #ccc;
