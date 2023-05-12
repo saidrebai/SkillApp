@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import myImg from "../images/img.png";
 import ImgAu from "../images/about-us-page-1.png";
+import logogmail from "../images/logogmail.png";
+import logoPhone from "../images/logoPhone.jpg";
 
 const Main = () => {
   const [pageviews, setPageviews] = useState();
@@ -12,6 +14,10 @@ const Main = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
+  const [showMore, setShowMore] = useState(false);
+  // const [text, setText] = useState("");
+  const text =
+    "Our web application is dedicated to the design and production of high quality professional application files. We understand the crucial importance of a well-presented application file in attracting the attention of recruiters and increasing the chances of success when looking for a job.";
 
   function updateCounter() {
     const type =
@@ -57,29 +63,39 @@ const Main = () => {
     <>
       <div className="maiin_container">
         <div className="main_content">
-          {/* <h1>SkillApp</h1> */}
           <div id="home">
-            <h2 className="h2_main">Home : </h2>
+            <h1 className="h1_main">HOME : </h1>
             <p>
               Welcome, <br /> We are delighted to welcome you on our website !{" "}
               <br />
               We hope you find all the information you need and that you will
               spend <br />a pleasant time browsing our site.
             </p>
-            <img src={myImg} alt="" />
+            <img src={myImg} alt="" class="logo" />
           </div>
           <div id="aboutus">
-            <h2>About us : </h2>
-            <img src={ImgAu} alt="" />
+            <h1 className="h1_main">ABOUT US : </h1>
+
+            <img src={ImgAu} alt="" class="image_overlay" />
+
+            <h6 class="text-overlay">
+              {showMore ? text : `${text.substring(0, 250)}`}
+              <button
+                className="btn_more"
+                onClick={() => setShowMore(!showMore)}
+              >
+                {showMore ? "Show less" : "Show more"}
+              </button>
+            </h6>
           </div>
           <div id="contact">
-            <h2>Contact : </h2>
+            <h1 className="h1_main">CONTACT : </h1>
             <form className="Form_contact" onSubmit={handleSubmit}>
-              <div>
-                <div>
-                  <label htmlFor="name" className="label_contact">
+              <div className="left_for_contact">
+                <table>
+                  {/* <label htmlFor="name" className="label_contact">
                     Name:
-                  </label>
+                  </label> */}
                   <input
                     type="text"
                     id="name"
@@ -87,12 +103,12 @@ const Main = () => {
                     onChange={(e) => setName(e.target.value)}
                     required
                     className="input_contact"
+                    placeholder="Name"
                   />
-                </div>
-                <div>
-                  <label htmlFor="email" className="label_contact">
+
+                  {/* <label htmlFor="email" className="label_contact">
                     Email:
-                  </label>
+                  </label> */}
                   <input
                     type="email"
                     id="email"
@@ -100,12 +116,12 @@ const Main = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     className="input_contact"
+                    placeholder="Business email"
                   />
-                </div>
-                <div>
-                  <label htmlFor="phoneNumber" className="label_contact">
+
+                  {/* <label htmlFor="phoneNumber" className="label_contact">
                     Phone Number:
-                  </label>
+                  </label> */}
                   <input
                     type="tel"
                     id="phoneNumber"
@@ -113,24 +129,43 @@ const Main = () => {
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     required
                     className="input_contact"
+                    placeholder="Phone Number"
                   />
-                </div>
-                <div>
-                  <label htmlFor="message" className="label_contact">
+
+                  {/* <label htmlFor="message" className="label_contact">
                     Message:
-                  </label>
+                  </label> */}
                   <textarea
                     id="message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     required
                     className="input_contact"
+                    placeholder="Message"
+                    cols="23"
+                    rows="10"
                   />
-                </div>
+                  <button type="submit" className="btn_send">
+                    Send Message
+                  </button>
+                </table>
               </div>
-              <button type="submit" className="btn_send">
-                Send Message
-              </button>
+              <div>
+                <table>
+                  <img src={logogmail} alt="" class="logo_gmail" />
+                  <div>
+                    <p class="ova_text">
+                      <a href="mailto:info@arsela.co"> info@arsela.co</a>
+                    </p>
+                  </div>
+                  <div>
+                    <img src={logoPhone} alt="" class="logo_Phone" />
+                    <p class="ova_text">
+                      <a href="tel:53107042"> (+216) 53 107 042</a>
+                    </p>
+                  </div>
+                </table>
+              </div>
             </form>
           </div>
         </div>
