@@ -660,12 +660,12 @@ const Account = () => {
 
             <div>
               <div className="btn-container">
-                <button type="submit" className="style-button">
+                <button type="submit" className="stylebutton">
                   Update
                 </button>
                 <button
                   type="button"
-                  className="style-button"
+                  className="stylebutton"
                   onClick={deleteUser}
                 >
                   Delete

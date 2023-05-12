@@ -7,6 +7,8 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 export default function Card() {
   const user = localStorage.getItem("token");
@@ -208,7 +210,7 @@ export default function Card() {
                             className="popup_id"
                             value={updatedOffer?._id}
                           ></div>
-                          <h1>Enter your CV here : </h1>
+                          <h2 className="h1_cv">Enter your CV here : </h2>
                           <input
                             type="file"
                             name="pdfs"
@@ -244,7 +246,9 @@ export default function Card() {
                 </div>
               ))
             ) : (
-              <div>No offers to display</div>
+              <Box sx={{ display: "flex" }}>
+                <CircularProgress />
+              </Box>
             )}
           </tr>
         </table>

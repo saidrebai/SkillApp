@@ -8,7 +8,8 @@
 .offer_container{
     width: 347px;
     height: 595px;
-    background-color: #ffffff94;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -63,7 +64,7 @@
 .apply_button{
     border-radius: 5px;
     border: none;
-    background-color: #14be99;
+    background-color: #8d48a8;
     width: 100%;
     padding: 10px;
     font-size: 20px;
@@ -74,8 +75,8 @@
     transition-duration: 0.4s;
     color: white;
 }
-.offer_container button:hover {
-    background-color: #3bb19b;
+.apply_button:hover {
+    background-color: #450c4d;
     color: #fff;
     box-shadow: 0px 0px 10px #000;
   }
@@ -111,7 +112,14 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    padding: 5px 7px;
+    padding: 5px 5px;
+    border-radius: 5px;
+    border: none;
+    width: 80px;
+    height: 35px;
+    background-color: #304f6d;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 body.active-popup{
     overflow-y: hidden;
@@ -139,7 +147,7 @@ body.active-popup{
     padding: 5px 7px;
     
 }
-.save_button{
+/* .save_button{
     border-radius: 5px;
     border: none;
     width: 100px;
@@ -153,11 +161,14 @@ body.active-popup{
     right: 10px;
     padding: 5px 7px;
 
-}
+} */
 .title_cv{
     margin:20px;
 }
 .offre_label{
     font-size: large;
     font-family: emoji;
+}
+.h1_cv{
+    color: #000;
 }

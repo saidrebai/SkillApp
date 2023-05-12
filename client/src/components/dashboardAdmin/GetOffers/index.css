@@ -1,4 +1,4 @@
-.getoffer_container{
+.getoffer_container {
   display: flex;
 }
 .offerr_gird {
@@ -30,10 +30,10 @@
   align-items: center;
   align-content: stretch;
 }
-.offerr_name{
-    margin:10px;
+.offerr_name {
+  margin: 10px;
 }
-.update_botton button{
+.update_botton button {
   background-color: #389b5f;
   border: none;
   border-radius: 5px;
@@ -78,35 +78,31 @@
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
-  background: #E6E1DD;
   padding: 14px 28px;
   border-radius: 3px;
-  max-width: 850px;
-  min-width: 900px;
-  min-height: 400px;
-  max-height: 100px;
+  min-width: 950px;
+  height: fit-content;
 }
-.close_popup {
+/* .close_popup {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 7px;
+    top: 0;
+    right: 0;
+    padding: 5px 5px;
+    border-radius: 5px;
+    border: none;
+    width: 100px;
+    height: 35px;
+    background-color: #304f6d;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+} */
+.Save_popup {
   border-radius: 5px;
   border: none;
   width: 100px;
   height: 40px;
   margin: 10px;
-  background-color: #304F6D;
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-}
-.Save_popup{
-  border-radius: 5px;
-  border: none;
-  width: 100px;
-  height: 40px;
-  margin: 10px;
-  background-color: #304F6D;
+  background-color: #304f6d;
   color: rgb(255, 255, 255);
   cursor: pointer;
 }
@@ -120,17 +116,17 @@
   flex-direction: row;
   justify-content: space-between;
 }
-.button_display{
-    margin:10px;
-    padding: 10px 25px;
-    font-size: 17px;
+.button_display {
+  margin: 10px;
+  padding: 10px 25px;
+  font-size: 17px;
 }
-.table{
+.table {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
 }
-td{
+td {
   margin: 5px 5px;
 }
 .inputt {
@@ -141,26 +137,15 @@ td{
   border-radius: 10px;
   font-size: 14px;
 }
-.user{
-    width: 80%;
-    height: 50px;
-    font-size: large;
-    border-radius: 5px;
-    padding-left: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    margin: 2px;
-    background-color: #d8d8d8;
-}
-.button{
+.button {
   border-radius: 5px;
   border: none;
   background-color: #3185d6;
   color: rgb(255, 255, 255);
-  cursor: pointer; 
-  height: 30px;
-  margin: 5px;
+  cursor: pointer;
+  /* height: 15px; */
+  /* padding: 10px; */
+}
+.action{
+  width: 120px;
 }
