@@ -19,6 +19,8 @@ root.render(
       window.location.pathname !== "/signup" &&
       window.location.pathname !== "/dashboardA" &&
       window.location.pathname !== "/getoffers" &&
+      window.location.pathname !== "/getscore" &&
+      window.location.pathname !== "/calendar" &&
       window.location.pathname !== "/AccountA") && <ResponsiveAppBar />}
     <React.StrictMode>
       <App />
@@ -28,6 +30,8 @@ root.render(
       window.location.pathname !== "/signup" &&
       window.location.pathname !== "/dashboardA" &&
       window.location.pathname !== "/getoffers" &&
+      window.location.pathname !== "/getscore" &&
+      window.location.pathname !== "/calendar" &&
       window.location.pathname !== "/AccountA") && <Footer />}
   </BrowserRouter>
 );

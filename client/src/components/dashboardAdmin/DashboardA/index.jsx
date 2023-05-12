@@ -4,16 +4,14 @@ import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
 // import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-// import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../dashboardAdmin/components/Header";
 import LineChart from "../../dashboardAdmin/components/LineChart";
-// import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../dashboardAdmin/components/BarChart";
 import StatBox from "../../dashboardAdmin/components/StatBox";
-import { useState, useEffect } from "react";
+import ContactPageIcon from '@mui/icons-material/ContactPage';
+import { useState,useEffect } from "react";
 // import ProgressCircle from "../../components/ProgressCircle";
 import axios from "axios";
 
@@ -28,13 +26,23 @@ const DashboardA = () => {
   const [offersCount, setOffersCount] = useState(0);
   const [userCount, setUserCount] = useState(0);
   const [pdfCount, setPdfCount] = useState(0);
+  const [countScores, setCountScores] = useState(0);
+  // const [idOffers,setIdOffers] = useState({});
 
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
         `http://localhost:8080/api/offerRouter/getofferbyid/${id}`
       );
+       const idOffers = response.data.offer.map((offer) => offer._id).join(",");
+      const responseScores = await axios.get(
+        "http://localhost:8080/api/scoreRouter/getscorebyid",
+        { params: { q: idOffers } }
+      );
+      setCountScores(responseScores.data?.scoreCount);
       setOffersCount(response.data.offer.length);
+      // setIdOffers(response.data._id)
+      // console.log("==>",idOffers);
     }
     fetchData();
   }, []);
@@ -59,6 +67,17 @@ const DashboardA = () => {
     }
     fetchData();
   }, []);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await axios.get(
+  //       `http://localhost:8080/api/scoreRouter/getscorebyid/${idOffers}`
+  //     );
+  //     setCountScores(response.data?.scoreCount);
+  //   }
+  //   fetchData();
+  // }, []);
+
 
   return (
     <Box m="20px">
@@ -141,7 +160,7 @@ const DashboardA = () => {
             progress="0.50"
             increase="+21%"
             icon={
-              <PointOfSaleIcon
+              <ContactPageIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -156,7 +175,7 @@ const DashboardA = () => {
           justifyContent="center"
         >
           <StatBox
-            title="{visits}"
+            title={countScores}
             subtitle="Quiz"
             progress="0.80"
             increase="+43%"
@@ -210,7 +229,10 @@ const DashboardA = () => {
             <LineChart isDashboard={true} />
           </Box>
         </Box>
-        <Box
+        
+
+        {/* ROW 3 */}
+              <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -226,6 +248,9 @@ const DashboardA = () => {
             <BarChart isDashboard={true} />
           </Box>
         </Box>
+        
+  
+
       </Box>
     </Box>
   );

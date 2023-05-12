@@ -17,6 +17,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Offer from "./components/dashboardAdmin/Offer";
 import Quiz from "./components/Quiz/";
+import Score from "./components/dashboardAdmin/Score";
+import Calendar from "./components/dashboardAdmin/Calendar";
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
       <Routes>
       <Route path="/dashboardA" exact element={<DashboardA />} />
       <Route path="/getoffers" exact element={<Offer />} />
+      <Route path="/getscore" exact element={<Score />} />
+      <Route path="/calendar" exact element={<Calendar />} />
       {user &&<Route path="/AccountA" exact element={<AccountAdmin />} />}
       </Routes></main></div>
       </ThemeProvider>

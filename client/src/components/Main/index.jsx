@@ -59,7 +59,7 @@ const Main = () => {
         <div className="main_content">
           {/* <h1>SkillApp</h1> */}
           <div id="home">
-            <h2>Home : </h2>
+            <h2 className="h2_main">Home : </h2>
             <p>
               Welcome, <br /> We are delighted to welcome you on our website !{" "}
               <br />
