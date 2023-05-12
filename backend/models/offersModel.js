@@ -38,7 +38,9 @@ const offerSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'user',
   }]
-});
+},
+{ timestamps: true }
+);
 
 const offerModel = mongoose.model("offerModel", offerSchema);
 

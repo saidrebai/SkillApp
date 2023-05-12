@@ -26,7 +26,9 @@ const scoreSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-});
+},
+{ timestamps: true }
+);
 
 const scoreModel = mongoose.model("scoreModel", scoreSchema);
 module.exports = { scoreModel };
