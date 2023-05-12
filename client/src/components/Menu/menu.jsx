@@ -127,6 +127,7 @@ function ResponsiveAppBar() {
                     display: { xs: "block", md: "none" },
                   }}
                 >
+                  
                   <MenuItem key="Home" onClick={handleHomeClick} href="#home">
                     <Typography textAlign="center" >Home</Typography>
                   </MenuItem>
