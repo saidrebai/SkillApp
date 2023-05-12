@@ -17,3 +17,11 @@
     margin: 15px;
     border-radius: 20px;
 }
+.logo_top{
+    bottom: 20px;
+    right: 20px;
+    border-radius: 4px;
+    background-color: #1564bf;
+    color: #fff;
+    text-align: center;
+}
