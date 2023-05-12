@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Stack from "@mui/material/Stack";
 import SendIcon from "@mui/icons-material/Send";
@@ -19,17 +19,99 @@ export default function Quiz() {
   const [newScore, setNewScore] = useState({
     offer: offerId,
     user: id,
-
   });
+  const Ref = useRef(null);
+
+
+  const [timer, setTimer] = useState("");
+  const [isCurrentQuestion, setIsCurrentQuestion] = useState(false);
+
+
+  const getTimeRemaining = (e) => {
+    const total = Date.parse(e) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
+    return {
+      total,
+      hours,
+      minutes,
+      seconds,
+    };
+  };
+
+  const startTimer = (e) => {
+    let { total, hours, minutes, seconds } = getTimeRemaining(e);
+    if (total >0) {
+      setTimer(
+        (hours > 9 ? hours : "0" + hours) +
+          ":" +
+          (minutes > 9 ? minutes : "0" + minutes) +
+          ":" +
+          (seconds > 9 ? seconds : "0" + seconds)
+      );
+    console.log("noo");
+    setIsCurrentQuestion(false);
+    console.log("is",isCurrentQuestion);
+    }
+    // else if(total ===0){
+    //   clearTimer(getDeadTime());
+    // }
+    else{
+      setTimer("00:00:00");
+      handleNextPage();
+      if(isCurrentQuestion == true){
+      clearTimer(getDeadTime());}
+    }
+  };
+
+  const clearTimer = (e) => {
+    setTimer("00:00:10");
+    if (Ref.current) clearInterval(Ref.current);
+    const id = setInterval(() => {
+      startTimer(e);
+    }, 1000);
+    Ref.current = id;
+    console.log("cleartime");
+    // setIsCurrentQuestion(false)
+  };
+
+  const getDeadTime = () => {
+    let deadline = new Date();
+ console.log("getdeadtime");
+    deadline.setSeconds(deadline.getSeconds() + 10);
+    return deadline;
+   
+  };
+
+  useEffect(() => {
+    clearTimer(getDeadTime());
+    console.log("userffet");
+  }, []);
+
+  const onClickReset = () => {
+    clearTimer(getDeadTime());
+  };
+
+  const handleNextPage = ()=>{
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      console.log("hh",currentQuestionIndex);
+      setIsCurrentQuestion(true);
+      console.log(isCurrentQuestion);
+
+  }
+
 
   const addScore = async (e) => {
-    const final = currentQuestionIndex===quiz.length-1;
+    const final = currentQuestionIndex === quiz.length - 1;
     console.log(final);
-    if (final){
+    if (final) {
       try {
-        
-        const response = await axios.post("http://localhost:8080/api/scoreRouter/addscore", {...newScore, result : score});
-        console.log("yess",response.data);
+        const response = await axios.post(
+          "http://localhost:8080/api/scoreRouter/addscore",
+          { ...newScore, result: score }
+        );
+        console.log("yess", response.data);
         toast.success("Adding successfully!");
         localStorage.removeItem("score");
       } catch (error) {
@@ -42,7 +124,7 @@ export default function Quiz() {
         }
       }
     }
-  // }
+    // }
   };
 
   useEffect(() => {
@@ -56,44 +138,43 @@ export default function Quiz() {
     }
     fetchData();
   }, []);
-  console.log("======>", quiz);
+  // console.log("======>", quiz);
 
   const handleNextQuestion = () => {
     if (document.querySelector('input[name="option"]:checked')) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
+
   const calculateTotalScore = () => {
     const selectedAnswer = document.querySelector(
       'input[name="option"]:checked'
     ).value;
     const correctAnswer = quiz[currentQuestionIndex].correct_answer;
-    console.log("correct answer",correctAnswer);
-    console.log("selected answer",selectedAnswer);
-
+    console.log("correct answer", correctAnswer);
+    console.log("selected answer", selectedAnswer);
 
     if (selectedAnswer === correctAnswer) {
       setScore(score + 1);
       console.log("score is ", score + 1);
-      
     } else {
       console.log("score is ", score);
     }
-    const final = currentQuestionIndex===quiz.length-1;
+    const final = currentQuestionIndex === quiz.length - 1;
     console.log(final);
-    if (final){setScore(score);}
-
+    if (final) {
+      setScore(score);
+    }
   };
-
-
 
   return (
     <>
       <div className="q_container">
-        <ToastContainer/>
+        <ToastContainer />
         {quiz.length > 0 && currentQuestionIndex < quiz.length ? (
           <div className="quiz_container">
             <div className="question">
+              <h2>{timer}</h2>
               <label>question : </label>
               {quiz[currentQuestionIndex].question}
             </div>
@@ -129,6 +210,7 @@ export default function Quiz() {
                       handleNextQuestion();
                       calculateTotalScore();
                       addScore();
+                      onClickReset();
                     }}
                     color="primary"
                     variant="contained"

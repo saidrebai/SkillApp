@@ -6,6 +6,13 @@ import Avatar from "@mui/material/Avatar";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import "./index.css";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 const GetOffer = () => {
   const id = localStorage.getItem("id");
@@ -20,7 +27,7 @@ const GetOffer = () => {
   const [pdf, setPdf] = useState({});
   const [isSelected, setIsSelected] = useState(null);
 
-  function handleSelecUser(user){
+  function handleSelecUser(user) {
     setIsSelected(user);
   }
 
@@ -101,7 +108,7 @@ const GetOffer = () => {
       window.open(`http://localhost:8080/uploads/${filename}`, "_blank");
     } catch (error) {
       console.error(error);
-      toast.error("PDF file not found")
+      toast.error("PDF file not found");
     }
   };
 
@@ -175,6 +182,15 @@ const GetOffer = () => {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
+
+  // const rows = [
+  //   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+
+  // ];
+  useEffect(() => {
+    console.log("users==========>", users);
+  }, [users]);
+
   return (
     <>
       <div className="getoffer_container">
@@ -420,50 +436,66 @@ const GetOffer = () => {
             </div>
           </div>
         )}
+
         {modal && (
           <div className="popup_container" style={{ zIndex: "1" }}>
             <div className="overlay" onClick={() => toggleModal(null)}></div>
             <div className="popup_content">
-              <button
-                type="button"
-                className="close_popup"
-                onClick={() => toggleModal(null)}
-              >
-                close
-              </button>
-              <div className="id_users">
-                {users.length > 0 ? (
-                  users.map((user) => (
-                    <div key={user._id} className={`user ${user ===isSelected ? 'selected' : ''}`}
-                    onClick={() => {handleSelecUser(user);fetchPdf(user.cv);}}>
-                      {user.email}
-                      {user === isSelected && (
-                      <div className="cv_buttons">
-                        {/* <button
-                          className="button"
-                          type="submit"
-                          onClick={() => {
-                            // fetchPdf(user.cv);
-                          }}
-                        >
-                          display
-                        </button> */}
-                        <button
-                          className="button"
-                          type="button"
-                          onClick={() => {
-                            fetchCv();
-                          }}
-                        >
-                          View CV
-                        </button>
-                      </div>)}
-                    </div>
-                  ))
-                ) : (
-                  <div>No users to display</div>
-                )}
-              </div>
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="caption table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Email</TableCell>
+                      <TableCell align="right">Country</TableCell>
+                      <TableCell align="right">Town</TableCell>
+                      <TableCell align="right">Adresse</TableCell>
+                      <TableCell align="right">Phone</TableCell>
+                      <TableCell align="right">Birthdate</TableCell>
+                      <TableCell align="right">Gender</TableCell>
+                      <TableCell className="action" align="right">&ensp;</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {users?.map((user, key) => (
+                      <TableRow
+                        key={user._id}
+                        className={`user ${
+                          user === isSelected ? "selected" : ""
+                        }`}
+                        onClick={() => {
+                          handleSelecUser(user);
+                          fetchPdf(user.cv);
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {user?.email}
+                        </TableCell>
+                        <TableCell align="right">{user?.country}</TableCell>
+                        <TableCell align="right">{user?.town}</TableCell>
+                        <TableCell align="right">{user?.adresse}</TableCell>
+                        <TableCell align="right">{user?.tel}</TableCell>
+                        <TableCell align="right">{user?.birthDate}</TableCell>
+                        <TableCell align="right">{user?.gender}</TableCell>
+                        <TableCell align="right">
+                          {user === isSelected && (
+                            <div className="cv_buttons">
+                              <button
+                                className="button"
+                                type="button"
+                                onClick={() => {
+                                  fetchCv();
+                                }}
+                              >
+                                View CV
+                              </button>
+                            </div>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </div>
           </div>
         )}

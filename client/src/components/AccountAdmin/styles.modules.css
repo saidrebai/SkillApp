@@ -64,13 +64,13 @@
   width: 150px;
   height: 40px;
   margin: 15px;
-  background-color: white;
+  background-color: #389b5f;
   border: 1px solid rgb(248, 241, 241);
   border-radius: 4px;
-  color: #030404;
+  color: #ffffff;
 }
 .style-button:hover {
-  background-color: rgba(13, 88, 121, 0.54);
+  background-color: #085326;
   border: 1px solid 147563;
   border-radius: 4px;
   color: white;

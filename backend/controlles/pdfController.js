@@ -1,6 +1,6 @@
 const PDF = require("../models/filesModels");
 const ocrSpace = require("../middleware/OCRSpace");
-const getCVData = require("../middleware/getCVData");
+const getCvdata = require("../middleware/getCVData");
 
 
 module.exports={
@@ -102,7 +102,7 @@ uploads: async function (req, res) {
      var filePath = req.file;
      const result =  await parseFile(req, res, filePath);
      console.log(result.ParsedResults[0].TextOverlay);
-     const DATA = await getCVData (result.ParsedResults[0].TextOverlay);
+     const DATA = await getCvdata (result.ParsedResults[0].TextOverlay);
     // console.log(result.ParsedResults[0].TextOverlay);
    // console.log(result.SearchablePDFURL);
    console.log(DATA)
