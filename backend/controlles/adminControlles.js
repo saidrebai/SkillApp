@@ -7,6 +7,9 @@ const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const offer = require("../controlles/offersControllers");
+const score = require("../controlles/scoreController");
+// const { scoreModel } = require("../models/scoreModel");
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -218,6 +221,64 @@ module.exports = {
       }
     } catch (error) {
       console.error(error);
+    }
+  },
+  AccepterCandidatPR: async (req, res) => {
+    console.log(req.body, "req body ====>");
+    try {
+      const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: process.env.MAIL_USERNAME, // Votre nom d'utilisateur Gmail
+          pass: process.env.MAIL_PASSWORD, // Votre mot de passe Gmail
+        },
+      });
+
+      const AcceptationForm = {
+        Name: req.body.Name,
+        email: req.body.email,
+        score: req.body.score,
+        offer: req.body.offer,
+      };
+
+      if (AcceptationForm.score > 16) {
+        const email_content =
+          "Félicitations " +
+          AcceptationForm.Name +
+          "! Bienvenue dans votre nouveau poste." +
+          AcceptationForm.email +
+          "cette offer est:" +
+          AcceptationForm.offer +
+          "Avec un score est:";
+        AcceptationForm.score;
+
+        const mailOptions = {
+          to: AcceptationForm.email,
+          subject: "Félicitations !",
+          html: email_content,
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+            res.status(500).json({
+              message: "Problème lors de l'envoi de l'e-mail",
+            });
+          } else {
+            console.log(
+              "E-mail envoyé avec succès ! Réponse du serveur :",
+              info.response
+            );
+            res.json({ message: "E-mail envoyé avec succès" });
+          }
+        });
+      } else {
+        res.json({
+          message: "Le score du candidat est inférieur à 16",
+        });
+      }
+    } catch (err) {
+      res.status(400).send({ message: "Une erreur s'est produite" });
     }
   },
 };
