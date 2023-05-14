@@ -27,6 +27,7 @@
     "joi-password-complexity": "^5.1.0",
     "jsonwebtoken": "^9.0.0",
     "mime-types": "^2.1.35",
+    "mindee": "^3.7.4",
     "mongodb": "^5.0.1",
     "mongodb-connection-string-url": "^2.6.0",
     "mongoose": "^6.9.2",
