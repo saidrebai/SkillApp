@@ -90,6 +90,68 @@ export default function Card() {
     }
   };
 
+  const handleParse = async (e) => {
+    // if (e) {
+    //   e.preventDefault();
+      const formData = new FormData();
+      formData.append("pdfs", pdfs);
+      formData.append("id", id);
+      // const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
+      // if (submissionSuccessful) {
+        try {
+          const { data: res } = await axios.post(
+            "http://localhost:8080/api/uploadRouter/cvParser",
+            formData
+          );
+          console.log("frfr", res);
+          localStorage.setItem("skills", res);
+          // toast.success("uploaded succesfuly");
+          // return true;
+        } catch (error) {
+          if (error.response && error.response.status === 415) {
+            toast.error("PDF file only");
+          } else {
+            console.error(error);
+            toast.error("PDF file only");
+          }
+          // return false;
+        }
+      // }
+    // }
+    console.log("work");
+  };
+
+  // const handleGetSkills = async (e) => {
+  //   // if (e) {
+  //   //   e.preventDefault();
+  //     const formData = new FormData();
+  //     formData.append("pdfs", pdfs);
+  //     formData.append("id", id);
+  //     // const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
+  //     // if (submissionSuccessful) {
+  //       try {
+  //         const { data: res } = await axios.post(
+  //           "{{baseUrl}}/products/alamakh/resume/:version/predict",
+  //           formData
+  //         );
+  //         console.log("frfr", res);
+  //         localStorage.setItem("skills", res);
+  //         // toast.success("uploaded succesfuly");
+  //         // return true;
+  //       } catch (error) {
+  //         if (error.response && error.response.status === 415) {
+  //           toast.error("PDF file only");
+  //         } else {
+  //           console.error(error);
+  //           toast.error("PDF file only");
+  //         }
+  //         // return false;
+  //       }
+  //     // }
+  //   // }
+  //   console.log("work");
+  // };
+
   const handleUpdate = async () => {
     try {
       const response = await axios.put(
@@ -234,6 +296,8 @@ export default function Card() {
                             onClick={() => {
                               handleUpdate();
                               updateUser();
+                              handleParse();
+                              // handleGetSkills();
                             }}
                           >
                             Send
