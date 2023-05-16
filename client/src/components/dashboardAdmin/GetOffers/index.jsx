@@ -440,7 +440,7 @@ const GetOffer = () => {
         {modal && (
           <div className="popup_container" style={{ zIndex: "1" }}>
             <div className="overlay" onClick={() => toggleModal(null)}></div>
-            <div className="popup_content">
+            <div className="popu_contnt">
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="caption table">
                   <TableHead>

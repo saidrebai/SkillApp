@@ -74,7 +74,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.firstName}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="text"
@@ -83,7 +83,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.lastName}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="email"
@@ -92,7 +92,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.email}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="password"
@@ -101,7 +101,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.password}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="text"
@@ -110,7 +110,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.adresse}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="tel"
@@ -120,7 +120,7 @@ const Signup = () => {
               value={data.tel}
               maxLength={8}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="date"
@@ -128,7 +128,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.birthDate}
               required
-              className="inpute"
+              className="inpute-signup"
             />
 
             <div class="custom-select">
@@ -459,7 +459,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.town}
               required
-              className="inpute"
+              className="inpute-signup"
             />
 
             <div class="custom-select">
@@ -484,7 +484,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.zipCode}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="text"
@@ -493,7 +493,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.Establishment}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             {error && <div className="error_msg">{error}</div>}
             <button type="submit" className="white_btn">

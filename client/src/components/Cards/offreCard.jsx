@@ -168,6 +168,7 @@ export default function Card() {
       return true;
     } catch (error) {
       console.error(error);
+      toast.error("Already Deposit")
     }
     return false;
     // }
@@ -187,7 +188,14 @@ export default function Card() {
         console.log("=>", response.data);
         // toast.success("Updated successfully!");
         setUsers(response.data);
+        const confirmed = window.confirm(
+          "Are you ready to get started with the test ?\n"+
+          "the test contain 20 question with one ansewr every 10 sec"
+        );
+        if (confirmed) {
         window.location = "/answerquiz";
+        }
+        
       } catch (error) {
         console.error(error);
       }
