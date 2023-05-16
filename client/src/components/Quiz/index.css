@@ -1,52 +1,195 @@
-.q_container{
-    min-height: 80%;
+.q_container {
+  min-height: 80%;
 }
-.quiz_container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 50%;
-    background-color: #f5f5f5;
-    padding: 150px;
-    border-radius: 5px;
-    margin: 20px 250px;
-    border-style: solid;
-    border-color: coral;
-    border-radius: 7px;
-    
-    
+.quiz_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 50%;
+  background-color: #e9ac4a80;
+  padding: 150px;
+  border-radius: 5px;
+  margin: 20px 250px;
+  border-style: solid;
+  border-color: coral;
+  border-radius: 7px;
 }
-.question{
-    margin: 10px;
-    font-size: xx-large;
+.question {
+  margin: 10px;
+  font-size: xx-large;
 }
-.answers{
+.answers {
     display: flex;
     width: 900px;
-    height: 600px;
+    height: 500px;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    align-content: center;
 }
-.answers_container{
-    font-size: larger;
-    padding: 10px;
-    margin: 20px;
-    width: 260px;
-    border-style: solid;
-    border-color: coral;
-    border-radius: 7px;
-    background-color: white;
-    width: 300px;
-    height: 100px;
+.answers_container {
+  font-size: larger;
+  padding: 10px;
+  margin: 10px 20px;
+  border-style: solid;
+  border-color: coral;
+  border-radius: 7px;
+  background-color: white;
+  width: 350px;
+  height: 120px;
+  display: flex;
 }
-.score{
-    font-family: sans-serif;
-    text-align: center;
+.score {
+  font-family: sans-serif;
+  text-align: center;
 }
-.timer_container{
-    position:absolute;
-    right: 50px;
-    top: 50px;
+.timer_container {
+  position: absolute;
+  right: 1px;
+  top: 30px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400);
+
+* {
+  box-sizing: border-box;
+}
+
+.timer-group {
+  height: 400px;
+  margin: 0 auto;
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  width: 400px;
+}
+
+.timer {
+  border-radius: 50%;
+  height: 50px;
+  overflow: hidden;
+  position: absolute;
+  width: 50px;
+}
+
+.timer:after {
+  background: #111 url(https://codepen.io/images/classy_fabric.png);
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: 40px;
+  left: 5px;
+  position: absolute;
+  width: 40px;
+  top: 5px;
+}
+
+.timer .hand {
+  float: left;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 50%;
+}
+
+.timer .hand span {
+  border: 25px solid rgba(0, 255, 255, 0.4);
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+  display: block;
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: rotate(225deg);
+  width: 0;
+}
+
+.timer .hand:first-child {
+  transform: rotate(180deg);
+}
+
+.timer .hand span {
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.timer .hand:first-child span {
+  animation-name: spin1;
+}
+
+.timer .hand:last-child span {
+  animation-name: spin2;
+}
+
+.timer.minute {
+  background: rgba(189, 189, 189, 0.623);
+  height: 175px;
+  left: 12.5px;
+  width: 175px;
+  top: 12.5px;
+}
+
+.timer.minute .hand span {
+  animation-duration: 10s;
+  border-top-color: rgb(252, 109, 1);
+  border-right-color: rgb(252, 109, 1);
+  border-width: 87.5px;
+}
+
+.timer.minute:after {
+  height: 155px;
+  left: 10px;
+  width: 155px;
+  top: 10px;
+}
+
+.face {
+  background: white;
+  border-radius: 50%;
+  height: 148px;
+  left: 26px;
+  padding: 82.5px 20px 0;
+  position: absolute;
+  width: 148px;
+  text-align: center;
+  top: 26px;
+}
+
+.face p {
+  border-radius: 10px;
+  font-size: 38px;
+  font-weight: 400;
+  position: absolute;
+  top: 8.5px;
+  width: 130px;
+  left: 9px;
+  margin-top: 33px;
+}
+
+@keyframes spin1 {
+  0% {
+    transform: rotate(225deg);
+  }
+  50% {
+    transform: rotate(225deg);
+  }
+  100% {
+    transform: rotate(405deg);
+  }
+}
+
+@keyframes spin2 {
+  0% {
+    transform: rotate(225deg);
+  }
+  50% {
+    transform: rotate(405deg);
+  }
+  100% {
+    transform: rotate(405deg);
+  }
 }

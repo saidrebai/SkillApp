@@ -68,7 +68,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.Name}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             {/* <input
               type="text"
@@ -335,7 +335,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.town}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="text"
@@ -344,7 +344,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.adresse}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="number"
@@ -353,7 +353,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.Zipcode}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="number"
@@ -362,7 +362,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.tel}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="number"
@@ -371,7 +371,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.fiscalCode}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="email"
@@ -380,7 +380,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.email}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             <input
               type="password"
@@ -389,7 +389,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.password}
               required
-              className="inpute"
+              className="inpute-signup"
             />
             {error && <div className="error_msg">{error}</div>}
             <button type="submit" className="white_btn">

@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.modules.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import myImg from "../images/img.png";
+import myImg from "../images/Capture.PNG";
 import ImgAu from "../images/about-us-page-1.png";
 import logogmail from "../images/logogmail.png";
 import logoPhone from "../images/logoPhone.jpg";
@@ -58,115 +58,125 @@ const Main = () => {
         //Afficher un message d'erreur
       });
   };
+  const handleLoginClick = () => {
+    window.location.href = "/login";
+  };
 
   return (
     <>
       <div className="maiin_container">
         <div className="main_content">
           <div id="home">
-            <h1 className="h1_main">HOME : </h1>
-            <p>
-              Welcome, <br /> We are delighted to welcome you on our website !{" "}
-              <br />
-              We hope you find all the information you need and that you will
-              spend <br />a pleasant time browsing our site.
-            </p>
-            <img src={myImg} alt="" class="logo" />
+            <div className="home-left">
+              <h1 className="h1_main">HOME : </h1>
+              <p>
+                Welcome, <br /> We are delighted to welcome you on our website !{" "}
+                <br />
+                We hope you find all the information you need and that you will
+                spend <br />a pleasant time browsing our site.
+              </p>
+              <button type="button" className="sign_up_button" onClick={handleLoginClick}>SIGN UP</button> 
+            </div>
+            <div className="home-right">
+              <img src={myImg} alt="" class="logo" />
+            </div>
           </div>
           <div id="aboutus">
-            <h1 className="h1_main">ABOUT US : </h1>
+            <div className="aboutus-left">
+              <h1 className="h1_main">ABOUT US : </h1>
 
-            <img src={ImgAu} alt="" class="image_overlay" />
-
-            <h6 class="text-overlay">
-              {showMore ? text : `${text.substring(0, 250)}`}
-              <button
-                className="btn_more"
-                onClick={() => setShowMore(!showMore)}
-              >
-                {showMore ? "Show less" : "Show more"}
-              </button>
-            </h6>
+              <img src={ImgAu} alt="" class="image_overlay" />
+            </div>
+            <div className="aboutus-right">
+              <h6 class="text-overlay">
+                {showMore ? text : `${text.substring(0, 250)}`}
+                <button
+                  className="btn_more"
+                  onClick={() => setShowMore(!showMore)}
+                >
+                  {showMore ? "Show less" : "Show more"}
+                </button>
+              </h6>
+            </div>
           </div>
           <div id="contact">
-            <h1 className="h1_main">CONTACT : </h1>
-            <form className="Form_contact" onSubmit={handleSubmit}>
-              <div className="left_for_contact">
-                <table>
-                  {/* <label htmlFor="name" className="label_contact">
+            <div className="contact-right">
+              <h1 className="h1_main">CONTACT : </h1>
+              <form className="Form_contact" onSubmit={handleSubmit}>
+                {/* <div className="right_for_contact"> */}
+                    {/* <label htmlFor="name" className="label_contact">
                     Name:
                   </label> */}
-                  <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    className="input_contact"
-                    placeholder="Name"
-                  />
+                    <input
+                      type="text"
+                      id="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      className="input_contact"
+                      placeholder="Name"
+                    />
 
-                  {/* <label htmlFor="email" className="label_contact">
+                    {/* <label htmlFor="email" className="label_contact">
                     Email:
                   </label> */}
-                  <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="input_contact"
-                    placeholder="Business email"
-                  />
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="input_contact"
+                      placeholder="Business email"
+                    />
 
-                  {/* <label htmlFor="phoneNumber" className="label_contact">
+                    {/* <label htmlFor="phoneNumber" className="label_contact">
                     Phone Number:
                   </label> */}
-                  <input
-                    type="tel"
-                    id="phoneNumber"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    required
-                    className="input_contact"
-                    placeholder="Phone Number"
-                  />
+                    <input
+                      type="tel"
+                      id="phoneNumber"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      required
+                      className="input_contact"
+                      placeholder="Phone Number"
+                    />
 
-                  {/* <label htmlFor="message" className="label_contact">
+                    {/* <label htmlFor="message" className="label_contact">
                     Message:
                   </label> */}
-                  <textarea
-                    id="message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
-                    className="input_contact"
-                    placeholder="Message"
-                    cols="23"
-                    rows="10"
-                  />
-                  <button type="submit" className="btn_send">
-                    Send Message
-                  </button>
-                </table>
-              </div>
+                    <textarea 
+                      type="text"
+                      id="message"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
+                      className="input_message"
+                      placeholder="Message"
+                    ></textarea>
+                    <button type="submit" className="btn_send">
+                      Send Message
+                    </button>
+                {/* </div> */}
+              </form>
+            </div>
+            <div className="contact_left">
               <div>
-                <table>
-                  <img src={logogmail} alt="" class="logo_gmail" />
-                  <div>
-                    <p class="ova_text">
-                      <a href="mailto:info@arsela.co"> info@arsela.co</a>
-                    </p>
-                  </div>
-                  <div>
-                    <img src={logoPhone} alt="" class="logo_Phone" />
-                    <p class="ova_text">
-                      <a href="tel:53107042"> (+216) 53 107 042</a>
-                    </p>
-                  </div>
-                </table>
+                {/* <img src={logogmail} alt="" class="logo_gmail" /> */}
+                <div>
+                  <p class="ova_text">
+                    <a href="mailto:info@arsela.co"> info@arsela.co</a>
+                  </p>
+                </div>
+                <div>
+                  {/* <img src={logoPhone} alt="" class="logo_Phone" /> */}
+                  <p class="ova_text">
+                    <a href="tel:53107042"> (+216) 53 107 042</a>
+                  </p>
+                </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

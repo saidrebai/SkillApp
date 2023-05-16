@@ -22,10 +22,8 @@ export default function Quiz() {
   });
   const Ref = useRef(null);
 
-
   const [timer, setTimer] = useState("00:00:00");
   const [isCurrentQuestion, setIsCurrentQuestion] = useState(false);
-
 
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
@@ -42,7 +40,7 @@ export default function Quiz() {
 
   const startTimer = (e) => {
     let { total, hours, minutes, seconds } = getTimeRemaining(e);
-    if (total >=0) {
+    if (total >= 0) {
       setTimer(
         (hours > 9 ? hours : "0" + hours) +
           ":" +
@@ -50,8 +48,7 @@ export default function Quiz() {
           ":" +
           (seconds > 9 ? seconds : "0" + seconds)
       );
-    }
-    else {
+    } else {
       handleNextPage();
     }
   };
@@ -69,7 +66,6 @@ export default function Quiz() {
     let deadline = new Date();
     deadline.setSeconds(deadline.getSeconds() + 10);
     return deadline;
-   
   };
 
   useEffect(() => {
@@ -80,11 +76,9 @@ export default function Quiz() {
   const onClickReset = () => {
     clearTimer(getDeadTime());
   };
-const handleNextPage = ()=>{
-  setCurrentQuestionIndex(currentQuestionIndex + 1);
-}
-
-
+  const handleNextPage = () => {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+  };
 
   const addScore = async (e) => {
     const final = currentQuestionIndex === quiz.length - 1;
@@ -155,32 +149,50 @@ const handleNextPage = ()=>{
     <>
       <div className="q_container">
         <ToastContainer />
-        <h2 className="timer_container">{timer}</h2>
+
         {quiz.length > 0 && currentQuestionIndex < quiz.length ? (
           <div className="quiz_container">
+            <div className="timer_container">
+              <div class="timer-group">
+                <div class="timer minute">
+                  <div class="hand">
+                    <span></span>
+                  </div>
+                  <div class="hand">
+                    <span></span>
+                  </div>
+                </div>
+                <div class="face">
+                  <p id="lazy">{timer}</p>
+                </div>
+              </div>
+            </div>
+            <label>Question : </label>
             <div className="question">
-              <label>question : </label>
               {quiz[currentQuestionIndex].question}
             </div>
             <div className="answers">
               {Object.keys(quiz[currentQuestionIndex].answers)
-              .filter((key) => quiz[currentQuestionIndex].answers[key] !== null)
-              .map((key, index) => (
-                    <div className="answers_container" key={key}>
-                      <div className="radio_group">
-                        
-                          <>
-                            <label>
-                              <input className = "radio" type="radio" name="option" value={key} />
-                              {quiz[currentQuestionIndex].answers[key]}
-                            </label>
-                          </>
-                      
-                      </div>
-                    </div>
-                  )
+                .filter(
+                  (key) => quiz[currentQuestionIndex].answers[key] !== null
                 )
-               }
+                .map((key, index) => (
+                  <div className="answers_container" key={key}>
+                    <div className="radio_group">
+                      <>
+                        <label>
+                          <input
+                            className="radio"
+                            type="radio"
+                            name="option"
+                            value={key}
+                          />
+                          {quiz[currentQuestionIndex].answers[key]}
+                        </label>
+                      </>
+                    </div>
+                  </div>
+                ))}
             </div>
             <div className="pagination_container">
               <Stack spacing={2}>

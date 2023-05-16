@@ -162,7 +162,7 @@ function ResponsiveAppBar() {
               >
                 Skills
               </Typography>
-              <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              <Box className="pages"sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 <MenuItem key="Home" onClick={handleHomeClick}>
                   <Typography textAlign="center">Home</Typography>
                 </MenuItem>
@@ -192,7 +192,7 @@ function ResponsiveAppBar() {
               {!token && (
                 
                   <button className="title_signin" onClick={handleLoginClick}>
-                    Sign in
+                    SIGN IN
                   </button>
                 
               )}
