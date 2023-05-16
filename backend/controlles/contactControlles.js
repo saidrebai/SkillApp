@@ -20,6 +20,7 @@ module.exports = {
         phoneNumber: req.body.phoneNumber,
         message: req.body.message,
       };
+      
       const email_content =
         "Bonjour cette contact form est d'apres le site " +
         ",<br> name : " +
@@ -28,7 +29,7 @@ module.exports = {
         contactForm.phoneNumber +
         ",<br> message : " +
         contactForm.message;
-
+       
       const mailOptions = {
         //   from: "Openjavascript <test@openjavascript.info>",
         to: contactForm.email,
@@ -51,6 +52,7 @@ module.exports = {
         }
       );
       res.status(201).send({ message: "contact Created", contact });
+      console.log("contact", contact);
     } catch (err) {
       res.status(400).send({ message: "An error occured" });
     }
