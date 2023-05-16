@@ -8,7 +8,7 @@ router.put("/updateinfoAdmin/:id", adminControlles.updateInfoAdmin);
 router.get("/getAll", adminControlles.getAll);
 router.delete("/deleteadmin/:id", adminControlles.deleteAdmin);
 router.post("/ResetPassword", adminControlles.ResetPassword);
-router.post("/AccepterCandidatPR/:id", adminControlles.AccepterCandidatPR);
-
+router.post("/accepterCandidatPR", adminControlles.accepterCandidatPR);
+router.post("/refuserCandidatPR", adminControlles.refuserCandidatPR);
 
 module.exports = router;

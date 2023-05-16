@@ -7,9 +7,9 @@ const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const offer = require("../controlles/offersControllers");
-const score = require("../controlles/scoreController");
-// const { scoreModel } = require("../models/scoreModel");
+// const offer = require("../controlles/offersControllers");
+// const score = require("../controlles/scoreController");
+const { ContactModel } = require("../models/contactModel");
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -223,7 +223,81 @@ module.exports = {
       console.error(error);
     }
   },
-  AccepterCandidatPR: async (req, res) => {
+
+  accepterCandidatPR: async (req, res) => {
+    try {
+      const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: process.env.MAIL_USERNAME,
+          pass: process.env.MAIL_PASSWORD,
+        },
+      });
+
+      const acceptationForm = new ContactModel({
+        email: req.body.email,
+        score: req.body.score,
+        offer: req.body.offer,
+        adminEmail: req.body.adminEmail,
+      });
+
+      console.log(acceptationForm);
+      // console.log(req.body.adminEmail);
+
+      if (acceptationForm.score > 10) {
+        const emailContent =
+          "Félicitations " +
+          "! Bienvenue dans votre nouveau poste. " +
+          "L'offre est : " +
+          acceptationForm.offer +
+          " , " +
+          " Avec un score de : " +
+          acceptationForm.score +
+          " , " +
+          " A cette administrateur : " +
+          acceptationForm.adminEmail;
+        (".");
+
+        const mailOptions = {
+          to: acceptationForm.email,
+          subject: "Félicitations !",
+          html: emailContent,
+        };
+
+        acceptationForm
+          .save()
+          .then(() => {
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+                res
+                  .status(500)
+                  .json({ message: "Problème lors de l'envoi de l'e-mail" });
+              } else {
+                console.log("Email sent: " + info.response);
+                res.json(acceptationForm.toJSON());
+              }
+            });
+          })
+          .catch((e) => {
+            // Votre logique de gestion des doublons d'adresses e-mail ici
+            console.log(e);
+            res.status(400).json({ message: "Adresse e-mail en double" });
+          });
+      } else {
+        res
+          .status(404)
+          .json({ message: "Le score du candidat est inférieur à 10" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Une erreur s'est produite lors de l'envoi de l'e-mail",
+      });
+    }
+  },
+
+  refuserCandidatPR: async (req, res) => {
     console.log(req.body, "req body ====>");
     try {
       const transporter = nodemailer.createTransport({
@@ -234,51 +308,60 @@ module.exports = {
         },
       });
 
-      const AcceptationForm = {
-        Name: req.body.Name,
+      const RefuserForm = new ContactModel({
         email: req.body.email,
         score: req.body.score,
         offer: req.body.offer,
-      };
+        adminEmail: req.body.adminEmail,
+      });
 
-      if (AcceptationForm.score > 16) {
+      if (RefuserForm.score < 10) {
         const email_content =
-          "Félicitations " +
-          AcceptationForm.Name +
-          "! Bienvenue dans votre nouveau poste." +
-          AcceptationForm.email +
-          "cette offer est:" +
-          AcceptationForm.offer +
-          "Avec un score est:";
-        AcceptationForm.score;
+          "Désolé, " +
+          "! Votre candidature n'a pas été retenue pour l'offre : " +
+          RefuserForm.offer +  " , " +
+          "Avec un score est : " +
+          RefuserForm.score +  " , " +
+          " A cette administrateur : " +
+          RefuserForm.adminEmail +
+          ". Nous vous remercions pour votre intérêt.";
 
         const mailOptions = {
-          to: AcceptationForm.email,
-          subject: "Félicitations !",
+          to: RefuserForm.email,
+          subject: "Désole !",
           html: email_content,
         };
 
-        transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-            console.log(error);
-            res.status(500).json({
-              message: "Problème lors de l'envoi de l'e-mail",
+        RefuserForm
+          .save()
+          .then(() => {
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+                res
+                  .status(500)
+                  .json({ message: "Problème lors de l'envoi de l'e-mail" });
+              } else {
+                console.log("Email sent: " + info.response);
+                res.json(RefuserForm.toJSON());
+              }
             });
-          } else {
-            console.log(
-              "E-mail envoyé avec succès ! Réponse du serveur :",
-              info.response
-            );
-            res.json({ message: "E-mail envoyé avec succès" });
-          }
-        });
+          })
+          .catch((e) => {
+            // Votre logique de gestion des doublons d'adresses e-mail ici
+            console.log(e);
+            res.status(400).json({ message: "Adresse e-mail en double" });
+          });
       } else {
-        res.json({
-          message: "Le score du candidat est inférieur à 16",
-        });
+        res
+          .status(404)
+          .json({ message: "Le score du candidat est supérieur à 10" });
       }
-    } catch (err) {
-      res.status(400).send({ message: "Une erreur s'est produite" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Une erreur s'est produite lors de l'envoi de l'e-mail",
+      });
     }
   },
 };

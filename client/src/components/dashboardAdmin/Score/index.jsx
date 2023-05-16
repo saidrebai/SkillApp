@@ -23,6 +23,11 @@ export default function Score() {
   const [modal, setModal] = useState(false);
   const [selectedScore, setSelectedScore] = useState(null);
 
+  const [email, setEmail] = useState("");
+  const [scoreForMail, setScoreForMail] = useState(null);
+  const [offer, setOffer] = useState("");
+  const [adminEmail, setadminEmail] = useState("");
+
   const toggleModal = (score) => {
     setModal(!modal);
   };
@@ -62,6 +67,13 @@ export default function Score() {
           "http://localhost:8080/api/candidatRouters/searchuser",
           { params: { q: idUsers } }
         );
+        const idAdmin = localStorage.getItem("id");
+
+        const adminInfo = await axios.get(
+          `http://localhost:8080/api/adminRouters/getinfoAdmin/${idAdmin}`
+        );
+        setadminEmail(adminInfo.data.data.email);
+
         console.log("psps", idUsers);
         setScores(responseScores.data?.scores);
         setCountScores(responseScores.data?.scoreCount);
@@ -76,6 +88,57 @@ export default function Score() {
     fetchData();
   }, []);
   // console.log("currentScores",currentScores);
+
+  const accepterCandidat = async (e) => {
+    console.log("dkhalna", email, scoreForMail, offer, adminEmail);
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/api/adminRouters/accepterCandidatPR`,
+        {
+          email,
+          score: scoreForMail,
+          offer,
+          adminEmail,
+        }
+      );
+
+      console.log(response.data); // Affiche la réponse du serveur
+      // setScore(response.data.score);
+      // setEmail(response.data.email);
+      // setOffer(response.data.offer);
+      // setadminEmail(response.data.adminEmail);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // const rejeterCandidat = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:8080/api/adminRouters/RefuserCandidatPR",
+  //       {
+  //         email,
+  //         score,
+  //         offer,
+  //         adminEmail,
+  //       }
+  //     );
+
+  //     console.log(response.data); // Display the server response
+  //     setScore(response.data.score);
+  //     setEmail(response.data.email);
+  //     setOffer(response.data.offer);
+  //     setadminEmail(response.data.adminEmail);
+
+  //   } catch (error) {
+  //     console.error(error); // Display the error in case of a problem
+  //   }
+  // };
+  useEffect(() => {
+    console.log("offer tbadel", offer);
+  }, [offer]);
+
   return (
     <>
       <div className="s_container">
@@ -129,7 +192,14 @@ export default function Score() {
                               />
                               {console.log("score selected == >", score)}
 
-                              <button>Accepte</button>
+                              <button
+                                onClick={() => {
+                                  accepterCandidat();
+                                  toggleModal();
+                                }}
+                              >
+                                Accepte
+                              </button>
                               <button>Rejecte</button>
                             </div>
                           </div>
@@ -140,6 +210,14 @@ export default function Score() {
                         onClick={() => {
                           toggleModal(score);
                           setSelectedScore(score);
+                          setEmail(
+                            users.find((user) => user._id === score.user)?.email
+                          );
+                          setScoreForMail(score.result);
+                          setOffer(
+                            idOffer.find((offer) => offer._id === score.offer)
+                              ?.Name
+                          );
                         }}
                       >
                         display

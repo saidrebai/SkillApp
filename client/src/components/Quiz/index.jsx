@@ -23,7 +23,7 @@ export default function Quiz() {
   const Ref = useRef(null);
 
 
-  const [timer, setTimer] = useState("");
+  const [timer, setTimer] = useState("00:00:00");
   const [isCurrentQuestion, setIsCurrentQuestion] = useState(false);
 
 
@@ -42,7 +42,7 @@ export default function Quiz() {
 
   const startTimer = (e) => {
     let { total, hours, minutes, seconds } = getTimeRemaining(e);
-    if (total >0) {
+    if (total >=0) {
       setTimer(
         (hours > 9 ? hours : "0" + hours) +
           ":" +
@@ -50,18 +50,9 @@ export default function Quiz() {
           ":" +
           (seconds > 9 ? seconds : "0" + seconds)
       );
-    console.log("noo");
-    setIsCurrentQuestion(false);
-    console.log("is",isCurrentQuestion);
     }
-    // else if(total ===0){
-    //   clearTimer(getDeadTime());
-    // }
-    else{
-      setTimer("00:00:00");
+    else {
       handleNextPage();
-      if(isCurrentQuestion == true){
-      clearTimer(getDeadTime());}
     }
   };
 
@@ -72,13 +63,10 @@ export default function Quiz() {
       startTimer(e);
     }, 1000);
     Ref.current = id;
-    console.log("cleartime");
-    // setIsCurrentQuestion(false)
   };
 
   const getDeadTime = () => {
     let deadline = new Date();
- console.log("getdeadtime");
     deadline.setSeconds(deadline.getSeconds() + 10);
     return deadline;
    
@@ -87,19 +75,15 @@ export default function Quiz() {
   useEffect(() => {
     clearTimer(getDeadTime());
     console.log("userffet");
-  }, []);
+  }, [currentQuestionIndex]);
 
   const onClickReset = () => {
     clearTimer(getDeadTime());
   };
+const handleNextPage = ()=>{
+  setCurrentQuestionIndex(currentQuestionIndex + 1);
+}
 
-  const handleNextPage = ()=>{
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      console.log("hh",currentQuestionIndex);
-      setIsCurrentQuestion(true);
-      console.log(isCurrentQuestion);
-
-  }
 
 
   const addScore = async (e) => {
@@ -171,34 +155,32 @@ export default function Quiz() {
     <>
       <div className="q_container">
         <ToastContainer />
+        <h2 className="timer_container">{timer}</h2>
         {quiz.length > 0 && currentQuestionIndex < quiz.length ? (
           <div className="quiz_container">
             <div className="question">
-              <h2>{timer}</h2>
               <label>question : </label>
               {quiz[currentQuestionIndex].question}
             </div>
             <div className="answers">
-              {Object.keys(quiz[currentQuestionIndex].answers).length > 0 ? (
-                Object.keys(quiz[currentQuestionIndex].answers).map(
-                  (key, index) => (
+              {Object.keys(quiz[currentQuestionIndex].answers)
+              .filter((key) => quiz[currentQuestionIndex].answers[key] !== null)
+              .map((key, index) => (
                     <div className="answers_container" key={key}>
                       <div className="radio_group">
-                        {quiz[currentQuestionIndex].answers[key] !== null && (
+                        
                           <>
                             <label>
-                              <input type="radio" name="option" value={key} />
+                              <input className = "radio" type="radio" name="option" value={key} />
                               {quiz[currentQuestionIndex].answers[key]}
                             </label>
                           </>
-                        )}
+                      
                       </div>
                     </div>
                   )
                 )
-              ) : (
-                <div>No answers available.</div>
-              )}
+               }
             </div>
             <div className="pagination_container">
               <Stack spacing={2}>

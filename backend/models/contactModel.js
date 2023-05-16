@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const contactSchema = new mongoose.Schema({
   Name: {
     type: String,
-    required: true,
+    // required: true,
   },
   email: {
     type: String,
@@ -12,11 +12,23 @@ const contactSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: Number,
-    required: true,
+    // required: true,
   },
   message: {
     type: String,
-    required: true,
+    // required: true,
+  },
+  score: {
+    type: Number,
+    // required: true,
+  },
+  offer: {
+    type: String,
+    // required: true,
+  },
+  adminEmail: {
+    type: String,
+    // required: true,
   },
 });
 
