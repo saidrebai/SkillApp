@@ -3,6 +3,7 @@ const router = require("express").Router();
 
 router.post("/offers", offersControlles.createOffer);
 router.get("/getoffer", offersControlles.getoffer);
+router.get("/getoffebyid/:id", offersControlles.getoffeById);
 router.put("/updateoffer/:id", offersControlles.updateoffer);
 router.delete("/deleteOffer/:id", offersControlles.deleteOffer);
 router.get("/getofferbyid/:id", offersControlles.getOfferById);
