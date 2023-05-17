@@ -8,6 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import ReactStoreIndicator from "react-score-indicator";
 import { toast, ToastContainer } from "react-toastify";
+import { useTheme } from "@mui/material";
 
 export default function Quiz() {
   const id = localStorage.getItem("id");
@@ -16,6 +17,7 @@ export default function Quiz() {
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  // const [istrue, setIsTrue] = useState(false);
   const [newScore, setNewScore] = useState({
     offer: offerId,
     user: id,
@@ -85,6 +87,7 @@ export default function Quiz() {
     console.log(final);
     if (final) {
       try {
+        if(score >15){
         const response = await axios.post(
           "http://localhost:8080/api/scoreRouter/addscore",
           { ...newScore, result: score }
@@ -92,6 +95,14 @@ export default function Quiz() {
         console.log("yess", response.data);
         toast.success("Adding successfully!");
         localStorage.removeItem("score");
+
+        return true;
+      }
+      else{
+        toast.error("Adding failed!");
+        return false;
+      }
+        
       } catch (error) {
         if (
           error.response &&
@@ -100,6 +111,7 @@ export default function Quiz() {
         ) {
           toast.error("Adding failed!");
         }
+        return false;
       }
     }
     // }
@@ -144,6 +156,45 @@ export default function Quiz() {
       setScore(score);
     }
   };
+
+  const [updatedData, setUpdatedData] = useState({});
+  
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/offerRouter/getoffebyid/${offerId}`)
+      .then((response) => {
+        setUpdatedData(response.data.offer);
+        console.log("offer",response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleUpdate = async () => {
+    const addSuccessfully = await addScore();
+  if (addSuccessfully) {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/offerRouter/updateofferwithid/${offerId}`,
+        {
+          ...updatedData,
+          user: [...updatedData.user, id],
+        }
+      );
+      console.log("lala", response.data);
+
+      setUpdatedData(response.data);
+      // localStorage.setItem("offerId", updatedOffer._id);
+      return true;
+    } catch (error) {
+      console.error(error);
+      toast.error("Already Deposit")
+    }
+    return false;
+    }
+  };
+
 
   return (
     <>
@@ -205,6 +256,7 @@ export default function Quiz() {
                       calculateTotalScore();
                       addScore();
                       onClickReset();
+                      handleUpdate();
                     }}
                     color="primary"
                     variant="contained"
@@ -240,7 +292,8 @@ export default function Quiz() {
                       style={{ color: "#aaa" }}
                     />
                   }
-                  <h2>this is your score</h2>
+                  {score > 15 &&<h2 className="cong_msg">Congratulation you passed the quiz successfully</h2>}
+                  {score <= 15 &&<h2 className="inf_msg">Sorry you did not passed the quiz</h2>}
                 </div>
               </div>
             ) : (

@@ -169,7 +169,12 @@
   left: 9px;
   margin-top: 33px;
 }
-
+.cong_msg{
+  color: green;
+}
+.inf_msg{
+  color: red;
+}
 @keyframes spin1 {
   0% {
     transform: rotate(225deg);

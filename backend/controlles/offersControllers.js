@@ -45,6 +45,18 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
+  getoffeById: async function (req, res) {
+    try {
+      const offer = await offerModel.findById({_id : req.params.id});
+      if (!offer) {
+        return res.status(404).json({ message: "Offer not found" });
+      }
+      return res.status(200).json({ message: "Offer found", offer });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
   updateoffer: function (req, res) {
     offerModel
       .findByIdAndUpdate(req.params.id, {

@@ -120,6 +120,7 @@ module.exports = {
       zipCode: req.body.zipCode,
       Establishment: req.body.Establishment,
       cv: req.body.id,
+      status: req.body.status,
 
     }).exec(function (err, candid) {
       if (err) {
