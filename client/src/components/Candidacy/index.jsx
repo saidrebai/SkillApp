@@ -132,7 +132,7 @@ const Candidacy = () => {
                     <Grid item>
                       <Typography sx={{ cursor: "pointer" }} variant="body2">
                         <Box sx={{ width: "100%" }}>
-                          <Stepper activeStep={1} alternativeLabel>
+                          <Stepper activeStep={2} alternativeLabel>
                             {steps.map((label) => (
                               <Step key={label}>
                                 <StepLabel>{label}</StepLabel>

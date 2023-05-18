@@ -129,19 +129,19 @@ const Quiz=()=> {
     }
   };
 
-  const [updatedData, setUpdatedData] = useState({});
+  // const [updatedData, setUpdatedData] = useState({});
   
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/offerRouter/getoffebyid/${offerId}`)
-      .then((response) => {
-        setUpdatedData(response.data.offer);
-        console.log("offer",response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:8080/api/offerRouter/getoffebyid/${offerId}`)
+  //     .then((response) => {
+  //       setUpdatedData(response.data.offer);
+  //       console.log("offer",response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
 const addScore = async (e) => {
     const final = currentQuestionIndex === quiz.length - 1;
@@ -190,31 +190,6 @@ const addScore = async (e) => {
   };
 
 
-  // console.log("idScore",idScore);
-  
-  // const addApplication = async () => {
-  //   const addSuccessfully = await addScore();
-  //   if (addSuccessfully) {
-  //     try {
-  //       const response = await axios.post(
-  //         "http://localhost:8080/api/candidacyRouter/addCondidact",application
-        
-  //       );
-  //       console.log("new app", response.data);
-  //       toast.success("Adding application successfully!");
-  //       return true;
-  //     } catch (error) {
-  //       if (
-  //         error.response &&
-  //         error.response.status >= 400 &&
-  //         error.response.status <= 500
-  //       ) {
-  //         toast.error("Adding application failed!");
-  //       }
-  //       return false;
-  //     }
-  //   }
-  // };
 
 
   return (
@@ -279,7 +254,6 @@ const addScore = async (e) => {
                       calculateTotalScore();
                       addScore();
                       onClickReset();
-                      // addApplication();
                     }}
                     color="primary"
                     variant="contained"
