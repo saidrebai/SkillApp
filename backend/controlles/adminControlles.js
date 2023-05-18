@@ -244,7 +244,7 @@ module.exports = {
       console.log(acceptationForm);
       // console.log(req.body.adminEmail);
 
-      if (acceptationForm.score > 10) {
+      if (acceptationForm.score >= 15) {
         const emailContent =
           "Félicitations " +
           "! Bienvenue dans votre nouveau poste. " +
@@ -315,7 +315,7 @@ module.exports = {
         adminEmail: req.body.adminEmail,
       });
 
-      if (RefuserForm.score < 10) {
+      if (RefuserForm.score < 15) {
         const email_content =
           "Désolé, " +
           "! Votre candidature n'a pas été retenue pour l'offre : " +
