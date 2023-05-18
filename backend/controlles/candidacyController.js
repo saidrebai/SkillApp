@@ -24,9 +24,21 @@ module.exports = {
     });
   },
 
-  getCandidacyByUser: async function (req, res) {
+  // getCandidacyByUser: async function (req, res) {
+  //   try {
+  //     const Candidacy = await CandidacyModel.findOne({user: req.params.id});
+  //     if (!Candidacy) {
+  //       return res.status(404).json({ message: "Candidacy not found" });
+  //     }
+  //     return res.status(200).json({ message: "Candidacy found", Candidacy });
+  //   } catch (error) {
+  //     console.error(error);
+  //     return res.status(500).json({ message: "Internal Server Error" });
+  //   }
+  // },
+  getCandidacy: async function (req, res) {
     try {
-      const Candidacy = await CandidacyModel.findOne({user: req.params.id});
+      const Candidacy = await CandidacyModel.find({user: req.params.id});
       if (!Candidacy) {
         return res.status(404).json({ message: "Candidacy not found" });
       }
@@ -36,13 +48,16 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
-  getCandidacy: async function (req, res) {
+
+  updateCandidacy: async function (req, res) {
     try {
-      const Candidacy = await CandidacyModel.find({user: req.params.id});
+      const Candidacy = await CandidacyModel.findByIdAndUpdate(req.params.id ,{
+        accepted : true,
+      });
       if (!Candidacy) {
-        return res.status(404).json({ message: "Candidacy not found" });
+        return res.status(404).json({ message: "update Candidacy failed" });
       }
-      return res.status(200).json({ message: "Candidacy found", Candidacy });
+      return res.status(200).json({ message: "Candidacy updated", Candidacy });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });

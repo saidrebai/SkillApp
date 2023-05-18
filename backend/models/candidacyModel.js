@@ -17,6 +17,10 @@ const candidacySchema = new mongoose.Schema({
     required: true,
     ref: "user",
   },
+  accepted:{
+    type: Boolean,
+    default: false
+  }
 },
 { timestamps: true }
 );

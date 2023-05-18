@@ -182,11 +182,27 @@ module.exports = {
       res.status(500).send('Error adding cv to user');
     }
   },
-  searchItems : async function (req, res) {
+  searchItems: async function (req, res) {
     try {
       const ids = req.query.q.split(","); // Convert comma-separated string of ids into an array
-      const filteredItems = await User.find({ _id: { $in: ids } });
-      res.status(200).json({ msg: "Items found", status: 200, data: filteredItems, usercount:filteredItems.length});
+      const batchSize = 10; // Define the number of IDs to include in each batch
+      const batchCount = Math.ceil(ids.length / batchSize);
+      const filteredItems = [];
+  
+      for (let i = 0; i < batchCount; i++) {
+        const start = i * batchSize;
+        const end = start + batchSize;
+        const batchIds = ids.slice(start, end);
+        const batchItems = await User.find({ _id: { $in: batchIds } });
+        filteredItems.push(...batchItems);
+      }
+  
+      res.status(200).json({
+        msg: "Items found",
+        status: 200,
+        data: filteredItems,
+        usercount: filteredItems.length,
+      });
     } catch (error) {
       console.error(error);
       res.status(500).send("Error searching for items in database");
