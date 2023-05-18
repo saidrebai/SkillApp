@@ -1,3 +1,7 @@
+.quiz{
+  margin-right: auto;
+    max-width: 1093px;
+}
 .q_container {
   min-height: 80%;
 }
@@ -7,26 +11,26 @@
   align-items: center;
   min-height: 50%;
   background-color: #e9ac4a80;
-  padding: 150px;
+  padding: 20px;
   border-radius: 5px;
-  margin: 20px 250px;
+  margin: 20px 30px;
   border-style: solid;
   border-color: coral;
   border-radius: 7px;
 }
 .question {
   margin: 10px;
-  font-size: xx-large;
+  font-size: x-large;
+  /* background-color: rgb(221, 56, 56); */
 }
 .answers {
-    display: flex;
-    width: 900px;
-    height: 500px;
+  display: flex;
+    width: 1246px;
+    height: 434px;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+    /* background-color: aquamarine; */
+    align-content: flex-start;
 }
 .answers_container {
   font-size: larger;
@@ -36,7 +40,7 @@
   border-color: coral;
   border-radius: 7px;
   background-color: white;
-  width: 350px;
+  width: 500px;
   height: 120px;
   display: flex;
 }
@@ -46,8 +50,14 @@
 }
 .timer_container {
   position: absolute;
-  right: 1px;
   top: 30px;
+  right: -221px;
+}
+.next_container{
+  display: flex;
+    justify-content: center;
+    margin: 5px;
+    /* background-color: rgb(199, 125, 29); */
 }
 
 @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400);

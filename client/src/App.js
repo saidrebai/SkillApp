@@ -19,6 +19,7 @@ import Offer from "./components/dashboardAdmin/Offer";
 import Quiz from "./components/Quiz/";
 import Score from "./components/dashboardAdmin/Score";
 import Calendar from "./components/dashboardAdmin/Calendar";
+import Candidacy from "./components/Candidacy";
 
 
 function App() {
@@ -55,6 +56,9 @@ function App() {
       {!user && <Route path="/login" exact element={<Login />} />}
       {user && isAdmin === "false" && (
         <Route path="/Account" exact element={<Account />} />
+      )}
+      {user && isAdmin === "false" && (
+        <Route path="/candidacy" exact element={<Candidacy />} />
       )}
       {!user && <Route path="/AccountA" exact element={<Login />} />}
       {(isAdmin === "false" || !isAdmin) && (
