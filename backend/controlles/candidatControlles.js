@@ -192,7 +192,8 @@ module.exports = {
       res.status(500).send("Error searching for items in database");
     }
   },
-  ResetPassword: async (req, res, next) => {
+
+  resetPassword: async (req, res, next) => {
     try {
       const password = randomString(
         10,

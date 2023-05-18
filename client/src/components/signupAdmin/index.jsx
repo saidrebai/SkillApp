@@ -29,6 +29,7 @@ const Signup = () => {
       const { data: res } = await axios.post(url, data);
       navigate("/login");
       console.log(res.message);
+      
     } catch (error) {
       if (
         error.response &&

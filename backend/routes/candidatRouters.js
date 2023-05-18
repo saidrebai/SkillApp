@@ -9,6 +9,6 @@ router.get("/getAll", candidatControlles.getAll)
 router.delete("/deleteuser/:id", candidatControlles.deleteUser);
 router.put("/updateuserwithcv/:id",candidatControlles.addCvIdToUser);
 router.get("/searchuser", candidatControlles.searchItems);
-router.post("/ResetPassword", candidatControlles.ResetPassword);
+router.post("/resetPassword", candidatControlles.resetPassword);
 
 module.exports = router;

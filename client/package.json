@@ -13,6 +13,7 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.11",
     "@nivo/bar": "^0.81.0",
+    "@nivo/core": "^0.83.0",
     "@nivo/line": "^0.81.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
