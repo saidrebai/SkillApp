@@ -5,6 +5,7 @@ import "./styles.modules.css";
 
 const Login = () => {
   const user = localStorage.getItem("token");
+  // const history = useHistory();
 
   const [type, setType] = useState("password");
   const [data, setData] = useState({ email: "", password: "" });
@@ -86,7 +87,21 @@ const Login = () => {
       setType("password");
     }
   };
+  const handleForgotPassword = (event) => {
+    event.preventDefault(); // Prevents the default navigation behavior
 
+    // Check if the required fields are filled
+    const isFormValid = document.querySelector('.from_container').checkValidity();
+
+    if (isFormValid) {
+      // Navigate to the "ForgotPassword" page
+      // history.push('/ForgotPassword');
+      window.location = "/ForgotPassword";
+    } else {
+      // Display an error message or perform any other action
+      console.log('Please fill in all required fields.');
+    }
+  };
   return (
     <>
       <div className="login_container">
@@ -96,12 +111,12 @@ const Login = () => {
               <h1>Login to Your Account</h1>
               <div className="radio_group">
                 <label>
-                  <input type="radio" name="option" value="option1" />
+                  <input type="radio" name="option" value="option1" required/>
                   Admin
                 </label>
 
                 <label>
-                  <input type="radio" name="option" value="option2" />
+                  <input type="radio" name="option" value="option2" required />
                   User
                 </label>
               </div>
@@ -138,7 +153,7 @@ const Login = () => {
               <div className="ForgotPass">
                 <p>
                   Forgot Password
-                  <NavLink to="/ForgotPassword"> Click Here</NavLink>
+                  <button onClick={handleForgotPassword}> Click Here</button>
                 </p>
               </div>
             </form>
