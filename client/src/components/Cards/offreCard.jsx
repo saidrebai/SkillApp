@@ -66,8 +66,8 @@ export default function Card() {
       const formData = new FormData();
       formData.append("pdfs", pdfs);
       formData.append("id", id);
-      // const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
-      // if (submissionSuccessful) {
+      const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
+      if (submissionSuccessful) {
         try {
           const { data: res } = await axios.post(
             "http://localhost:8080/api/uploadRouter/upload",
@@ -87,7 +87,7 @@ export default function Card() {
           return false;
         }
       }
-    // }
+    }
   };
 
   const handleParse = async (e) => {
@@ -175,8 +175,8 @@ export default function Card() {
   };
 
   const updateUser = async () => {
-    // const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
-    // if (submissionSuccessful) {
+    const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
+    if (submissionSuccessful) {
       try {
         const response = await axios.put(
           `http://localhost:8080/api/candidatRouters/updateuserwithcv/${id}`,
@@ -200,7 +200,7 @@ export default function Card() {
       } catch (error) {
         console.error(error);
       }
-    // }
+    }
   };
 
   useEffect(() => {

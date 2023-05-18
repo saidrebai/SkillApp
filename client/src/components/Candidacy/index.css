@@ -1,0 +1,11 @@
+.candidacy_container{
+    background-color: #f5f5f5;
+    padding-bottom: 20px;
+}
+.first_img{
+width: 80%;
+height: 500px;
+margin-left: 170px;
+margin-top: 10px;
+border-radius: 5px;
+}

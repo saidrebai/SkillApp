@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
-import { formatDate } from '@fullcalendar/core'
+import { formatDate } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -124,7 +124,7 @@ const Calendar = () => {
             ]}
           />
         </Box>
-                <Box
+        <Box
           flex="1 1 20%"
           backgroundColor={colors.primary[400]}
           p="15px"

@@ -48,6 +48,10 @@ function ResponsiveAppBar() {
   const handleDashboardClick = () => {
     window.location.href = "/dashboardA";
   };
+  const handleAppClick = () => {
+    window.location.href = "/candidacy";
+  };
+
   const handlelogoutClick = () => {
     window.location.href = "/login";
     localStorage.removeItem("token");
@@ -225,11 +229,16 @@ function ResponsiveAppBar() {
                 >
                   {!isSuperAdmin && (
                   <MenuItem key="Account" onClick={handleAccountClick}>
-                    <Typography textAlign="center">Account</Typography>
+                    <Typography textAlign="center">Profil</Typography>
                   </MenuItem>)} 
                   {isAdmin === "true" && (
                     <MenuItem key="Dashboard" onClick={handleDashboardClick}>
                       <Typography textAlign="center">Dashboard</Typography>
+                    </MenuItem>
+                  )}
+                  {isAdmin === "false" && (
+                    <MenuItem key="application" onClick={handleAppClick}>
+                      <Typography textAlign="center">my Applications</Typography>
                     </MenuItem>
                   )}
                   <MenuItem key="logout" onClick={handlelogoutClick}>
