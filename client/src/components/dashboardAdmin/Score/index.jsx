@@ -89,9 +89,8 @@ export default function Score() {
   }, []);
   // console.log("currentScores",currentScores);
 
-  const accepterCandidat = async (e) => {
+  const accepterCandidat = async () => {
     console.log("dkhalna", email, scoreForMail, offer, adminEmail);
-    e.preventDefault();
     try {
       const response = await axios.post(
         `http://localhost:8080/api/adminRouters/accepterCandidatPR`,
@@ -103,38 +102,31 @@ export default function Score() {
         }
       );
 
-      console.log(response.data); // Affiche la réponse du serveur
-      // setScore(response.data.score);
-      // setEmail(response.data.email);
-      // setOffer(response.data.offer);
-      // setadminEmail(response.data.adminEmail);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // const rejeterCandidat = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8080/api/adminRouters/RefuserCandidatPR",
-  //       {
-  //         email,
-  //         score,
-  //         offer,
-  //         adminEmail,
-  //       }
-  //     );
+  const rejeterCandidat = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/api/adminRouters/refuserCandidatPR`,
+        {
+          email,
+          score: scoreForMail,
+          offer,
+          adminEmail,
+        }
+      );
 
-  //     console.log(response.data); // Display the server response
-  //     setScore(response.data.score);
-  //     setEmail(response.data.email);
-  //     setOffer(response.data.offer);
-  //     setadminEmail(response.data.adminEmail);
+      console.log(response.data); // Display the server response
+      console.log("waaaaa", offer);
+    } catch (error) {
+      console.error(error); // Display the error in case of a problem
+    }
+  };
 
-  //   } catch (error) {
-  //     console.error(error); // Display the error in case of a problem
-  //   }
-  // };
   useEffect(() => {
     console.log("offer tbadel", offer);
   }, [offer]);
@@ -200,7 +192,14 @@ export default function Score() {
                               >
                                 Accepte
                               </button>
-                              <button>Rejecte</button>
+                              <button
+                                onClick={() => {
+                                  rejeterCandidat();
+                                  toggleModal();
+                                }}
+                              >
+                                Rejecte
+                              </button>
                             </div>
                           </div>
                         </div>
