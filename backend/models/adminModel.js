@@ -27,11 +27,7 @@ const adminSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    tel: {
-      type: Number,
-      required: true,
-    },
-    fiscalCode: {
+    Phone: {
       type: Number,
       required: true,
     },

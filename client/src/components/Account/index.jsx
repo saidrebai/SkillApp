@@ -199,20 +199,20 @@ const Account = () => {
               <div className="form-input-container">
                 <div className="title-input-style">
                   <div className="containertext-input">
-                    <label className="title-style">Tel</label>
+                    <label className="title-style">Phone</label>
                   </div>
                 </div>
                 <div className="input-style">
                   <input
-                    type="tel"
-                    name="Tel"
-                    value={updatedData.tel}
+                    type="Phone"
+                    name="Phone"
+                    value={updatedData.Phone}
                     required={true}
                     maxLength={8}
                     onChange={(e) => {
                       setUpdatedData({
                         ...updatedData,
-                        tel: e.target.value,
+                        Phone: e.target.value,
                       });
                     }}
                     className="style-inputt"
@@ -639,21 +639,6 @@ const Account = () => {
                   <div className="containertext-input">
                     <label className="title-style">Establishment</label>
                   </div>
-                </div>
-                <div className="input-style">
-                  <input
-                    type="text"
-                    name="Establishment"
-                    value={updatedData.Establishment || newData.Establishment}
-                    required={true}
-                    onChange={(e) =>
-                      setUpdatedData({
-                        ...updatedData,
-                        Establishment: e.target.value,
-                      })
-                    }
-                    className="style-inputt"
-                  />
                 </div>
               </div>
             </div>
