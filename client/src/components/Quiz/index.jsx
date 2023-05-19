@@ -18,11 +18,11 @@ const Quiz=()=> {
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [idScore,setIdScore] = useState(null); 
-  const [application,setApplication] = useState({
-    offer : offerId,
-    user : id
-  }); 
+  // const [idScore,setIdScore] = useState(null); 
+  // const [application,setApplication] = useState({
+  //   offer : offerId,
+  //   user : id
+  // }); 
   const [newScore, setNewScore] = useState({
     offer: offerId,
     user: id,
@@ -150,22 +150,22 @@ const addScore = async (e) => {
       try {
         if(score >10){
         const response = await axios.post(
-          "http://localhost:8080/api/scoreRouter/addscore",
+          "http://localhost:8080/api/ApplicationRouter/addscore",
           { ...newScore, result: score }
         );
         console.log("score=====>", response.data);
         toast.success("Adding successfully!");
         localStorage.removeItem("score");
-        setIdScore(response?.data?.idScore);
-        const scoreID = response?.data?.idScore
-        const responseApp = await axios.post(
-          "http://localhost:8080/api/candidacyRouter/addCondidact",
-          {
-            ...application,
-            score : scoreID
-          })
-          console.log("new app", responseApp.data);
-          toast.success("Adding application successfully!");
+        // setIdScore(response?.data?.idScore);
+        // const scoreID = response?.data?.idScore
+        // const responseApp = await axios.post(
+        //   "http://localhost:8080/api/candidacyRouter/addCondidact",
+        //   {
+        //     ...application,
+        //     score : scoreID
+        //   })
+        //   console.log("new app", responseApp.data);
+        //   toast.success("Adding application successfully!");
 
 
         return true;

@@ -20,7 +20,6 @@ const Candidacy = () => {
 
   const [candidacy, setCandidacy] = useState([]);
   const [offer, setOffer] = useState([]);
-  const [score, setScore] = useState([]);
 
   console.log("ccc", candidacy);
 
@@ -28,31 +27,25 @@ const Candidacy = () => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/candidacyRouter/getCandidacy/${id}`
+          `http://localhost:8080/api/ApplicationRouter/getappbyuser/${id}`
         );
         setCandidacy(response.data.Candidacy);
+        // setIsAccepted(response.)
         console.log("response", response.data);
         const idOffers = response.data.Candidacy.map(
           (candidacy) => candidacy.offer
         ).join(",");
         console.log("offers", idOffers);
-        const idScore = response.data?.Candidacy?.map(
-          (candidacy) => candidacy.score
-        ).join(",");
-        console.log("scores", idScore);
-        const responseScores = await axios.get(
-          "http://localhost:8080/api/scoreRouter/getscoresbyid",
-          { params: { q: idScore } }
-        );
+        // const idScore = response.data?.Candidacy?.map(
+        //   (candidacy) => candidacy.score
+        // ).join(",");
+        // console.log("scores", idScore);
         const responseOffer = await axios.get(
           "http://localhost:8080/api/offerRouter/getofferbyids",
           { params: { q: idOffers } }
         );
-
-        setScore(responseScores.data.scores);
         setOffer(responseOffer.data.offers);
         console.log("off", offer);
-        console.log("scr", score);
       } catch (error) {
         console.error(error);
       }
@@ -67,11 +60,7 @@ const Candidacy = () => {
     maxHeight: "100%",
   });
 
-  const steps = [
-    "Applied ",
-    "Quiz Completed",
-    "Accepted",
-  ];
+  const steps = ["Applied ", "Quiz Completed", "Accepted"];
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -82,6 +71,13 @@ const Candidacy = () => {
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
+  };
+
+  const step = (acc) => {
+    if (acc === false) {
+      return 2;
+    }
+    return 3;
   };
   return (
     <>
@@ -103,7 +99,6 @@ const Candidacy = () => {
             >
               <Grid container spacing={2}>
                 <Grid item>
-                  {/* <p>{cand.offer}</p> */}
                   <ButtonBase sx={{ width: 128, height: 128 }}>
                     <Img alt="complex" src={img} />
                   </ButtonBase>
@@ -121,18 +116,24 @@ const Candidacy = () => {
                       <Typography variant="body2" gutterBottom>
                         {
                           offer.find((offer) => offer._id === cand.offer)
-                            ?.adresse
+                            ?.company_name
                         }
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        ID:{" "}
-                        {offer.find((offer) => offer._id === cand.offer)?._id}
+                        Adresse:{" "}
+                        {
+                          offer.find((offer) => offer._id === cand.offer)
+                            ?.adresse
+                        }
                       </Typography>
                     </Grid>
                     <Grid item>
                       <Typography sx={{ cursor: "pointer" }} variant="body2">
                         <Box sx={{ width: "100%" }}>
-                          <Stepper activeStep={2} alternativeLabel>
+                          <Stepper
+                            activeStep={step(cand.accepted)}
+                            alternativeLabel
+                          >
                             {steps.map((label) => (
                               <Step key={label}>
                                 <StepLabel>{label}</StepLabel>
@@ -146,7 +147,7 @@ const Candidacy = () => {
                   <Grid item>
                     <Typography variant="subtitle1" component="div">
                       SCORE:{" "}
-                      {score.find((score) => score._id === cand.score)?.result}
+                      {cand.result}
                     </Typography>
                   </Grid>
                 </Grid>

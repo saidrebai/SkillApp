@@ -36,7 +36,7 @@ const DashboardA = () => {
       );
        const idOffers = response.data.offer.map((offer) => offer._id).join(",");
       const responseScores = await axios.get(
-        "http://localhost:8080/api/scoreRouter/getscorebyid",
+        "http://localhost:8080/api/ApplicationRouter/getscorebyid",
         { params: { q: idOffers } }
       );
       setCountScores(responseScores.data?.scoreCount);
