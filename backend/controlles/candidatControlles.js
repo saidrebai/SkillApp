@@ -1,4 +1,4 @@
-const { User } = require("../models/user");
+const { User } = require("../models/candidat");
 const { vall } = require("../middleware/vall");
 const randomString = require("../utils/utils");
 const checkDuplicateEmail = require("../utils/utils");
@@ -21,7 +21,7 @@ const validate = (data) => {
   const schema = Joi.object({
     firstName: Joi.string().required().label("firstName"),
     lastName: Joi.string().required().label("lastName"),
-    tel: Joi.number().required().label("tel"),
+    Phone: Joi.number().required().label("Phone"),
     adresse: Joi.string().required().label("adresse"),
     email: Joi.string().email().required().label("Email"),
     password: passwordComplexity().required().label("Password"),
@@ -30,7 +30,6 @@ const validate = (data) => {
     country: Joi.string().required().label("country"),
     gender: Joi.string().required().label("gender"),
     zipCode: Joi.number().required().label("zipCode"),
-    Establishment: Joi.string().required().label("Establishment"),
     // cv: Joi.ref().label("cv"),
   });
   return schema.validate(data);
@@ -111,14 +110,13 @@ module.exports = {
     User.findByIdAndUpdate(req.params.id, {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      tel: req.body.tel,
+      Phone: req.body.Phone,
       adresse: req.body.adresse,
       birthDate: req.body.birthDate,
       town: req.body.town,
       country: req.body.country,
       gender: req.body.gender,
       zipCode: req.body.zipCode,
-      Establishment: req.body.Establishment,
       cv: req.body.id,
       status: req.body.status,
 
@@ -192,7 +190,8 @@ module.exports = {
       res.status(500).send("Error searching for items in database");
     }
   },
-  ResetPassword: async (req, res, next) => {
+
+  resetPassword: async (req, res, next) => {
     try {
       const password = randomString(
         10,

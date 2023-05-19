@@ -22,7 +22,9 @@ module.exports = {
       };
       
       const email_content =
-        "Bonjour cette contact form est d'apres le site " +
+        "Bonjour cette contact form est d'apres le site ," +
+        " Avec email : "+
+        contactForm.email +
         ",<br> name : " +
         contactForm.Name +
         ",<br> phoneNumber : " +

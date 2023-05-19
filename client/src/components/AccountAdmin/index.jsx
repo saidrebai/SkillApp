@@ -469,50 +469,26 @@ const AccountAdmin = () => {
           <div className="form-input-container-tel">
             <div className="title-input-style">
               <div className="containertext-input">
-                <label className="title-stylee">tel</label>
+                <label className="title-stylee">Phone</label>
               </div>
             </div>
             <div className="input-style">
               <input
-                type="tel"
-                name="tel"
+                type="Phone"
+                name="Phone"
                 required = {true}
                 maxLength={8}
-                value={updatedData.tel}
+                value={updatedData.Phone}
                 onChange={(e) =>
                   setUpdatedData({
                     ...updatedData,
-                    tel: e.target.value,
+                    Phone: e.target.value,
                   })
                 }
                 className="style-input"
               />
             </div>
           </div>
-
-          <div className="form-input-container-fiscalCode">
-            <div className="title-input-style">
-              <div className="containertext-input">
-                <label className="title-stylee">fiscalCode</label>
-              </div>
-            </div>
-            <div className="input-style">
-              <input
-                type="text"
-                name="fiscalCode"
-                required = {true}
-                value={updatedData.fiscalCode}
-                onChange={(e) =>
-                  setUpdatedData({
-                    ...updatedData,
-                    fiscalCode: e.target.value,
-                  })
-                }
-                className="style-input"
-              />
-            </div>
-          </div>
-
           <div>
             <div className="btn-container">
               <button type="submit" className="style-button">

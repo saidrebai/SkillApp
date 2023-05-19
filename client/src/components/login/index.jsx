@@ -91,17 +91,22 @@ const Login = () => {
     event.preventDefault(); // Prevents the default navigation behavior
 
     // Check if the required fields are filled
-    const isFormValid = document.querySelector('.from_container').checkValidity();
+    const isFormValidate = document
+      .querySelector(".from_container")
+      .checkValidity();
 
-    if (isFormValid) {
-      // Navigate to the "ForgotPassword" page
-      // history.push('/ForgotPassword');
+    if (isFormValidate) {
       window.location = "/ForgotPassword";
     } else {
-      // Display an error message or perform any other action
-      console.log('Please fill in all required fields.');
+      const requiredMessage = document.createElement("p");
+      requiredMessage.textContent = "Please fill in the required fields of an administrator or a user.";
+      requiredMessage.style.color = "red";
+
+      const formContainer = document.querySelector(".from_container");
+      formContainer.appendChild(requiredMessage);
     }
   };
+
   return (
     <>
       <div className="login_container">
@@ -111,12 +116,28 @@ const Login = () => {
               <h1>Login to Your Account</h1>
               <div className="radio_group">
                 <label>
-                  <input type="radio" name="option" value="option1" required/>
+                  <input
+                    type="radio"
+                    name="option"
+                    value="option1"
+                    required
+                    onClick={() => {
+                      localStorage.setItem("myUser", "admin");
+                    }}
+                  />
                   Admin
                 </label>
 
                 <label>
-                  <input type="radio" name="option" value="option2" required />
+                  <input
+                    type="radio"
+                    name="option"
+                    value="option2"
+                    required
+                    onClick={() => {
+                      localStorage.setItem("myUser", "user");
+                    }}
+                  />
                   User
                 </label>
               </div>
@@ -153,7 +174,7 @@ const Login = () => {
               <div className="ForgotPass">
                 <p>
                   Forgot Password
-                  <button onClick={handleForgotPassword}> Click Here</button>
+                  <NavLink onClick={handleForgotPassword}> Click Here</NavLink>
                 </p>
               </div>
             </form>

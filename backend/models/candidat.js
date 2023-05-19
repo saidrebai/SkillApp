@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 8,
   },
-  tel: {
+  Phone: {
     type: Number,
     required: true,
   },
@@ -48,10 +48,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Establishment: {
-    type: String,
-    required: true,
-  },
   cv: 
 		{
 			type: Schema.Types.ObjectId,
@@ -70,6 +66,6 @@ userSchema.methods.generateAuthToken = function () {
   return token;
 };
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("candidat", userSchema);
 
 module.exports = { User };
