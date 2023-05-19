@@ -18,11 +18,11 @@ const Quiz=()=> {
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [idScore,setIdScore] = useState(null); 
-  const [application,setApplication] = useState({
-    offer : offerId,
-    user : id
-  }); 
+  // const [idScore,setIdScore] = useState(null); 
+  // const [application,setApplication] = useState({
+  //   offer : offerId,
+  //   user : id
+  // }); 
   const [newScore, setNewScore] = useState({
     offer: offerId,
     user: id,
@@ -129,19 +129,19 @@ const Quiz=()=> {
     }
   };
 
-  const [updatedData, setUpdatedData] = useState({});
+  // const [updatedData, setUpdatedData] = useState({});
   
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/offerRouter/getoffebyid/${offerId}`)
-      .then((response) => {
-        setUpdatedData(response.data.offer);
-        console.log("offer",response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:8080/api/offerRouter/getoffebyid/${offerId}`)
+  //     .then((response) => {
+  //       setUpdatedData(response.data.offer);
+  //       console.log("offer",response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
 const addScore = async (e) => {
     const final = currentQuestionIndex === quiz.length - 1;
@@ -150,22 +150,22 @@ const addScore = async (e) => {
       try {
         if(score >10){
         const response = await axios.post(
-          "http://localhost:8080/api/scoreRouter/addscore",
+          "http://localhost:8080/api/ApplicationRouter/addscore",
           { ...newScore, result: score }
         );
         console.log("score=====>", response.data);
         toast.success("Adding successfully!");
         localStorage.removeItem("score");
-        setIdScore(response?.data?.idScore);
-        const scoreID = response?.data?.idScore
-        const responseApp = await axios.post(
-          "http://localhost:8080/api/candidacyRouter/addCondidact",
-          {
-            ...application,
-            score : scoreID
-          })
-          console.log("new app", responseApp.data);
-          toast.success("Adding application successfully!");
+        // setIdScore(response?.data?.idScore);
+        // const scoreID = response?.data?.idScore
+        // const responseApp = await axios.post(
+        //   "http://localhost:8080/api/candidacyRouter/addCondidact",
+        //   {
+        //     ...application,
+        //     score : scoreID
+        //   })
+        //   console.log("new app", responseApp.data);
+        //   toast.success("Adding application successfully!");
 
 
         return true;
@@ -190,31 +190,6 @@ const addScore = async (e) => {
   };
 
 
-  // console.log("idScore",idScore);
-  
-  // const addApplication = async () => {
-  //   const addSuccessfully = await addScore();
-  //   if (addSuccessfully) {
-  //     try {
-  //       const response = await axios.post(
-  //         "http://localhost:8080/api/candidacyRouter/addCondidact",application
-        
-  //       );
-  //       console.log("new app", response.data);
-  //       toast.success("Adding application successfully!");
-  //       return true;
-  //     } catch (error) {
-  //       if (
-  //         error.response &&
-  //         error.response.status >= 400 &&
-  //         error.response.status <= 500
-  //       ) {
-  //         toast.error("Adding application failed!");
-  //       }
-  //       return false;
-  //     }
-  //   }
-  // };
 
 
   return (
@@ -279,7 +254,6 @@ const addScore = async (e) => {
                       calculateTotalScore();
                       addScore();
                       onClickReset();
-                      // addApplication();
                     }}
                     color="primary"
                     variant="contained"

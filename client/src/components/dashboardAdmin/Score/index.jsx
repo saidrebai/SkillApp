@@ -22,6 +22,7 @@ export default function Score() {
   const [users, setUsers] = useState([]);
   const [modal, setModal] = useState(false);
   const [selectedScore, setSelectedScore] = useState(null);
+  const [application, setApplication] = useState({});
 
   const [email, setEmail] = useState("");
   const [scoreForMail, setScoreForMail] = useState(null);
@@ -57,7 +58,7 @@ export default function Score() {
           .map((offer) => offer._id)
           .join(",");
         const responseScores = await axios.get(
-          "http://localhost:8080/api/scoreRouter/getscorebyid",
+          "http://localhost:8080/api/ApplicationRouter/getscorebyid",
           { params: { q: idOffers } }
         );
         const idUsers = responseScores.data?.scores
@@ -131,6 +132,18 @@ export default function Score() {
     console.log("offer tbadel", offer);
   }, [offer]);
 
+  const updateCandidacy = async (userId) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/ApplicationRouter/updateUser/${userId}`
+      );
+      setApplication(response?.data);
+      console.log("candidacy updated", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <div className="s_container">
@@ -142,6 +155,7 @@ export default function Score() {
                 <TableRow>
                   <TableCell>Email</TableCell>
                   <TableCell align="right">Offer</TableCell>
+                  <TableCell align="right">Accepted</TableCell>
                   <TableCell align="right">Score</TableCell>
                 </TableRow>
               </TableHead>
@@ -153,6 +167,9 @@ export default function Score() {
                     </TableCell>
                     <TableCell align="right">
                       {idOffer.find((offer) => offer._id === score.offer)?.Name}
+                    </TableCell>
+                    <TableCell align="right">
+                      {score.accepted}
                     </TableCell>
                     <TableCell align="right">
                       {modal && (
@@ -188,6 +205,7 @@ export default function Score() {
                                 onClick={() => {
                                   accepterCandidat();
                                   toggleModal();
+                                  updateCandidacy(users.find((user) => user._id === score.user)?._id)
                                 }}
                               >
                                 Accepte

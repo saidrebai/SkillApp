@@ -33,7 +33,8 @@ function App() {
   const [isSidebar, setIsSidebar] = useState(true);
 
   return (<>
-  {isAdmin==="true" && window.location.pathname !== "/" && (<ColorModeContext.Provider value={colorMode}>
+  {isAdmin==="true" && window.location.pathname !== "/" && window.location.pathname !== "/resetpassword" && window.location.pathname !== "/login" &&
+  (<ColorModeContext.Provider value={colorMode}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className="app">
@@ -45,7 +46,7 @@ function App() {
       <Route path="/getoffers" exact element={<Offer />} />
       <Route path="/getscore" exact element={<Score />} />
       <Route path="/calendar" exact element={<Calendar />} />
-      {user &&<Route path="/AccountA" exact element={<AccountAdmin />} />}
+      <Route path="/AccountA" exact element={<AccountAdmin />} />
       </Routes></main></div>
       </ThemeProvider>
     </ColorModeContext.Provider>)}
@@ -66,7 +67,7 @@ function App() {
       )}
       <Route path="//" element={<Navigate replace to="/login" />} />
 
-      <Route path="/ForgotPassword" exact element={<ForgotPassword />} />
+      {!user && <Route path="/ForgotPassword" exact element={<ForgotPassword />} />}
       <Route path="/resetpassword" exact element={<ResetPassword />} />
       <Route path="/answerquiz" exact element={<Quiz />} />
 

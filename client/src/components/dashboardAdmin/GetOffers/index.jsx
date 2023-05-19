@@ -81,7 +81,7 @@ const GetOffer = () => {
         { params: { q: ids } }
       );
       setUsers(response.data.data);
-      console.log("response", response.data);
+      console.log("response====>", response?.data?.data);
       localStorage.setItem("ids", ids);
     } catch (error) {
       console.error(error);
