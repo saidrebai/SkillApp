@@ -155,6 +155,7 @@ export default function Score() {
                 <TableRow>
                   <TableCell>Email</TableCell>
                   <TableCell align="right">Offer</TableCell>
+                  <TableCell align="right">Accepted</TableCell>
                   <TableCell align="right">Score</TableCell>
                 </TableRow>
               </TableHead>
@@ -166,6 +167,9 @@ export default function Score() {
                     </TableCell>
                     <TableCell align="right">
                       {idOffer.find((offer) => offer._id === score.offer)?.Name}
+                    </TableCell>
+                    <TableCell align="right">
+                      {score.accepted}
                     </TableCell>
                     <TableCell align="right">
                       {modal && (
