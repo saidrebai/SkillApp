@@ -1,7 +1,7 @@
-const { scoreModel } = require("../models/scoreModel");
+const { ApplicationModel } = require("../models/ApplicationModel");
 
 module.exports = {
-  addScore: function (req, res) {
+  addApplication: function (req, res) {
     const score = {
       offer: req.body.id,
       user: req.body.id,
@@ -10,7 +10,7 @@ module.exports = {
 
     console.log("nneww", score);
 
-    scoreModel.create(req.body, function (err, score) {
+    ApplicationModel.create(req.body, function (err, score) {
       if (err)
         res.json({
           message: err,
@@ -26,9 +26,9 @@ module.exports = {
     });
   },
 
-  getScore: async function (req, res) {
+  getAllApplication: async function (req, res) {
     try {
-      const score = await scoreModel.find();
+      const score = await ApplicationModel.find();
       if (!score) {
         return res.status(404).json({ message: "score not found" });
       }
@@ -41,10 +41,10 @@ module.exports = {
     }
   },
 
-  getScoreById: async function (req, res) {
+  getApplicationByOffer: async function (req, res) {
     try {
       const ids = req.query.q.split(",");
-      const scores = await scoreModel.find({ offer: { $in: ids } });
+      const scores = await ApplicationModel.find({ offer: { $in: ids } });
       if (!scores) {
         return res.status(404).json({ message: "Scores not found" });
       }
@@ -56,16 +56,42 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
-  getScoresById: async function (req, res) {
+  getApplicationById: async function (req, res) {
     try {
       const ids = req.query.q.split(",");
-      const scores = await scoreModel.find({ _id: { $in: ids } });
+      const scores = await ApplicationModel.find({ _id: { $in: ids } });
       if (!scores) {
         return res.status(404).json({ message: "Scores not found" });
       }
       return res
         .status(200)
         .json({ message: "score found", scores, scoreCount: scores.length });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+  getApplicationByUser: async function (req, res) {
+    try {
+      const Candidacy = await ApplicationModel.find({user: req.params.id});
+      if (!Candidacy) {
+        return res.status(404).json({ message: "Candidacy not found" });
+      }
+      return res.status(200).json({ message: "Candidacy found", Candidacy });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+  updateApplication: async function (req, res) {
+    try {
+      const Candidacy = await ApplicationModel.findOne({user: req.params.id});
+      if (!Candidacy) {
+        return res.status(404).json({ message: "update Candidacy failed" });
+      }
+      Candidacy.accepted =true;
+      await Candidacy.save();
+      return res.status(200).json({ message: "Candidacy updated", Candidacy });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
