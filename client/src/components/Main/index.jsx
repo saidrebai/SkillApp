@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import myImg from "../images/Capture.PNG";
 import ImgAu from "../images/about-us-page-1.png";
-import logogmail from "../images/logogmail.png";
-import logoPhone from "../images/logoPhone.jpg";
 
 const Main = () => {
   const [pageviews, setPageviews] = useState();

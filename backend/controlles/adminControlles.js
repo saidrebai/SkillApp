@@ -19,8 +19,7 @@ const validate = (data) => {
     town: Joi.string().required().label("town"),
     adresse: Joi.string().required().label("adresse"),
     Zipcode: Joi.number().required().label("Zipcode"),
-    tel: Joi.number().required().label("tel"),
-    fiscalCode: Joi.number().required().label("fiscal Code"),
+    Phone: Joi.number().required().label("Phone"),
     email: Joi.string().email().required().label("Email"),
     password: passwordComplexity().required().label("Password"),
   });
@@ -103,8 +102,7 @@ module.exports = {
       town: req.body.town,
       adresse: req.body.adresse,
       Zipcode: req.body.Zipcode,
-      tel: req.body.tel,
-      fiscalCode: req.body.fiscalCode,
+      Phone: req.body.Phone,
     }).exec(function (err, admin) {
       if (err) {
         res.json({

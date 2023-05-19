@@ -37,7 +37,7 @@ function ForgotPassword() {
       <section>
         <div className="form_data">
           <div className="form_heading">
-            <h1>Check your Email</h1>
+            <h1>Write your Email</h1>
           </div>
           <form onSubmit={handleResetClick}>
             <label>Email :</label>
@@ -45,6 +45,7 @@ function ForgotPassword() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <button type="submit" className="btn_sub">
               Reset

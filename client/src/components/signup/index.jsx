@@ -10,7 +10,7 @@ const Signup = () => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
-    tel: "",
+    Phone: "",
     adresse: "",
     email: "",
     password: "",
@@ -19,7 +19,6 @@ const Signup = () => {
     country: "",
     gender: "",
     zipCode: "",
-    Establishment: "",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -113,11 +112,11 @@ const Signup = () => {
               className="inpute-signup"
             />
             <input
-              type="tel"
-              placeholder="tel"
-              name="tel"
+              type="number"
+              placeholder="Phone"
+              name="Phone"
               onChange={handleChange}
-              value={data.tel}
+              value={data.Phone}
               maxLength={8}
               required
               className="inpute-signup"
@@ -483,15 +482,6 @@ const Signup = () => {
               name="zipCode"
               onChange={handleChange}
               value={data.zipCode}
-              required
-              className="inpute-signup"
-            />
-            <input
-              type="text"
-              placeholder="Establishment"
-              name="Establishment"
-              onChange={handleChange}
-              value={data.Establishment}
               required
               className="inpute-signup"
             />

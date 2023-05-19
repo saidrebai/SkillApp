@@ -10,14 +10,19 @@ import ReactStoreIndicator from "react-score-indicator";
 import { toast, ToastContainer } from "react-toastify";
 import { useTheme } from "@mui/material";
 
-export default function Quiz() {
+const Quiz=()=> {
   const id = localStorage.getItem("id");
   const offerId = localStorage.getItem("offerId");
-
+  // const scoreId = localStorage.getItem("scoreId")
+  
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  // const [istrue, setIsTrue] = useState(false);
+  const [idScore,setIdScore] = useState(null); 
+  const [application,setApplication] = useState({
+    offer : offerId,
+    user : id
+  }); 
   const [newScore, setNewScore] = useState({
     offer: offerId,
     user: id,
@@ -25,7 +30,7 @@ export default function Quiz() {
   const Ref = useRef(null);
 
   const [timer, setTimer] = useState("00:00:00");
-  const [isCurrentQuestion, setIsCurrentQuestion] = useState(false);
+  // const [isCurrentQuestion, setIsCurrentQuestion] = useState(false);
 
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
@@ -82,40 +87,7 @@ export default function Quiz() {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 
-  const addScore = async (e) => {
-    const final = currentQuestionIndex === quiz.length - 1;
-    console.log(final);
-    if (final) {
-      try {
-        if(score >15){
-        const response = await axios.post(
-          "http://localhost:8080/api/scoreRouter/addscore",
-          { ...newScore, result: score }
-        );
-        console.log("yess", response.data);
-        toast.success("Adding successfully!");
-        localStorage.removeItem("score");
-
-        return true;
-      }
-      else{
-        toast.error("Adding failed!");
-        return false;
-      }
-        
-      } catch (error) {
-        if (
-          error.response &&
-          error.response.status >= 400 &&
-          error.response.status <= 500
-        ) {
-          toast.error("Adding failed!");
-        }
-        return false;
-      }
-    }
-    // }
-  };
+  
 
   useEffect(() => {
     async function fetchData() {
@@ -171,29 +143,78 @@ export default function Quiz() {
       });
   }, []);
 
-  const handleUpdate = async () => {
-    const addSuccessfully = await addScore();
-  if (addSuccessfully) {
-    try {
-      const response = await axios.put(
-        `http://localhost:8080/api/offerRouter/updateofferwithid/${offerId}`,
-        {
-          ...updatedData,
-          user: [...updatedData.user, id],
-        }
-      );
-      console.log("lala", response.data);
+const addScore = async (e) => {
+    const final = currentQuestionIndex === quiz.length - 1;
+    console.log(final);
+    if (final) {
+      try {
+        if(score >10){
+        const response = await axios.post(
+          "http://localhost:8080/api/scoreRouter/addscore",
+          { ...newScore, result: score }
+        );
+        console.log("score=====>", response.data);
+        toast.success("Adding successfully!");
+        localStorage.removeItem("score");
+        setIdScore(response?.data?.idScore);
+        const scoreID = response?.data?.idScore
+        const responseApp = await axios.post(
+          "http://localhost:8080/api/candidacyRouter/addCondidact",
+          {
+            ...application,
+            score : scoreID
+          })
+          console.log("new app", responseApp.data);
+          toast.success("Adding application successfully!");
 
-      setUpdatedData(response.data);
-      // localStorage.setItem("offerId", updatedOffer._id);
-      return true;
-    } catch (error) {
-      console.error(error);
-      toast.error("Already Deposit")
+
+        return true;
+      }
+      else{
+        toast.error("Adding score failed!");
+        return false;
+      }
+              
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.status >= 400 &&
+          error.response.status <= 500
+        ) {
+          toast.error("Adding failed!");
+        }
+        return false;
+      }
     }
-    return false;
-    }
+    // console.log("id score",idScore);
   };
+
+
+  // console.log("idScore",idScore);
+  
+  // const addApplication = async () => {
+  //   const addSuccessfully = await addScore();
+  //   if (addSuccessfully) {
+  //     try {
+  //       const response = await axios.post(
+  //         "http://localhost:8080/api/candidacyRouter/addCondidact",application
+        
+  //       );
+  //       console.log("new app", response.data);
+  //       toast.success("Adding application successfully!");
+  //       return true;
+  //     } catch (error) {
+  //       if (
+  //         error.response &&
+  //         error.response.status >= 400 &&
+  //         error.response.status <= 500
+  //       ) {
+  //         toast.error("Adding application failed!");
+  //       }
+  //       return false;
+  //     }
+  //   }
+  // };
 
 
   return (
@@ -219,6 +240,7 @@ export default function Quiz() {
               </div>
             </div>
             <label>Question : </label>
+            <div className="quiz">
             <div className="question">
               {quiz[currentQuestionIndex].question}
             </div>
@@ -245,7 +267,8 @@ export default function Quiz() {
                   </div>
                 ))}
             </div>
-            <div className="pagination_container">
+            
+          </div><div className="next_container">
               <Stack spacing={2}>
                 {currentQuestionIndex <= quiz.length && (
                   <Button
@@ -256,7 +279,7 @@ export default function Quiz() {
                       calculateTotalScore();
                       addScore();
                       onClickReset();
-                      handleUpdate();
+                      // addApplication();
                     }}
                     color="primary"
                     variant="contained"
@@ -266,8 +289,7 @@ export default function Quiz() {
                   </Button>
                 )}
               </Stack>
-            </div>
-          </div>
+            </div></div>
         ) : (
           <div>
             {" "}
@@ -307,3 +329,5 @@ export default function Quiz() {
     </>
   );
 }
+export default Quiz;
+

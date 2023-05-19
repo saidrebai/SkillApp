@@ -160,6 +160,21 @@ module.exports = {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  },
   
+  getOffByIds: async function (req, res) {
+    try {
+      const ids = req.query.q.split(",");
+      const offers = await offerModel.find({ _id: { $in: ids } });
+      if (!offers) {
+        return res.status(404).json({ message: "offers not found" });
+      }
+      return res
+        .status(200)
+        .json({ message: "offers are found", offers});
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
 };

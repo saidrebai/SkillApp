@@ -11,8 +11,7 @@ const Signup = () => {
     town: "",
     adresse: "",
     Zipcode: "",
-    tel: "",
-    fiscalCode: "",
+    Phone: "",
     email: "",
     password: "",
   });
@@ -358,19 +357,11 @@ const Signup = () => {
             />
             <input
               type="number"
-              placeholder="tel"
-              name="tel"
+              placeholder="Phone"
+              name="Phone"
               onChange={handleChange}
-              value={data.tel}
-              required
-              className="inpute-signup"
-            />
-            <input
-              type="number"
-              placeholder="fiscalCode"
-              name="fiscalCode"
-              onChange={handleChange}
-              value={data.fiscalCode}
+              value={data.Phone}
+              maxLength={8}
               required
               className="inpute-signup"
             />

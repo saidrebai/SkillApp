@@ -56,4 +56,19 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
+  getScoresById: async function (req, res) {
+    try {
+      const ids = req.query.q.split(",");
+      const scores = await scoreModel.find({ _id: { $in: ids } });
+      if (!scores) {
+        return res.status(404).json({ message: "Scores not found" });
+      }
+      return res
+        .status(200)
+        .json({ message: "score found", scores, scoreCount: scores.length });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
 };
