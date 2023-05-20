@@ -356,7 +356,7 @@ const Signup = () => {
               className="inpute-signup"
             />
             <input
-              type="number"
+              type="tel"
               placeholder="Phone"
               name="Phone"
               onChange={handleChange}

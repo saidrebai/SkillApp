@@ -139,6 +139,7 @@ const Main = () => {
                       id="phoneNumber"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
+                      maxLength={8}
                       required
                       className="input_contact"
                       placeholder="Phone Number"
