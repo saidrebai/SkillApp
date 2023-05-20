@@ -29,17 +29,18 @@ const Signup = () => {
   useEffect(() => {
     console.log("===>", data);
   }, [data]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const url = "http://localhost:8080/api/candidatRouters/signup";
       const { data: res } = await axios.post(url, data);
-      toast.success("Updated successfully!");
+      toast.success("created successfully!");
       navigate("/login");
       console.log(res.message);
     } catch (error) {
-      toast.error("Update failed!");
+      toast.error("created failed!");
       if (
         error.response &&
         error.response.status >= 400 &&
