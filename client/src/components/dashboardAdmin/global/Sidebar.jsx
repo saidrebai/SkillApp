@@ -151,7 +151,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Score"
+              title="Applications"
               to="/getscore"
               icon={<DonutSmallIcon />}
               selected={selected}

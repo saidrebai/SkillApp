@@ -21,6 +21,19 @@ export default function Card() {
   const [updatedOffer, setUpdatedOffer] = useState({});
   const [selectedOffer, setSelectedOffer] = useState(null);
   const [users, setUsers] = useState({ cv: [] });
+  const [isSubmited, setSubmited] = useState(false);
+  const [isOfferUpdated, setIsOfferUpdated] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 6;
+  const totalPages = Math.ceil(offers.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentOffers = offers.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
   const toggleModel = (offer) => {
     if (user) {
@@ -49,158 +62,170 @@ export default function Card() {
   }, []);
   console.log("======>", offers);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
-  const totalPages = Math.ceil(offers.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentOffers = offers.slice(startIndex, endIndex);
-
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
   const handleSubmit = async (e) => {
     if (e) {
       e.preventDefault();
       const formData = new FormData();
       formData.append("pdfs", pdfs);
       formData.append("id", id);
-      const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
-      if (submissionSuccessful) {
-        try {
-          const { data: res } = await axios.post(
-            "http://localhost:8080/api/uploadRouter/upload",
-            formData
-          );
-          console.log("===>", res);
-          localStorage.setItem("idpdf", res.idpdf);
-          toast.success("uploaded succesfuly");
-          return true;
-        } catch (error) {
-          if (error.response && error.response.status === 415) {
-            toast.error("PDF file only");
-          } else {
-            console.error(error);
-            toast.error("PDF file only");
-          }
-          return false;
+      try {
+        const { data: res } = await axios.post(
+          "http://localhost:8080/api/uploadRouter/upload",
+          formData
+        );
+        console.log("===>", res);
+        localStorage.setItem("idpdf", res.idpdf);
+        setSubmited(true);
+        toast.success("uploaded succesfuly");
+        // handleUpdate();
+        return true;
+      } catch (error) {
+        if (error.response && error.response.status === 415) {
+          toast.error("PDF file only");
+        } else {
+          console.error(error);
+          toast.error("PDF file only");
         }
+        setSubmited(false);
+        return false;
       }
     }
   };
+  console.log("sub is", isSubmited);
+useEffect(() => {
+  const handleUpdate = async () => {
+    console.log("submit is ", isSubmited);
+    if (isSubmited) {
+      try {
+        const response = await axios.put(
+          `http://localhost:8080/api/offerRouter/updateofferwithid/${updatedOffer._id}`,
+          {
+            ...updatedOffer,
+            user: [...updatedOffer.user, id],
+          }
+        );
+        console.log("offer updated", response?.data?.offer);
+        setIsOfferUpdated(true);
+        setUpdatedOffer(response?.data?.offer);
+        localStorage.setItem("offerId", updatedOffer._id);
+        // updateUser();
+        return true;
+      } catch (error) {
+        console.error(error);
+        toast.error("Already Deposit");
+        setIsOfferUpdated(false);
+      }
+      setSubmited(false);
+      return false;
+    }
+  };
+  handleUpdate();
+}, [isSubmited])
+
+  
+
+  // const updateUser = async () => {
+  //   // const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
+  //   if (isOfferUpdated) {
+  //     try {
+  //       const response = await axios.put(
+  //         `http://localhost:8080/api/candidatRouters/updateuserwithcv/${id}`,
+  //         {
+  //           ...users,
+  //           cv: [idpdf],
+  //         }
+  //       );
+  //       console.log("=>", response.data);
+  //       // toast.success("Updated successfully!");
+  //       setUsers(response.data);
+  //       localStorage.setItem("offerId", updatedOffer._id);
+  //       setIsOfferUpdated(false);
+  //       const confirmed = window.confirm(
+  //         "Are you ready to get started with the test ?\n"+
+  //         "the test contain 20 question with one ansewr every 10 sec"
+  //       );
+  //       if (confirmed) {
+  //       window.location = "/answerquiz";
+  //       }
+  //       return true;
+  //     } catch (error) {
+  //       console.error(error);
+  //       return false;
+  //     }
+  //   }
+  // };
+
+  // const onClickButton = () => {
+  //   handleUpdate()
+  //     .then((success) => {
+  //       if (success) {
+  //         handleParse();
+  //       }
+  //     })
+  // };
+
+  useEffect(() => {
+    const updateUser = async () => {
+      if (isSubmited && isOfferUpdated) {
+        try {
+          const response = await axios.put(
+            `http://localhost:8080/api/candidatRouters/updateuserwithcv/${id}`,
+            {
+              ...users,
+              cv: [idpdf],
+            }
+          );
+          console.log("=>", response.data);
+          // toast.success("Updated successfully!");
+          setUsers(response.data);
+          localStorage.setItem("offerId", updatedOffer._id);
+          setIsOfferUpdated(false);
+          const confirmed = window.confirm(
+            "Are you ready to get started with the test ?\n" +
+              "the test contain 20 question with one ansewr every 10 sec"
+          );
+          if (confirmed) {
+            window.location = "/answerquiz";
+          }
+          return true;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+
+    updateUser();
+  }, [isSubmited, isOfferUpdated]);
 
   const handleParse = async (e) => {
     // if (e) {
     //   e.preventDefault();
-      const formData = new FormData();
-      formData.append("pdfs", pdfs);
-      formData.append("id", id);
-      // const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
-      // if (submissionSuccessful) {
-        try {
-          const { data: res } = await axios.post(
-            "http://localhost:8080/api/uploadRouter/cvParser",
-            formData
-          );
-          console.log("frfr", res);
-          localStorage.setItem("skills", res);
-          // toast.success("uploaded succesfuly");
-          // return true;
-        } catch (error) {
-          if (error.response && error.response.status === 415) {
-            toast.error("PDF file only");
-          } else {
-            console.error(error);
-            toast.error("PDF file only");
-          }
-          // return false;
-        }
-      // }
+    const formData = new FormData();
+    formData.append("pdfs", pdfs);
+    formData.append("id", id);
+    // const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
+    // if (submissionSuccessful) {
+    try {
+      const { data: res } = await axios.post(
+        "http://localhost:8080/api/uploadRouter/cvParser",
+        formData
+      );
+      console.log("frfr", res);
+      localStorage.setItem("skills", res);
+      // toast.success("uploaded succesfuly");
+      // return true;
+    } catch (error) {
+      if (error.response && error.response.status === 415) {
+        toast.error("PDF file only");
+      } else {
+        console.error(error);
+        toast.error("PDF file only");
+      }
+      // return false;
+    }
+    // }
     // }
     console.log("work");
-  };
-
-  // const handleGetSkills = async (e) => {
-  //   // if (e) {
-  //   //   e.preventDefault();
-  //     const formData = new FormData();
-  //     formData.append("pdfs", pdfs);
-  //     formData.append("id", id);
-  //     // const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
-  //     // if (submissionSuccessful) {
-  //       try {
-  //         const { data: res } = await axios.post(
-  //           "{{baseUrl}}/products/alamakh/resume/:version/predict",
-  //           formData
-  //         );
-  //         console.log("frfr", res);
-  //         localStorage.setItem("skills", res);
-  //         // toast.success("uploaded succesfuly");
-  //         // return true;
-  //       } catch (error) {
-  //         if (error.response && error.response.status === 415) {
-  //           toast.error("PDF file only");
-  //         } else {
-  //           console.error(error);
-  //           toast.error("PDF file only");
-  //         }
-  //         // return false;
-  //       }
-  //     // }
-  //   // }
-  //   console.log("work");
-  // };
-
-  const handleUpdate = async () => {
-    try {
-      const response = await axios.put(
-        `http://localhost:8080/api/offerRouter/updateofferwithid/${updatedOffer._id}`,
-        {
-          ...updatedOffer,
-          user: [...updatedOffer.user, id],
-        }
-      );
-      console.log("lala", response.data);
-
-      setUpdatedOffer(response.data);
-      localStorage.setItem("offerId", updatedOffer._id);
-      return true;
-    } catch (error) {
-      console.error(error);
-      toast.error("Already Deposit")
-    }
-    return false;
-    // }
-  };
-
-  const updateUser = async () => {
-    const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
-    if (submissionSuccessful) {
-      try {
-        const response = await axios.put(
-          `http://localhost:8080/api/candidatRouters/updateuserwithcv/${id}`,
-          {
-            ...users,
-            cv: [idpdf],
-          }
-        );
-        console.log("=>", response.data);
-        // toast.success("Updated successfully!");
-        setUsers(response.data);
-        localStorage.setItem("offerId", updatedOffer._id);
-        const confirmed = window.confirm(
-          "Are you ready to get started with the test ?\n"+
-          "the test contain 20 question with one ansewr every 10 sec"
-        );
-        if (confirmed) {
-        window.location = "/answerquiz";
-        }
-        
-      } catch (error) {
-        console.error(error);
-      }
-    }
   };
 
   useEffect(() => {
@@ -293,7 +318,6 @@ export default function Card() {
                             type="button"
                             onClick={() => {
                               toggleModel();
-                              // updateUser();
                             }}
                           >
                             Close
@@ -304,9 +328,9 @@ export default function Card() {
                             type="submit"
                             onClick={() => {
                               // handleUpdate();
-                              updateUser();
+                              // updateUser();
+                              // onClickButton();
                               handleParse();
-                              // handleGetSkills();
                             }}
                           >
                             Send
