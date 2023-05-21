@@ -13,11 +13,13 @@ import { useTheme } from "@mui/material";
 const Quiz=()=> {
   const id = localStorage.getItem("id");
   const offerId = localStorage.getItem("offerId");
-  // const scoreId = localStorage.getItem("scoreId")
+  const skills = localStorage.getItem("skills");
   
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [offer,setOffer] = useState("");
+  const [hasSkill, setHasSkill] = useState(false);
   // const [idScore,setIdScore] = useState(null); 
   // const [application,setApplication] = useState({
   //   offer : offerId,
@@ -91,16 +93,52 @@ const Quiz=()=> {
 
   useEffect(() => {
     async function fetchData() {
+      if(hasSkill){
       const response = await axios.get(
-        `https://quizapi.io/api/v1/questions?apiKey=Aw9rwqe0uBihndUdtI5DtGpPuNqeDURVQeaLqLKN&difficulty=Hard&limit=20`
+        `https://quizapi.io/api/v1/questions?apiKey=Aw9rwqe0uBihndUdtI5DtGpPuNqeDURVQeaLqLKN&difficulty=Hard&limit=20&tags=${offer}`
       );
       setQuiz(response.data);
       console.log("==>", response.data.length);
       console.log("response", response.data);
+      console.log("tag===>",offer);
+      // console.log("tags",response?.data?.tags);
+    }else{
+      const confirm = window.confirm("your resume do not contain the necessecary skill for the offer !\nplease select another offer ")
+      if(confirm){
+        window.location="/offers"
+      }else{
+        window.location="/offers"
+      }
+    }
+  }
+    fetchData();
+  }, [hasSkill,skills, offer]);
+  // console.log("======>", quiz);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `http://localhost:8080/api/offerRouter/getoffebyid/${offerId}`
+      );
+      setOffer(response?.data?.offer?.skills);
+      console.log("==>", response.data.offer.skills);
+      // console.log("response", response.data);
     }
     fetchData();
   }, []);
-  // console.log("======>", quiz);
+
+  useEffect(() => {
+    // Check if competence contains skill
+    if (skills.includes(offer)) {
+      setHasSkill(true);
+    } else {
+      setHasSkill(false);
+    }
+    console.log("skills",skills);
+    console.log("offer skill",offer);
+    console.log("is is",hasSkill);
+  }, [skills, offer]);
+
 
   const handleNextQuestion = () => {
     if (document.querySelector('input[name="option"]:checked')) {
@@ -129,19 +167,7 @@ const Quiz=()=> {
     }
   };
 
-  // const [updatedData, setUpdatedData] = useState({});
-  
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:8080/api/offerRouter/getoffebyid/${offerId}`)
-  //     .then((response) => {
-  //       setUpdatedData(response.data.offer);
-  //       console.log("offer",response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
+
 
 const addScore = async (e) => {
     const final = currentQuestionIndex === quiz.length - 1;

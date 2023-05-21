@@ -44,14 +44,14 @@ function App() {
       <Routes>
       <Route path="/dashboardA" exact element={<DashboardA />} />
       <Route path="/getoffers" exact element={<Offer />} />
-      <Route path="/getscore" exact element={<Score />} />
+      <Route path="/application" exact element={<Score />} />
       <Route path="/calendar" exact element={<Calendar />} />
       <Route path="/AccountA" exact element={<AccountAdmin />} />
       </Routes></main></div>
       </ThemeProvider>
     </ColorModeContext.Provider>)}
     <Routes>
-      <Route path="/" exact element={<Main />} />
+      {(isAdmin === "false" || !user) &&<Route path="/" exact element={<Main />} />}
       {!user && <Route path="/signup" exact element={<Signup />} />}
       {!user && <Route path="/signupAdmin" exact element={<SignupAdmin />} />}
       {!user && <Route path="/login" exact element={<Login />} />}

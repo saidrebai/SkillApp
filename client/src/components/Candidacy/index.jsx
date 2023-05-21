@@ -128,8 +128,8 @@ const Candidacy = () => {
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <Typography sx={{ cursor: "pointer" }} variant="body2">
-                        <Box sx={{ width: "100%" }}>
+                      <Typography sx={{ cursor: "pointer"}} variant="body2">
+                        <Box sx={{ width: "100%"}}>
                           <Stepper
                             activeStep={step(cand.accepted)}
                             alternativeLabel

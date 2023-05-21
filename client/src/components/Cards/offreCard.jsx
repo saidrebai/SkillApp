@@ -164,6 +164,10 @@ useEffect(() => {
   //     })
   // };
 
+  // useEffect(() => {
+  //   handleParse();
+  // }, [isSubmited])
+  
   useEffect(() => {
     const updateUser = async () => {
       if (isSubmited && isOfferUpdated) {
@@ -180,13 +184,13 @@ useEffect(() => {
           setUsers(response.data);
           localStorage.setItem("offerId", updatedOffer._id);
           setIsOfferUpdated(false);
-          const confirmed = window.confirm(
-            "Are you ready to get started with the test ?\n" +
-              "the test contain 20 question with one ansewr every 10 sec"
-          );
-          if (confirmed) {
-            window.location = "/answerquiz";
-          }
+          // const confirmed = window.confirm(
+          //   "Are you ready to get started with the test ?\n" +
+          //     "the test contain 20 question with one ansewr every 10 sec"
+          // );
+          // if (confirmed) {
+          //   window.location = "/answerquiz";
+          // }
           return true;
         } catch (error) {
           console.error(error);
@@ -197,36 +201,69 @@ useEffect(() => {
     updateUser();
   }, [isSubmited, isOfferUpdated]);
 
-  const handleParse = async (e) => {
-    // if (e) {
-    //   e.preventDefault();
-    const formData = new FormData();
-    formData.append("pdfs", pdfs);
-    formData.append("id", id);
-    // const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
-    // if (submissionSuccessful) {
-    try {
-      const { data: res } = await axios.post(
-        "http://localhost:8080/api/uploadRouter/cvParser",
-        formData
-      );
-      console.log("frfr", res);
-      localStorage.setItem("skills", res);
-      // toast.success("uploaded succesfuly");
-      // return true;
-    } catch (error) {
-      if (error.response && error.response.status === 415) {
-        toast.error("PDF file only");
-      } else {
-        console.error(error);
-        toast.error("PDF file only");
+  useEffect(() => {
+    const handleParse = async (e) => {
+      const formData = new FormData();
+      formData.append("pdfs", pdfs);
+      formData.append("id", id);
+      if (isSubmited && isOfferUpdated) {
+      try {
+        const { data: res } = await axios.post(
+          "http://localhost:8080/api/uploadRouter/cvParser",
+          formData
+        );
+        console.log("frfr", res);
+        localStorage.setItem("skills", res.skills);
+        const confirmed = window.confirm(
+          "Are you ready to get started with the test ?\n" +
+            "the test contain 20 question with one ansewr every 10 sec"
+        );
+        if (confirmed) {
+          window.location = "/answerquiz";
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 415) {
+          toast.error("PDF file only");
+        } else {
+          console.error(error);
+          toast.error("PDF file only");
+        }
       }
-      // return false;
-    }
-    // }
-    // }
-    console.log("work");
-  };
+      console.log("work");
+    };
+  }
+
+    handleParse();
+  }, [isSubmited, isOfferUpdated]);
+
+  // const handleParse = async (e) => {
+  //   const formData = new FormData();
+  //   formData.append("pdfs", pdfs);
+  //   formData.append("id", id);
+  //   try {
+  //     const { data: res } = await axios.post(
+  //       "http://localhost:8080/api/uploadRouter/cvParser",
+  //       formData
+  //     );
+  //     console.log("frfr", res);
+  //     localStorage.setItem("skills", res);
+  //     const confirmed = window.confirm(
+  //       "Are you ready to get started with the test ?\n" +
+  //         "the test contain 20 question with one ansewr every 10 sec"
+  //     );
+  //     if (confirmed) {
+  //       window.location = "/answerquiz";
+  //     }
+  //   } catch (error) {
+  //     if (error.response && error.response.status === 415) {
+  //       toast.error("PDF file only");
+  //     } else {
+  //       console.error(error);
+  //       toast.error("PDF file only");
+  //     }
+  //   }
+  //   console.log("work");
+  // };
 
   useEffect(() => {
     if (selectedOffer) {
@@ -330,7 +367,7 @@ useEffect(() => {
                               // handleUpdate();
                               // updateUser();
                               // onClickButton();
-                              handleParse();
+                              // handleParse();
                             }}
                           >
                             Send
@@ -348,9 +385,7 @@ useEffect(() => {
               </Box>
             )}
           </tr>
-        </table>
-      </div>
-      <div className="pagination_container">
+        </table><div className="pagination_container">
         <Stack spacing={2}>
           <Pagination
             count={totalPages}
@@ -360,6 +395,8 @@ useEffect(() => {
           />
         </Stack>
       </div>
+      </div>
+      
     </>
   );
 }

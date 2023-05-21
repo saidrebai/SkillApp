@@ -227,15 +227,15 @@ function ResponsiveAppBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {!isSuperAdmin && (
+                  {!isSuperAdmin && isAdmin ==="false"&& (
                   <MenuItem key="Account" onClick={handleAccountClick}>
                     <Typography textAlign="center">Profil</Typography>
                   </MenuItem>)} 
-                  {isAdmin === "true" && (
+                  {/* {isAdmin === "true" && (
                     <MenuItem key="Dashboard" onClick={handleDashboardClick}>
                       <Typography textAlign="center">Dashboard</Typography>
                     </MenuItem>
-                  )}
+                  )} */}
                   {isAdmin === "false" && (
                     <MenuItem key="application" onClick={handleAppClick}>
                       <Typography textAlign="center">my Applications</Typography>
