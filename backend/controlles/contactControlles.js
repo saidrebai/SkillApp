@@ -34,7 +34,7 @@ module.exports = {
        
       const mailOptions = {
         //   from: "Openjavascript <test@openjavascript.info>",
-        to: contactForm.email,
+        to: process.env.MAIL_USERNAME,
         subject: "Message SkillApp",
         html: email_content,
       };
@@ -53,10 +53,12 @@ module.exports = {
           });
         }
       );
+      
       res.status(201).send({ message: "contact Created", contact });
       console.log("contact", contact);
     } catch (err) {
       res.status(400).send({ message: "An error occured" });
     }
+
   },
 };

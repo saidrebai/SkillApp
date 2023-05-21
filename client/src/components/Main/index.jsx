@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles.modules.css";
+import { toast, ToastContainer } from "react-toastify";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import myImg from "../images/Capture.PNG";
@@ -49,10 +50,12 @@ const Main = () => {
       })
       .then((response) => {
         console.log(response.data);
+         toast.success("Email was sent successfully");
         //Afficher un message de confirmation
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Error failed!");
         //Afficher un message d'erreur
       });
   };
@@ -136,6 +139,7 @@ const Main = () => {
                       id="phoneNumber"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
+                      maxLength={8}
                       required
                       className="input_contact"
                       placeholder="Phone Number"
@@ -172,6 +176,7 @@ const Main = () => {
                   <p class="ova_text">
                     <a href="tel:53107042"> (+216) 53 107 042</a>
                   </p>
+                  <ToastContainer />
                 </div>
               </div>
             </div>
