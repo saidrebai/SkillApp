@@ -131,24 +131,53 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
-  deleteAdmin: function (req, res) {
-    Admin.findByIdAndRemove({ _id: req.params.id }, (err, Admin) => {
-      if (err) {
-        res.status(500),
-          json({
-            msg: "erreur",
-            status: 500,
-            data: null,
-          });
-      } else {
-        res.status(200).json({
-          msg: "Admin deleted!",
-          status: 200,
-          data: Admin,
+  // deleteAdmin: function (req, res) {
+  //   Admin.findByIdAndRemove({ _id: req.params.id }, (err, Admin) => {
+  //     if (err) {
+  //       res.status(500),
+  //         json({
+  //           msg: "erreur",
+  //           status: 500,
+  //           data: null,
+  //         });
+  //     } else {
+  //       res.status(200).json({
+  //         msg: "Admin deleted!",
+  //         status: 200,
+  //         data: Admin,
+  //       });
+  //     }
+  //   });
+  // },
+  deleteAdmin: async function (req, res) {
+    try {
+      const idAdmin = req.params.id;
+      // Find the admin document
+      const admin = await Admin.findById(idAdmin);
+      if (!admin) {
+        return res.status(404).json({
+          msg: "Admin not found",
+          status: 404,
+          data: null,
         });
       }
-    });
+      // Delete the admin document (triggers the middleware)
+      await admin.remove();
+      return res.status(200).json({
+        msg: "Admin deleted!",
+        status: 200,
+        data: admin,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        msg: "Internal server error",
+        status: 500,
+        data: null,
+      });
+    }
   },
+
   ResetPassword: async (req, res, next) => {
     try {
       const password = randomString(

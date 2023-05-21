@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const {ApplicationModel} = require("./ApplicationModel");
 
 const offerSchema = new mongoose.Schema({
   type: {
@@ -41,6 +42,16 @@ const offerSchema = new mongoose.Schema({
 },
 { timestamps: true }
 );
+
+offerSchema.pre("remove", async function (next) {
+  const offerId = this._id;
+  try {
+    await ApplicationModel.deleteMany({ offer: offerId });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 const offerModel = mongoose.model("offerModel", offerSchema);
 
