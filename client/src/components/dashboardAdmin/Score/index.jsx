@@ -169,7 +169,7 @@ export default function Score() {
                       {idOffer.find((offer) => offer._id === score.offer)?.Name}
                     </TableCell>
                     <TableCell align="right">
-                      {score.accepted}
+                      {score.accepted ===true ?(<div>true</div>):(<div>false</div>)}
                     </TableCell>
                     <TableCell align="right">
                       {modal && (

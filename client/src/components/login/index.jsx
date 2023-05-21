@@ -113,11 +113,12 @@ const Login = () => {
         <div className="login_from_container">
           <div className="left">
             <form className="from_container" onSubmit={handleSubmit}>
-              <h1>Login to Your Account</h1>
+              <h1 className="login">Login to your account</h1>
               <div className="radio_group">
                 <label>
                   <input
                     type="radio"
+                    className="radio_button"
                     name="option"
                     value="option1"
                     required
@@ -133,6 +134,7 @@ const Login = () => {
                     type="radio"
                     name="option"
                     value="option2"
+                    className="radio_button"
                     required
                     onClick={() => {
                       localStorage.setItem("myUser", "user");
@@ -180,14 +182,14 @@ const Login = () => {
             </form>
           </div>
           <div className="right">
-            <h1>New here ?</h1>
-            <div className="radio_grp">
+            <h1 className="login">Get started</h1>
+            <div className="radio_group">
               <label>
-                <input type="radio" name="opt" value="opt1" />
+                <input className="radio_button" type="radio" name="opt" value="opt1" />
                 Admin
               </label>
               <label>
-                <input type="radio" name="opt" value="opt2" />
+                <input className="radio_button" type="radio" name="opt" value="opt2" />
                 User
               </label>
             </div>

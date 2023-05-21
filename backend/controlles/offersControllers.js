@@ -85,23 +85,51 @@ module.exports = {
         }
       });
   },
-  deleteOffer: function (req, res) {
-    offerModel.findByIdAndRemove({ _id: req.params.id }, (err, offerr) => {
-      if (err) {
-        res.status(500),
-          json({
-            msg: "erreur",
-            status: 500,
-            data: null,
-          });
-      } else {
-        res.status(200).json({
-          msg: "offerr deleted!",
-          status: 200,
-          data: offerr,
+  // deleteOffer: function (req, res) {
+  //   offerModel.findByIdAndRemove({ _id: req.params.id }, (err, offerr) => {
+  //     if (err) {
+  //       res.status(500),
+  //         json({
+  //           msg: "erreur",
+  //           status: 500,
+  //           data: null,
+  //         });
+  //     } else {
+  //       res.status(200).json({
+  //         msg: "offerr deleted!",
+  //         status: 200,
+  //         data: offerr,
+  //       });
+  //     }
+  //   });
+  // },
+  deleteOffer: async function (req, res) {
+    try {
+      const offerId = req.params.id;
+      // Find the user document
+      const offer = await offerModel.findById(offerId);
+      if (!offer) {
+        return res.status(404).json({
+          msg: "offer not found",
+          status: 404,
+          data: null,
         });
       }
-    });
+      // Delete the offer document
+      await offer.remove();
+      return res.status(200).json({
+        msg: "offer deleted!",
+        status: 200,
+        data: offer,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        msg: "Internal server error",
+        status: 500,
+        data: null,
+      });
+    }
   },
   getOfferById: async function (req, res) {
     try {

@@ -148,24 +148,53 @@ module.exports = {
   		return res.status(500).json({ message: "Internal Server Error" });
   	}
   },
-  deleteUser: function (req, res) {
-    User.findByIdAndRemove({ _id: req.params.id }, (err, user) => {
-      if (err) {
-        res.status(500),
-          json({
-            msg: "erreur",
-            status: 500,
-            data: null,
-          });
-      } else {
-        res.status(200).json({
-          msg: "user deleted!",
-          status: 200,
-          data: user,
+  // deleteUser: function (req, res) {
+  //   User.findByIdAndRemove({ _id: req.params.id }, (err, user) => {
+  //     if (err) {
+  //       res.status(500),
+  //         json({
+  //           msg: "erreur",
+  //           status: 500,
+  //           data: null,
+  //         });
+  //     } else {
+  //       res.status(200).json({
+  //         msg: "user deleted!",
+  //         status: 200,
+  //         data: user,
+  //       });
+  //     }
+  //   });
+  // },
+  deleteUser: async function (req, res) {
+    try {
+      const idUser = req.params.id;
+      // Find the user document
+      const user = await User.findById(idUser);
+      if (!user) {
+        return res.status(404).json({
+          msg: "User not found",
+          status: 404,
+          data: null,
         });
       }
-    });
+      // Delete the user document
+      await user.remove();
+      return res.status(200).json({
+        msg: "User deleted!",
+        status: 200,
+        data: user,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        msg: "Internal server error",
+        status: 500,
+        data: null,
+      });
+    }
   },
+
   addCvIdToUser: async function (req, res) {
     try {
       const updatedUser = await User.findByIdAndUpdate(

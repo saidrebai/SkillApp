@@ -1,28 +1,28 @@
 const PDF = require("../models/filesModels");
 const ocrSpace = require("../middleware/OCRSpace");
 const getCVData = require("../middleware/getCVData");
-const mindee = require("mindee");
+// const mindee = require("mindee");
 
-const getSkills = async(req,res)=>{
-const mindeeClient = new mindee.Client({
-  apiKey: "195eb6430f65eb1f4e6ceb761d5d27fc",
-}).addEndpoint({
-  accountName: "alamakh",
-  endpointName: "resume",
-});
+// const getSkills = async(req,res)=>{
+// const mindeeClient = new mindee.Client({
+//   apiKey: "195eb6430f65eb1f4e6ceb761d5d27fc",
+// }).addEndpoint({
+//   accountName: "alamakh",
+//   endpointName: "resume",
+// });
 
-const apiResponse = mindeeClient
-  .docFromPath(req.body.file)
-  .parse(mindee.CustomV1, { endpointName: "resume" });
+// const apiResponse = mindeeClient
+//   .docFromPath(req.body.file)
+//   .parse(mindee.CustomV1, { endpointName: "resume" });
 
-apiResponse.then((resp) => {
-  if (resp.document === undefined) return;
+// apiResponse.then((resp) => {
+//   if (resp.document === undefined) return;
 
-  console.log(resp.document);
+//   console.log(resp.document);
 
-  console.log(resp.document.toString());
-});
-}
+//   console.log(resp.document.toString());
+// });
+// }
 const parseFile = async (req, res, filePath) => {
   try {
     // const isCreateSearchablePdf = req.body.isCreateSearchablePdf;
@@ -134,5 +134,5 @@ module.exports = {
     }
   },
   factureParser,
-  getSkills
+  // getSkills
 };

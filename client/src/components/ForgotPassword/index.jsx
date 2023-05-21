@@ -17,12 +17,14 @@ function ForgotPassword() {
           { email }
         );
         console.log(response.data);
+        localStorage.removeItem("myUser");
       } else {
         const responsee = await axios.post(
           "http://localhost:8080/api/candidatRouters/resetPassword",
           { email }
         );
         console.log(responsee.data.email);
+        localStorage.removeItem("myUser");
       }
       setMessage(`Un e-mail a été envoyé à ${email}`);
       window.location.href = "/resetpassword";

@@ -1,9 +1,10 @@
 .container{
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
-    flex-direction: row;
+    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    /* background-color: #c12377; */
 }
 .offer_container{
     width: 347px;
@@ -147,21 +148,6 @@ body.active-popup{
     padding: 5px 7px;
     
 }
-/* .save_button{
-    border-radius: 5px;
-    border: none;
-    width: 100px;
-    height: 40px;
-    margin: 10px;
-    background-color: #304F6D;
-    color: rgb(255, 255, 255);
-    cursor: pointer;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    padding: 5px 7px;
-
-} */
 .title_cv{
     margin:20px;
 }

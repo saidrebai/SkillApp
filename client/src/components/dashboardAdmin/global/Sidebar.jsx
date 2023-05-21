@@ -14,7 +14,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Avatar from "@mui/material/Avatar";
 import ArticleIcon from '@mui/icons-material/Article';
-import DonutSmallIcon from '@mui/icons-material/DonutSmall';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -152,8 +152,8 @@ const Sidebar = () => {
             />
             <Item
               title="Applications"
-              to="/getscore"
-              icon={<DonutSmallIcon />}
+              to="/application"
+              icon={<ContactPageIcon />}
               selected={selected}
               setSelected={setSelected}
             />

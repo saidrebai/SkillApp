@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const Schema = mongoose.Schema;
+const {ApplicationModel} = require("./ApplicationModel");
+const filesModel = require("./filesModels");
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -57,7 +59,28 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
   }
 },
-{ timestamps: true });
+{ timestamps: true }
+);
+
+userSchema.pre("remove", async function (next) {
+  const idUser = this._id;
+  try {
+    await ApplicationModel.deleteMany({ user: idUser });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+userSchema.pre("remove", async function (next) {
+  const idUser = this._id;
+  try {
+    await filesModel.deleteMany({ user: idUser });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {

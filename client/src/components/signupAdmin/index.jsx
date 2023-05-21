@@ -53,7 +53,7 @@ const Signup = () => {
         </div>
         <div className="right-signup-admmin">
           <form className="form_container" onSubmit={handleSubmit}>
-            <h1>Create Account</h1>
+            <h1 className="login">Create Account</h1>
             <div class="custom-select">
               <select className="container-select" name="TypeOfUser" onChange={handleChange} value={data.TypeOfUser} required>
                 <option value="" disabled selected>Type of user</option>
