@@ -28,6 +28,7 @@ export default function Score() {
   const [scoreForMail, setScoreForMail] = useState(null);
   const [offer, setOffer] = useState("");
   const [adminEmail, setadminEmail] = useState("");
+  const [date, setdate] = useState("");
 
   const toggleModal = (score) => {
     setModal(!modal);
@@ -80,6 +81,7 @@ export default function Score() {
         setCountScores(responseScores.data?.scoreCount);
         setIdOffer(response.data.offer);
         setUsers(responseUser.data?.data);
+        setdate(responseScores.data.date);
         console.log(users);
         console.log(idOffer);
       } catch (error) {
@@ -100,6 +102,7 @@ export default function Score() {
           score: scoreForMail,
           offer,
           adminEmail,
+          date,
         }
       );
 

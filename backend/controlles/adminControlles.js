@@ -266,6 +266,7 @@ module.exports = {
         score: req.body.score,
         offer: req.body.offer,
         adminEmail: req.body.adminEmail,
+        date : req.body.date,
       });
 
       console.log(acceptationForm);
@@ -282,7 +283,7 @@ module.exports = {
           acceptationForm.score +
           " , " +
           " A cette administrateur : " +
-          acceptationForm.adminEmail;
+          acceptationForm.adminEmail + "Acette date : " + acceptationForm.date + " nous avons un rendez-vous pour le discuter " +  
         (".");
 
         const mailOptions = {
@@ -314,7 +315,7 @@ module.exports = {
       } else {
         res
           .status(404)
-          .json({ message: "Le score du candidat est inférieur à 10" });
+          .json({ message: "Le score du candidat est inférieur à 15" });
       }
     } catch (error) {
       console.error(error);
@@ -382,7 +383,7 @@ module.exports = {
       } else {
         res
           .status(404)
-          .json({ message: "Le score du candidat est supérieur à 10" });
+          .json({ message: "Le score du candidat est supérieur à 15" });
       }
     } catch (error) {
       console.error(error);
