@@ -473,7 +473,7 @@ const GetOffer = () => {
                         <TableCell align="right">{user?.country}</TableCell>
                         <TableCell align="right">{user?.town}</TableCell>
                         <TableCell align="right">{user?.adresse}</TableCell>
-                        <TableCell align="right">{user?.tel}</TableCell>
+                        <TableCell align="right">{user?.Phone}</TableCell>
                         <TableCell align="right">{user?.birthDate}</TableCell>
                         <TableCell align="right">{user?.gender}</TableCell>
                         <TableCell align="right">

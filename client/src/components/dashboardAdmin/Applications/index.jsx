@@ -12,7 +12,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-export default function Score() {
+
+export default function Application() {
+
   const id = localStorage.getItem("id");
 
   const [scores, setScores] = useState([]);
@@ -29,6 +31,7 @@ export default function Score() {
   const [offer, setOffer] = useState("");
   const [adminEmail, setadminEmail] = useState("");
   const [date, setdate] = useState("");
+
 
   const toggleModal = (score) => {
     setModal(!modal);
@@ -146,6 +149,7 @@ export default function Score() {
       console.error(error);
     }
   };
+
 
   return (
     <>
