@@ -93,7 +93,7 @@ const Quiz=()=> {
 
   useEffect(() => {
     async function fetchData() {
-      if(hasSkill){
+      if(hasSkill && offer){
       const response = await axios.get(
         `https://quizapi.io/api/v1/questions?apiKey=Aw9rwqe0uBihndUdtI5DtGpPuNqeDURVQeaLqLKN&difficulty=Hard&limit=20&tags=${offer}`
       );
@@ -102,14 +102,15 @@ const Quiz=()=> {
       console.log("response", response.data);
       console.log("tag===>",offer);
       // console.log("tags",response?.data?.tags);
-    }else{
-      const confirm = window.confirm("your resume do not contain the necessecary skill for the offer !\nplease select another offer ")
-      if(confirm){
-        window.location="/offers"
-      }else{
-        window.location="/offers"
-      }
     }
+    // else if (hasSkill ===false){
+    //   const confirm = window.confirm("your resume do not contain the necessecary skill for the offer !\nplease select another offer ")
+    //   if(confirm){
+    //     window.location="/offers"
+    //   }else{
+    //     window.location="/offers"
+    //   }
+    // }
   }
     fetchData();
   }, [hasSkill,skills, offer]);
