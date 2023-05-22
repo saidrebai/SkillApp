@@ -6,11 +6,12 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+// import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import "./index.css";
-
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -78,6 +79,35 @@ function ResponsiveAppBar() {
     contactSection.scrollIntoView({ behavior: "smooth" });
   };
 
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = "#";
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar() {
+    return {
+      sx: {
+        bgcolor: stringToColor(firstName),
+      },
+      children: `${firstName.split(" ")[0][0].toUpperCase()}`,
+    };
+  }
+
   return (
     <>
       <div className="menu_container">
@@ -131,20 +161,27 @@ function ResponsiveAppBar() {
                     display: { xs: "block", md: "none" },
                   }}
                 >
-                  
                   <MenuItem key="Home" onClick={handleHomeClick} href="#home">
-                    <Typography textAlign="center" >Home</Typography>
+                    <Typography textAlign="center">Home</Typography>
                   </MenuItem>
-                  <MenuItem key="Aboutus" onClick={handleAboutusClick} href="#About_us">
-                    <Typography textAlign="center" >About us</Typography>
+                  <MenuItem
+                    key="Aboutus"
+                    onClick={handleAboutusClick}
+                    href="#About_us"
+                  >
+                    <Typography textAlign="center">About us</Typography>
                   </MenuItem>
-                  {(!isAdmin || isAdmin === "false") && (!isSuperAdmin) && (
+                  {(!isAdmin || isAdmin === "false") && !isSuperAdmin && (
                     <MenuItem key="Offers" onClick={handleOffersClick}>
-                      <Typography textAlign="center" >Offers</Typography>
+                      <Typography textAlign="center">Offers</Typography>
                     </MenuItem>
                   )}
-                  <MenuItem key="Contact" onClick={handleContactClick} href="#Contact">
-                    <Typography textAlign="center" >Contact</Typography>
+                  <MenuItem
+                    key="Contact"
+                    onClick={handleContactClick}
+                    href="#Contact"
+                  >
+                    <Typography textAlign="center">Contact</Typography>
                   </MenuItem>
                 </Menu>
               </Box>
@@ -166,19 +203,22 @@ function ResponsiveAppBar() {
               >
                 Skills
               </Typography>
-              <Box className="pages"sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              <Box
+                className="pages"
+                sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+              >
                 <MenuItem key="Home" onClick={handleHomeClick}>
                   <Typography textAlign="center">Home</Typography>
                 </MenuItem>
                 <MenuItem key="Aboutus" onClick={handleAboutusClick}>
                   <Typography textAlign="center">About us</Typography>
                 </MenuItem>
-                {(isAdmin === "false" || !isAdmin) && (!isSuperAdmin) && (
-                    <MenuItem key="Offers" onClick={handleOffersClick}>
-                      <Typography textAlign="center">Offers</Typography>
-                    </MenuItem>
-                  )}
-                 <MenuItem key="Contact" onClick={handleContactClick}>
+                {(isAdmin === "false" || !isAdmin) && !isSuperAdmin && (
+                  <MenuItem key="Offers" onClick={handleOffersClick}>
+                    <Typography textAlign="center">Offers</Typography>
+                  </MenuItem>
+                )}
+                <MenuItem key="Contact" onClick={handleContactClick}>
                   <Typography textAlign="center">Contact</Typography>
                 </MenuItem>
               </Box>
@@ -194,22 +234,22 @@ function ResponsiveAppBar() {
                 </Search>
               </div> */}
               {!token && (
-                
-                  <button className="title_signin" onClick={handleLoginClick}>
-                    SIGN IN
-                  </button>
-                
+                <button className="title_signin" onClick={handleLoginClick}>
+                  SIGN IN
+                </button>
               )}
               <Box sx={{ flexGrow: 0 }}>
                 {token && (
                   <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <Avatar src="/broken-image.jpg" />
+                      <Stack direction="row" spacing={2}>
+                        <Avatar {...stringAvatar()} />
+                      </Stack>
                     </IconButton>
                   </Tooltip>
                 )}
 
-                <div className="name">{firstName}</div>
+                {/* <div className="name">{firstName}</div> */}
 
                 <Menu
                   sx={{ mt: "45px" }}
@@ -227,10 +267,11 @@ function ResponsiveAppBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {!isSuperAdmin && isAdmin ==="false"&& (
-                  <MenuItem key="Account" onClick={handleAccountClick}>
-                    <Typography textAlign="center">Profil</Typography>
-                  </MenuItem>)} 
+                  {!isSuperAdmin && isAdmin === "false" && (
+                    <MenuItem key="Account" onClick={handleAccountClick}>
+                      <Typography textAlign="center">Profil</Typography>
+                    </MenuItem>
+                  )}
                   {/* {isAdmin === "true" && (
                     <MenuItem key="Dashboard" onClick={handleDashboardClick}>
                       <Typography textAlign="center">Dashboard</Typography>
@@ -238,7 +279,9 @@ function ResponsiveAppBar() {
                   )} */}
                   {isAdmin === "false" && (
                     <MenuItem key="application" onClick={handleAppClick}>
-                      <Typography textAlign="center">my Applications</Typography>
+                      <Typography textAlign="center">
+                        my Applications
+                      </Typography>
                     </MenuItem>
                   )}
                   <MenuItem key="logout" onClick={handlelogoutClick}>
