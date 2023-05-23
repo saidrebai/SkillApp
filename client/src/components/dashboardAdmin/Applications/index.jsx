@@ -11,10 +11,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function Application() {
-
   const id = localStorage.getItem("id");
 
   const [scores, setScores] = useState([]);
@@ -25,13 +25,12 @@ export default function Application() {
   const [modal, setModal] = useState(false);
   const [selectedScore, setSelectedScore] = useState(null);
   const [application, setApplication] = useState({});
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const [email, setEmail] = useState("");
   const [scoreForMail, setScoreForMail] = useState(null);
   const [offer, setOffer] = useState("");
   const [adminEmail, setadminEmail] = useState("");
-  const [date, setdate] = useState("");
-
 
   const toggleModal = (score) => {
     setModal(!modal);
@@ -41,7 +40,12 @@ export default function Application() {
   } else {
     document.body.classList.remove("active-popup");
   }
-
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+  // const handleTimeChange = (time) => {
+  //   setSelectedTime(time);
+  // };
   // const itemsPerPage = 6;
   // const totalPages = Math.ceil(scores.length / itemsPerPage);
   // const startIndex = (currentPage - 1) * itemsPerPage;
@@ -84,7 +88,6 @@ export default function Application() {
         setCountScores(responseScores.data?.scoreCount);
         setIdOffer(response.data.offer);
         setUsers(responseUser.data?.data);
-        setdate(responseScores.data.date);
         console.log(users);
         console.log(idOffer);
       } catch (error) {
@@ -105,7 +108,7 @@ export default function Application() {
           score: scoreForMail,
           offer,
           adminEmail,
-          date,
+          date: selectedDate,
         }
       );
 
@@ -114,7 +117,7 @@ export default function Application() {
       console.error(error);
     }
   };
-
+  // console.log(email, scoreForMail, offer, adminEmail, date);
   const rejeterCandidat = async () => {
     try {
       const response = await axios.post(
@@ -150,7 +153,6 @@ export default function Application() {
     }
   };
 
-
   return (
     <>
       <div className="s_container">
@@ -176,7 +178,11 @@ export default function Application() {
                       {idOffer.find((offer) => offer._id === score.offer)?.Name}
                     </TableCell>
                     <TableCell align="right">
-                      {score.accepted ===true ?(<div>true</div>):(<div>false</div>)}
+                      {score.accepted === true ? (
+                        <div>true</div>
+                      ) : (
+                        <div>false</div>
+                      )}
                     </TableCell>
                     <TableCell align="right">
                       {modal && (
@@ -208,16 +214,20 @@ export default function Application() {
                               />
                               {console.log("score selected == >", score)}
 
-                              <button
+                              <button 
                                 onClick={() => {
                                   accepterCandidat();
                                   toggleModal();
-                                  updateCandidacy(users.find((user) => user._id === score.user)?._id)
+                                  updateCandidacy(
+                                    users.find(
+                                      (user) => user._id === score.user
+                                    )?._id
+                                  );
                                 }}
                               >
                                 Accepte
                               </button>
-                              <button
+                              <button  
                                 onClick={() => {
                                   rejeterCandidat();
                                   toggleModal();
@@ -225,6 +235,18 @@ export default function Application() {
                               >
                                 Rejecte
                               </button>
+                            </div>
+                            <div className="datepicker_container">
+                              <DatePicker
+                                // type="date"
+                                selected={selectedDate}
+                                onChange={handleDateChange}
+                                dateFormat="yyyy-MM-dd              HH:mm aa"
+                                showTimeInput
+                                placeholderText="Select a date and time"
+                                className="input__date"
+                                // disabled={!selectedDate}
+                              />
                             </div>
                           </div>
                         </div>
