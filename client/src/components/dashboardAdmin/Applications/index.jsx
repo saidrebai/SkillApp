@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactStoreIndicator from "react-score-indicator";
 import "./index.css";
+// import Pagination from "@mui/material/Pagination";
+// import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -105,7 +107,6 @@ export default function Application() {
       );
 
       console.log(response.data);
-      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -152,22 +153,18 @@ export default function Application() {
       <div className="s_container">
         <div className="score_container">
           {/* <div>{idOffer._id}</div> */}
-          <h1>Pendding</h1>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 550 }} aria-label="caption table">
+            <Table sx={{ minWidth: 650 }} aria-label="caption table">
               <TableHead>
                 <TableRow>
-                  <TableCell className="row">Email</TableCell>
-                  <TableCell className="row"align="right">Offer</TableCell>
-                  {/* <TableCell className="row"align="left">Accepted</TableCell> */}
-                  <TableCell className="row"align="right">Score</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell align="right">Offer</TableCell>
+                  <TableCell align="right">Accepted</TableCell>
+                  <TableCell align="right">Score</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {scores?.map((score, _id) => {
-                  if(!score.accepted){
-                    return(
-                  
+                {scores?.map((score, _id) => (
                   <TableRow key={score._id}>
                     <TableCell component="th" scope="row">
                       {users.find((user) => user._id === score.user)?.email}
@@ -175,9 +172,9 @@ export default function Application() {
                     <TableCell align="right">
                       {idOffer.find((offer) => offer._id === score.offer)?.Name}
                     </TableCell>
-                    {/* <TableCell align="right">
+                    <TableCell align="right">
                       {score.accepted ===true ?(<div>true</div>):(<div>false</div>)}
-                    </TableCell> */}
+                    </TableCell>
                     <TableCell align="right">
                       {modal && (
                         <div
@@ -248,114 +245,21 @@ export default function Application() {
                       </button>
                     </TableCell>
                   </TableRow>
-                )}})}
+                ))}
               </TableBody>
             </Table>
           </TableContainer>
         </div>
-
-         <div className="score_container">
-          {/* <div>{idOffer._id}</div> */}
-          <h1>Accepted</h1>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 550 }} aria-label="caption table">
-              <TableHead>
-                <TableRow>
-                  <TableCell className="row">Email</TableCell>
-                  <TableCell className="row"align="right">Offer</TableCell>
-                  {/* <TableCell className="row"align="left">Accepted</TableCell> */}
-                  <TableCell className="row"align="right">Score</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-              {scores?.map((score, _id) => {
-                  if(score.accepted){
-                    return(
-                  <TableRow key={score._id}>
-                    <TableCell component="th" scope="row">
-                      {users.find((user) => user._id === score.user)?.email}
-                    </TableCell>
-                    <TableCell align="right">
-                      {idOffer.find((offer) => offer._id === score.offer)?.Name}
-                    </TableCell>
-                    {/* <TableCell align="right">
-                      {score.accepted ===true ?(<div>true</div>):(<div>false</div>)}
-                    </TableCell> */}
-                    <TableCell align="right">
-                      {modal && (
-                        <div
-                          className="popup_container"
-                          style={{ zIndex: "1" }}
-                          key={_id}
-                        >
-                          <div
-                            className="overlay"
-                            onClick={() => toggleModal(null)}
-                          ></div>
-                          <div className="modal_content" key={score._id}>
-                            <div className="score" key={score._id}>
-                              <ReactStoreIndicator
-                                value={selectedScore.result}
-                                maxValue={20}
-                                stepColors={[
-                                  "#271a1a",
-                                  "#ed8d00",
-                                  "#f1bc00",
-                                  "#84c42b",
-                                  "#53b83a",
-                                  "#3da940",
-                                  "#3da940",
-                                  "#3da940",
-                                ]}
-                                style={{ color: "#aaa" }}
-                              />
-                              {console.log("score selected == >", score)}
-
-                              <button
-                                onClick={() => {
-                                  accepterCandidat();
-                                  toggleModal();
-                                  updateCandidacy(users.find((user) => user._id === score.user)?._id)
-                                }}
-                              >
-                                Accepte
-                              </button>
-                              <button
-                                onClick={() => {
-                                  rejeterCandidat();
-                                  toggleModal();
-                                }}
-                              >
-                                Rejecte
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      <button
-                        className="dsply_btn"
-                        onClick={() => {
-                          toggleModal(score);
-                          setSelectedScore(score);
-                          setEmail(
-                            users.find((user) => user._id === score.user)?.email
-                          );
-                          setScoreForMail(score.result);
-                          setOffer(
-                            idOffer.find((offer) => offer._id === score.offer)
-                              ?.Name
-                          );
-                        }}
-                      >
-                        display
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                )}})}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
+        {/* <div className="pagination_container">
+          <Stack spacing={2}>
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Stack>
+        </div> */}
       </div>
     </>
   );

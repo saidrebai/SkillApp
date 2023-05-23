@@ -20,11 +20,12 @@
   flex-direction: column;
   /* width: 60%; */
   inline-size: max-content;
-  background: rgb(34, 193, 195);
+  background: rgb(225, 234, 255);
   background: linear-gradient(
-    357deg,
-    rgba(34, 193, 195, 1) 0%,
-    rgba(227, 255, 152, 1) 100%
+    180deg,
+    rgba(225, 234, 255, 1) 0%,
+    rgba(214, 230, 253, 1) 52%,
+    rgba(255, 221, 252, 1) 100%
   );
   justify-content: center;
   align-items: center;
