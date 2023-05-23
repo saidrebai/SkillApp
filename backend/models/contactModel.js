@@ -30,6 +30,10 @@ const contactSchema = new mongoose.Schema({
     type: String,
     // required: true,
   },
+  date: {
+    type: Date,
+    // required: true,
+  },
 });
 
 const ContactModel = mongoose.model("contactModel", contactSchema);
