@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./index.css";
-import myImage from "../images/arsela-techmologies.png";
+import myImage from "../images/Fotolia_177831790_Subscription_Monthly_M-1024x682.jpg";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import "react-toastify/dist/ReactToastify.css";
@@ -184,6 +184,7 @@ useEffect(() => {
           setUsers(response.data);
           localStorage.setItem("offerId", updatedOffer._id);
           setIsOfferUpdated(false);
+          localStorage.removeItem("idpdf");
           // const confirmed = window.confirm(
           //   "Are you ready to get started with the test ?\n" +
           //     "the test contain 20 question with one ansewr every 10 sec"

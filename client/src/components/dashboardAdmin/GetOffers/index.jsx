@@ -95,7 +95,7 @@ const GetOffer = () => {
       );
       setPdf(response.data.pdf);
       console.log("response", response.data);
-      localStorage.setItem("cvId", cvId);
+      // localStorage.setItem("cvId", cvId);
     } catch (error) {
       console.error(error);
     }
@@ -379,9 +379,8 @@ const GetOffer = () => {
                           <label> skills : </label>
                         </td>
                         <td>
-                          <input
+                          <select
                             className="inputt"
-                            type="text"
                             name="skills"
                             required={true}
                             value={updatedOffer.skills}
@@ -391,7 +390,22 @@ const GetOffer = () => {
                                 skills: e.target.value,
                               });
                             }}
-                          />
+                          >
+                            <option value="" disabled selected>
+                              {updatedOffer.skills || "Skills"}
+                            </option>
+                            <option value="Linux">Linux</option>
+                            <option value="Bash">Bash</option>
+                            <option value="HTML">HTML</option>
+                            <option value="Docker">Docker</option>
+                            <option value="MySQL">MySQL</option>
+                            <option value="PHP">PHP</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="DevOps">DevOps</option>
+                            <option value="Kubernetes">Kubernetes</option>
+                            <option value="Laravel">Laravel</option>
+                            <option value="WordPress">WordPress</option>
+                          </select>
                         </td>
                       </div>
                     </tr>
@@ -452,7 +466,9 @@ const GetOffer = () => {
                       <TableCell align="right">Phone</TableCell>
                       <TableCell align="right">Birthdate</TableCell>
                       <TableCell align="right">Gender</TableCell>
-                      <TableCell className="action" align="right">&ensp;</TableCell>
+                      <TableCell className="action" align="right">
+                        &ensp;
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

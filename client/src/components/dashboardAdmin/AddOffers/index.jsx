@@ -161,16 +161,28 @@ const AddOffers = () => {
                         <td>
                           <label> skills : </label>
                         </td>
-                        <td>
-                          <input
-                            type="Text"
-                            name="skills"
-                            required
-                            onChange={handleChange}
-                            value={data.skills}
+                        <select
                             className="inputt"
-                          />
-                        </td>
+                            name="skills"
+                            required={true}
+                            value={data.skills}
+                            onChange={handleChange}
+                          >
+                            <option value="" disabled selected>
+                              Skills
+                            </option>
+                            <option value="Linux">Linux</option>
+                            <option value="Bash">Bash</option>
+                            <option value="HTML">HTML</option>
+                            <option value="Docker">Docker</option>
+                            <option value="MySQL">MySQL</option>
+                            <option value="PHP">PHP</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="DevOps">DevOps</option>
+                            <option value="Kubernetes">Kubernetes</option>
+                            <option value="Laravel">Laravel</option>
+                            <option value="WordPress">WordPress</option>
+                          </select>
                       </div>
                     </tr>
 

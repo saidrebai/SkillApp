@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-import "./styles.modules.css";
+import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const Account = () => {
@@ -99,7 +99,7 @@ const Account = () => {
             <div className="form-container">
               <div className="form-input-container">
                 <div className="userid" value={updatedData._id}></div>
-                <div className="title-input-style">
+                <div className="title-input-stylee">
                   <div className="container-text-input">
                     <label className="title-style">First_Name</label>
                   </div>
@@ -122,7 +122,7 @@ const Account = () => {
               </div>
 
               <div className="form-input-container">
-                <div className="title-input-style">
+                <div className="title-input-stylee">
                   <div className="containertext-input">
                     <label className="title-style">Last_Name</label>
                   </div>
@@ -145,7 +145,7 @@ const Account = () => {
               </div>
 
               <div className="form-input-container">
-                <div className="title-input-style">
+                <div className="title-input-stylee">
                   <div className="containertext-input">
                     <label className="title-style">gender</label>
                   </div>
@@ -174,7 +174,7 @@ const Account = () => {
               </div>
 
               <div className="form-input-container">
-                <div className="title-input-style">
+                <div className="title-input-stylee">
                   <div className="containertext-input">
                     <label className="title-style">birthDate</label>
                   </div>
@@ -197,7 +197,7 @@ const Account = () => {
               </div>
 
               <div className="form-input-container">
-                <div className="title-input-style">
+                <div className="title-input-stylee">
                   <div className="containertext-input">
                     <label className="title-style">Phone</label>
                   </div>
@@ -209,11 +209,15 @@ const Account = () => {
                     value={updatedData.Phone}
                     required={true}
                     maxLength={8}
+                    pattern="\d{8}"
                     onChange={(e) => {
-                      setUpdatedData({
-                        ...updatedData,
-                        Phone: e.target.value,
-                      });
+                      const phoneNumber = e.target.value;
+                      if (/^\d{0,8}$/.test(phoneNumber)) {
+                        setUpdatedData({
+                          ...updatedData,
+                          Phone: phoneNumber,
+                        });
+                      }
                     }}
                     className="style-inputt"
                   />
@@ -221,7 +225,7 @@ const Account = () => {
               </div>
 
               <div className="form-input-container">
-                <div className="title-input-style">
+                <div className="title-input-stylee">
                   <div className="containertext-input">
                     <label className="title-style">country</label>
                   </div>
@@ -566,7 +570,7 @@ const Account = () => {
               </div>
 
               <div className="form-input-container">
-                <div className="title-input-style">
+                <div className="title-input-stylee">
                   <div className="containertext-input">
                     <label className="title-style">town</label>
                   </div>
@@ -575,7 +579,7 @@ const Account = () => {
                   <input
                     type="text"
                     name="town"
-                    value={updatedData.town || newData.town}
+                    value={updatedData.town}
                     required={true}
                     onChange={(e) =>
                       setUpdatedData({
@@ -589,7 +593,7 @@ const Account = () => {
               </div>
 
               <div className="form-input-container">
-                <div className="title-input-style">
+                <div className="title-input-stylee">
                   <div className="containertext-input">
                     <label className="title-style">Adresse</label>
                   </div>
@@ -598,7 +602,7 @@ const Account = () => {
                   <input
                     type="text"
                     name="Adresse"
-                    value={updatedData.adresse || newData.adresse}
+                    value={updatedData.adresse}
                     required={true}
                     onChange={(e) => {
                       setUpdatedData({
@@ -612,7 +616,7 @@ const Account = () => {
               </div>
 
               <div className="form-input-container">
-                <div className="title-input-style">
+                <div className="title-input-stylee">
                   <div className="containertext-input">
                     <label className="title-style">zipCode</label>
                   </div>
@@ -621,7 +625,7 @@ const Account = () => {
                   <input
                     type="number"
                     name="zipCode"
-                    value={updatedData.zipCode || newData.zipCode}
+                    value={updatedData.zipCode}
                     required={true}
                     onChange={(e) =>
                       setUpdatedData({
@@ -631,14 +635,6 @@ const Account = () => {
                     }
                     className="style-inputt"
                   />
-                </div>
-              </div>
-
-              <div className="form-input-container">
-                <div className="title-input-style">
-                  <div className="containertext-input">
-                    <label className="title-style">Establishment</label>
-                  </div>
                 </div>
               </div>
             </div>
