@@ -266,56 +266,54 @@ module.exports = {
         score: req.body.score,
         offer: req.body.offer,
         adminEmail: req.body.adminEmail,
+        date: req.body.date,
       });
 
       console.log(acceptationForm);
       // console.log(req.body.adminEmail);
 
-      if (acceptationForm.score >= 15) {
-        const emailContent =
-          "Félicitations " +
-          "! Bienvenue dans votre nouveau poste. " +
-          "L'offre est : " +
-          acceptationForm.offer +
-          " , " +
-          " Avec un score de : " +
-          acceptationForm.score +
-          " , " +
-          " A cette administrateur : " +
-          acceptationForm.adminEmail;
-        (".");
+      const emailContent =
+        "Félicitations " +
+        "! Bienvenue dans votre nouveau poste. " +
+        "L'offre est : " +
+        acceptationForm.offer +
+        " , " +
+        " Avec un score de : " +
+        acceptationForm.score +
+        " , " +
+        " A cette administrateur : " +
+        acceptationForm.adminEmail + " , " +
+        "A cette date : " +
+        acceptationForm.date +
+        " nous avons un rendez-vous pour le discuter " +
+        ".";
 
-        const mailOptions = {
-          to: acceptationForm.email,
-          subject: "Félicitations !",
-          html: emailContent,
-        };
+      const mailOptions = {
+        to: acceptationForm.email,
+        subject: "Félicitations !",
+        html: emailContent,
+      };
 
-        acceptationForm
-          .save()
-          .then(() => {
-            transporter.sendMail(mailOptions, function (error, info) {
-              if (error) {
-                console.log(error);
-                res
-                  .status(500)
-                  .json({ message: "Problème lors de l'envoi de l'e-mail" });
-              } else {
-                console.log("Email sent: " + info.response);
-                res.json(acceptationForm.toJSON());
-              }
-            });
-          })
-          .catch((e) => {
-            // Votre logique de gestion des doublons d'adresses e-mail ici
-            console.log(e);
-            res.status(400).json({ message: "Adresse e-mail en double" });
+      acceptationForm
+        .save()
+        .then(() => {
+          transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+              console.log(error);
+              res
+                .status(500)
+                .json({ message: "Problème lors de l'envoi de l'e-mail" });
+            } else {
+              console.log("Email sent: " + info.response);
+              res.json(acceptationForm.toJSON());
+            }
           });
-      } else {
-        res
-          .status(404)
-          .json({ message: "Le score du candidat est inférieur à 10" });
-      }
+        })
+        .catch((e) => {
+          // Votre logique de gestion des doublons d'adresses e-mail ici
+          console.log(e);
+          res.status(400).json({ message: "Adresse e-mail en double" });
+        });
     } catch (error) {
       console.error(error);
       res.status(500).json({
@@ -342,48 +340,43 @@ module.exports = {
         adminEmail: req.body.adminEmail,
       });
 
-      if (RefuserForm.score < 15) {
-        const email_content =
-          "Désolé, " +
-          "! Votre candidature n'a pas été retenue pour l'offre : " +
-          RefuserForm.offer +  " , " +
-          "Avec un score est : " +
-          RefuserForm.score +  " , " +
-          " A cette administrateur : " +
-          RefuserForm.adminEmail +
-          ". Nous vous remercions pour votre intérêt.";
+      const email_content =
+        "Désolé, " +
+        "! Votre candidature n'a pas été retenue pour l'offre : " +
+        RefuserForm.offer +
+        " , " +
+        "Avec un score est : " +
+        RefuserForm.score +
+        " , " +
+        " A cette administrateur : " +
+        RefuserForm.adminEmail +
+        ". Nous vous remercions pour votre intérêt.";
 
-        const mailOptions = {
-          to: RefuserForm.email,
-          subject: "Désole !",
-          html: email_content,
-        };
+      const mailOptions = {
+        to: RefuserForm.email,
+        subject: "Désole !",
+        html: email_content,
+      };
 
-        RefuserForm
-          .save()
-          .then(() => {
-            transporter.sendMail(mailOptions, function (error, info) {
-              if (error) {
-                console.log(error);
-                res
-                  .status(500)
-                  .json({ message: "Problème lors de l'envoi de l'e-mail" });
-              } else {
-                console.log("Email sent: " + info.response);
-                res.json(RefuserForm.toJSON());
-              }
-            });
-          })
-          .catch((e) => {
-            // Votre logique de gestion des doublons d'adresses e-mail ici
-            console.log(e);
-            res.status(400).json({ message: "Adresse e-mail en double" });
+      RefuserForm.save()
+        .then(() => {
+          transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+              console.log(error);
+              res
+                .status(500)
+                .json({ message: "Problème lors de l'envoi de l'e-mail" });
+            } else {
+              console.log("Email sent: " + info.response);
+              res.json(RefuserForm.toJSON());
+            }
           });
-      } else {
-        res
-          .status(404)
-          .json({ message: "Le score du candidat est supérieur à 10" });
-      }
+        })
+        .catch((e) => {
+          // Votre logique de gestion des doublons d'adresses e-mail ici
+          console.log(e);
+          res.status(400).json({ message: "Adresse e-mail en double" });
+        });
     } catch (error) {
       console.error(error);
       res.status(500).json({

@@ -6,25 +6,43 @@
     width: 50%;
     margin: 20px;
 }
-.score{
-    margin:20px;
+.score {
+  margin: 20px;
 }
 .s_container{
     width: 90%;
     margin-left: 59px;
     display: flex;
 }
-.modal_content{
-    position: absolute;
-    top: 50%;
-    left: 55%;
-    transform: translate(-50%, -50%);
-    line-height: 1.4;
-    padding: 14px 28px;
-    border-radius: 3px;
-    min-width: 500px;
-    min-height: 500px;
-    background-color: white;
+.modal_content {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  padding: 14px 28px;
+  border-radius: 3px;
+  min-width: 500px;
+  min-height: 500px;
+  background-color: white;
+}
+.dsply_btn {
+  border-radius: 5px;
+  border: none;
+  background-color: #389b5f;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  height: 25px;
+}
+.datepicker_container {
+  position: absolute;
+  top: 60%;
+  left: 37%;
+}
+.input__date {
+  width: 145px;
+  height: 35px;
+  background-color: burlywood;
 }
 .dsply_btn{
     border-radius: 5px;
