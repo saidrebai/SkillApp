@@ -19,6 +19,10 @@ const ApplicationSchema = new mongoose.Schema({
   accepted:{
     type: Boolean,
     default: false
+  },
+  refused:{
+    type: Boolean,
+    default: false
   }
 },
 { timestamps: true }

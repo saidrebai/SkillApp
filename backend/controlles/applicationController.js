@@ -83,15 +83,29 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
-  updateApplication: async function (req, res) {
+  acceptApplication: async function (req, res) {
     try {
-      const Candidacy = await ApplicationModel.findOne({user: req.params.id});
+      const Candidacy = await ApplicationModel.findById({_id: req.params.id});
       if (!Candidacy) {
         return res.status(404).json({ message: "update Candidacy failed" });
       }
       Candidacy.accepted =true;
       await Candidacy.save();
-      return res.status(200).json({ message: "Candidacy updated", Candidacy });
+      return res.status(200).json({ message: "Candidacy accepted", Candidacy });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+  refuseApplication: async function (req, res) {
+    try {
+      const Candidacy = await ApplicationModel.findById({_id: req.params.id});
+      if (!Candidacy) {
+        return res.status(404).json({ message: "update Candidacy failed" });
+      }
+      Candidacy.refused =true;
+      await Candidacy.save();
+      return res.status(200).json({ message: "Candidacy refused", Candidacy });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
