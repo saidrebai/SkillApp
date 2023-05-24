@@ -23,7 +23,9 @@ export default function Application() {
   const [modal, setModal] = useState(false);
   const [selectedScore, setSelectedScore] = useState(null);
   const [application, setApplication] = useState({});
+
   const [refused, setRefused] = useState({});
+
   const [selectedDate, setSelectedDate] = useState(null);
 
   const [email, setEmail] = useState("");
@@ -42,6 +44,21 @@ export default function Application() {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
+
+
+
+  // const handleTimeChange = (time) => {
+  //   setSelectedTime(time);
+  // };
+  // const itemsPerPage = 6;
+  // const totalPages = Math.ceil(scores.length / itemsPerPage);
+  // const startIndex = (currentPage - 1) * itemsPerPage;
+  // const endIndex = startIndex + itemsPerPage;
+  // const currentScores = scores.slice(startIndex, endIndex);
+
+  // const handlePageChange = (event, value) => {
+  //   setCurrentPage(value);
+  // };
 
 
   useEffect(() => {
@@ -220,6 +237,7 @@ export default function Application() {
                                 onClick={() => {
                                   accepterCandidat();
                                   toggleModal();
+
                                   acceptCandidacy(score._id);
                                 }}
                               >

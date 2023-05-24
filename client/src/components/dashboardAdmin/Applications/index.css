@@ -1,3 +1,4 @@
+
 .score_container{
     display: flex;
     flex-direction: row;
@@ -9,6 +10,7 @@
 .score {
   margin: 20px;
 }
+
 .s_container{
     width: 90%;
     margin-left: 59px;
@@ -34,6 +36,7 @@
   cursor: pointer;
   height: 25px;
 }
+
 .datepicker_container {
   position: absolute;
   top: 60%;
@@ -44,15 +47,4 @@
   height: 35px;
   background-color: burlywood;
 }
-.dsply_btn{
-    border-radius: 5px;
-    border: none;
-    background-color: #389b5f;
-    color: rgb(255, 255, 255);
-    cursor: pointer;
-    height: 25px;
 
-}
-/* .row{
-    width: 50px;
-} */
