@@ -1,0 +1,22 @@
+.score_c{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 10px;
+    width: 100%;
+}
+.score {
+    margin: 20px;
+  }
+.s_container{
+      width: 90%;
+      margin: 50px;
+      display: flex;
+  }
+.status{
+    margin-bottom: 10px;
+}
+.tables{
+    margin: 5px;
+}

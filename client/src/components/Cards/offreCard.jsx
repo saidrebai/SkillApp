@@ -92,82 +92,37 @@ export default function Card() {
     }
   };
   console.log("sub is", isSubmited);
-useEffect(() => {
-  const handleUpdate = async () => {
-    console.log("submit is ", isSubmited);
-    if (isSubmited) {
-      try {
-        const response = await axios.put(
-          `http://localhost:8080/api/offerRouter/updateofferwithid/${updatedOffer._id}`,
-          {
-            ...updatedOffer,
-            user: [...updatedOffer.user, id],
-          }
-        );
-        console.log("offer updated", response?.data?.offer);
-        setIsOfferUpdated(true);
-        setUpdatedOffer(response?.data?.offer);
-        localStorage.setItem("offerId", updatedOffer._id);
-        // updateUser();
-        return true;
-      } catch (error) {
-        console.error(error);
-        toast.error("Already Deposit");
-        setIsOfferUpdated(false);
+  useEffect(() => {
+    const handleUpdate = async () => {
+      console.log("submit is ", isSubmited);
+      if (isSubmited) {
+        try {
+          const response = await axios.put(
+            `http://localhost:8080/api/offerRouter/updateofferwithid/${updatedOffer._id}`,
+            {
+              ...updatedOffer,
+              user: [...updatedOffer.user, id],
+            }
+          );
+          console.log("offer updated", response?.data?.offer);
+          setIsOfferUpdated(true);
+          setUpdatedOffer(response?.data?.offer);
+          localStorage.setItem("offerId", updatedOffer._id);
+          // updateUser();
+          return true;
+        } catch (error) {
+          console.error(error);
+          toast.error("Already Deposit");
+          setIsOfferUpdated(false);
+        }
+        setSubmited(false);
+        return false;
       }
-      setSubmited(false);
-      return false;
-    }
-  };
-  handleUpdate();
-}, [isSubmited])
+    };
+    handleUpdate();
+  }, [isSubmited]);
 
-  
 
-  // const updateUser = async () => {
-  //   // const submissionSuccessful = await handleUpdate(); // call handleSubmit and store its return value
-  //   if (isOfferUpdated) {
-  //     try {
-  //       const response = await axios.put(
-  //         `http://localhost:8080/api/candidatRouters/updateuserwithcv/${id}`,
-  //         {
-  //           ...users,
-  //           cv: [idpdf],
-  //         }
-  //       );
-  //       console.log("=>", response.data);
-  //       // toast.success("Updated successfully!");
-  //       setUsers(response.data);
-  //       localStorage.setItem("offerId", updatedOffer._id);
-  //       setIsOfferUpdated(false);
-  //       const confirmed = window.confirm(
-  //         "Are you ready to get started with the test ?\n"+
-  //         "the test contain 20 question with one ansewr every 10 sec"
-  //       );
-  //       if (confirmed) {
-  //       window.location = "/answerquiz";
-  //       }
-  //       return true;
-  //     } catch (error) {
-  //       console.error(error);
-  //       return false;
-  //     }
-  //   }
-  // };
-
-  // const onClickButton = () => {
-  //   handleUpdate()
-  //     .then((success) => {
-  //       if (success) {
-  //         handleParse();
-  //       }
-  //     })
-  // };
-
-  // useEffect(() => {
-  //   handleParse();
-  // }, [isSubmited])
-  
   useEffect(() => {
     const updateUser = async () => {
       if (isSubmited && isOfferUpdated) {
@@ -184,7 +139,7 @@ useEffect(() => {
           setUsers(response.data);
           localStorage.setItem("offerId", updatedOffer._id);
           setIsOfferUpdated(false);
-          localStorage.removeItem("idpdf");
+          // localStorage.removeItem("idpdf");
           // const confirmed = window.confirm(
           //   "Are you ready to get started with the test ?\n" +
           //     "the test contain 20 question with one ansewr every 10 sec"
@@ -202,37 +157,43 @@ useEffect(() => {
     updateUser();
   }, [isSubmited, isOfferUpdated]);
 
+  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     const handleParse = async (e) => {
       const formData = new FormData();
       formData.append("pdfs", pdfs);
       formData.append("id", id);
       if (isSubmited && isOfferUpdated) {
-      try {
-        const { data: res } = await axios.post(
-          "http://localhost:8080/api/uploadRouter/cvParser",
-          formData
-        );
-        console.log("frfr", res);
-        localStorage.setItem("skills", res.skills);
-        const confirmed = window.confirm(
-          "Are you ready to get started with the test ?\n" +
-            "the test contain 20 question with one ansewr every 10 sec"
-        );
-        if (confirmed) {
-          window.location = "/answerquiz";
+        try {
+          setLoading(true);
+          const { data: res } = await axios.post(
+            "http://localhost:8080/api/uploadRouter/cvParser",
+            formData
+          );
+          console.log("frfr", res);
+          localStorage.setItem("skills", res.skills);
+          if (res) {
+            setLoading(false);
+          }
+          const confirmed = window.confirm(
+            "Are you ready to get started with the test ?\n" +
+              "the test contain 20 question with one ansewr every 10 sec"
+          );
+
+          if (confirmed) {
+            window.location = "/answerquiz";
+          }
+        } catch (error) {
+          if (error.response && error.response.status === 415) {
+            toast.error("PDF file only");
+          } else {
+            console.error(error);
+            toast.error("PDF file only");
+          }
         }
-      } catch (error) {
-        if (error.response && error.response.status === 415) {
-          toast.error("PDF file only");
-        } else {
-          console.error(error);
-          toast.error("PDF file only");
-        }
+        console.log("work");
       }
-      console.log("work");
     };
-  }
 
     handleParse();
   }, [isSubmited, isOfferUpdated]);
@@ -330,6 +291,11 @@ useEffect(() => {
                   </button>
                   {popup && (
                     <div className="popup_container" style={{ zIndex: "1" }}>
+                      {isLoading ? (
+                        <Box sx={{ display: "flex" }}>
+                        <CircularProgress />
+                      </Box>
+                      ) : null}
                       <div
                         className="overlay"
                         onClick={() => toggleModel(null)}
@@ -386,18 +352,18 @@ useEffect(() => {
               </Box>
             )}
           </tr>
-        </table><div className="pagination_container">
-        <Stack spacing={2}>
-          <Pagination
-            count={totalPages}
-            page={currentPage}
-            onChange={handlePageChange}
-            color="primary"
-          />
-        </Stack>
+        </table>
+        <div className="pagination_container">
+          <Stack spacing={2}>
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Stack>
+        </div>
       </div>
-      </div>
-      
     </>
   );
 }

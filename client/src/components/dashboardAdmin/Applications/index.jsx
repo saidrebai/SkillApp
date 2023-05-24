@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactStoreIndicator from "react-score-indicator";
 import "./index.css";
-// import Pagination from "@mui/material/Pagination";
-// import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -19,12 +17,13 @@ export default function Application() {
 
   const [scores, setScores] = useState([]);
   const [countScores, setCountScores] = useState(0);
-  // const [currentPage, setCurrentPage] = useState(1);
+
   const [idOffer, setIdOffer] = useState([]);
   const [users, setUsers] = useState([]);
   const [modal, setModal] = useState(false);
   const [selectedScore, setSelectedScore] = useState(null);
   const [application, setApplication] = useState({});
+  const [refused, setRefused] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
 
   const [email, setEmail] = useState("");
@@ -43,18 +42,7 @@ export default function Application() {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
-  // const handleTimeChange = (time) => {
-  //   setSelectedTime(time);
-  // };
-  // const itemsPerPage = 6;
-  // const totalPages = Math.ceil(scores.length / itemsPerPage);
-  // const startIndex = (currentPage - 1) * itemsPerPage;
-  // const endIndex = startIndex + itemsPerPage;
-  // const currentScores = scores.slice(startIndex, endIndex);
 
-  // const handlePageChange = (event, value) => {
-  //   setCurrentPage(value);
-  // };
 
   useEffect(() => {
     async function fetchData() {
@@ -141,13 +129,26 @@ export default function Application() {
     console.log("offer tbadel", offer);
   }, [offer]);
 
-  const updateCandidacy = async (userId) => {
+  const acceptCandidacy = async (userId) => {
     try {
       const response = await axios.put(
         `http://localhost:8080/api/ApplicationRouter/updateUser/${userId}`
       );
       setApplication(response?.data);
-      console.log("candidacy updated", response.data);
+      console.log("candidacy accepted", response.data);
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const refuseCandidacy = async (userId) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/ApplicationRouter/refuseUser/${userId}`
+      );
+      setRefused(response?.data);
+      console.log("candidacy refused", response.data);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -157,7 +158,6 @@ export default function Application() {
     <>
       <div className="s_container">
         <div className="score_container">
-          {/* <div>{idOffer._id}</div> */}
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="caption table">
               <TableHead>
@@ -169,7 +169,9 @@ export default function Application() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {scores?.map((score, _id) => (
+                {scores?.map((score, _id) => {
+                  if(!score.accepted && !score.refused){
+                    return(
                   <TableRow key={score._id}>
                     <TableCell component="th" scope="row">
                       {users.find((user) => user._id === score.user)?.email}
@@ -218,11 +220,7 @@ export default function Application() {
                                 onClick={() => {
                                   accepterCandidat();
                                   toggleModal();
-                                  updateCandidacy(
-                                    users.find(
-                                      (user) => user._id === score.user
-                                    )?._id
-                                  );
+                                  acceptCandidacy(score._id);
                                 }}
                               >
                                 Accepte
@@ -231,6 +229,7 @@ export default function Application() {
                                 onClick={() => {
                                   rejeterCandidat();
                                   toggleModal();
+                                  refuseCandidacy(score._id);
                                 }}
                               >
                                 Rejecte
@@ -270,7 +269,7 @@ export default function Application() {
                       </button>
                     </TableCell>
                   </TableRow>
-                ))}
+                )}})}
               </TableBody>
             </Table>
           </TableContainer>

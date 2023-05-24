@@ -6,15 +6,16 @@ import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Avatar from "@mui/material/Avatar";
-import ArticleIcon from '@mui/icons-material/Article';
-import ContactPageIcon from '@mui/icons-material/ContactPage';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
+import ContentPasteOutlinedIcon from '@mui/icons-material/ContentPasteOutlined';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -131,7 +132,7 @@ const Sidebar = () => {
             <Item
               title="Profile"
               to="/AccountA"
-              icon={<PeopleOutlinedIcon />}
+              icon={<AccountCircleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -146,14 +147,21 @@ const Sidebar = () => {
             <Item
               title="Offers"
               to="/getoffers"
-              icon={<ArticleIcon />}
+              icon={<ArticleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Applications"
               to="/application"
-              icon={<ContactPageIcon />}
+              icon={<ContentPasteOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+                   <Item
+              title="Recrutments"
+              to="/recrutments"
+              icon={<PeopleAltOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
