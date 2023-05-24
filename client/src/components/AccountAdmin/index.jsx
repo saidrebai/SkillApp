@@ -478,13 +478,17 @@ const AccountAdmin = () => {
                 name="Phone"
                 required = {true}
                 maxLength={8}
+                pattern="\d{8}"
                 value={updatedData.Phone}
-                onChange={(e) =>
-                  setUpdatedData({
-                    ...updatedData,
-                    Phone: e.target.value,
-                  })
-                }
+                onChange={(e) => {
+                  const phoneNumber = e.target.value;
+                  if (/^\d{0,8}$/.test(phoneNumber)) {
+                    setUpdatedData({
+                      ...updatedData,
+                      Phone: phoneNumber
+                    });
+                  }
+                }}
                 className="style-input"
               />
             </div>

@@ -1,15 +1,20 @@
-.score_container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+
+.score_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 80%;
+    margin: 30px;
 }
 .score {
   margin: 20px;
 }
-.s_container {
-  width: 90%;
-  margin-left: 59px;
+
+.s_container{
+    width: 90%;
+    margin-left: 59px;
+    display: flex;
 }
 .modal_content {
   position: absolute;
@@ -31,6 +36,7 @@
   cursor: pointer;
   height: 25px;
 }
+
 .datepicker_container {
   position: absolute;
   top: 60%;
@@ -41,3 +47,4 @@
   height: 35px;
   background-color: burlywood;
 }
+

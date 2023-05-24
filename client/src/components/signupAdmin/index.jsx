@@ -362,6 +362,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.Phone}
               maxLength={8}
+              pattern="\d{8}"
               required
               className="inpute-signup"
             />

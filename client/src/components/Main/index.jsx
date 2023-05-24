@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import myImg from "../images/Capture.PNG";
 import ImgAu from "../images/about-us-page-1.png";
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 const Main = () => {
   const [pageviews, setPageviews] = useState();
@@ -164,16 +166,18 @@ const Main = () => {
               </form>
             </div>
             <div className="contact_left">
-              <div>
+              <div className="contact-info">
                 {/* <img src={logogmail} alt="" class="logo_gmail" /> */}
                 <div>
                   <p class="ova_text">
+                    <EmailIcon/>
                     <a href="mailto:info@arsela.co"> info@arsela.co</a>
                   </p>
                 </div>
                 <div>
                   {/* <img src={logoPhone} alt="" class="logo_Phone" /> */}
                   <p class="ova_text">
+                    <PhoneIcon/>
                     <a href="tel:53107042"> (+216) 53 107 042</a>
                   </p>
                   <ToastContainer />

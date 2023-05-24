@@ -18,7 +18,7 @@ import axios from "axios";
 const DashboardA = () => {
   const id = localStorage.getItem("id");
   const ids = localStorage.getItem("ids");
-  const cvId = localStorage.getItem("cvId");
+  // const cvId = localStorage.getItem("cvId");
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

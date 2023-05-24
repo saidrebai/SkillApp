@@ -20,6 +20,7 @@ root.render(
       window.location.pathname !== "/dashboardA" &&
       window.location.pathname !== "/getoffers" &&
       window.location.pathname !== "/application" &&
+      window.location.pathname !== "/recrutments" &&
       window.location.pathname !== "/calendar" &&
       window.location.pathname !== "/ForgotPassword" &&
       window.location.pathname !== "/resetpassword" &&
@@ -33,6 +34,7 @@ root.render(
       window.location.pathname !== "/dashboardA" &&
       window.location.pathname !== "/getoffers" &&
       window.location.pathname !== "/application" &&
+      window.location.pathname !== "/recrutments" &&
       window.location.pathname !== "/calendar" &&
       window.location.pathname !== "/ForgotPassword" &&
       window.location.pathname !== "/resetpassword" &&

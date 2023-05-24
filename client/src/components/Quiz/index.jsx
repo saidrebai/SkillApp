@@ -101,6 +101,7 @@ const Quiz=()=> {
       console.log("==>", response.data.length);
       console.log("response", response.data);
       console.log("tag===>",offer);
+      // localStorage.removeItem("skills");
       // console.log("tags",response?.data?.tags);
     }
     // else if (hasSkill ===false){
@@ -175,7 +176,7 @@ const addScore = async (e) => {
     console.log(final);
     if (final) {
       try {
-        if(score >10){
+        if(score >5){
         const response = await axios.post(
           "http://localhost:8080/api/ApplicationRouter/addscore",
           { ...newScore, result: score }
@@ -183,6 +184,7 @@ const addScore = async (e) => {
         console.log("score=====>", response.data);
         toast.success("Adding successfully!");
         localStorage.removeItem("score");
+        localStorage.removeItem("offerId");
         // setIdScore(response?.data?.idScore);
         // const scoreID = response?.data?.idScore
         // const responseApp = await axios.post(

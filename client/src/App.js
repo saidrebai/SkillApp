@@ -20,6 +20,7 @@ import Quiz from "./components/Quiz/";
 import Applications from "./components/dashboardAdmin/Applications";
 import Calendar from "./components/dashboardAdmin/Calendar";
 import Candidacy from "./components/Candidacy";
+import Recrutments from "./components/dashboardAdmin/Recrutments";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
       <Route path="/dashboardA" exact element={<DashboardA />} />
       <Route path="/getoffers" exact element={<Offer />} />
       <Route path="/application" exact element={<Applications />} />
+      <Route path="/recrutments" exact element={<Recrutments />} />
       <Route path="/calendar" exact element={<Calendar />} />
       <Route path="/AccountA" exact element={<AccountAdmin />} />
       </Routes></main></div>
