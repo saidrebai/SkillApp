@@ -45,8 +45,6 @@ export default function Application() {
     setSelectedDate(date);
   };
 
-
-
   // const handleTimeChange = (time) => {
   //   setSelectedTime(time);
   // };
@@ -59,7 +57,6 @@ export default function Application() {
   // const handlePageChange = (event, value) => {
   //   setCurrentPage(value);
   // };
-
 
   useEffect(() => {
     async function fetchData() {
@@ -187,107 +184,114 @@ export default function Application() {
               </TableHead>
               <TableBody>
                 {scores?.map((score, _id) => {
-                  if(!score.accepted && !score.refused){
-                    return(
-                  <TableRow key={score._id}>
-                    <TableCell component="th" scope="row">
-                      {users.find((user) => user._id === score.user)?.email}
-                    </TableCell>
-                    <TableCell align="right">
-                      {idOffer.find((offer) => offer._id === score.offer)?.Name}
-                    </TableCell>
-                    <TableCell align="right">
-                      {score.accepted === true ? (
-                        <div>true</div>
-                      ) : (
-                        <div>false</div>
-                      )}
-                    </TableCell>
-                    <TableCell align="right">
-                      {modal && (
-                        <div
-                          className="popup_container"
-                          style={{ zIndex: "1" }}
-                          key={_id}
-                        >
-                          <div
-                            className="overlay"
-                            onClick={() => toggleModal(null)}
-                          ></div>
-                          <div className="modal_content" key={score._id}>
-                            <div className="score" key={score._id}>
-                              <ReactStoreIndicator
-                                value={selectedScore.result}
-                                maxValue={20}
-                                stepColors={[
-                                  "#271a1a",
-                                  "#ed8d00",
-                                  "#f1bc00",
-                                  "#84c42b",
-                                  "#53b83a",
-                                  "#3da940",
-                                  "#3da940",
-                                  "#3da940",
-                                ]}
-                                style={{ color: "#aaa" }}
-                              />
-                              {console.log("score selected == >", score)}
-
-                              <button 
-                                onClick={() => {
-                                  accepterCandidat();
-                                  toggleModal();
-
-                                  acceptCandidacy(score._id);
-                                }}
-                              >
-                                Accepte
-                              </button>
-                              <button  
-                                onClick={() => {
-                                  rejeterCandidat();
-                                  toggleModal();
-                                  refuseCandidacy(score._id);
-                                }}
-                              >
-                                Rejecte
-                              </button>
-                            </div>
-                            <div className="datepicker_container">
-                              <DatePicker
-                                // type="date"
-                                selected={selectedDate}
-                                onChange={handleDateChange}
-                                dateFormat="yyyy-MM-dd              HH:mm aa"
-                                showTimeInput
-                                placeholderText="Select a date and time"
-                                className="input__date"
-                                // disabled={!selectedDate}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      <button
-                        className="dsply_btn"
-                        onClick={() => {
-                          toggleModal(score);
-                          setSelectedScore(score);
-                          setEmail(
-                            users.find((user) => user._id === score.user)?.email
-                          );
-                          setScoreForMail(score.result);
-                          setOffer(
+                  if (!score.accepted && !score.refused) {
+                    return (
+                      <TableRow key={score._id}>
+                        <TableCell component="th" scope="row">
+                          {users.find((user) => user._id === score.user)?.email}
+                        </TableCell>
+                        <TableCell align="right">
+                          {
                             idOffer.find((offer) => offer._id === score.offer)
                               ?.Name
-                          );
-                        }}
-                      >
-                        display
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                )}})}
+                          }
+                        </TableCell>
+                        <TableCell align="right">
+                          {score.accepted === true ? (
+                            <div>true</div>
+                          ) : (
+                            <div>false</div>
+                          )}
+                        </TableCell>
+                        <TableCell align="right">
+                          {modal && (
+                            <div
+                              className="popup_container"
+                              style={{ zIndex: "1" }}
+                              key={_id}
+                            >
+                              <div
+                                className="overlay"
+                                onClick={() => toggleModal(null)}
+                              ></div>
+                              <div className="modal_content" key={score._id}>
+                                <div className="score" key={score._id}>
+                                  <ReactStoreIndicator
+                                    value={selectedScore.result}
+                                    maxValue={20}
+                                    stepColors={[
+                                      "#271a1a",
+                                      "#ed8d00",
+                                      "#f1bc00",
+                                      "#84c42b",
+                                      "#53b83a",
+                                      "#3da940",
+                                      "#3da940",
+                                      "#3da940",
+                                    ]}
+                                    style={{ color: "#aaa" }}
+                                  />
+                                  {console.log("score selected == >", score)}
+
+                                  <button
+                                    onClick={() => {
+                                      accepterCandidat();
+                                      toggleModal();
+
+                                      acceptCandidacy(score._id);
+                                    }}
+                                  >
+                                    Accepte
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      rejeterCandidat();
+                                      toggleModal();
+                                      refuseCandidacy(score._id);
+                                    }}
+                                  >
+                                    Rejecte
+                                  </button>
+                                </div>
+                                <div className="datepicker_container">
+                                  <DatePicker
+                                    // type="date"
+                                    selected={selectedDate}
+                                    onChange={handleDateChange}
+                                    dateFormat="yyyy-MM-dd              HH:mm aa"
+                                    showTimeInput
+                                    placeholderText="Select a date and time"
+                                    className="input__date"
+                                    // disabled={!selectedDate}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          <button
+                            className="dsply_btn"
+                            onClick={() => {
+                              toggleModal(score);
+                              setSelectedScore(score);
+                              setEmail(
+                                users.find((user) => user._id === score.user)
+                                  ?.email
+                              );
+                              setScoreForMail(score.result);
+                              setOffer(
+                                idOffer.find(
+                                  (offer) => offer._id === score.offer
+                                )?.Name
+                              );
+                            }}
+                          >
+                            display
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  }
+                })}
               </TableBody>
             </Table>
           </TableContainer>
