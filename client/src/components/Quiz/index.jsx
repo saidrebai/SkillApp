@@ -8,7 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import ReactStoreIndicator from "react-score-indicator";
 import { toast, ToastContainer } from "react-toastify";
-import { useTheme } from "@mui/material";
+// import { useTheme } from "@mui/material";
 
 const Quiz=()=> {
   const id = localStorage.getItem("id");

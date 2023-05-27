@@ -39,13 +39,16 @@ const AddOffers = () => {
       toast.success("Adding successfully!");
       window.location.reload();
     } catch (error) {
+      console.log("jeeeeeeeeee");
       if (
         error.response &&
         error.response.status >= 400 &&
-        error.response.status <= 500
+        error.response.status <= 500 &&
+        console.log("gatagata")
       ) {
         setError(error.response.data.message);
         toast.error("Adding failed!");
+        console.log("frfrfr");
       }
     }
   };

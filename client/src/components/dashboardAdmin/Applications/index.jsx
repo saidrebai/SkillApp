@@ -25,7 +25,9 @@ export default function Application() {
   const [modal, setModal] = useState(false);
   const [selectedScore, setSelectedScore] = useState(null);
   const [application, setApplication] = useState({});
+
   const [refused, setRefused] = useState({});
+
   const [selectedDate, setSelectedDate] = useState(null);
 
   const [idUser, setIdUser] = useState();
@@ -56,6 +58,7 @@ export default function Application() {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
+
 
   useEffect(() => {
     async function fetchData() {

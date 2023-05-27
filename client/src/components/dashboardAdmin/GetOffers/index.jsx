@@ -6,6 +6,9 @@ import Avatar from "@mui/material/Avatar";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import "./index.css";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+import { styled, alpha } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,6 +16,48 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
+}));
 
 const GetOffer = () => {
   const id = localStorage.getItem("id");
@@ -26,6 +71,7 @@ const GetOffer = () => {
   const [users, setUsers] = useState([]);
   const [pdf, setPdf] = useState({});
   const [isSelected, setIsSelected] = useState(null);
+  const [search, setSearch] = useState("");
 
   const [isCurrentPage, setIsCurrentPage] = useState(1);
   const itemsPerPag = 4;
@@ -209,51 +255,72 @@ const GetOffer = () => {
           <div className="number_of_offer">
             <p>Number of offer : {offerCount}</p>
           </div>
+          <div className="search_container">
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <form>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                  className="search_input"
+                  type="text"
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                />
+              </form>
+            </Search>
+          </div>
           <div className="offerr">
             {currentoffer.length > 0 ? (
-              currentoffer.map((selectedOffer) => (
-                <div className="offerr_container" key={selectedOffer._id}>
-                  <div className="offerr_avatar">
-                    <Avatar src="/broken-image.jpg" />
-                    <div className="offerr_name">{selectedOffer.Name}</div>
-                  </div>
+              currentoffer
+                .filter((selectedOffer) => {
+                  return search.toLowerCase() === ""
+                    ? selectedOffer
+                    : selectedOffer.Name.toLowerCase().includes(search);
+                })
+                .map((selectedOffer) => (
+                  <div className="offerr_container" key={selectedOffer._id}>
+                    <div className="offerr_avatar">
+                      <Avatar src="/broken-image.jpg" />
+                      <div className="offerr_name">{selectedOffer.Name}</div>
+                    </div>
 
-                  <div className="update_botton">
-                    <button
-                      className="buttons"
-                      type="submit"
-                      onClick={() => {
-                        toggleModel(selectedOffer);
-                      }}
-                    >
-                      Update
-                    </button>
-                    <button
-                      className="buttons"
-                      type="button"
-                      onClick={() => {
-                        toggleModal(selectedOffer);
-                        fetchUser(selectedOffer);
-                      }}
-                    >
-                      candidats
-                    </button>
+                    <div className="update_botton">
+                      <button
+                        className="buttons"
+                        onClick={() => {
+                          toggleModel(selectedOffer);
+                        }}
+                      >
+                        Update
+                      </button>
+                      <button
+                        className="buttons"
+                        onClick={() => {
+                          toggleModal(selectedOffer);
+                          fetchUser(selectedOffer);
+                        }}
+                      >
+                        candidats
+                      </button>
 
-                    <button
-                      className="buttons"
-                      type="submit"
-                      onClick={() => handleDelete(selectedOffer)}
-                    >
-                      Delete
-                    </button>
+                      <button
+                        className="buttons"
+                        onClick={() => handleDelete(selectedOffer)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))
+                ))
             ) : (
               <div>No offer to display</div>
             )}
             <ToastContainer />
           </div>
+
           <div className="pagination_container">
             <Stack spacing={2}>
               <Pagination
