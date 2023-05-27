@@ -61,4 +61,18 @@ module.exports = {
     }
 
   },
+
+  getContactByEmail: async function (req, res) {
+  	try {
+      const emails = req.query.q.split(",");
+  		const contact = await ContactModel.find({email:{$in : emails}});
+  		if (!contact) {
+  			return res.status(404).json({ message: "contact not found" });
+  		}
+  		return res.status(200).json({ message: "contact found", contact });
+  	} catch (error) {
+  		console.error(error);
+  		return res.status(500).json({ message: "Internal Server Error" });
+  	}
+  },
 };

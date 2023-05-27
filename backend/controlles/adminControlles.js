@@ -267,6 +267,7 @@ module.exports = {
         offer: req.body.offer,
         adminEmail: req.body.adminEmail,
         date: req.body.date,
+        user : req.body.user
       });
 
       console.log(acceptationForm);
