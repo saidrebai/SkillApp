@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-// const Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const contactSchema = new mongoose.Schema({
   Name: {
@@ -33,6 +33,10 @@ const contactSchema = new mongoose.Schema({
   date: {
     type: Date,
     // required: true,
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
   },
 });
 

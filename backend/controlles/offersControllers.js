@@ -172,10 +172,18 @@ module.exports = {
   ,
   getOfferUsersCount: async function (req, res) {
     try {
-      const offerId = req.params.id;
+      // const offerId = req.params.id;
+      const offer = await offerModel.find({admin:req.params.id});
+      if(offer){
       const result = await offerModel.aggregate([
-        { $match: { admin: mongoose.Types.ObjectId(offerId) } },
-        { $project: { userCount: { $size: "$user" } } }
+        { $match: { admin: offer.admin } },
+        {
+          $group: {
+            _id: null,
+            uniqueUserIds: { $addToSet: "$user" }
+          }
+        },
+        { $project: { userCount: { $size: "$uniqueUserIds" } } }
       ]);
   
       if (!result || result.length === 0) {
@@ -183,7 +191,7 @@ module.exports = {
       }
   
       const count = result[0].userCount;
-      return res.status(200).json({ message: "User count found", count });
+      return res.status(200).json({ message: "User count found", count });}
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });

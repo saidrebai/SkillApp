@@ -24,6 +24,7 @@ export default function Card() {
   const [isSubmited, setSubmited] = useState(false);
   const [isOfferUpdated, setIsOfferUpdated] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAnalyse, setIsAnalyse] = useState(false);
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil(offers.length / itemsPerPage);
@@ -77,17 +78,13 @@ export default function Card() {
         localStorage.setItem("idpdf", res.idpdf);
         setSubmited(true);
         toast.success("uploaded succesfuly");
-        // handleUpdate();
-        return true;
       } catch (error) {
         if (error.response && error.response.status === 415) {
           toast.error("PDF file only");
         } else {
           console.error(error);
-          toast.error("PDF file only");
+          toast.error("err");
         }
-        setSubmited(false);
-        return false;
       }
     }
   };
@@ -108,15 +105,13 @@ export default function Card() {
           setIsOfferUpdated(true);
           setUpdatedOffer(response?.data?.offer);
           localStorage.setItem("offerId", updatedOffer._id);
-          // updateUser();
-          return true;
+          setOfferId(updatedOffer._id);
         } catch (error) {
           console.error(error);
           toast.error("Already Deposit");
+          setSubmited(false);
           setIsOfferUpdated(false);
         }
-        setSubmited(false);
-        return false;
       }
     };
     handleUpdate();
@@ -135,19 +130,9 @@ export default function Card() {
             }
           );
           console.log("=>", response.data);
-          // toast.success("Updated successfully!");
           setUsers(response.data);
           localStorage.setItem("offerId", updatedOffer._id);
-          setIsOfferUpdated(false);
           // localStorage.removeItem("idpdf");
-          // const confirmed = window.confirm(
-          //   "Are you ready to get started with the test ?\n" +
-          //     "the test contain 20 question with one ansewr every 10 sec"
-          // );
-          // if (confirmed) {
-          //   window.location = "/answerquiz";
-          // }
-          return true;
         } catch (error) {
           console.error(error);
         }
@@ -172,9 +157,52 @@ export default function Card() {
           );
           console.log("frfr", res);
           localStorage.setItem("skills", res.skills);
+          setSkills(res.skills)
+          setIsAnalyse(true);
           if (res) {
             setLoading(false);
           }
+          // const confirmed = window.confirm(
+          //   "Are you ready to get started with the test ?\n" +
+          //     "the test contain 20 question with one ansewr every 10 sec"
+          // );
+
+          // if (confirmed) {
+          //   window.location = "/answerquiz";
+          // }
+        } catch (error) {
+          if (error.response && error.response.status === 415) {
+            toast.error("PDF file only");
+          } else {
+            console.error(error);
+            toast.error("PDF file only");
+          }
+        }
+
+      }
+    };
+
+    handleParse();
+  }, [isSubmited, isOfferUpdated]);
+
+const[offerId,setOfferId]=useState({});
+const[competence,setCompetence]=useState({});
+const[skills,setSkills]=useState({});
+
+  useEffect(() => {
+    async function confirme () {
+      if (isSubmited && isOfferUpdated && isAnalyse ) {
+        try {
+          const response = await axios.get(
+            `http://localhost:8080/api/offerRouter/getoffebyid/${offerId}`
+          );
+          setCompetence(response?.data?.offer?.skills);
+          console.log("==>", response.data.offer.skills);
+          const comp = response?.data?.offer?.skills;
+          setSubmited(false);
+          setIsOfferUpdated(false);
+          setIsAnalyse(false);
+          if (skills.includes(comp)) {
           const confirmed = window.confirm(
             "Are you ready to get started with the test ?\n" +
               "the test contain 20 question with one ansewr every 10 sec"
@@ -182,6 +210,9 @@ export default function Card() {
 
           if (confirmed) {
             window.location = "/answerquiz";
+          }}
+          else{
+            alert("oumerk mch mrigla")
           }
         } catch (error) {
           if (error.response && error.response.status === 415) {
@@ -191,41 +222,13 @@ export default function Card() {
             toast.error("PDF file only");
           }
         }
-        console.log("work");
+        console.log("work",isSubmited);
+        console.log("go",isOfferUpdated);
       }
     };
 
-    handleParse();
-  }, [isSubmited, isOfferUpdated]);
-
-  // const handleParse = async (e) => {
-  //   const formData = new FormData();
-  //   formData.append("pdfs", pdfs);
-  //   formData.append("id", id);
-  //   try {
-  //     const { data: res } = await axios.post(
-  //       "http://localhost:8080/api/uploadRouter/cvParser",
-  //       formData
-  //     );
-  //     console.log("frfr", res);
-  //     localStorage.setItem("skills", res);
-  //     const confirmed = window.confirm(
-  //       "Are you ready to get started with the test ?\n" +
-  //         "the test contain 20 question with one ansewr every 10 sec"
-  //     );
-  //     if (confirmed) {
-  //       window.location = "/answerquiz";
-  //     }
-  //   } catch (error) {
-  //     if (error.response && error.response.status === 415) {
-  //       toast.error("PDF file only");
-  //     } else {
-  //       console.error(error);
-  //       toast.error("PDF file only");
-  //     }
-  //   }
-  //   console.log("work");
-  // };
+    confirme();
+  }, [isSubmited, isOfferUpdated,isAnalyse]);
 
   useEffect(() => {
     if (selectedOffer) {
