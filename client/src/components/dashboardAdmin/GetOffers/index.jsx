@@ -27,6 +27,17 @@ const GetOffer = () => {
   const [pdf, setPdf] = useState({});
   const [isSelected, setIsSelected] = useState(null);
 
+  const [isCurrentPage, setIsCurrentPage] = useState(1);
+  const itemsPerPag = 4;
+  const totalPage = Math.ceil(users.length / itemsPerPag);
+  const startInde = (isCurrentPage - 1) * itemsPerPag;
+  const endInde = startInde + itemsPerPag;
+  const currentUsers = users.slice(startInde, endInde);
+
+  const handleNextPage = (event, value) => {
+    setIsCurrentPage(value);
+  };
+
   function handleSelecUser(user) {
     setIsSelected(user);
   }
@@ -472,7 +483,7 @@ const GetOffer = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {users?.map((user, key) => (
+                    {currentUsers?.map((user, key) => (
                       <TableRow
                         key={user._id}
                         className={`user ${
@@ -512,6 +523,16 @@ const GetOffer = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
+              <div className="pagination_container">
+              <Stack spacing={2}>
+                <Pagination
+                  count={totalPage}
+                  page={isCurrentPage}
+                  onChange={handleNextPage}
+                  color="primary"
+                />
+              </Stack>
+            </div>
             </div>
           </div>
         )}

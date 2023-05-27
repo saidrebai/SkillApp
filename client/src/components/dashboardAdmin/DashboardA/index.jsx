@@ -176,7 +176,7 @@ const DashboardA = () => {
         >
           <StatBox
             title={countScores}
-            subtitle="Quiz"
+            subtitle="Applications"
             progress="0.80"
             increase="+43%"
             icon={

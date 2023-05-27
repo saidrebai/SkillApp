@@ -8,6 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 export default function Recrutments() {
   const id = localStorage.getItem("id");
@@ -16,6 +18,28 @@ export default function Recrutments() {
   const [countScores, setCountScores] = useState(0);
   const [idOffer, setIdOffer] = useState([]);
   const [users, setUsers] = useState([]);
+  const [emailUser, setEmailUser] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isCurrentPage, setIsCurrentPage] = useState(1);
+
+  const itemsPerPage = 8;
+  const totalPages = Math.ceil(application.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentApplications = application.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+  const itemsPerPag = 8;
+  const totalPage = Math.ceil(application.length / itemsPerPag);
+  const startInde = (isCurrentPage - 1) * itemsPerPag;
+  const endInde = startInde + itemsPerPag;
+  const currentApplication = application.slice(startInde, endInde);
+
+  const handleNextPage = (event, value) => {
+    setIsCurrentPage(value);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -37,12 +61,23 @@ export default function Recrutments() {
           "http://localhost:8080/api/candidatRouters/searchuser",
           { params: { q: idUsers } }
         );
+        const emails = responseUser.data?.data
+          ?.map((app) => app.email)
+          .join(",");
+        console.log("emails==>", emails);
+
+        const responseEmail = await axios.get(
+          "http://localhost:8080/api/contactRouter/getcontactbyemail",
+          { params: { q: emails } }
+        );
+        setEmailUser(responseEmail?.data.contact);
+        console.log("em==>", emailUser);
 
         console.log("psps", idUsers);
-        setApplication(responseScores.data?.scores);
+        setApplication(responseScores.data.scores);
         setCountScores(responseScores.data?.scoreCount);
         setIdOffer(response.data.offer);
-        setUsers(responseUser.data?.data);
+        setUsers(responseUser.data.data);
         console.log(users);
         console.log(idOffer);
       } catch (error) {
@@ -62,18 +97,15 @@ export default function Recrutments() {
               <Table sx={{ minWidth: 550 }} aria-label="caption table">
                 <TableHead>
                   <TableRow>
-                    <TableCell >Email</TableCell>
-                    <TableCell align="right">
-                      Offer
-                    </TableCell>
-                    <TableCell align="right">
-                      Score
-                    </TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell align="right">Offer</TableCell>
+                    <TableCell align="right">Score</TableCell>
+                    <TableCell align="center">Date</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {application?.map((app, _id) => {
-                    if (app.accepted == true) {
+                  {currentApplications?.map((app, _id) => {
+                    if (app.accepted === true) {
                       return (
                         <TableRow key={app._id}>
                           <TableCell component="th" scope="row">
@@ -86,6 +118,15 @@ export default function Recrutments() {
                             }
                           </TableCell>
                           <TableCell align="right">{app.result}</TableCell>
+                          <TableCell align="right">
+                            <TableCell align="right">
+                              {
+                                emailUser?.find(
+                                  (email) => email.user === app.user
+                                )?.date
+                              }
+                            </TableCell>
+                          </TableCell>
                         </TableRow>
                       );
                     }
@@ -93,6 +134,16 @@ export default function Recrutments() {
                 </TableBody>
               </Table>
             </TableContainer>
+            <div className="pagination_container">
+              <Stack spacing={2}>
+                <Pagination
+                  count={totalPages}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  color="primary"
+                />
+              </Stack>
+            </div>
           </div>
         </div>
         <div className="tables">
@@ -108,7 +159,7 @@ export default function Recrutments() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {application?.map((app, _id) => {
+                  {currentApplication?.map((app, _id) => {
                     if (app.refused === true) {
                       return (
                         <TableRow key={app._id}>
@@ -129,6 +180,16 @@ export default function Recrutments() {
                 </TableBody>
               </Table>
             </TableContainer>
+            <div className="pagination_container">
+              <Stack spacing={2}>
+                <Pagination
+                  count={totalPage}
+                  page={isCurrentPage}
+                  onChange={handleNextPage}
+                  color="primary"
+                />
+              </Stack>
+            </div>
           </div>
         </div>
       </div>
