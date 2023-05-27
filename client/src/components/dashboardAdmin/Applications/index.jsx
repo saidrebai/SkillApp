@@ -59,8 +59,6 @@ export default function Application() {
     setSelectedDate(date);
   };
 
-
-
   // const handleTimeChange = (time) => {
   //   setSelectedTime(time);
   // };
@@ -73,7 +71,6 @@ export default function Application() {
   // const handlePageChange = (event, value) => {
   //   setCurrentPage(value);
   // };
-
 
   useEffect(() => {
     async function fetchData() {
@@ -255,6 +252,7 @@ export default function Application() {
                                     onClick={() => {
                                       accepterCandidat();
                                       toggleModal();
+
                                       acceptCandidacy(score._id);
                                     }}
                                   >
@@ -294,6 +292,7 @@ export default function Application() {
                                 users.find((user) => user._id === score.user)
                                   ?.email
                               );
+
                               setIdUser(
                                 users.find((user) => user._id === score.user)
                                   ?._id
