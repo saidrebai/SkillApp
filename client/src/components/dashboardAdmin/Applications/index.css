@@ -4,7 +4,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 80%;
+    width: 90%;
     margin: 30px;
 }
 .score {
@@ -15,6 +15,7 @@
     width: 90%;
     margin-left: 59px;
     display: flex;
+    flex-direction: column;
 }
 .modal_content {
   position: absolute;
@@ -26,7 +27,7 @@
   border-radius: 3px;
   min-width: 500px;
   min-height: 500px;
-  background-color: white;
+  background-color: #212529ad;
 }
 .dsply_btn {
   border-radius: 5px;
@@ -35,6 +36,31 @@
   color: rgb(255, 255, 255);
   cursor: pointer;
   height: 25px;
+}
+.accept_button{
+  width: 100px;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 7px;
+  color: white;
+  background-color: #389b5f;
+  cursor: pointer;
+}
+.accept_button:hover{
+  background-color: #136e38da;
+}
+
+.refuse_button{
+  width: 100px;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 7px;
+  color: white;
+  background-color: #d62222;
+  cursor: pointer;
+}
+.refuse_button:hover{
+  background-color: #951c14;
 }
 
 .datepicker_container {
@@ -45,6 +71,8 @@
 .input__date {
   width: 145px;
   height: 35px;
-  background-color: burlywood;
+  padding: 10px;
+  border-radius: 13px;
+  background-color: #fff;
 }
 

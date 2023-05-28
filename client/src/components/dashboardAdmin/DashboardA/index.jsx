@@ -7,8 +7,8 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../dashboardAdmin/components/Header";
-import LineChart from "../../dashboardAdmin/components/LineChart";
-import BarChart from "../../dashboardAdmin/components/BarChart";
+// import LineChart from "../../dashboardAdmin/components/LineChart";
+// import BarChart from "../../dashboardAdmin/components/BarChart";
 import StatBox from "../../dashboardAdmin/components/StatBox";
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import { useState,useEffect } from "react";
@@ -225,9 +225,9 @@ const DashboardA = () => {
               </IconButton>
             </Box>
           </Box>
-          <Box height="250px" m="-20px 0 0 0">
+          {/* <Box height="250px" m="-20px 0 0 0">
             <LineChart isDashboard={true} />
-          </Box>
+          </Box> */}
         </Box>
         
 
@@ -244,9 +244,9 @@ const DashboardA = () => {
           >
             Sales Quantity
           </Typography>
-          <Box height="250px" mt="-20px">
+          {/* <Box height="250px" mt="-20px">
             <BarChart isDashboard={true} />
-          </Box>
+          </Box> */}
         </Box>
         
   
