@@ -89,7 +89,7 @@ export default function Recrutments() {
 
   return (
     <>
-      <div className="s_container">
+      <div className="sx_container">
         <div className="tables">
           <h1 className="status">Accepted</h1>
           <div className="score_c">

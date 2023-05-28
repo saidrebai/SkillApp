@@ -9,6 +9,58 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+import { styled, alpha } from "@mui/material/styles";
+import TitleIcon from "@mui/icons-material/Title";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import RadarOutlinedIcon from "@mui/icons-material/RadarOutlined";
+import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
+}));
 
 export default function Card() {
   const user = localStorage.getItem("token");
@@ -25,6 +77,7 @@ export default function Card() {
   const [isOfferUpdated, setIsOfferUpdated] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isAnalyse, setIsAnalyse] = useState(false);
+  const [search, setSearch] = useState("");
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil(offers.length / itemsPerPage);
@@ -117,7 +170,6 @@ export default function Card() {
     handleUpdate();
   }, [isSubmited]);
 
-
   useEffect(() => {
     const updateUser = async () => {
       if (isSubmited && isOfferUpdated) {
@@ -157,7 +209,7 @@ export default function Card() {
           );
           console.log("frfr", res);
           localStorage.setItem("skills", res.skills);
-          setSkills(res.skills)
+          setSkills(res.skills);
           setIsAnalyse(true);
           if (res) {
             setLoading(false);
@@ -178,20 +230,19 @@ export default function Card() {
             toast.error("PDF file only");
           }
         }
-
       }
     };
 
     handleParse();
   }, [isSubmited, isOfferUpdated]);
 
-const[offerId,setOfferId]=useState({});
-const[competence,setCompetence]=useState({});
-const[skills,setSkills]=useState({});
+  const [offerId, setOfferId] = useState({});
+  const [competence, setCompetence] = useState({});
+  const [skills, setSkills] = useState({});
 
   useEffect(() => {
-    async function confirme () {
-      if (isSubmited && isOfferUpdated && isAnalyse ) {
+    async function confirme() {
+      if (isSubmited && isOfferUpdated && isAnalyse) {
         try {
           const response = await axios.get(
             `http://localhost:8080/api/offerRouter/getoffebyid/${offerId}`
@@ -203,16 +254,18 @@ const[skills,setSkills]=useState({});
           setIsOfferUpdated(false);
           setIsAnalyse(false);
           if (skills.includes(comp)) {
-          const confirmed = window.confirm(
-            "Are you ready to get started with the test ?\n" +
-              "the test contain 20 question with one ansewr every 10 sec"
-          );
+            const confirmed = window.confirm(
+              "Are you ready to get started with the test ?\n" +
+                "the test contain 20 question with one ansewr every 10 sec"
+            );
 
-          if (confirmed) {
-            window.location = "/answerquiz";
-          }}
-          else{
-            alert("oumerk mch mrigla")
+            if (confirmed) {
+              window.location = "/answerquiz";
+            } else {
+              toggleModel(false);
+            }
+          } else {
+            alert("you do not have the necessary skills!\n try another offer");
           }
         } catch (error) {
           if (error.response && error.response.status === 415) {
@@ -222,13 +275,13 @@ const[skills,setSkills]=useState({});
             toast.error("PDF file only");
           }
         }
-        console.log("work",isSubmited);
-        console.log("go",isOfferUpdated);
+        console.log("work", isSubmited);
+        console.log("go", isOfferUpdated);
       }
-    };
+    }
 
     confirme();
-  }, [isSubmited, isOfferUpdated,isAnalyse]);
+  }, [isSubmited, isOfferUpdated, isAnalyse]);
 
   useEffect(() => {
     if (selectedOffer) {
@@ -243,112 +296,155 @@ const[skills,setSkills]=useState({});
   return (
     <>
       <div className="container">
+        <div className="search_containe">
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <form>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                className="search_input"
+                type="text"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+              />
+            </form>
+          </Search>
+        </div>
         <table>
           <tr className="table1">
             {currentOffers.length > 0 ? (
-              currentOffers.map((selectedOffer) => (
-                <div className="offer_container" key={selectedOffer._id}>
-                  <div className="offer_container_img">
-                    <img src={myImage} alt="" />
-                  </div>
-                  {/* <label className="offre_label">information : </label> */}
-                  <div className="offer_container_info">
-                    <label className="offre_label">Title : </label>
-                    {selectedOffer.Name}
-                  </div>
-                  <div className="offer_container_info">
-                    <label className="offre_label">Type : </label>
-                    {selectedOffer.type}
-                  </div>
-                  <div className="offer_container_info">
-                    <label className="offre_label">Time : </label>
-                    {selectedOffer.time}
-                  </div>
-
-                  <div className="offer_container_description">
-                    <label className="offre_label">Descritption : </label>
-                    {selectedOffer.description}
-                  </div>
-
-                  <div className="skills_container">
-                    <label className="offre_label">Skills : </label>
-                    {selectedOffer.skills}
-                  </div>
-
-                  <div className="company_Name_container">
-                    <label className="offre_label">Entreprise : </label>
-                    {selectedOffer.company_name}
-                  </div>
-
-                  <div className="adresse_container">
-                    <label className="offre_label">Adresse : </label>
-                    {selectedOffer.adresse}
-                  </div>
-                  <button
-                    className="apply_button"
-                    onClick={() => {
-                      toggleModel(selectedOffer);
-                    }}
-                  >
-                    Apply
-                  </button>
-                  {popup && (
-                    <div className="popup_container" style={{ zIndex: "1" }}>
-                      {isLoading ? (
-                        <Box sx={{ display: "flex" }}>
-                        <CircularProgress />
-                      </Box>
-                      ) : null}
-                      <div
-                        className="overlay"
-                        onClick={() => toggleModel(null)}
-                      ></div>
-                      <form
-                        className="form_container"
-                        method="POST"
-                        onSubmit={handleSubmit}
-                      >
-                        <div className="popup_contnt">
-                          <div
-                            className="popup_id"
-                            value={updatedOffer?._id}
-                          ></div>
-                          <h2 className="h1_cv">Enter your CV here : </h2>
-                          <input
-                            type="file"
-                            name="pdfs"
-                            onChange={handleFileChange}
-                            required
-                          />
-                          <button
-                            className="close_popup"
-                            type="button"
-                            onClick={() => {
-                              toggleModel();
-                            }}
-                          >
-                            Close
-                          </button>
-                          {error && <div className="error_msg">{error}</div>}
-                          <button
-                            className="submit_button"
-                            type="submit"
-                            onClick={() => {
-                              // handleUpdate();
-                              // updateUser();
-                              // onClickButton();
-                              // handleParse();
-                            }}
-                          >
-                            Send
-                          </button>
-                        </div>
-                      </form>
-                      <ToastContainer />
+              currentOffers
+                .filter((selectedOffer) => {
+                  return search.toLowerCase() === ""
+                    ? selectedOffer
+                    : selectedOffer.Name.toLowerCase().includes(search);
+                })
+                .map((selectedOffer) => (
+                  <div className="offer_container" key={selectedOffer._id}>
+                    <div className="offer_container_img">
+                      <img src={myImage} alt="" />
                     </div>
-                  )}
-                </div>
-              ))
+                    <div className="offer_container_info">
+                      <label className="offre_label">
+                        {" "}
+                        <TitleIcon /> Title :{" "}
+                      </label>
+
+                      {selectedOffer.Name}
+                    </div>
+                    <div className="offer_container_info">
+                      <label className="offre_label">
+                        <PermIdentityOutlinedIcon /> Position :{" "}
+                      </label>
+                     {selectedOffer.type}
+                    </div>
+                    <div className="offer_container_info">
+                      <label className="offre_label">
+                        <AccessTimeIcon /> Time :{" "}
+                      </label>
+
+                      {selectedOffer.time}
+                    </div>
+
+                    <div className="offer_container_description">
+                      <label className="offre_label">
+                        <DescriptionOutlinedIcon /> Descritption :{" "}
+                      </label>
+
+                      {selectedOffer.description}
+                    </div>
+
+                    <div className="skills_container">
+                      <label className="offre_label">
+                        <RadarOutlinedIcon /> Skills :{" "}
+                      </label>
+
+                      {selectedOffer.skills}
+                    </div>
+
+                    <div className="company_Name_container">
+                      <label className="offre_label">
+                        <ApartmentOutlinedIcon /> Entreprise :{" "}
+                      </label>
+
+                      {selectedOffer.company_name}
+                    </div>
+
+                    <div className="adresse_container">
+                      <label className="offre_label">
+                        <LocationOnOutlinedIcon /> Adresse :
+                      </label>
+
+                      {selectedOffer.adresse}
+                    </div>
+                    <button
+                      className="apply_button"
+                      onClick={() => {
+                        toggleModel(selectedOffer);
+                      }}
+                    >
+                      Apply
+                    </button>
+                    {popup && (
+                      <div className="popup_container" style={{ zIndex: "1" }}>
+                        {isLoading ? (
+                          <Box sx={{ display: "flex" }}>
+                            <CircularProgress />
+                          </Box>
+                        ) : null}
+                        <div
+                          className="overlay"
+                          onClick={() => toggleModel(null)}
+                        ></div>
+                        <form
+                          className="form_container"
+                          method="POST"
+                          onSubmit={handleSubmit}
+                        >
+                          <div className="popup_contnt">
+                            <div
+                              className="popup_id"
+                              value={updatedOffer?._id}
+                            ></div>
+                            <h2 className="h1_cv">Enter your CV here : </h2>
+                            <input
+                              type="file"
+                              name="pdfs"
+                              onChange={handleFileChange}
+                              required
+                            />
+                            <button
+                              className="close_popup"
+                              type="button"
+                              onClick={() => {
+                                toggleModel();
+                              }}
+                            >
+                              Close
+                            </button>
+                            {error && <div className="error_msg">{error}</div>}
+                            <button
+                              className="submit_button"
+                              type="submit"
+                              onClick={() => {
+                                // handleUpdate();
+                                // updateUser();
+                                // onClickButton();
+                                // handleParse();
+                              }}
+                            >
+                              Send
+                            </button>
+                          </div>
+                        </form>
+                        <ToastContainer />
+                      </div>
+                    )}
+                  </div>
+                ))
             ) : (
               <Box sx={{ display: "flex" }}>
                 <CircularProgress />

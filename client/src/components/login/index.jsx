@@ -126,7 +126,7 @@ const Login = () => {
                       localStorage.setItem("myUser", "admin");
                     }}
                   />
-                  Admin
+                  Recruter
                 </label>
 
                 <label>
@@ -140,7 +140,7 @@ const Login = () => {
                       localStorage.setItem("myUser", "user");
                     }}
                   />
-                  User
+                  Candidat
                 </label>
               </div>
               <input
@@ -186,11 +186,11 @@ const Login = () => {
             <div className="radio_group">
               <label>
                 <input className="radio_button" type="radio" name="opt" value="opt1" />
-                Admin
+                Recruter
               </label>
               <label>
                 <input className="radio_button" type="radio" name="opt" value="opt2" />
-                User
+                Candidat
               </label>
             </div>
             <div>

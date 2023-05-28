@@ -240,10 +240,6 @@ const GetOffer = () => {
     setCurrentPage(value);
   };
 
-  // const rows = [
-  //   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-
-  // ];
   useEffect(() => {
     console.log("users==========>", users);
   }, [users]);
