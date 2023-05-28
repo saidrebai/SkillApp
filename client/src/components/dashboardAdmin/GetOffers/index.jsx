@@ -73,6 +73,7 @@ const GetOffer = () => {
   const [isSelected, setIsSelected] = useState(null);
   const [search, setSearch] = useState("");
 
+
   const [isCurrentPage, setIsCurrentPage] = useState(1);
   const itemsPerPag = 4;
   const totalPage = Math.ceil(users.length / itemsPerPag);
@@ -83,6 +84,7 @@ const GetOffer = () => {
   const handleNextPage = (event, value) => {
     setIsCurrentPage(value);
   };
+
 
   function handleSelecUser(user) {
     setIsSelected(user);
