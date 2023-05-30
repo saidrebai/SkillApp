@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./styles.modules.css";
+import { toast, ToastContainer } from "react-toastify";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -28,20 +29,25 @@ const Signup = () => {
       const { data: res } = await axios.post(url, data);
       navigate("/login");
       console.log(res.message);
+      toast.success(res.message)
       
     } catch (error) {
       if (
         error.response &&
         error.response.status >= 400 &&
-        error.response.status <= 500
+        error.response.status <= 500 &&
+        toast.error(error.message)
       ) {
         setError(error.response.data.message);
+        toast.error(error.message)
       }
+      toast.error(error.message)
     }
   };
 
   return (
     <div className="signup_admin_container">
+      <ToastContainer/>
       <div className="signup_admin_from_container">
         <div className="left-side-signup-admin">
           <h1 className="titleButton"> welcome Back</h1>
