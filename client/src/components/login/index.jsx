@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import "./styles.modules.css";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
   const user = localStorage.getItem("token");
@@ -52,10 +53,13 @@ const Login = () => {
         if (
           error.response &&
           error.response.status >= 400 &&
-          error.response.status <= 500
+          error.response.status <= 500 &&
+          toast.error(error.message)
         ) {
           setError(error.response.data.message);
+          toast.error(error.message)
         }
+        toast.error(error.message)
       }
     } else {
       alert("you are already connected");
@@ -110,6 +114,7 @@ const Login = () => {
   return (
     <>
       <div className="login_container">
+        <ToastContainer/>
         <div className="login_from_container">
           <div className="left">
             <form className="from_container" onSubmit={handleSubmit}>

@@ -40,7 +40,7 @@ const Signup = () => {
       navigate("/login");
       console.log(res.message);
     } catch (error) {
-      toast.error("created failed!");
+      toast.error(error.message);
       if (
         error.response &&
         error.response.status >= 400 &&

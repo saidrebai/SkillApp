@@ -43,7 +43,7 @@ const Account = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Update failed!");
+        toast.error(error.message)
       });
     console.log("yess", updatedData);
   }
