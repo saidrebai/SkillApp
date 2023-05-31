@@ -38,6 +38,9 @@ const contactSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "user",
   },
+  emailSuper: {
+    type: String,
+  },
 });
 
 const ContactModel = mongoose.model("contactModel", contactSchema);
