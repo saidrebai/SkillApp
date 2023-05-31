@@ -19,6 +19,7 @@ module.exports = {
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
         message: req.body.message,
+        emailSuper:process.env.MAIL_USERNAME,
       };
       
       const email_content =
@@ -61,6 +62,18 @@ module.exports = {
     }
 
   },
+  getContactBySuperAdmin: async function (req, res) {
+  	try {
+  		const contact = await ContactModel.find({emailSuper : process.env.MAIL_USERNAME});
+  		if (!contact) {
+  			return res.status(404).json({ message: "contact not found" });
+  		}
+  		return res.status(200).json({ message: "contact found", contact });
+  	} catch (error) {
+  		console.error(error);
+  		return res.status(500).json({ message: "Internal Server Error" });
+  	}
+  },
 
   getContactByEmail: async function (req, res) {
   	try {
@@ -75,6 +88,19 @@ module.exports = {
   		return res.status(500).json({ message: "Internal Server Error" });
   	}
   },
+  getContactByCandidat: async function (req, res) {
+  	try {
+  		const contact = await ContactModel.find({user: req.params.id});
+  		if (!contact) {
+  			return res.status(404).json({ message: "contact not found" });
+  		}
+  		return res.status(200).json({ message: "contact found", contact });
+  	} catch (error) {
+  		console.error(error);
+  		return res.status(500).json({ message: "Internal Server Error" });
+  	}
+  },
+
   accepterCandidatPR: async (req, res) => {
     try {
       const transporter = nodemailer.createTransport({
@@ -91,7 +117,8 @@ module.exports = {
         offer: req.body.offer,
         adminEmail: req.body.adminEmail,
         date: req.body.date,
-        user : req.body.user
+        user : req.body.user,
+        link: "",
       });
 
       console.log(acceptationForm);
@@ -100,7 +127,6 @@ module.exports = {
       const emailContent =
         "Félicitations " +
         "! Bienvenue dans votre nouveau poste. " +
-        "L'offre est : " +
         acceptationForm.offer +
         " , " +
         " Avec un score de : " +
@@ -130,6 +156,8 @@ module.exports = {
                 .json({ message: "Problème lors de l'envoi de l'e-mail" });
             } else {
               console.log("Email sent: " + info.response);
+              acceptationForm.link = emailContent;
+              acceptationForm.save();
               res.json(acceptationForm.toJSON());
             }
           });
@@ -163,6 +191,7 @@ module.exports = {
         score: req.body.score,
         offer: req.body.offer,
         adminEmail: req.body.adminEmail,
+        link: "",
       });
 
       const email_content =
@@ -193,6 +222,8 @@ module.exports = {
                 .json({ message: "Problème lors de l'envoi de l'e-mail" });
             } else {
               console.log("Email sent: " + info.response);
+              RefuserForm.link = email_content;
+              RefuserForm.save();
               res.json(RefuserForm.toJSON());
             }
           });
