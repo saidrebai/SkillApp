@@ -390,11 +390,6 @@ export default function Card() {
                     </button>
                     {popup && (
                       <div className="popup_container" style={{ zIndex: "1" }}>
-                        {isLoading ? (
-                          <Box sx={{ display: "flex" }}>
-                            <CircularProgress />
-                          </Box>
-                        ) : null}
                         <div
                           className="overlay"
                           onClick={() => toggleModel(null)}
@@ -410,6 +405,11 @@ export default function Card() {
                               value={updatedOffer?._id}
                             ></div>
                             <h2 className="h1_cv">Enter your CV here : </h2>
+                            {isLoading ? (
+                          <Box sx={{ display: "flex" }}>
+                            <CircularProgress />
+                          </Box>
+                        ) : null}
                             <input
                               type="file"
                               name="pdfs"
