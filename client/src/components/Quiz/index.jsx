@@ -95,10 +95,10 @@ const Quiz=()=> {
     async function fetchData() {
       if(hasSkill && offer){
       const response = await axios.get(
-        `https://quizapi.io/api/v1/questions?apiKey=Aw9rwqe0uBihndUdtI5DtGpPuNqeDURVQeaLqLKN&difficulty=Hard&limit=20&tags=${offer}`
+        `http://localhost:8080/api/quizRouter/getquiz?tags=${offer}`
       );
       setQuiz(response.data);
-      console.log("==>", response.data.length);
+      console.log("==>", response.data.nbrOfQuestion);
       console.log("response", response.data);
       console.log("tag===>",offer);
       // localStorage.removeItem("skills");

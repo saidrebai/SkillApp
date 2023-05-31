@@ -10,6 +10,7 @@ const offerRouter = require("./routes/offerRouter");
 const superAdminRoutes = require("./routes/superAdminRouters");
 const applicationRouter = require("./routes/ApplicationRouter");
 const contactRouter = require("./routes/contactRouter");
+const quizRouter = require("./routes/quizRouter");
 // const CandidacyRoutes =require("./routes/candidacyRouter");
 const morgan = require('morgan');
 const path = require("path");
@@ -30,7 +31,7 @@ app.use("/api/offerRouter", offerRouter);
 app.use("/api/superAdminRouters", superAdminRoutes);
 app.use("/api/ApplicationRouter", applicationRouter);
 app.use("/api/contactRouter", contactRouter);
-// app.use("/api/candidacyRouter", CandidacyRoutes);
+app.use("/api/quizRouter", quizRouter);
 app.use("/uploads",express.static(path.join("uploads")))
 
 

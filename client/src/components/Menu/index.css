@@ -40,3 +40,19 @@
     color: #fff;
     text-align: center;
 }
+.notification{
+    margin-right: 30px;
+}
+.nots{
+    border-radius: 8px;
+    width : 500px
+}
+.msg{
+    width: 450px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: #000000;
+    background-color: #f5f5f5;
+}

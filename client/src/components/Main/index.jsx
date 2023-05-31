@@ -57,7 +57,7 @@ const Main = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Error failed!");
+        toast.error("Network error!");
         //Afficher un message d'erreur
       });
   };
@@ -142,6 +142,7 @@ const Main = () => {
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
                       maxLength={8}
+                      pattern="\d{8}"
                       required
                       className="input_contact"
                       placeholder="Phone Number"
