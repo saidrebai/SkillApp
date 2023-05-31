@@ -12,6 +12,8 @@ import MenuItem from "@mui/material/MenuItem";
 import "./index.css";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import Popover from "@mui/material/Popover";
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -107,6 +109,19 @@ function ResponsiveAppBar() {
       children: `${firstName.split(" ")[0][0].toUpperCase()}`,
     };
   }
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   return (
     <>
@@ -222,17 +237,34 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center">Contact</Typography>
                 </MenuItem>
               </Box>
-              {/* <div className="search_container">
-                <Search>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
-              </div> */}
+
+              {token && isAdmin === "false" && (
+                <div className="notification">
+                  <IconButton
+                    aria-describedby={id}
+                    variant="contained"
+                    onClick={handleClick}
+                  >
+                    <NotificationsOutlinedIcon />
+                  </IconButton>
+
+                  <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                  >
+                    <Typography sx={{ p: 3 }}>
+                      The content of the Popover.
+                    </Typography>
+                  </Popover>
+                </div>
+              )}
+
               {!token && (
                 <button className="title_signin" onClick={handleLoginClick}>
                   SIGN IN
