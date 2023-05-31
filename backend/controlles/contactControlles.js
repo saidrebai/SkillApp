@@ -19,6 +19,7 @@ module.exports = {
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
         message: req.body.message,
+        emailSuper:process.env.MAIL_USERNAME,
       };
       
       const email_content =
@@ -61,7 +62,18 @@ module.exports = {
     }
 
   },
-
+  getContactBySuperAdmin: async function (req, res) {
+  	try {
+  		const contact = await ContactModel.find({emailSuper : process.env.MAIL_USERNAME});
+  		if (!contact) {
+  			return res.status(404).json({ message: "contact not found" });
+  		}
+  		return res.status(200).json({ message: "contact found", contact });
+  	} catch (error) {
+  		console.error(error);
+  		return res.status(500).json({ message: "Internal Server Error" });
+  	}
+  },
   getContactByEmail: async function (req, res) {
   	try {
       const emails = req.query.q.split(",");
@@ -75,6 +87,7 @@ module.exports = {
   		return res.status(500).json({ message: "Internal Server Error" });
   	}
   },
+
   accepterCandidatPR: async (req, res) => {
     try {
       const transporter = nodemailer.createTransport({
