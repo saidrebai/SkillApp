@@ -165,7 +165,7 @@ export default function Application() {
     console.log("dkhalna", email, scoreForMail, offer, adminEmail, idUser);
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/adminRouters/accepterCandidatPR`,
+        `http://localhost:8080/api/contactRouter/accepterCandidatPR`,
         {
           email,
           score: scoreForMail,
@@ -187,7 +187,7 @@ export default function Application() {
   const rejeterCandidat = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/adminRouters/refuserCandidatPR`,
+        `http://localhost:8080/api/contactRouter/refuserCandidatPR`,
         {
           email,
           score: scoreForMail,
