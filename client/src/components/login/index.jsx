@@ -53,13 +53,12 @@ const Login = () => {
         if (
           error.response &&
           error.response.status >= 400 &&
-          error.response.status <= 500 &&
-          toast.error(error.message)
+          error.response.status <= 500 
+          // toast.error("Network error")
         ) {
           setError(error.response.data.message);
-          toast.error(error.message)
         }
-        toast.error(error.message)
+        // toast.error("Network error")
       }
     } else {
       alert("you are already connected");

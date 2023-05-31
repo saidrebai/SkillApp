@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -14,10 +15,16 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import Popover from "@mui/material/Popover";
+import Badge from "@mui/material/Badge";
+import axios from "axios";
 
 function ResponsiveAppBar() {
+  const ids = localStorage.getItem("id");
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [notification, setNotification] = useState([]);
+  const [numberNot, setNumberNot] = useState(0);
+
   const isAdmin = localStorage.getItem("isAdmin");
   const firstName = localStorage.getItem("firstName");
   const token = localStorage.getItem("token");
@@ -123,6 +130,27 @@ function ResponsiveAppBar() {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `http://localhost:8080/api/contactRouter/getcontactbycandidat/${ids}`
+      );
+      setNotification(response.data.contact);
+      console.log("heere", response.data.contact);
+      setNumberNot(response.data.contact.length);
+      console.log("num", response.data.contact.length);
+    }
+    fetchData();
+  }, []);
+  // console.log("not",notification);
+
+  function truncateText(text, maxLength) {
+    if (text.length <= maxLength) {
+      return text;
+    } else {
+      return text.slice(0, maxLength) + "...";
+    }
+  }
   return (
     <>
       <div className="menu_container">
@@ -245,9 +273,10 @@ function ResponsiveAppBar() {
                     variant="contained"
                     onClick={handleClick}
                   >
-                    <NotificationsOutlinedIcon />
+                    <Badge badgeContent={numberNot} color="secondary">
+                      <NotificationsOutlinedIcon />
+                    </Badge>
                   </IconButton>
-
                   <Popover
                     id={id}
                     open={open}
@@ -258,8 +287,13 @@ function ResponsiveAppBar() {
                       horizontal: "right",
                     }}
                   >
-                    <Typography sx={{ p: 3 }}>
-                      The content of the Popover.
+                    <Typography className="nots" sx={{ p: 2 }}>
+                      {notification.map((not) => (
+                        <div className="msg" key={not._id}>
+                          <p className="link">{truncateText(not.link, 50)}</p>
+                          <p>Check your email</p>
+                        </div>
+                      ))}
                     </Typography>
                   </Popover>
                 </div>
