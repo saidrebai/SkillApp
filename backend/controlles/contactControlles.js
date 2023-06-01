@@ -94,7 +94,7 @@ module.exports = {
   		if (!contact) {
   			return res.status(404).json({ message: "contact not found" });
   		}
-  		return res.status(200).json({ message: "contact found", contact });
+  		return res.status(200).json({ message: "contact found", contact, nbreContact : contact.length});
   	} catch (error) {
   		console.error(error);
   		return res.status(500).json({ message: "Internal Server Error" });
