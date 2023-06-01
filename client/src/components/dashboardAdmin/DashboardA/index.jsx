@@ -218,7 +218,9 @@ const DashboardA = () => {
               </IconButton>
             </Box>
           </Box>
-          <iframe title="pfe" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=08f07807-81fb-4e2f-991e-bd7ecffbcd6b&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61" frameborder="0" allowFullScreen="true"></iframe>
+          <div className="powerbi">
+          <iframe title="pfe" width="1140" height="700" src="https://app.powerbi.com/reportEmbed?reportId=08f07807-81fb-4e2f-991e-bd7ecffbcd6b&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61" frameborder="0" allowFullScreen="true"></iframe>
+          </div>
         </Box>
         
 
