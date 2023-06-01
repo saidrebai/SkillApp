@@ -106,18 +106,6 @@ export default function Application() {
     setSelectedDate(date);
   };
 
-  // const handleTimeChange = (time) => {
-  //   setSelectedTime(time);
-  // };
-  // const itemsPerPage = 6;
-  // const totalPages = Math.ceil(scores.length / itemsPerPage);
-  // const startIndex = (currentPage - 1) * itemsPerPage;
-  // const endIndex = startIndex + itemsPerPage;
-  // const currentScores = scores.slice(startIndex, endIndex);
-
-  // const handlePageChange = (event, value) => {
-  //   setCurrentPage(value);
-  // };
 
   useEffect(() => {
     async function fetchData() {
