@@ -18,7 +18,7 @@ const Signup = () => {
     birthDate: "",
     country: "",
     gender: "",
-    zipCode: "",
+    age: "",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -479,11 +479,13 @@ const Signup = () => {
               </select>
             </div>
             <input
-              type="number"
-              placeholder="zipCode"
-              name="zipCode"
+              type="tel"
+              placeholder="age"
+              name="age"
               onChange={handleChange}
-              value={data.zipCode}
+              value={data.age}
+              maxLength={2}
+              pattern="\d{2}"
               required
               className="inpute-signup"
             />

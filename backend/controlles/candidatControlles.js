@@ -29,7 +29,7 @@ const validate = (data) => {
     birthDate: Joi.string().required().label("birthDate"),
     country: Joi.string().required().label("country"),
     gender: Joi.string().required().label("gender"),
-    zipCode: Joi.number().required().label("zipCode"),
+    age: Joi.number().required().label("age"),
     // cv: Joi.ref().label("cv"),
   });
   return schema.validate(data);
@@ -105,7 +105,7 @@ module.exports = {
       }
     });
   },
-  
+
   updateInfo: function (req, res) {
     User.findByIdAndUpdate(req.params.id, {
       firstName: req.body.firstName,
@@ -116,10 +116,9 @@ module.exports = {
       town: req.body.town,
       country: req.body.country,
       gender: req.body.gender,
-      zipCode: req.body.zipCode,
+      age: req.body.age,
       cv: req.body.id,
       status: req.body.status,
-
     }).exec(function (err, candid) {
       if (err) {
         res.json({
@@ -137,16 +136,16 @@ module.exports = {
     });
   },
   getAll: async function (req, res) {
-  	try {
-  		const users = await User.find();
-  		if (!users) {
-  			return res.status(404).json({ message: "users not found" });
-  		}
-  		return res.status(200).json({ message: "users found", users });
-  	} catch (error) {
-  		console.error(error);
-  		return res.status(500).json({ message: "Internal Server Error" });
-  	}
+    try {
+      const users = await User.find();
+      if (!users) {
+        return res.status(404).json({ message: "users not found" });
+      }
+      return res.status(200).json({ message: "users found", users });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
   },
   // deleteUser: function (req, res) {
   //   User.findByIdAndRemove({ _id: req.params.id }, (err, user) => {
@@ -203,10 +202,10 @@ module.exports = {
         { new: true }
       );
 
-      res.status(200).json({msg : "user updated",status : 200, updatedUser}); 
+      res.status(200).json({ msg: "user updated", status: 200, updatedUser });
     } catch (error) {
       console.error(error);
-      res.status(500).send('Error adding cv to user');
+      res.status(500).send("Error adding cv to user");
     }
   },
   searchItems: async function (req, res) {
@@ -215,7 +214,7 @@ module.exports = {
       const batchSize = 10; // Define the number of IDs to include in each batch
       const batchCount = Math.ceil(ids.length / batchSize);
       const filteredItems = [];
-  
+
       for (let i = 0; i < batchCount; i++) {
         const start = i * batchSize;
         const end = start + batchSize;
@@ -223,7 +222,7 @@ module.exports = {
         const batchItems = await User.find({ _id: { $in: batchIds } });
         filteredItems.push(...batchItems);
       }
-  
+
       res.status(200).json({
         msg: "Items found",
         status: 200,
@@ -275,8 +274,7 @@ module.exports = {
           subject: "Réinitialisation de votre mot de passe SkillApp",
           html: email_content,
         };
-        UserFinded
-          .save()
+        UserFinded.save()
           .then(async (savedUser) => {
             transporter.sendMail(mailOptions, function (error, info) {
               if (error) {

@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  zipCode: {
+  age: {
     type: Number,
     required: true,
   },
