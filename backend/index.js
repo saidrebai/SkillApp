@@ -11,7 +11,7 @@ const superAdminRoutes = require("./routes/superAdminRouters");
 const applicationRouter = require("./routes/ApplicationRouter");
 const contactRouter = require("./routes/contactRouter");
 const quizRouter = require("./routes/quizRouter");
-// const CandidacyRoutes =require("./routes/candidacyRouter");
+const revenueRouter = require("./routes/revenueRouter")
 const morgan = require('morgan');
 const path = require("path");
 const fs = require('fs');
@@ -19,10 +19,12 @@ const fs = require('fs');
 
 //database connection
 connection();
+
 //middelwares
 app.use(express.json());
 app.use(cors());
 app.use(morgan('combined'));
+
 //routes
 app.use("/api/adminRouters", AdminRoutes);
 app.use("/api/candidatRouters", CandidatRoutes);
@@ -32,6 +34,7 @@ app.use("/api/superAdminRouters", superAdminRoutes);
 app.use("/api/ApplicationRouter", applicationRouter);
 app.use("/api/contactRouter", contactRouter);
 app.use("/api/quizRouter", quizRouter);
+app.use("/api/revenueRouter", revenueRouter);
 app.use("/uploads",express.static(path.join("uploads")))
 
 
