@@ -137,7 +137,7 @@ function ResponsiveAppBar() {
       );
       setNotification(response.data.contact);
       console.log("heere", response.data.contact);
-      setNumberNot(response.data.contact.length);
+      setNumberNot(response.data.nbreContact);
       console.log("num", response.data.contact.length);
     }
     fetchData();
@@ -145,10 +145,10 @@ function ResponsiveAppBar() {
   // console.log("not",notification);
 
   function truncateText(text, maxLength) {
-    if (text.length <= maxLength) {
+    if (text?.length <= maxLength) {
       return text;
     } else {
-      return text.slice(0, maxLength) + "...";
+      return text?.slice(0, maxLength) + "...";
     }
   }
   return (
@@ -287,10 +287,11 @@ function ResponsiveAppBar() {
                       horizontal: "right",
                     }}
                   >
-                    <Typography className="nots" sx={{ p: 2 }}>
-                      {notification.map((not) => (
-                        <div className="msg" key={not._id}>
-                          <p className="link">{truncateText(not.link, 50)}</p>
+                    <Typography className="nots" sx={{ p: 1 }}>
+                      {notification?.map((not) => (
+                        <div className="msg" key={not?._id}>
+                          <p className="linke"> you have recived an email from : {not.adminEmail}</p>
+                          <p className="link">{truncateText(not?.link, 50)}</p>
                           <p>Check your email</p>
                         </div>
                       ))}
