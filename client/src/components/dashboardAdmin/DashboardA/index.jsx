@@ -190,8 +190,8 @@ const DashboardA = () => {
 
         {/* ROW 2 */}
         <Box
-          gridColumn="span 8"
-          gridRow="span 2"
+          gridColumn="span 12"
+          gridRow="span 5"
           backgroundColor={colors.primary[400]}
         >
           <Box
@@ -204,17 +204,10 @@ const DashboardA = () => {
             <Box>
               <Typography
                 variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                Revenue Generated
-              </Typography>
-              <Typography
-                variant="h3"
-                fontWeight="bold"
+                fontWeight="1000"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+                Power BI Dashboard
               </Typography>
             </Box>
             <Box>
@@ -225,30 +218,12 @@ const DashboardA = () => {
               </IconButton>
             </Box>
           </Box>
-          {/* <Box height="250px" m="-20px 0 0 0">
-            <LineChart isDashboard={true} />
-          </Box> */}
           <iframe title="pfe" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=08f07807-81fb-4e2f-991e-bd7ecffbcd6b&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61" frameborder="0" allowFullScreen="true"></iframe>
         </Box>
         
 
         {/* ROW 3 */}
-              <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Sales Quantity
-          </Typography>
-          {/* <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
-          </Box> */}
-        </Box>
+
         
   
 
