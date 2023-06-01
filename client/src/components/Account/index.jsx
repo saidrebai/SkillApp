@@ -618,19 +618,19 @@ const Account = () => {
               <div className="form-input-container">
                 <div className="title-input-stylee">
                   <div className="containertext-input">
-                    <label className="title-style">zipCode</label>
+                    <label className="title-style">Age</label>
                   </div>
                 </div>
                 <div className="input-style">
                   <input
                     type="number"
-                    name="zipCode"
-                    value={updatedData.zipCode}
+                    name="age"
+                    value={updatedData.age}
                     required={true}
                     onChange={(e) =>
                       setUpdatedData({
                         ...updatedData,
-                        zipCode: e.target.value,
+                        age: e.target.value,
                       })
                     }
                     className="style-inputt"

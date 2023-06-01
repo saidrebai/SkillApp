@@ -6,6 +6,7 @@ module.exports = {
   // Envoie un message à l'admin
   sendMessageToAdmin: async function (req, res) {
     console.log(req.body, "req body ====>");
+   
     try {
       const transporter = nodemailer.createTransport({
         service: "Gmail",
@@ -19,7 +20,9 @@ module.exports = {
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
         message: req.body.message,
+        date: Date.now(),
         emailSuper:process.env.MAIL_USERNAME,
+       
       };
       
       const email_content =
@@ -31,8 +34,8 @@ module.exports = {
         ",<br> phoneNumber : " +
         contactForm.phoneNumber +
         ",<br> message : " +
-        contactForm.message;
-       
+        contactForm.message +
+        contactForm.date ;
       const mailOptions = {
         //   from: "Openjavascript <test@openjavascript.info>",
         to: process.env.MAIL_USERNAME,
@@ -60,8 +63,8 @@ module.exports = {
     } catch (err) {
       res.status(400).send({ message: "An error occured" });
     }
-
   },
+
   getContactBySuperAdmin: async function (req, res) {
   	try {
   		const contact = await ContactModel.find({emailSuper : process.env.MAIL_USERNAME});
