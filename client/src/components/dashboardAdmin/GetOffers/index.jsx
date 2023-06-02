@@ -543,7 +543,7 @@ const GetOffer = () => {
                       <TableCell align="right">Birthdate</TableCell>
                       <TableCell align="right">Gender</TableCell>
                       <TableCell className="action" align="right">
-                        &ensp;
+                        {/* &ensp; */}
                       </TableCell>
                     </TableRow>
                   </TableHead>
