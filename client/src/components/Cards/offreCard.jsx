@@ -214,14 +214,6 @@ export default function Card() {
           if (res) {
             setLoading(false);
           }
-          // const confirmed = window.confirm(
-          //   "Are you ready to get started with the test ?\n" +
-          //     "the test contain 20 question with one ansewr every 10 sec"
-          // );
-
-          // if (confirmed) {
-          //   window.location = "/answerquiz";
-          // }
         } catch (error) {
           if (error.response && error.response.status === 415) {
             toast.error("PDF file only");
@@ -315,13 +307,14 @@ export default function Card() {
         </div>
         <table>
           <tr className="table1">
-            {currentOffers.length > 0 ? (
-              currentOffers
+            {offers.length > 0 ? (
+              offers
                 .filter((selectedOffer) => {
                   return search.toLowerCase() === ""
                     ? selectedOffer
                     : selectedOffer.Name.toLowerCase().includes(search);
                 })
+                .slice(startIndex, endIndex)
                 .map((selectedOffer) => (
                   <div className="offer_container" key={selectedOffer._id}>
                     <div className="offer_container_img">

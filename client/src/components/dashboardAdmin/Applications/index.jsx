@@ -52,9 +52,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "20ch",
       "&:focus": {
-        width: "20ch",
+        width: "30ch",
       },
     },
   },
@@ -70,7 +70,7 @@ export default function Application() {
   const [users, setUsers] = useState([]);
   const [modal, setModal] = useState(false);
   const [selectedScore, setSelectedScore] = useState(null);
-  const [application, setApplication] = useState({});
+  const [accepted, setAccepted] = useState({});
 
   const [refused, setRefused] = useState({});
 
@@ -81,18 +81,23 @@ export default function Application() {
   const [scoreForMail, setScoreForMail] = useState(null);
   const [offer, setOffer] = useState("");
   const [adminEmail, setadminEmail] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
 
+
+  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
+
   const totalPages = Math.ceil(scores.length / itemsPerPage);
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentApplications = scores.slice(startIndex, endIndex);
+
+  // const currentoffer = scores.slice(startIndex, endIndex);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
+
 
   const toggleModal = (score) => {
     setModal(!modal);
@@ -136,6 +141,7 @@ export default function Application() {
 
         console.log("psps", idUsers);
         setScores(responseScores.data?.scores);
+        console.log("apps",responseScores.data?.scores);
         setCountScores(responseScores.data?.scoreCount);
         setIdOffer(response.data.offer);
         setUsers(responseUser.data?.data);
@@ -181,6 +187,7 @@ export default function Application() {
           score: scoreForMail,
           offer,
           adminEmail,
+          user: idUser,
         }
       );
 
@@ -202,7 +209,7 @@ export default function Application() {
       const response = await axios.put(
         `http://localhost:8080/api/ApplicationRouter/updateUser/${userId}`
       );
-      setApplication(response?.data);
+      setAccepted(response?.data);
       console.log("candidacy accepted", response.data);
       window.location.reload();
     } catch (error) {
@@ -233,7 +240,7 @@ export default function Application() {
             </SearchIconWrapper>
             <form>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder="Search by score …"
                 inputProps={{ "aria-label": "search" }}
                 className="search_input"
                 type="text"
@@ -261,19 +268,20 @@ export default function Application() {
                     const resultValue = score?.result;
                     return searchValue === "" ? score : resultValue >= parseInt(searchValue);
                   })
-                  .map((score, _id) => {
+                  .slice(startIndex, endIndex)
+                  .map((score,_id) => {
                     if (!score.accepted && !score.refused) {
                       return (
                         <TableRow key={score._id}>
                           <TableCell component="th" scope="row">
                             {
-                              users.find((user) => user._id === score.user)
+                              users?.find((user) => user._id === score.user)
                                 ?.email
                             }
                           </TableCell>
                           <TableCell align="right">
                             {
-                              idOffer.find((offer) => offer._id === score.offer)
+                              idOffer?.find((offer) => offer._id === score.offer)
                                 ?.Name
                             }
                           </TableCell>
