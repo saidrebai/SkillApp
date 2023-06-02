@@ -20,12 +20,8 @@ const Quiz=()=> {
   const [score, setScore] = useState(0);
   const [offer,setOffer] = useState("");
   const [hasSkill, setHasSkill] = useState(false);
-  // const [idScore,setIdScore] = useState(null); 
-  // const [application,setApplication] = useState({
-  //   offer : offerId,
-  //   user : id
-  // }); 
-  const [newScore, setNewScore] = useState({
+
+  const [newApplication, setNewApplication] = useState({
     offer: offerId,
     user: id,
   });
@@ -171,7 +167,7 @@ const Quiz=()=> {
 
 
 
-const addScore = async (e) => {
+const addApplication = async (e) => {
     const final = currentQuestionIndex === quiz.length - 1;
     console.log(final);
     if (final) {
@@ -179,22 +175,12 @@ const addScore = async (e) => {
         if(score >5){
         const response = await axios.post(
           "http://localhost:8080/api/ApplicationRouter/addscore",
-          { ...newScore, result: score }
+          { ...newApplication, result: score }
         );
-        console.log("score=====>", response.data);
+        console.log("newapp=====>", response.data);
         toast.success("Adding successfully!");
         localStorage.removeItem("score");
         localStorage.removeItem("offerId");
-        // setIdScore(response?.data?.idScore);
-        // const scoreID = response?.data?.idScore
-        // const responseApp = await axios.post(
-        //   "http://localhost:8080/api/candidacyRouter/addCondidact",
-        //   {
-        //     ...application,
-        //     score : scoreID
-        //   })
-        //   console.log("new app", responseApp.data);
-        //   toast.success("Adding application successfully!");
 
 
         return true;
@@ -281,7 +267,7 @@ const addScore = async (e) => {
                     onClick={() => {
                       handleNextQuestion();
                       calculateTotalScore();
-                      addScore();
+                      addApplication();
                       onClickReset();
                     }}
                     color="primary"

@@ -85,6 +85,19 @@ const GetOffer = () => {
     setIsCurrentPage(value);
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  const totalPages = Math.ceil(offers.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // const currentoffer = offers.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
   function handleSelecUser(user) {
     setIsSelected(user);
@@ -134,7 +147,7 @@ const GetOffer = () => {
   const fetchUser = async (selectedOffer) => {
     try {
       const ids = selectedOffer?.user?.join(",");
-      console.log("ids", ids);
+
       const response = await axios.get(
         "http://localhost:8080/api/candidatRouters/searchuser",
         { params: { q: ids } }
@@ -142,6 +155,7 @@ const GetOffer = () => {
       setUsers(response.data.data);
       console.log("response====>", response?.data?.data);
       localStorage.setItem("ids", ids);
+            console.log("ids", ids);
     } catch (error) {
       console.error(error);
     }
@@ -199,6 +213,7 @@ const GetOffer = () => {
   useEffect(() => {
     if (selectedOffer) {
       setUpdatedOffer(selectedOffer);
+      // setSelectedOffer(selectedOffer);
     }
   }, [selectedOffer]);
 
@@ -228,23 +243,11 @@ const GetOffer = () => {
       });
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
 
-  const totalPages = Math.ceil(offers.length / itemsPerPage);
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  const currentoffer = offers.slice(startIndex, endIndex);
-
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
-  useEffect(() => {
-    console.log("users==========>", users);
-  }, [users]);
+  // useEffect(() => {
+  //   console.log("users==========>", users);
+  // }, [users]);
 
   return (
     <>
@@ -271,13 +274,14 @@ const GetOffer = () => {
             </Search>
           </div>
           <div className="offerr">
-            {currentoffer.length > 0 ? (
-              currentoffer
+            {offers.length > 0 ? (
+              offers
                 .filter((selectedOffer) => {
                   return search.toLowerCase() === ""
                     ? selectedOffer
                     : selectedOffer.Name.toLowerCase().includes(search);
                 })
+                .slice(startIndex, endIndex)
                 .map((selectedOffer) => (
                   <div className="offerr_container" key={selectedOffer._id}>
                     <div className="offerr_avatar">
@@ -543,12 +547,12 @@ const GetOffer = () => {
                       <TableCell align="right">Birthdate</TableCell>
                       <TableCell align="right">Gender</TableCell>
                       <TableCell className="action" align="right">
-                        &ensp;
+                        {/* &ensp; */}
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {currentUsers?.map((user, key) => (
+                    {currentUsers?.map((user) => (
                       <TableRow
                         key={user._id}
                         className={`user ${
@@ -588,6 +592,7 @@ const GetOffer = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
+
               <div className="pagination_container">
               <Stack spacing={2}>
                 <Pagination
