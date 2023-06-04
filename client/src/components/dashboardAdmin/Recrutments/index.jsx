@@ -14,7 +14,8 @@ import Stack from "@mui/material/Stack";
 export default function Recrutments() {
   const id = localStorage.getItem("id");
 
-  const [application, setApplication] = useState([]);
+  const [acceptedApplication, setAcceptedApplication] = useState([]);
+  const [refusedApplication, setRefusedApplication] = useState([]);
   const [countScores, setCountScores] = useState(0);
   const [idOffer, setIdOffer] = useState([]);
   const [users, setUsers] = useState([]);
@@ -22,20 +23,20 @@ export default function Recrutments() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isCurrentPage, setIsCurrentPage] = useState(1);
 
-  const itemsPerPage = 8;
-  const totalPages = Math.ceil(application.length / itemsPerPage);
+  const itemsPerPage = 5;
+  const totalPages = Math.ceil(acceptedApplication.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentApplications = application.slice(startIndex, endIndex);
+  const currentAcceptedApplications = acceptedApplication.slice(startIndex, endIndex);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
   const itemsPerPag = 8;
-  const totalPage = Math.ceil(application.length / itemsPerPag);
+  const totalPage = Math.ceil(refusedApplication.length / itemsPerPag);
   const startInde = (isCurrentPage - 1) * itemsPerPag;
   const endInde = startInde + itemsPerPag;
-  const currentApplication = application.slice(startInde, endInde);
+  const currentRefusedApplication = refusedApplication.slice(startInde, endInde);
 
   const handleNextPage = (event, value) => {
     setIsCurrentPage(value);
@@ -51,15 +52,23 @@ export default function Recrutments() {
           .map((offer) => offer._id)
           .join(",");
         const responseScores = await axios.get(
-          "http://localhost:8080/api/ApplicationRouter/getscorebyid",
+          "http://localhost:8080/api/ApplicationRouter/getaccappsbyoffers",
           { params: { q: idOffers } }
         );
         const idUsers = responseScores.data?.scores
           ?.map((score) => score.user)
           .join(",");
+          const responseRefApp = await axios.get(
+            "http://localhost:8080/api/ApplicationRouter/getrefappsbyoffers",
+            { params: { q: idOffers } }
+          );
+          const idUserss = responseRefApp.data?.scores
+            ?.map((score) => score.user)
+            .join(",");
+            const joinedIds = idUsers + (idUsers && idUserss ? "," : "") + idUserss;
         const responseUser = await axios.get(
           "http://localhost:8080/api/candidatRouters/searchuser",
-          { params: { q: idUsers } }
+          { params: { q: joinedIds } }
         );
         const emails = responseUser.data?.data
           ?.map((app) => app.email)
@@ -74,7 +83,8 @@ export default function Recrutments() {
         console.log("em==>", emailUser);
 
         console.log("psps", idUsers);
-        setApplication(responseScores.data.scores);
+        setAcceptedApplication(responseScores?.data?.scores);
+        setRefusedApplication(responseRefApp?.data?.scores);
         setCountScores(responseScores.data?.scoreCount);
         setIdOffer(response.data.offer);
         setUsers(responseUser.data.data);
@@ -104,8 +114,8 @@ export default function Recrutments() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {currentApplications?.map((app, _id) => {
-                    if (app.accepted === true) {
+                  {currentAcceptedApplications?.map((app, _id) => {
+                    // if (app.accepted === true) {
                       return (
                         <TableRow key={app._id}>
                           <TableCell component="th" scope="row">
@@ -129,7 +139,7 @@ export default function Recrutments() {
                           </TableCell>
                         </TableRow>
                       );
-                    }
+                    // }
                   })}
                 </TableBody>
               </Table>
@@ -159,8 +169,8 @@ export default function Recrutments() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {currentApplication?.map((app, _id) => {
-                    if (app.refused === true) {
+                  {currentRefusedApplication?.map((app, _id) => {
+                    // if (app.refused === true) {
                       return (
                         <TableRow key={app._id}>
                           <TableCell component="th" scope="row">
@@ -175,7 +185,7 @@ export default function Recrutments() {
                           <TableCell align="right">{app.result}</TableCell>
                         </TableRow>
                       );
-                    }
+                    // }
                   })}
                 </TableBody>
               </Table>

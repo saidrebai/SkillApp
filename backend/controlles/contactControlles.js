@@ -194,6 +194,7 @@ module.exports = {
         score: req.body.score,
         offer: req.body.offer,
         adminEmail: req.body.adminEmail,
+        user : req.body.user,
         link: "",
       });
 

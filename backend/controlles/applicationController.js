@@ -18,7 +18,7 @@ module.exports = {
         });
       else
         res.json({
-          message: "new score!",
+          message: "new application!",
           statut: 200,
           data: score,
           idScore: score._id,
@@ -44,7 +44,47 @@ module.exports = {
   getApplicationByOffer: async function (req, res) {
     try {
       const ids = req.query.q.split(",");
-      const scores = await ApplicationModel.find({ offer: { $in: ids } });
+      const scores = await ApplicationModel.find({
+        offer: { $in: ids },
+        accepted: false,
+        refused: false
+      });
+      if (!scores) {
+        return res.status(404).json({ message: "Scores not found" });
+      }
+      return res
+        .status(200)
+        .json({ message: "score found", scores, scoreCount: scores.length });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+  getAcceptedApplicationByOffers: async function (req, res) {
+    try {
+      const ids = req.query.q.split(",");
+      const scores = await ApplicationModel.find({
+        offer: { $in: ids },
+        accepted: true
+      });
+      if (!scores) {
+        return res.status(404).json({ message: "Scores not found" });
+      }
+      return res
+        .status(200)
+        .json({ message: "score found", scores, scoreCount: scores.length });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+  getRefusedApplicationByOffers: async function (req, res) {
+    try {
+      const ids = req.query.q.split(",");
+      const scores = await ApplicationModel.find({
+        offer: { $in: ids },
+        refused: true
+      });
       if (!scores) {
         return res.status(404).json({ message: "Scores not found" });
       }

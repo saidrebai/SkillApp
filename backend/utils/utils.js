@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 module.exports = function randomString(
   len = 10,
-  charStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};':\"\\|,.<>/?"
+  charStr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{};':\"\\|,.<>/?"
 ) {
   const chars = [...`${charStr}`];
   return [...Array(len)]

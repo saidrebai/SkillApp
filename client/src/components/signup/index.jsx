@@ -11,7 +11,7 @@ const Signup = () => {
     firstName: "",
     lastName: "",
     Phone: "",
-    adresse: "",
+    adress: "",
     email: "",
     password: "",
     town: "",
@@ -37,7 +37,7 @@ const Signup = () => {
       const url = "http://localhost:8080/api/candidatRouters/signup";
       const { data: res } = await axios.post(url, data);
       toast.success("created successfully!");
-      navigate("/login");
+      navigate("/");
       console.log(res.message);
     } catch (error) {
       toast.error(error.message);
@@ -105,10 +105,10 @@ const Signup = () => {
             />
             <input
               type="text"
-              placeholder="adresse"
-              name="adresse"
+              placeholder="adress"
+              name="adress"
               onChange={handleChange}
-              value={data.adresse}
+              value={data.adress}
               required
               className="inpute-signup"
             />

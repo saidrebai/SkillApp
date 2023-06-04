@@ -17,7 +17,7 @@ const validate = (data) => {
     Name: Joi.string().required().label("Name"),
     country: Joi.string().required().label("country"),
     town: Joi.string().required().label("town"),
-    adresse: Joi.string().required().label("adresse"),
+    adress: Joi.string().required().label("adress"),
     Zipcode: Joi.number().required().label("Zipcode"),
     Phone: Joi.number().required().label("Phone"),
     email: Joi.string().email().required().label("Email"),
@@ -100,7 +100,7 @@ module.exports = {
       Name: req.body.Name,
       country: req.body.country,
       town: req.body.town,
-      adresse: req.body.adresse,
+      adress: req.body.adress,
       Zipcode: req.body.Zipcode,
       Phone: req.body.Phone,
     }).exec(function (err, admin) {
@@ -220,6 +220,7 @@ module.exports = {
         adminFinded
           .save()
           .then(async (savedAdmin) => {
+            console.log("🚀 ~ file: adminControlles.js:223 ~ .then ~ savedAdmin:", savedAdmin)
             transporter.sendMail(mailOptions, function (error, info) {
               if (error) {
                 console.log(error);

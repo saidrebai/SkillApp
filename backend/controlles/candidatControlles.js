@@ -22,7 +22,7 @@ const validate = (data) => {
     firstName: Joi.string().required().label("firstName"),
     lastName: Joi.string().required().label("lastName"),
     Phone: Joi.number().required().label("Phone"),
-    adresse: Joi.string().required().label("adresse"),
+    adress: Joi.string().required().label("adresse"),
     email: Joi.string().email().required().label("Email"),
     password: passwordComplexity().required().label("Password"),
     town: Joi.string().required().label("Town"),
@@ -111,7 +111,7 @@ module.exports = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       Phone: req.body.Phone,
-      adresse: req.body.adresse,
+      adress: req.body.adresse,
       birthDate: req.body.birthDate,
       town: req.body.town,
       country: req.body.country,
@@ -235,6 +235,7 @@ module.exports = {
     }
   },
 
+
   resetPassword: async (req, res, next) => {
     try {
       const password = randomString(
@@ -247,9 +248,12 @@ module.exports = {
       let UserFinded = await User.findOne(email);
       console.log("userfind===>", UserFinded);
       if (UserFinded !== null) {
+       
         const salt = await bcrypt.genSalt(10);
+
         const hashedPassword = await bcrypt.hash(password, salt);
         UserFinded.password = hashedPassword;
+        
         const token = jwt.sign(
           { _id: UserFinded._id },
           process.env.RESET_PASSWORD_KEY,
@@ -262,6 +266,8 @@ module.exports = {
             pass: process.env.MAIL_PASSWORD, // generated ethereal password
           },
         });
+       
+
         const email_content =
           "Bonjour " +
           UserFinded.firstName +
@@ -269,12 +275,14 @@ module.exports = {
           password +
           "<br><br>Cordialement,<br>Le service clientèle de SkillApp";
         const mailOptions = {
-          from: "Openjavascript <test@openjavascript.info>",
+          // from: "Openjavascript <test@openjavascript.info>",
           to: UserFinded.email,
           subject: "Réinitialisation de votre mot de passe SkillApp",
           html: email_content,
         };
-        UserFinded.save()
+
+        UserFinded
+          .save()
           .then(async (savedUser) => {
             transporter.sendMail(mailOptions, function (error, info) {
               if (error) {
@@ -289,7 +297,7 @@ module.exports = {
             });
           })
           .catch((e) =>
-            checkDuplicateEmail(e, (result) => {
+            checkDuplicateEmail(e, (result) => {      
               if (result) {
                 res.status(400).json({ message: "Adresse e-mail en double" });
               } else {

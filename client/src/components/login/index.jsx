@@ -45,7 +45,7 @@ const Login = () => {
           localStorage.setItem("id", res.userId);
           localStorage.setItem("isAdmin", false);
           localStorage.setItem("firstName", res.firstName);
-          window.location = "/";
+          window.location = "/login";
         }
 
         // window.location = "/";

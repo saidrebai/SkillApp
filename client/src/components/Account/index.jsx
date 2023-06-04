@@ -595,14 +595,14 @@ const Account = () => {
               <div className="form-input-container">
                 <div className="title-input-stylee">
                   <div className="containertext-input">
-                    <label className="title-style">Adresse</label>
+                    <label className="title-style">Adress</label>
                   </div>
                 </div>
                 <div className="input-style">
                   <input
                     type="text"
-                    name="Adresse"
-                    value={updatedData.adresse}
+                    name="Adress"
+                    value={updatedData.adress}
                     required={true}
                     onChange={(e) => {
                       setUpdatedData({
