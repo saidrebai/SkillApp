@@ -422,15 +422,15 @@ const AccountAdmin = () => {
             <div className="form-input-container-Adresse">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-stylee">Adresse</label>
+                  <label className="title-stylee">Adress</label>
                 </div>
               </div>
               <div className="input-style">
                 <input
                   type="text"
-                  name="Adresse"
+                  name="Adress"
                   required = {true}
-                  value={updatedData.adresse}
+                  value={updatedData.adress}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,

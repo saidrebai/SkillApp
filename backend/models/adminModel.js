@@ -20,7 +20,7 @@ const adminSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    adresse: {
+    adress: {
       type: String,
       required: true,
     },
