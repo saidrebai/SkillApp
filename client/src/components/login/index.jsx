@@ -45,7 +45,7 @@ const Login = () => {
           localStorage.setItem("id", res.userId);
           localStorage.setItem("isAdmin", false);
           localStorage.setItem("firstName", res.firstName);
-          window.location = "/login";
+          window.location = "/";
         }
 
         // window.location = "/";
@@ -169,7 +169,7 @@ const Login = () => {
 
               <div className="show-password">
                 <input type="checkbox" onClick={handleToggle} />
-                show password
+                Show password
               </div>
 
               {error && <div className="error_msg">{error}</div>}

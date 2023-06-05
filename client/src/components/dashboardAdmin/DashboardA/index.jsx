@@ -18,7 +18,6 @@ import axios from "axios";
 const DashboardA = () => {
   const id = localStorage.getItem("id");
   const ids = localStorage.getItem("ids");
-  // const cvId = localStorage.getItem("cvId");
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -27,7 +26,6 @@ const DashboardA = () => {
   const [userCount, setUserCount] = useState(0);
   const [pdfCount, setPdfCount] = useState(0);
   const [countScores, setCountScores] = useState(0);
-  // const [idOffers,setIdOffers] = useState({});
 
   useEffect(() => {
     async function fetchData() {

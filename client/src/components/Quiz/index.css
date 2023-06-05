@@ -11,12 +11,12 @@
   flex-direction: column;
   align-items: center;
   min-height: 50%;
-  background-color: #e9ac4a80;
+  background-color: #0d6efd21;
   padding: 20px;
   border-radius: 5px;
   margin: 20px 30px;
   border-style: solid;
-  border-color: coral;
+  border-color: #50abff94;
   border-radius: 7px;
 }
 .question {
@@ -38,7 +38,7 @@
   padding: 10px;
   margin: 10px 20px;
   border-style: solid;
-  border-color: coral;
+  border-color: #50abff94;
   border-radius: 7px;
   background-color: white;
   width: 500px;
@@ -185,6 +185,9 @@
 }
 .inf_msg{
   color: red;
+}
+.radio{
+  cursor: pointer;
 }
 @keyframes spin1 {
   0% {
