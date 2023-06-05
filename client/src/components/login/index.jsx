@@ -169,7 +169,7 @@ const Login = () => {
 
               <div className="show-password">
                 <input type="checkbox" onClick={handleToggle} />
-                show password
+                Show password
               </div>
 
               {error && <div className="error_msg">{error}</div>}

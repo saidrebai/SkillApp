@@ -79,6 +79,18 @@ const Candidacy = () => {
     }
     return 3;
   };
+
+  const getStepColor = (accepted, refused, theme) => {
+    if (refused === true) {
+      return theme.palette.error.main; // Red color for refused
+    }
+    if (accepted === true) {
+      return theme.palette.success.main; // Green color for accepted
+    }
+    return theme.palette.primary.main; // Default color for other steps
+  };
+
+
   return (
     <>
       <div className="candidacy_container">
@@ -133,6 +145,19 @@ const Candidacy = () => {
                           <Stepper
                             activeStep={step(cand.accepted)}
                             alternativeLabel
+                            sx={{
+                              "& .MuiStepLabel-active": {
+                                color: (theme) =>
+                                  getStepColor(cand.accepted, cand.refused, theme),
+                              },
+                              "& .MuiStepIcon-active": {
+                                color: (theme) =>
+                                  getStepColor(cand.accepted, cand.refused, theme),
+                              },
+                              "& .MuiStepIcon-text": {
+                                fill: "#fff",
+                              },
+                            }}
                           >
                             {steps.map((label) => (
                               <Step key={label}>
