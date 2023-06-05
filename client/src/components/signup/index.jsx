@@ -11,7 +11,7 @@ const Signup = () => {
     firstName: "",
     lastName: "",
     Phone: "",
-    adresse: "",
+    adress: "",
     email: "",
     password: "",
     town: "",
@@ -105,10 +105,10 @@ const Signup = () => {
             />
             <input
               type="text"
-              placeholder="adresse"
-              name="adresse"
+              placeholder="adress"
+              name="adress"
               onChange={handleChange}
-              value={data.adresse}
+              value={data.adress}
               required
               className="inpute-signup"
             />

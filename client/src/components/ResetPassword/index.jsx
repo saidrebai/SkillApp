@@ -17,10 +17,10 @@ function ResetPassword() {
           <div className="form_heading">
             <h1>check your new password in your Email</h1>
           </div>
-          <h2> Réinitialiser le mot de passe </h2>
+          <h2> Save your new password </h2>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="password">Nouveau mot de passe:</label>
+              <label htmlFor="password">New password:</label>
               <input
                 type="password"
                 id="password"
@@ -31,7 +31,7 @@ function ResetPassword() {
             </div>
 
             <button className="btn_sub" type="submit">
-              Enregistrer
+              Save
             </button>
           </form>
         </div>
