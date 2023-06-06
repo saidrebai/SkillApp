@@ -315,7 +315,7 @@ export default function Card() {
                 .filter((selectedOffer) => {
                   return search.toLowerCase() === ""
                     ? selectedOffer
-                    : selectedOffer.Name.toLowerCase().includes(search);
+                    : selectedOffer.name.toLowerCase().includes(search);
                 })
                 .slice(startIndex, endIndex)
                 .map((selectedOffer) => (
@@ -329,7 +329,7 @@ export default function Card() {
                         <TitleIcon /> Title :{" "}
                       </label>
 
-                      {selectedOffer.Name}
+                      {selectedOffer.name}
                     </div>
                     <div className="offer_container_info">
                       <label className="offre_label">
@@ -371,10 +371,10 @@ export default function Card() {
 
                     <div className="adresse_container">
                       <label className="offre_label">
-                        <LocationOnOutlinedIcon /> Adresse :
+                        <LocationOnOutlinedIcon /> Address :
                       </label>
 
-                      {selectedOffer.adresse}
+                      {selectedOffer.address}
                     </div>
                     <button
                       className="apply_button"

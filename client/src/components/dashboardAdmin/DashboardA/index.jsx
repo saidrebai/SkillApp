@@ -29,7 +29,7 @@ const DashboardA = () => {
   const [offerId, setOfferId] = useState({});
   const [isTrue, setIsTrue] = useState(false);
   const [isFetch, setIsFetch] = useState(false);
-  const [users, setUsers] =useState ({})
+  const [users, setUsers] = useState({});
 
   useEffect(() => {
     async function fetchData() {
@@ -38,14 +38,14 @@ const DashboardA = () => {
       );
       const idOffers = response.data.offer.map((offer) => offer._id).join(",");
       setOfferId(idOffers);
-      console.log("vvvv",idOffers);
+      console.log("vvvv", idOffers);
       setIsTrue(true);
       const responseScores = await axios.get(
         "http://localhost:8080/api/ApplicationRouter/getscoresbyid",
         { params: { q: idOffers } }
       );
       setCountScores(responseScores?.data?.scoreCount);
-      console.log("pchpah",responseScores?.data?.scoreCount);
+      console.log("pchpah", responseScores?.data?.scoreCount);
       setOffersCount(response.data?.offer?.length);
     }
 
@@ -60,12 +60,14 @@ const DashboardA = () => {
           { params: { q: offerId } }
         );
         setUserCount(response?.data?.count);
-        const idUsers = response?.data?.result?.map((user) => user?.uniqueUserIds)?.join(",");
-        console.log("user=====>",idUsers);
-        setUsers(idUsers)
+        const idUsers = response?.data?.result
+          ?.map((user) => user?.uniqueUserIds)
+          ?.join(",");
+        console.log("user=====>", idUsers);
+        setUsers(idUsers);
         console.log("ff", response?.data?.count);
         setIsFetch(true);
-        console.log("is",isFetch);
+        console.log("is", isFetch);
       }
     }
     fetchData();
@@ -73,17 +75,17 @@ const DashboardA = () => {
 
   useEffect(() => {
     async function fetchData() {
-      if(isFetch){
-      const response = await axios.get(
-        "http://localhost:8080/api/uploadRouter/pdfs",
-        { params: { q: users } }
-      );
-      setPdfCount(response?.data?.pdfCount);
-      console.log("===============",response?.data?.pdfCount);
-      setIsTrue(false);
-      setIsFetch(false);
+      if (isFetch) {
+        const response = await axios.get(
+          "http://localhost:8080/api/uploadRouter/pdfs",
+          { params: { q: users } }
+        );
+        setPdfCount(response?.data?.pdfCount);
+        console.log("===============", response?.data?.pdfCount);
+        setIsTrue(false);
+        setIsFetch(false);
+      }
     }
-  }
     fetchData();
   }, [isFetch]);
 
@@ -227,10 +229,10 @@ const DashboardA = () => {
           </Box>
           <div className="powerbi">
             <iframe
-              title="pfe"
+              title="Final BI"
               width="1140"
-              height="700"
-              src="https://app.powerbi.com/reportEmbed?reportId=08f07807-81fb-4e2f-991e-bd7ecffbcd6b&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61"
+              height="541.25"
+              src="https://app.powerbi.com/reportEmbed?reportId=bd9f6d82-454b-4057-a402-77f504ec6824&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61"
               frameborder="0"
               allowFullScreen="true"
             ></iframe>

@@ -21,8 +21,8 @@ const validate = (data) => {
   const schema = Joi.object({
     firstName: Joi.string().required().label("firstName"),
     lastName: Joi.string().required().label("lastName"),
-    Phone: Joi.number().required().label("Phone"),
-    adress: Joi.string().required().label("adresse"),
+    phone: Joi.number().required().label("phone"),
+    address: Joi.string().required().label("address"),
     email: Joi.string().email().required().label("Email"),
     password: passwordComplexity().required().label("Password"),
     town: Joi.string().required().label("Town"),
@@ -110,8 +110,8 @@ module.exports = {
     User.findByIdAndUpdate(req.params.id, {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      Phone: req.body.Phone,
-      adress: req.body.adress,
+      phone: req.body.phone,
+      address: req.body.address,
       birthDate: req.body.birthDate,
       town: req.body.town,
       country: req.body.country,

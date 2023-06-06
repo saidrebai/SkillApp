@@ -124,7 +124,7 @@ export default function Recrutments() {
                           <TableCell align="right">
                             {
                               idOffer.find((offer) => offer._id === app.offer)
-                                ?.Name
+                                ?.name
                             }
                           </TableCell>
                           <TableCell align="right">{app.result}</TableCell>
@@ -179,7 +179,7 @@ export default function Recrutments() {
                           <TableCell align="right">
                             {
                               idOffer.find((offer) => offer._id === app.offer)
-                                ?.Name
+                                ?.name
                             }
                           </TableCell>
                           <TableCell align="right">{app.result}</TableCell>

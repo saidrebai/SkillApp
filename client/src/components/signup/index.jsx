@@ -10,8 +10,8 @@ const Signup = () => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
-    Phone: "",
-    adress: "",
+    phone: "",
+    address: "",
     email: "",
     password: "",
     town: "",
@@ -106,18 +106,18 @@ const Signup = () => {
             <input
               type="text"
               placeholder="address"
-              name="adress"
+              name="address"
               onChange={handleChange}
-              value={data.adress}
+              value={data.address}
               required
               className="inpute-signup"
             />
             <input
               type="tel"
               placeholder="Phone"
-              name="Phone"
+              name="phone"
               onChange={handleChange}
-              value={data.Phone}
+              value={data.phone}
               maxLength={8}
               pattern="\d{8}"
               required

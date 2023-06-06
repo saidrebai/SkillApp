@@ -33,7 +33,7 @@ const Login = () => {
           localStorage.setItem("token", res.data);
           localStorage.setItem("id", res._id);
           localStorage.setItem("isAdmin", true);
-          localStorage.setItem("firstName", res.Name);
+          localStorage.setItem("firstName", res.name);
           window.location = "/dashboardA";
         } else {
           const { data: res } = await axios.post(

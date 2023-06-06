@@ -4,11 +4,11 @@ const {offerModel} = require("./offersModel")
 
 const adminSchema = new mongoose.Schema(
   {
-    TypeOfUser: {
+    typeOfUser: {
       type: String,
       required: true,
     },
-    Name: {
+    name: {
       type: String,
       required: true,
     },
@@ -20,15 +20,15 @@ const adminSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    adress: {
+    address: {
       type: String,
       required: true,
     },
-    Zipcode: {
+    zipcode: {
       type: Number,
       required: true,
     },
-    Phone: {
+    phone: {
       type: Number,
       required: true,
     },

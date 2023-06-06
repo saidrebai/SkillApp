@@ -129,7 +129,7 @@ const Candidacy = () => {
                         variant="subtitle1"
                         component="div"
                       >
-                        {offer.find((offer) => offer._id === cand.offer)?.Name}
+                        {offer.find((offer) => offer._id === cand.offer)?.name}
                       </Typography>
                       <Typography variant="body2" gutterBottom>
                         {
@@ -138,10 +138,10 @@ const Candidacy = () => {
                         }
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        Adresse:{" "}
+                        Address:{" "}
                         {
                           offer.find((offer) => offer._id === cand.offer)
-                            ?.adresse
+                            ?.address
                         }
                       </Typography>
                     </Grid>

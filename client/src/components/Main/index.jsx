@@ -45,7 +45,7 @@ const Main = () => {
     e.preventDefault();
     axios
       .post("http://localhost:8080/api/contactRouter/sendMessageToAdmin", {
-        Name: name,
+        name: name,
         email,
         phoneNumber,
         message,
@@ -118,10 +118,6 @@ const Main = () => {
             <div className="contact-right">
               <h1 className="h1_main">CONTACT : </h1>
               <form className="Form_contact" onSubmit={handleSubmit}>
-                {/* <div className="right_for_contact"> */}
-                {/* <label htmlFor="name" className="label_contact">
-                    Name:
-                  </label> */}
                 <input
                   type="text"
                   id="name"

@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 module.exports = {
   createOffer: function (req, res) {
     const newoffer = {
-      Name: req.body.Name,
+      name: req.body.name,
       type: req.body.type,
       time: req.body.time,
       description: req.body.description,
       skills: req.body.skills,
-      adresse: req.body.adresse,
+      address: req.body.address,
       company_name: req.body.company_name,
       admin: req.body.id,
       user: req.body.id,
@@ -60,12 +60,12 @@ module.exports = {
   updateoffer: function (req, res) {
     offerModel
       .findByIdAndUpdate(req.params.id, {
-        Name: req.body.Name,
+        name: req.body.name,
         type: req.body.type,
         time: req.body.time,
         description: req.body.description,
         skills: req.body.skills,
-        adresse: req.body.adresse,
+        address: req.body.address,
         company_name: req.body.company_name,
         user: req.body.id,
       })

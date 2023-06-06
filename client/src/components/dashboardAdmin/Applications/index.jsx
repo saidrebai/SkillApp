@@ -282,7 +282,7 @@ export default function Application() {
                           <TableCell align="right">
                             {
                               idOffer?.find((offer) => offer._id === score.offer)
-                                ?.Name
+                                ?.name
                             }
                           </TableCell>
                           <TableCell align="right">
@@ -375,7 +375,7 @@ export default function Application() {
                                 setOffer(
                                   idOffer.find(
                                     (offer) => offer._id === score.offer
-                                  )?.Name
+                                  )?.name
                                 );
                               }}
                             >

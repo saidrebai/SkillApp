@@ -8,7 +8,7 @@ const AccountAdmin = () => {
   const [Data, setData] = useState({});
   const id = localStorage.getItem("id");
   const [isDeleted, setIsDeleted] = useState(false);
-  const [updatedData, setUpdatedData] = useState({ Name: "" });
+  const [updatedData, setUpdatedData] = useState({ name: "" });
   
   
   useEffect(() => {
@@ -37,7 +37,7 @@ const AccountAdmin = () => {
       .then((response) => {
         // update the Data state with the updated data
         setData(updatedData);
-        localStorage.setItem("firstName",updatedData.Name)
+        localStorage.setItem("firstName",updatedData.name)
         console.log("reeeeeeeeeeeeeeees", response);
         toast.success("Updated successfully!");
         window.location.reload();
@@ -49,7 +49,7 @@ const AccountAdmin = () => {
     console.log("yess", updatedData);
   }
   useEffect(() => {
-    Data ? setUpdatedData(Data) : setUpdatedData({ Name: "" });
+    Data ? setUpdatedData(Data) : setUpdatedData({ name: "" });
     console.log("Data---------------------", Data);
   }, [Data]);
 
@@ -105,13 +105,13 @@ const AccountAdmin = () => {
               <div className="input-style">
                 <input
                   type="text"
-                  name="Name"
+                  name="name"
                   required = {true}
-                  value={updatedData.Name}
+                  value={updatedData.name}
                   onChange={(e) => {
                     setUpdatedData({
                       ...updatedData,
-                      Name: e.target.value,
+                      name: e.target.value,
                     });
                   }}
                   className="style-input"
@@ -428,13 +428,13 @@ const AccountAdmin = () => {
               <div className="input-style">
                 <input
                   type="text"
-                  name="Adress"
+                  name="Address"
                   required = {true}
-                  value={updatedData.adress}
+                  value={updatedData.address}
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
-                      adress: e.target.value,
+                      address: e.target.value,
                     })
                   }
                   className="style-input"
@@ -452,13 +452,13 @@ const AccountAdmin = () => {
             <div className="input-style">
               <input
                 type="Number"
-                name="Zipcode"
+                name="zipcode"
                 required = {true}
-                value={updatedData.Zipcode}
+                value={updatedData.zipcode}
                 onChange={(e) =>
                   setUpdatedData({
                     ...updatedData,
-                    Zipcode: e.target.value,
+                    zipcode: e.target.value,
                   })
                 }
                 className="style-input"
@@ -475,17 +475,17 @@ const AccountAdmin = () => {
             <div className="input-style">
               <input
                 type="Phone"
-                name="Phone"
+                name="phone"
                 required = {true}
                 maxLength={8}
                 pattern="\d{8}"
-                value={updatedData.Phone}
+                value={updatedData.phone}
                 onChange={(e) => {
                   const phoneNumber = e.target.value;
                   if (/^\d{0,8}$/.test(phoneNumber)) {
                     setUpdatedData({
                       ...updatedData,
-                      Phone: phoneNumber
+                      phone: phoneNumber
                     });
                   }
                 }}
