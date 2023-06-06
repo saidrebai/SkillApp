@@ -343,7 +343,7 @@ const GetOffer = () => {
                   toggleModel(null);
                 }}
               >
-                <h2>Enter your offers : </h2>
+                <h2>Update your offers : </h2>
 
                 <table className="table">
                   <table>
