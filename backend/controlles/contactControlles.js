@@ -15,7 +15,7 @@ module.exports = {
         },
       });
       const contactForm = {
-        Name: req.body.Name,
+        name: req.body.name,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
         message: req.body.message,
@@ -28,7 +28,7 @@ module.exports = {
         " with email : " +
         contactForm.email +
         ",<br> name : " +
-        contactForm.Name +
+        contactForm.name +
         ",<br> phone Number : " +
         contactForm.phoneNumber +
         ",<br> message : " +

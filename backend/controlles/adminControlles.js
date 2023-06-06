@@ -13,13 +13,13 @@ const { ContactModel } = require("../models/contactModel");
 
 const validate = (data) => {
   const schema = Joi.object({
-    TypeOfUser: Joi.string().required().label("Type of user"),
-    Name: Joi.string().required().label("Name"),
+    typeOfUser: Joi.string().required().label("type of user"),
+    name: Joi.string().required().label("name"),
     country: Joi.string().required().label("country"),
     town: Joi.string().required().label("town"),
-    adress: Joi.string().required().label("adress"),
-    Zipcode: Joi.number().required().label("Zipcode"),
-    Phone: Joi.number().required().label("Phone"),
+    address: Joi.string().required().label("address"),
+    zipcode: Joi.number().required().label("zipcode"),
+    phone: Joi.number().required().label("phone"),
     email: Joi.string().email().required().label("Email"),
     password: passwordComplexity().required().label("Password"),
   });
@@ -49,7 +49,7 @@ module.exports = {
       res.status(200).send({
         data: token,
         _id: decoded._id,
-        Name: admin.Name,
+        name: admin.name,
         message: "logged in successfully",
       });
     } catch (error) {
@@ -97,12 +97,12 @@ module.exports = {
   },
   updateInfoAdmin: function (req, res) {
     Admin.findByIdAndUpdate(req.params.id, {
-      Name: req.body.Name,
+      name: req.body.name,
       country: req.body.country,
       town: req.body.town,
-      adress: req.body.adress,
-      Zipcode: req.body.Zipcode,
-      Phone: req.body.Phone,
+      address: req.body.address,
+      zipcode: req.body.zipcode,
+      phone: req.body.phone,
     }).exec(function (err, admin) {
       if (err) {
         res.json({
@@ -207,7 +207,7 @@ module.exports = {
         });
         const email_content =
           "Hello " +
-          adminFinded.Name +
+          adminFinded.name +
           ",<br><br>You have requested to reset your password<br><br>" +
           password +
           "<br><br>Sincerely,<br>The customer service department of SkillApp";

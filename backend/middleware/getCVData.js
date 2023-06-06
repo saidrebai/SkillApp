@@ -87,7 +87,7 @@ const dimensions = async (result, dataToSearch) => {
 
 const getCVData = async (result, ) => {
   const wordsToExtract = ["JavaScript", "Python","Bash","linux","Html","Css","Docker","Devops","mySQL","Wordpress","Php","SQL","php","PHP",
-"javaScript","js","Js","python","bash","Linux","HTML","html","HTML5","CSS","docker","devops","DevOps","wordpress","kubernetes","Laravel","laravel",
+"javaScript","js","Js","python","bash","Linux","HTML","html","HTML5","CSS","docker","devops","DevOps","wordpress","kubernetes","Kubernetes","Laravel","laravel",
 "LARAVEL","wordPress","WordPress"];
   try {
     const relevantData = {

@@ -11,9 +11,6 @@ const revenueSchema = new mongoose.Schema({
   expenses: {
     type: Number,
   },
-  date: {
-    type: String,
-  },
   year: {
     type: Number,
   },
