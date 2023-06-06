@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import myImg from "../images/Capture.PNG";
 import ImgAu from "../images/about-us-page-1.png";
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 const Main = () => {
   const [pageviews, setPageviews] = useState();
@@ -64,6 +64,12 @@ const Main = () => {
   const handleLoginClick = () => {
     window.location.href = "/login";
   };
+  const generateMaxLetters = () => {
+    if (message.length > 200) {
+      setMessage(message.slice(0, 200));
+    }
+  };
+ 
 
   return (
     <>
@@ -78,7 +84,13 @@ const Main = () => {
                 We hope you find all the information you need and that you will
                 spend <br />a pleasant time browsing our site.
               </p>
-              <button type="button" className="sign_up_button" onClick={handleLoginClick}>SIGN UP</button> 
+              <button
+                type="button"
+                className="sign_up_button"
+                onClick={handleLoginClick}
+              >
+                SIGN UP
+              </button>
             </div>
             <div className="home-right">
               <img src={myImg} alt="" class="logo" />
@@ -107,62 +119,65 @@ const Main = () => {
               <h1 className="h1_main">CONTACT : </h1>
               <form className="Form_contact" onSubmit={handleSubmit}>
                 {/* <div className="right_for_contact"> */}
-                    {/* <label htmlFor="name" className="label_contact">
+                {/* <label htmlFor="name" className="label_contact">
                     Name:
                   </label> */}
-                    <input
-                      type="text"
-                      id="name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      required
-                      className="input_contact"
-                      placeholder="Name"
-                    />
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="input_contact"
+                  placeholder="Name"
+                />
 
-                    {/* <label htmlFor="email" className="label_contact">
+                {/* <label htmlFor="email" className="label_contact">
                     Email:
                   </label> */}
-                    <input
-                      type="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="input_contact"
-                      placeholder="Business email"
-                    />
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="input_contact"
+                  placeholder="Business email"
+                />
 
-                    {/* <label htmlFor="phoneNumber" className="label_contact">
+                {/* <label htmlFor="phoneNumber" className="label_contact">
                     Phone Number:
                   </label> */}
-                    <input
-                      type="tel"
-                      id="phoneNumber"
-                      value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
-                      maxLength={8}
-                      pattern="\d{8}"
-                      required
-                      className="input_contact"
-                      placeholder="Phone Number"
-                    />
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  maxLength={8}
+                  pattern="\d{8}"
+                  required
+                  className="input_contact"
+                  placeholder="Phone Number"
+                />
 
-                    {/* <label htmlFor="message" className="label_contact">
+                {/* <label htmlFor="message" className="label_contact">
                     Message:
                   </label> */}
-                    <textarea 
-                      type="text"
-                      id="message"
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      required
-                      className="input_message"
-                      placeholder="Message"
-                    ></textarea>
-                    <button type="submit" className="btn_send">
-                      Send Message
-                    </button>
+                <textarea
+                  type="text"
+                  id="message"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                    generateMaxLetters();
+                  }}
+                  required
+                  className="input_message"
+                  placeholder="Message"
+                ></textarea>
+                <button type="submit" className="btn_send">
+                  Send Message
+                </button>
                 {/* </div> */}
               </form>
             </div>
@@ -171,14 +186,14 @@ const Main = () => {
                 {/* <img src={logogmail} alt="" class="logo_gmail" /> */}
                 <div>
                   <p class="ova_text">
-                    <EmailIcon/>
+                    <EmailIcon />
                     <a href="mailto:info@arsela.co"> info@arsela.co</a>
                   </p>
                 </div>
                 <div>
                   {/* <img src={logoPhone} alt="" class="logo_Phone" /> */}
                   <p class="ova_text">
-                    <PhoneIcon/>
+                    <PhoneIcon />
                     <a href="tel:53107042"> (+216) 53 107 042</a>
                   </p>
                   <ToastContainer />

@@ -131,7 +131,7 @@ module.exports = {
         filteredItems.push(...batchItems);
       }
 
-      const pdfCount = filteredItems.length;
+      const pdfCount = filteredItems?.length;
 
       res.status(200).json({
         message: "Items found",

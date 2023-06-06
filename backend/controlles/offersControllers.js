@@ -158,7 +158,8 @@ module.exports = {
       let tab;
 
       if (req.query?.q?.split(",")?.length) {
-        tab = req.query?.q?.split(",")?.map((res) => {
+        tab = req.query?.q?.split(",")
+        ?.map((res) => {
           return mongoose.Types.ObjectId(res);
         });
       } else {
@@ -167,6 +168,9 @@ module.exports = {
       const result = await offerModel.aggregate([
         {
           $match: { _id: { $in: tab } },
+        },
+        {
+          $unwind: "$user",
         },
         {
           $group: {
@@ -180,11 +184,13 @@ module.exports = {
       if (!result || result.length === 0) {
         return res.status(404).json({ message: "Offer not found" });
       }
-      const uniqueUserIds = result[0]?.uniqueUserIds[0] || [];
-      const count = uniqueUserIds?.length;
+      const uniqueUserIds = result[0]?.uniqueUserIds || [];
+      const uniqueCount = uniqueUserIds?.length;
+      console.log(uniqueCount);
+      
       return res
         .status(200)
-        .json({ message: "User count found", result, count });
+        .json({ message: "User count found", result, count: uniqueCount });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
