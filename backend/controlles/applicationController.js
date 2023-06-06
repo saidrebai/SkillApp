@@ -99,7 +99,9 @@ module.exports = {
   getApplicationById: async function (req, res) {
     try {
       const ids = req.query.q.split(",");
-      const scores = await ApplicationModel.find({ _id: { $in: ids } });
+      const scores = await ApplicationModel.find({
+        offer: { $in: ids }
+      });
       if (!scores) {
         return res.status(404).json({ message: "Scores not found" });
       }
@@ -111,6 +113,7 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
+  
   getApplicationByUser: async function (req, res) {
     try {
       const Candidacy = await ApplicationModel.find({user: req.params.id});

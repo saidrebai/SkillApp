@@ -84,7 +84,7 @@ userSchema.pre("remove", async function (next) {
 
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
-    expiresIn: "30m",
+    expiresIn: 60,
   });
   return token;
 };
