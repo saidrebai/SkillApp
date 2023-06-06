@@ -76,3 +76,9 @@
   background-color: #fff;
 }
 
+.paginationn_container {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  margin-left: 600px;
+}

@@ -345,7 +345,7 @@ const GetOffer = () => {
                   toggleModel(null);
                 }}
               >
-                <h2>Enter your offers : </h2>
+                <h2>Update your offers : </h2>
 
                 <table className="table">
                   <table>
@@ -594,7 +594,7 @@ const GetOffer = () => {
                 </Table>
               </TableContainer>
 
-              <div className="pagination_container">
+              <div className="pagiination_container">
               <Stack spacing={2}>
                 <Pagination
                   count={totalPage}

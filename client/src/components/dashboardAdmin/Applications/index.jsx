@@ -389,7 +389,7 @@ export default function Application() {
               </TableBody>
             </Table>
           </TableContainer>{" "}
-          <div className="pagination_container">
+          <div className="paginationn_container">
             <Stack spacing={2}>
               <Pagination
                 count={totalPages}
