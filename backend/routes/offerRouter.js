@@ -8,7 +8,7 @@ router.put("/updateoffer/:id", offersControlles.updateoffer);
 router.delete("/deleteOffer/:id", offersControlles.deleteOffer);
 router.get("/getofferbyid/:id", offersControlles.getOfferById);
 router.put("/updateofferwithid/:id",offersControlles.addUserIdToOffer);
-router.get("/countuserbyofferid/:id", offersControlles.getOfferUsersCount);
+router.get("/countuserbyofferid", offersControlles.getOfferUsersCount);
 router.get("/getofferbyids", offersControlles.getOffByIds);
 
 module.exports = router;

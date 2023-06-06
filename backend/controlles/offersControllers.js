@@ -47,7 +47,7 @@ module.exports = {
   },
   getoffeById: async function (req, res) {
     try {
-      const offer = await offerModel.findById({_id : req.params.id});
+      const offer = await offerModel.findById({ _id: req.params.id });
       if (!offer) {
         return res.status(404).json({ message: "Offer not found" });
       }
@@ -85,24 +85,6 @@ module.exports = {
         }
       });
   },
-  // deleteOffer: function (req, res) {
-  //   offerModel.findByIdAndRemove({ _id: req.params.id }, (err, offerr) => {
-  //     if (err) {
-  //       res.status(500),
-  //         json({
-  //           msg: "erreur",
-  //           status: 500,
-  //           data: null,
-  //         });
-  //     } else {
-  //       res.status(200).json({
-  //         msg: "offerr deleted!",
-  //         status: 200,
-  //         data: offerr,
-  //       });
-  //     }
-  //   });
-  // },
   deleteOffer: async function (req, res) {
     try {
       const offerId = req.params.id;
@@ -139,7 +121,7 @@ module.exports = {
       }
       return res
         .status(200)
-        .json({ message: "Offers found", offer, offerCount: offer.length});
+        .json({ message: "Offers found", offer, offerCount: offer.length });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
@@ -152,14 +134,16 @@ module.exports = {
       if (!offer) {
         return res.status(404).send({ message: "Offer not found" });
       }
-  
+
       const userIds = req.body.user.map((id) => mongoose.Types.ObjectId(id));
       const userExists = userIds.every((id) => offer.user.includes(id));
-  
+
       if (userExists) {
-        return res.status(409).send({ message: "User already exists for this offer" });
+        return res
+          .status(409)
+          .send({ message: "User already exists for this offer" });
       }
-  
+
       offer.user.push(...userIds);
       await offer.save();
       res.status(200).json({ msg: "Offer updated", status: 200, offer });
@@ -167,37 +151,52 @@ module.exports = {
       console.error(error);
       res.status(500).send("Error adding user to offer");
     }
-  }
-  
-  ,
+  },
+
   getOfferUsersCount: async function (req, res) {
     try {
-      // const offerId = req.params.id;
-      const offer = await offerModel.find({admin:req.params.id});
-      if(offer){
+      let tab;
+
+      if (req.query?.q?.split(",")?.length) {
+        tab = req.query?.q?.split(",")
+        ?.map((res) => {
+          return mongoose.Types.ObjectId(res);
+        });
+      } else {
+        tab = [];
+      }
       const result = await offerModel.aggregate([
-        { $match: { admin: offer.admin } },
+        {
+          $match: { _id: { $in: tab } },
+        },
+        {
+          $unwind: "$user",
+        },
         {
           $group: {
             _id: null,
-            uniqueUserIds: { $addToSet: "$user" }
-          }
+            uniqueUserIds: { $addToSet: "$user" },
+          },
         },
-        { $project: { userCount: { $size: "$uniqueUserIds" } } }
       ]);
-  
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", result);
+
       if (!result || result.length === 0) {
         return res.status(404).json({ message: "Offer not found" });
       }
-  
-      const count = result[0].userCount;
-      return res.status(200).json({ message: "User count found", count });}
+      const uniqueUserIds = result[0]?.uniqueUserIds || [];
+      const uniqueCount = uniqueUserIds?.length;
+      console.log(uniqueCount);
+      
+      return res
+        .status(200)
+        .json({ message: "User count found", result, count: uniqueCount });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
-  
+
   getOffByIds: async function (req, res) {
     try {
       const ids = req.query.q.split(",");
@@ -205,9 +204,7 @@ module.exports = {
       if (!offers) {
         return res.status(404).json({ message: "offers not found" });
       }
-      return res
-        .status(200)
-        .json({ message: "offers are found", offers});
+      return res.status(200).json({ message: "offers are found", offers });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });

@@ -66,6 +66,8 @@ export default function Card() {
   const user = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const idpdf = localStorage.getItem("idpdf");
+
+
   const [offers, setOffers] = useState([]);
   const [popup, setPopup] = useState(false);
   const [error, setError] = useState("");
@@ -122,6 +124,7 @@ export default function Card() {
       const formData = new FormData();
       formData.append("pdfs", pdfs);
       formData.append("id", id);
+      console.log("cv",formData);
       try {
         const { data: res } = await axios.post(
           "http://localhost:8080/api/uploadRouter/upload",
@@ -245,7 +248,7 @@ export default function Card() {
           setSubmited(false);
           setIsOfferUpdated(false);
           setIsAnalyse(false);
-          if (skills.includes(comp)) {
+          if (skills?.includes(comp)) {
             const confirmed = window.confirm(
               "Are you ready to get started with the test ?\n" +
                 "the test contain 20 question with one ansewr every 10 sec"

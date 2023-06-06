@@ -32,8 +32,8 @@ module.exports = {
         ",<br> phone Number : " +
         contactForm.phoneNumber +
         ",<br> message : " +
-        contactForm.message +
-        contactForm.date;
+        contactForm.message ;
+
       const mailOptions = {
         //   from: "Openjavascript <test@openjavascript.info>",
         to: process.env.MAIL_USERNAME,

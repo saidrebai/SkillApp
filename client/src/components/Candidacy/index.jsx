@@ -29,17 +29,12 @@ const Candidacy = () => {
         const response = await axios.get(
           `http://localhost:8080/api/ApplicationRouter/getappbyuser/${id}`
         );
-        setCandidacy(response.data.Candidacy);
-        // setIsAccepted(response.)
+        setCandidacy(response?.data?.Candidacy);
         console.log("response", response.data);
         const idOffers = response.data.Candidacy.map(
           (candidacy) => candidacy.offer
         ).join(",");
         console.log("offers", idOffers);
-        // const idScore = response.data?.Candidacy?.map(
-        //   (candidacy) => candidacy.score
-        // ).join(",");
-        // console.log("scores", idScore);
         const responseOffer = await axios.get(
           "http://localhost:8080/api/offerRouter/getofferbyids",
           { params: { q: idOffers } }
@@ -64,10 +59,10 @@ const Candidacy = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-  const totalPages = Math.ceil(candidacy.length / itemsPerPage);
+  const totalPages = Math.ceil(candidacy?.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const application = candidacy.slice(startIndex, endIndex);
+  const application = candidacy?.slice(startIndex, endIndex);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -82,14 +77,25 @@ const Candidacy = () => {
 
   const getStepColor = (accepted, refused, theme) => {
     if (refused === true) {
-      return theme.palette.error.main; // Red color for refused
+      return theme?.palette?.error?.main; // Red color for refused
     }
     if (accepted === true) {
-      return theme.palette.success.main; // Green color for accepted
+      return theme?.palette?.success?.main; // Green color for accepted
     }
-    return theme.palette.primary.main; // Default color for other steps
+    return theme?.palette?.primary?.main; // Default color for other steps
   };
 
+  const CustomStepper = styled(Stepper)(({ theme }) => ({
+    "& .MuiStepLabel-active": {
+      color: (props) => getStepColor(props?.accepted, props?.refused, theme),
+    },
+    "& .MuiStepIcon-active": {
+      color: (props) => getStepColor(props?.accepted, props?.refused, theme),
+    },
+    "& .MuiStepIcon-text": {
+      fill: "#fff",
+    },
+  }));
 
   return (
     <>
@@ -140,39 +146,27 @@ const Candidacy = () => {
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <Typography sx={{ cursor: "pointer"}} variant="body2">
-                        <Box sx={{ width: "100%"}}>
-                          <Stepper
+                      <Typography sx={{ cursor: "pointer" }} variant="body2">
+                        <Box sx={{ width: "100%" }}>
+                          <CustomStepper
                             activeStep={step(cand.accepted)}
                             alternativeLabel
-                            sx={{
-                              "& .MuiStepLabel-active": {
-                                color: (theme) =>
-                                  getStepColor(cand.accepted, cand.refused, theme),
-                              },
-                              "& .MuiStepIcon-active": {
-                                color: (theme) =>
-                                  getStepColor(cand.accepted, cand.refused, theme),
-                              },
-                              "& .MuiStepIcon-text": {
-                                fill: "#fff",
-                              },
-                            }}
+                            accepted={cand?.accepted}
+                            refused={cand?.refused}
                           >
                             {steps.map((label) => (
                               <Step key={label}>
                                 <StepLabel>{label}</StepLabel>
                               </Step>
                             ))}
-                          </Stepper>
+                          </CustomStepper>
                         </Box>
                       </Typography>
                     </Grid>
                   </Grid>
                   <Grid item>
                     <Typography variant="subtitle1" component="div">
-                      SCORE:{" "}
-                      {cand.result}
+                      SCORE: {cand.result}
                     </Typography>
                   </Grid>
                 </Grid>
