@@ -28,6 +28,7 @@ const DashboardA = () => {
   const [countScores, setCountScores] = useState(0);
   const [offerId, setOfferId] = useState({});
   const [isTrue, setIsTrue] = useState(false);
+  const [isFetch, setIsFetch] = useState(false);
   const [users, setUsers] =useState ({})
 
   useEffect(() => {
@@ -63,6 +64,8 @@ const DashboardA = () => {
         console.log("user=====>",idUsers);
         setUsers(idUsers)
         console.log("ff", response?.data?.count);
+        setIsFetch(true);
+        console.log("is",isFetch);
       }
     }
     fetchData();
@@ -70,15 +73,19 @@ const DashboardA = () => {
 
   useEffect(() => {
     async function fetchData() {
+      if(isFetch){
       const response = await axios.get(
         "http://localhost:8080/api/uploadRouter/pdfs",
         { params: { q: users } }
       );
-      setPdfCount(response?.data?.pdfcount);
-      console.log(response?.data?.pdfcount);
+      setPdfCount(response?.data?.pdfCount);
+      console.log("===============",response?.data?.pdfCount);
+      setIsTrue(false);
+      setIsFetch(false);
     }
+  }
     fetchData();
-  }, []);
+  }, [isFetch]);
 
   return (
     <Box m="20px">

@@ -29,7 +29,7 @@ const Candidacy = () => {
         const response = await axios.get(
           `http://localhost:8080/api/ApplicationRouter/getappbyuser/${id}`
         );
-        setCandidacy(response.data.Candidacy);
+        setCandidacy(response?.data?.Candidacy);
         console.log("response", response.data);
         const idOffers = response.data.Candidacy.map(
           (candidacy) => candidacy.offer
@@ -59,10 +59,10 @@ const Candidacy = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-  const totalPages = Math.ceil(candidacy.length / itemsPerPage);
+  const totalPages = Math.ceil(candidacy?.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const application = candidacy.slice(startIndex, endIndex);
+  const application = candidacy?.slice(startIndex, endIndex);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
