@@ -168,7 +168,6 @@ const GetOffer = () => {
       );
       setPdf(response.data.pdf);
       console.log("response", response.data);
-      // localStorage.setItem("cvId", cvId);
     } catch (error) {
       console.error(error);
     }

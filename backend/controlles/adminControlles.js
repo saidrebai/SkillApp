@@ -206,27 +206,28 @@ module.exports = {
           },
         });
         const email_content =
-          "Bonjour " +
+          "Hello " +
           adminFinded.Name +
-          ",<br><br>Vous avez demandé la réinitialisation de votre mot de passe <br><br>" +
+          ",<br><br>You have requested to reset your password<br><br>" +
           password +
-          "<br><br>Cordialement,<br>Le service clientèle de SkillApp";
+          "<br><br>Sincerely,<br>The customer service department of SkillApp";
         const mailOptions = {
           from: "Openjavascript <test@openjavascript.info>",
           to: adminFinded.email,
-          subject: "Réinitialisation de votre mot de passe SkillApp",
+          subject: "Reset your password SkillApp",
           html: email_content,
         };
         adminFinded
           .save()
           .then(async (savedAdmin) => {
-            console.log("🚀 ~ file: adminControlles.js:223 ~ .then ~ savedAdmin:", savedAdmin)
+            console.log(
+              "🚀 ~ file: adminControlles.js:223 ~ .then ~ savedAdmin:",
+              savedAdmin
+            );
             transporter.sendMail(mailOptions, function (error, info) {
               if (error) {
                 console.log(error);
-                res
-                  .status(500)
-                  .json({ message: "Problème lors de l'envoi de l'e-mail" });
+                res.status(500).json({ message: "Problem sending e-mail" });
               } else {
                 console.log("Email sent: " + info.response);
                 res.json(savedAdmin.toJSON());
@@ -236,7 +237,7 @@ module.exports = {
           .catch((e) =>
             checkDuplicateEmail(e, (result) => {
               if (result) {
-                res.status(400).json({ message: "Adresse e-mail en double" });
+                res.status(400).json({ message: "Duplicate e-mail address" });
               } else {
                 next(e);
               }
@@ -245,11 +246,10 @@ module.exports = {
       } else {
         res
           .status(404)
-          .json({ message: "Aucun administrateur trouvé avec l'ID fourni" });
+          .json({ message: "No administrator found with ID supplied" });
       }
     } catch (error) {
       console.error(error);
     }
   },
-
 };

@@ -37,7 +37,7 @@ const Signup = () => {
       const url = "http://localhost:8080/api/candidatRouters/signup";
       const { data: res } = await axios.post(url, data);
       toast.success("created successfully!");
-      navigate("/");
+      navigate("/login");
       console.log(res.message);
     } catch (error) {
       toast.error(error.message);

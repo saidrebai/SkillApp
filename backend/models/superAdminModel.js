@@ -14,7 +14,7 @@ const superAdminSchema = new mongoose.Schema({
 });
 superAdminSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
-    expiresIn: "5m",
+    expiresIn: 60,
   });
   return token;
 };
