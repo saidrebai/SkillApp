@@ -146,13 +146,15 @@ const GetOffer = () => {
 
   const fetchUser = async (selectedOffer) => {
     try {
-      const ids = selectedOffer?.user?.join(",");
+      const ids = [...new Set(selectedOffer?.user)]?.join(",");
+      console.log("lllllllll",ids);
+      console.log("rr====",selectedOffer?.Name);
 
       const response = await axios.get(
         "http://localhost:8080/api/candidatRouters/searchuser",
         { params: { q: ids } }
       );
-      setUsers(response.data.data);
+      setUsers(response?.data?.data);
       console.log("response====>", response?.data?.data);
       localStorage.setItem("ids", ids);
             console.log("ids", ids);

@@ -52,7 +52,7 @@ const Main = () => {
       })
       .then((response) => {
         console.log(response.data);
-         toast.success("Email was sent successfully");
+         toast.success("Email sent successfully");
         //Afficher un message de confirmation
       })
       .catch((error) => {

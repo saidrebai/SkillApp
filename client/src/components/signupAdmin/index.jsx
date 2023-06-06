@@ -29,7 +29,7 @@ const Signup = () => {
       const { data: res } = await axios.post(url, data);
       navigate("/login");
       console.log(res.message);
-      toast.success(res.message)
+      toast.success("created successfully!");
       
     } catch (error) {
       if (
@@ -345,7 +345,7 @@ const Signup = () => {
             />
             <input
               type="text"
-              placeholder="adress"
+              placeholder="address"
               name="adress"
               onChange={handleChange}
               value={data.adress}

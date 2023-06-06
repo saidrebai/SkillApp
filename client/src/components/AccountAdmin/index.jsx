@@ -422,7 +422,7 @@ const AccountAdmin = () => {
             <div className="form-input-container-Adresse">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-stylee">Adress</label>
+                  <label className="title-stylee">Address</label>
                 </div>
               </div>
               <div className="input-style">
@@ -434,7 +434,7 @@ const AccountAdmin = () => {
                   onChange={(e) =>
                     setUpdatedData({
                       ...updatedData,
-                      adresse: e.target.value,
+                      adress: e.target.value,
                     })
                   }
                   className="style-input"

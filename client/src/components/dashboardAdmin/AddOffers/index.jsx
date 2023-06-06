@@ -192,7 +192,7 @@ const AddOffers = () => {
                     <tr>
                       <div className="input_container">
                         <td>
-                          <label>adresse : </label>
+                          <label>address : </label>
                         </td>
                         <td>
                           <input
