@@ -25,10 +25,7 @@ const getCVData = require("../middleware/getCVData");
 // }
 const parseFile = async (req, res, filePath) => {
   try {
-    // const isCreateSearchablePdf = req.body.isCreateSearchablePdf;
-    // const isSearchablePdfHideTextLayer = req.body.isSearchablePdfHideTextLayer;
-    // const isTable = req.body.isTable;
-    // const language = req.body.language;
+  
     const isCreateSearchablePdf = false;
     const isSearchablePdfHideTextLayer = false;
     const isTable = true;
@@ -120,19 +117,35 @@ module.exports = {
 
   getPdfByUser: async function (req, res) {
     try {
-      const ids = req.query.q.split(",");
-      const pdf = await PDF.find({ user: { $in: ids } });
-      if (!pdf) {
-        return res.status(404).json({ message: "pdf not found" });
+      const ids = req.query.q.split(","); // Convert comma-separated string of ids into an array
+      const batchSize = 10; // Define the number of IDs to include in each batch
+      const batchCount = Math.ceil(ids.length / batchSize);
+      const filteredItems = [];
+
+      for (let i = 0; i < batchCount; i++) {
+        const start = i * batchSize;
+        const end = start + batchSize;
+        const batchIds = ids.slice(start, end);
+        console.log("=====",batchIds);
+        const batchItems = await PDF.find({ user: { $in: batchIds } });
+        filteredItems.push(...batchItems);
       }
-      return res
-        .status(200)
-        .json({ message: "pdf found", pdf, pdfcount: pdf.length });
+
+      const pdfCount = filteredItems?.length;
+
+      res.status(200).json({
+        message: "Items found",
+        status: 200,
+        data: filteredItems,
+        pdfCount: pdfCount,
+      });
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ message: "Internal Server Error" });
+      res.status(500).send("Error searching for items in database");
     }
   },
+
+
   factureParser,
   // getSkills
 };

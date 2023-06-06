@@ -1,5 +1,5 @@
 import React from "react";
-import './index.css'
+import "./index.css";
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
 // import { mockTransactions } from "../../data/mockData";
@@ -10,8 +10,8 @@ import Header from "../../dashboardAdmin/components/Header";
 // import LineChart from "../../dashboardAdmin/components/LineChart";
 // import BarChart from "../../dashboardAdmin/components/BarChart";
 import StatBox from "../../dashboardAdmin/components/StatBox";
-import ContactPageIcon from '@mui/icons-material/ContactPage';
-import { useState,useEffect } from "react";
+import ContactPageIcon from "@mui/icons-material/ContactPage";
+import { useState, useEffect } from "react";
 // import ProgressCircle from "../../components/ProgressCircle";
 import axios from "axios";
 
@@ -26,56 +26,66 @@ const DashboardA = () => {
   const [userCount, setUserCount] = useState(0);
   const [pdfCount, setPdfCount] = useState(0);
   const [countScores, setCountScores] = useState(0);
+  const [offerId, setOfferId] = useState({});
+  const [isTrue, setIsTrue] = useState(false);
+  const [isFetch, setIsFetch] = useState(false);
+  const [users, setUsers] =useState ({})
 
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
         `http://localhost:8080/api/offerRouter/getofferbyid/${id}`
       );
-       const idOffers = response.data.offer.map((offer) => offer._id).join(",");
+      const idOffers = response.data.offer.map((offer) => offer._id).join(",");
+      setOfferId(idOffers);
+      console.log("vvvv",idOffers);
+      setIsTrue(true);
       const responseScores = await axios.get(
-        "http://localhost:8080/api/ApplicationRouter/getscorebyid",
+        "http://localhost:8080/api/ApplicationRouter/getscoresbyid",
         { params: { q: idOffers } }
       );
-      setCountScores(responseScores.data?.scoreCount);
-      setOffersCount(response.data.offer.length);
-      // setIdOffers(response.data._id)
-      // console.log("==>",idOffers);
+      setCountScores(responseScores?.data?.scoreCount);
+      console.log("pchpah",responseScores?.data?.scoreCount);
+      setOffersCount(response.data?.offer?.length);
     }
+
     fetchData();
   }, []);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(
-        `http://localhost:8080/api/offerRouter/countuserbyofferid/${id}`
-      );
-      setUserCount(response.data.count);
+      if (isTrue) {
+        const response = await axios.get(
+          "http://localhost:8080/api/offerRouter/countuserbyofferid",
+          { params: { q: offerId } }
+        );
+        setUserCount(response?.data?.count);
+        const idUsers = response?.data?.result?.map((user) => user?.uniqueUserIds)?.join(",");
+        console.log("user=====>",idUsers);
+        setUsers(idUsers)
+        console.log("ff", response?.data?.count);
+        setIsFetch(true);
+        console.log("is",isFetch);
+      }
     }
     fetchData();
-  }, []);
+  }, [isTrue]);
 
   useEffect(() => {
     async function fetchData() {
+      if(isFetch){
       const response = await axios.get(
         "http://localhost:8080/api/uploadRouter/pdfs",
-        { params: { q: ids } }
+        { params: { q: users } }
       );
-      setPdfCount(response.data.pdfcount);
+      setPdfCount(response?.data?.pdfCount);
+      console.log("===============",response?.data?.pdfCount);
+      setIsTrue(false);
+      setIsFetch(false);
     }
+  }
     fetchData();
-  }, []);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const response = await axios.get(
-  //       `http://localhost:8080/api/scoreRouter/getscorebyid/${idOffers}`
-  //     );
-  //     setCountScores(response.data?.scoreCount);
-  //   }
-  //   fetchData();
-  // }, []);
-
+  }, [isFetch]);
 
   return (
     <Box m="20px">
@@ -184,7 +194,6 @@ const DashboardA = () => {
             }
           />
         </Box>
-        
 
         {/* ROW 2 */}
         <Box
@@ -217,16 +226,18 @@ const DashboardA = () => {
             </Box>
           </Box>
           <div className="powerbi">
-          <iframe title="pfe" width="1140" height="700" src="https://app.powerbi.com/reportEmbed?reportId=08f07807-81fb-4e2f-991e-bd7ecffbcd6b&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61" frameborder="0" allowFullScreen="true"></iframe>
+            <iframe
+              title="pfe"
+              width="1140"
+              height="700"
+              src="https://app.powerbi.com/reportEmbed?reportId=08f07807-81fb-4e2f-991e-bd7ecffbcd6b&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61"
+              frameborder="0"
+              allowFullScreen="true"
+            ></iframe>
           </div>
         </Box>
-        
 
         {/* ROW 3 */}
-
-        
-  
-
       </Box>
     </Box>
   );

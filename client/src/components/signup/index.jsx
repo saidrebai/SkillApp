@@ -105,7 +105,7 @@ const Signup = () => {
             />
             <input
               type="text"
-              placeholder="adress"
+              placeholder="address"
               name="adress"
               onChange={handleChange}
               value={data.adress}

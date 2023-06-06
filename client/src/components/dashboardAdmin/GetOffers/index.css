@@ -51,10 +51,11 @@
   color: white;
   margin-left: 10px;
 }
-.pagination_container {
+.pagiination_container {
   display: flex;
   justify-content: center;
   margin: 5px;
+  margin-left: -230px;
 }
 .popup_container {
   border-radius: 5px;

@@ -595,7 +595,7 @@ const Account = () => {
               <div className="form-input-container">
                 <div className="title-input-stylee">
                   <div className="containertext-input">
-                    <label className="title-style">Adress</label>
+                    <label className="title-style">Address</label>
                   </div>
                 </div>
                 <div className="input-style">
@@ -607,7 +607,7 @@ const Account = () => {
                     onChange={(e) => {
                       setUpdatedData({
                         ...updatedData,
-                        adresse: e.target.value,
+                        adress: e.target.value,
                       });
                     }}
                     className="style-inputt"
