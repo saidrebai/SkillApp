@@ -10,12 +10,12 @@ const AddOffers = () => {
   const firstName = localStorage.getItem("firstName");
 
   const [data, setData] = useState({
-    Name: "",
+    name: "",
     type: "",
     time: "",
     description: "",
     skills: "",
-    adresse: "",
+    address: "",
     company_name: firstName,
     admin: id,
   });
@@ -129,10 +129,10 @@ const AddOffers = () => {
                         <td>
                           <input
                             type="Text"
-                            name="Name"
+                            name="name"
                             required
                             onChange={handleChange}
-                            value={data.Name}
+                            value={data.name}
                             className="inputt"
                           />
                         </td>
@@ -197,10 +197,10 @@ const AddOffers = () => {
                         <td>
                           <input
                             type="Text"
-                            name="adresse"
+                            name="address"
                             required
                             onChange={handleChange}
-                            value={data.adresse}
+                            value={data.address}
                             className="inputt"
                           />
                         </td>

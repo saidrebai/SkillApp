@@ -6,13 +6,13 @@ import { toast, ToastContainer } from "react-toastify";
 
 const Signup = () => {
   const [data, setData] = useState({
-    TypeOfUser: "",
-    Name: "",
+    typeOfUser: "",
+    name: "",
     country: "",
     town: "",
-    adress: "",
-    Zipcode: "",
-    Phone: "",
+    address: "",
+    zipcode: "",
+    phone: "",
     email: "",
     password: "",
   });
@@ -61,7 +61,7 @@ const Signup = () => {
           <form className="form_container" onSubmit={handleSubmit}>
             <h1 className="login">Create Account</h1>
             <div class="custom-select">
-              <select className="container-select" name="TypeOfUser" onChange={handleChange} value={data.TypeOfUser} required>
+              <select className="container-select" name="typeOfUser" onChange={handleChange} value={data.typeOfUser} required>
                 <option value="" disabled selected>Type of user</option>
                 <option value="Individuel">Individuel</option>
                 <option value="Société">Société</option>
@@ -70,9 +70,9 @@ const Signup = () => {
             <input
               type="text"
               placeholder="Name"
-              name="Name"
+              name="name"
               onChange={handleChange}
-              value={data.Name}
+              value={data.name}
               required
               className="inpute-signup"
             />
@@ -346,27 +346,27 @@ const Signup = () => {
             <input
               type="text"
               placeholder="address"
-              name="adress"
+              name="address"
               onChange={handleChange}
-              value={data.adress}
+              value={data.address}
               required
               className="inpute-signup"
             />
             <input
               type="number"
               placeholder="Zipcode"
-              name="Zipcode"
+              name="zipcode"
               onChange={handleChange}
-              value={data.Zipcode}
+              value={data.zipcode}
               required
               className="inpute-signup"
             />
             <input
               type="tel"
               placeholder="Phone"
-              name="Phone"
+              name="phone"
               onChange={handleChange}
-              value={data.Phone}
+              value={data.phone}
               maxLength={8}
               pattern="\d{8}"
               required

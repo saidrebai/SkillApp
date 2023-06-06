@@ -67,7 +67,7 @@ const GetOffer = () => {
   const [popup, setPopup] = useState(false);
   const [modal, setModal] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState(null);
-  const [updatedOffer, setUpdatedOffer] = useState({ Name: "" });
+  const [updatedOffer, setUpdatedOffer] = useState({ name: "" });
   const [users, setUsers] = useState([]);
   const [pdf, setPdf] = useState({});
   const [isSelected, setIsSelected] = useState(null);
@@ -148,7 +148,7 @@ const GetOffer = () => {
     try {
       const ids = [...new Set(selectedOffer?.user)]?.join(",");
       console.log("lllllllll",ids);
-      console.log("rr====",selectedOffer?.Name);
+      console.log("rr====",selectedOffer?.name);
 
       const response = await axios.get(
         "http://localhost:8080/api/candidatRouters/searchuser",
@@ -280,14 +280,14 @@ const GetOffer = () => {
                 .filter((selectedOffer) => {
                   return search.toLowerCase() === ""
                     ? selectedOffer
-                    : selectedOffer.Name.toLowerCase().includes(search);
+                    : selectedOffer.name.toLowerCase().includes(search);
                 })
                 .slice(startIndex, endIndex)
                 .map((selectedOffer) => (
                   <div className="offerr_container" key={selectedOffer._id}>
                     <div className="offerr_avatar">
                       <Avatar src="/broken-image.jpg" />
-                      <div className="offerr_name">{selectedOffer.Name}</div>
+                      <div className="offerr_name">{selectedOffer.name}</div>
                     </div>
 
                     <div className="update_botton">
@@ -415,13 +415,13 @@ const GetOffer = () => {
                           <input
                             className="inputt"
                             type="text"
-                            name="Name"
+                            name="name"
                             required={true}
-                            value={updatedOffer.Name}
+                            value={updatedOffer.name}
                             onChange={(e) => {
                               setUpdatedOffer({
                                 ...updatedOffer,
-                                Name: e.target.value,
+                                name: e.target.value,
                               });
                             }}
                           />
@@ -494,19 +494,19 @@ const GetOffer = () => {
                     <tr>
                       <div className="offer_data">
                         <td>
-                          <label>adresse : </label>
+                          <label>address : </label>
                         </td>
                         <td>
                           <input
                             className="inputt"
                             type="text"
-                            name="adresse"
+                            name="address"
                             required={true}
-                            value={updatedOffer.adresse}
+                            value={updatedOffer.address}
                             onChange={(e) => {
                               setUpdatedOffer({
                                 ...updatedOffer,
-                                adresse: e.target.value,
+                                address: e.target.value,
                               });
                             }}
                           />
@@ -543,7 +543,7 @@ const GetOffer = () => {
                       <TableCell>Email</TableCell>
                       <TableCell align="right">Country</TableCell>
                       <TableCell align="right">Town</TableCell>
-                      <TableCell align="right">Adresse</TableCell>
+                      <TableCell align="right">Address</TableCell>
                       <TableCell align="right">Phone</TableCell>
                       <TableCell align="right">Birthdate</TableCell>
                       <TableCell align="right">Gender</TableCell>
@@ -569,8 +569,8 @@ const GetOffer = () => {
                         </TableCell>
                         <TableCell align="right">{user?.country}</TableCell>
                         <TableCell align="right">{user?.town}</TableCell>
-                        <TableCell align="right">{user?.adresse}</TableCell>
-                        <TableCell align="right">{user?.Phone}</TableCell>
+                        <TableCell align="right">{user?.address}</TableCell>
+                        <TableCell align="right">{user?.phone}</TableCell>
                         <TableCell align="right">{user?.birthDate}</TableCell>
                         <TableCell align="right">{user?.gender}</TableCell>
                         <TableCell align="right">

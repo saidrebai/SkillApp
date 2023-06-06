@@ -48,7 +48,7 @@ const Account = () => {
     console.log("yess", updatedData);
   }
   useEffect(() => {
-    newData ? setUpdatedData(newData) : setUpdatedData({ Name: "" });
+    newData ? setUpdatedData(newData) : setUpdatedData({ name: "" });
     console.log("Data---------------------", newData);
   }, [newData]);
 
@@ -205,8 +205,8 @@ const Account = () => {
                 <div className="input-style">
                   <input
                     type="Phone"
-                    name="Phone"
-                    value={updatedData.Phone}
+                    name="phone"
+                    value={updatedData.phone}
                     required={true}
                     maxLength={8}
                     pattern="\d{8}"
@@ -215,7 +215,7 @@ const Account = () => {
                       if (/^\d{0,8}$/.test(phoneNumber)) {
                         setUpdatedData({
                           ...updatedData,
-                          Phone: phoneNumber,
+                          phone: phoneNumber,
                         });
                       }
                     }}
@@ -601,13 +601,13 @@ const Account = () => {
                 <div className="input-style">
                   <input
                     type="text"
-                    name="Adress"
-                    value={updatedData.adress}
+                    name="Address"
+                    value={updatedData.address}
                     required={true}
                     onChange={(e) => {
                       setUpdatedData({
                         ...updatedData,
-                        adress: e.target.value,
+                        address: e.target.value,
                       });
                     }}
                     className="style-inputt"
