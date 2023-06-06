@@ -24,6 +24,7 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [notification, setNotification] = useState([]);
   const [numberNot, setNumberNot] = useState(0);
+  const [clicket, setClicked] = useState(true);
 
   const isAdmin = localStorage.getItem("isAdmin");
   const firstName = localStorage.getItem("firstName");
@@ -121,6 +122,7 @@ function ResponsiveAppBar() {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    setClicked(false)
   };
 
   const handleClose = () => {
@@ -267,15 +269,17 @@ function ResponsiveAppBar() {
               </Box>
 
               {token && isAdmin === "false" && (
-                <div className="notification">
+                <div className="notification" 
+                >
                   <IconButton
                     aria-describedby={id}
                     variant="contained"
                     onClick={handleClick}
                   >
-                    <Badge badgeContent={numberNot} color="secondary">
-                      <NotificationsOutlinedIcon />
-                    </Badge>
+                    {clicket && (
+                    <Badge badgeContent={numberNot} color="secondary" style={{marginRight:"-20px",marginTop:'-20px'}}/>
+                    )}
+                    <NotificationsOutlinedIcon />
                   </IconButton>
                   <Popover
                     id={id}
@@ -290,7 +294,10 @@ function ResponsiveAppBar() {
                     <Typography className="nots" sx={{ p: 1 }}>
                       {notification?.map((not) => (
                         <div className="msg" key={not?._id}>
-                          <p className="linke"> you have recived an email from : {not.adminEmail}</p>
+                          <p className="linke">
+                            {" "}
+                            you have recived an email from : {not.adminEmail}
+                          </p>
                           <p className="link">{truncateText(not?.link, 50)}</p>
                           <p>Check your email</p>
                         </div>
