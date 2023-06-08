@@ -19,7 +19,7 @@
 }
 .modal_content {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 55%;
   transform: translate(-50%, -50%);
   line-height: 1.4;

@@ -3,6 +3,8 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import "./styles.modules.css";
 import { toast, ToastContainer } from "react-toastify";
+import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 
 const Login = () => {
   const user = localStorage.getItem("token");
@@ -119,6 +121,7 @@ const Login = () => {
             <form className="from_container" onSubmit={handleSubmit}>
               <h1 className="login">Login to your account</h1>
               <div className="radio_group">
+              <BusinessCenterOutlinedIcon />
                 <label>
                   <input
                     type="radio"
@@ -132,7 +135,7 @@ const Login = () => {
                   />
                   Recruter
                 </label>
-
+                <PersonOutlinedIcon sx={{marginLeft : 2}}/>
                 <label>
                   <input
                     type="radio"
@@ -189,10 +192,12 @@ const Login = () => {
             <h1 className="login">Get started</h1>
             <div className="radio_group">
               <label>
+                <BusinessCenterOutlinedIcon />
                 <input className="radio_button" type="radio" name="opt" value="opt1" />
                 Recruter
               </label>
               <label>
+                <PersonOutlinedIcon sx={{marginLeft : 2}}/>
                 <input className="radio_button" type="radio" name="opt" value="opt2" />
                 Candidat
               </label>
