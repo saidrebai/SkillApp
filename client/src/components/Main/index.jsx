@@ -9,6 +9,8 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 
 const Main = () => {
+  const token = localStorage.getItem("token");
+
   const [pageviews, setPageviews] = useState();
   const [visits, setVisits] = useState();
   const [name, setName] = useState("");
@@ -18,7 +20,11 @@ const Main = () => {
   const [showMore, setShowMore] = useState(false);
   // const [text, setText] = useState("");
   const text =
-    "Our web application is dedicated to the design and production of high quality professional application files. We understand the crucial importance of a well-presented application file in attracting the attention of recruiters and increasing the chances of success when looking for a job.";
+    "Welcome to our cutting-edge web application," +
+    "where recruiters and candidates meet effortlessly. Our platform simplifies the recruitment process,"+
+    " connecting recruiters with top talent and helping candidates discover exciting job opportunities."+
+    " With streamlined job listings, easy application management, and objective assessment tools,"+
+    " our application transforms the way hiring happens. Join us today and experience the future of recruitment.";
 
   function updateCounter() {
     const type =
@@ -52,7 +58,7 @@ const Main = () => {
       })
       .then((response) => {
         console.log(response.data);
-         toast.success("Email sent successfully");
+        toast.success("Email sent successfully");
         //Afficher un message de confirmation
       })
       .catch((error) => {
@@ -69,7 +75,6 @@ const Main = () => {
       setMessage(message.slice(0, 200));
     }
   };
- 
 
   return (
     <>
@@ -79,18 +84,18 @@ const Main = () => {
             <div className="home-left">
               <h1 className="h1_main">HOME : </h1>
               <p>
-                Welcome, <br /> We are delighted to welcome you on our website !{" "}
-                <br />
-                We hope you find all the information you need and that you will
-                spend <br />a pleasant time browsing our site.
+                Discover limitless possibilities at SkillsApp !  <br /> 
+                Connect, grow, and succeed in our thriving online community. Whether you're a professional, a talent, or just curious, <br /> 
+                we've got you covered. Join us now and unlock your potential!
+
               </p>
-              <button
+              {!token &&<button
                 type="button"
                 className="sign_up_button"
                 onClick={handleLoginClick}
               >
                 SIGN UP
-              </button>
+              </button>}
             </div>
             <div className="home-right">
               <img src={myImg} alt="" class="logo" />
@@ -116,7 +121,7 @@ const Main = () => {
           </div>
           <div id="contact">
             <div className="contact-right">
-              <h1 className="h1_main">CONTACT : </h1>
+              <h1 className="h1_main">Contact Us: </h1>
               <form className="Form_contact" onSubmit={handleSubmit}>
                 <input
                   type="text"
@@ -128,9 +133,6 @@ const Main = () => {
                   placeholder="Name"
                 />
 
-                {/* <label htmlFor="email" className="label_contact">
-                    Email:
-                  </label> */}
                 <input
                   type="email"
                   id="email"
@@ -141,9 +143,6 @@ const Main = () => {
                   placeholder="Business email"
                 />
 
-                {/* <label htmlFor="phoneNumber" className="label_contact">
-                    Phone Number:
-                  </label> */}
                 <input
                   type="tel"
                   id="phoneNumber"
@@ -155,10 +154,6 @@ const Main = () => {
                   className="input_contact"
                   placeholder="Phone Number"
                 />
-
-                {/* <label htmlFor="message" className="label_contact">
-                    Message:
-                  </label> */}
                 <textarea
                   type="text"
                   id="message"
@@ -169,7 +164,7 @@ const Main = () => {
                   }}
                   required
                   className="input_message"
-                  placeholder="Message"
+                  placeholder="Message...."
                 ></textarea>
                 <button type="submit" className="btn_send">
                   Send Message
@@ -179,17 +174,19 @@ const Main = () => {
             </div>
             <div className="contact_left">
               <div className="contact-info">
-                {/* <img src={logogmail} alt="" class="logo_gmail" /> */}
-                <div>
+                <div className="infoo">
+                  <div className="icon_container">
+                    <EmailIcon sx={{ marginRight: 2 }} />
+                  </div>{" "}
                   <p class="ova_text">
-                    <EmailIcon />
-                    <a href="mailto:info@arsela.co"> info@arsela.co</a>
+                    <a href="mailto:info@arsela.co">info@arsela.co</a>
                   </p>
                 </div>
-                <div>
-                  {/* <img src={logoPhone} alt="" class="logo_Phone" /> */}
+                <div className="infoo">
+                  <div className="icon_container">
+                    <PhoneIcon sx={{ marginRight: 2 }} />
+                  </div>
                   <p class="ova_text">
-                    <PhoneIcon />
                     <a href="tel:53107042"> (+216) 53 107 042</a>
                   </p>
                   <ToastContainer />

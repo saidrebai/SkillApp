@@ -182,7 +182,7 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Power Bi"
-              to="/bar"
+              to="/powerbi"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

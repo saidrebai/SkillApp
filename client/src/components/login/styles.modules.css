@@ -107,7 +107,7 @@
 .radio_group {
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 12px 0px;
 }
 .whitee_btn {
   padding: 12px 20px;
@@ -130,4 +130,5 @@
 }
 .radio_button{
   margin: 5px;
+  cursor: pointer;
 }
