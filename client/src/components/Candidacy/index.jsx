@@ -139,7 +139,7 @@ const Candidacy = () => {
                         }
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        Address:{" "}
+                        Location:{" "}
                         {
                           offer.find((offer) => offer._id === cand.offer)
                             ?.address
@@ -154,6 +154,9 @@ const Candidacy = () => {
                             alternativeLabel
                             accepted={cand?.accepted}
                             refused={cand?.refused}
+                            onChange={
+                             getStepColor(cand.accepted, cand.refused) 
+                            }
                           >
                             {steps.map((label) => (
                               <Step key={label}>

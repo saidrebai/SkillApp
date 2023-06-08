@@ -1,6 +1,6 @@
 .score_c{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 10px;
@@ -29,5 +29,5 @@
     display: flex;
     justify-content: center;
     margin: 5px;
-    margin-left: 280px;
+    /* margin-left: 280px; */
 }

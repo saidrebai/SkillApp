@@ -21,7 +21,7 @@ import Applications from "./components/dashboardAdmin/Applications";
 import Calendar from "./components/dashboardAdmin/Calendar";
 import Candidacy from "./components/Candidacy";
 import Recrutments from "./components/dashboardAdmin/Recrutments";
-import PowerBi from "./components/dashboardAdmin/PowerBi";
+// import PowerBi from "./components/dashboardAdmin/PowerBi";
 
 
 function App() {
@@ -50,7 +50,7 @@ function App() {
       <Route path="/recrutments" exact element={<Recrutments />} />
       <Route path="/calendar" exact element={<Calendar />} />
       <Route path="/AccountA" exact element={<AccountAdmin />} />
-      <Route path="/powerbi" exact element={<PowerBi />} />
+      {/* <Route path="/powerbi" exact element={<PowerBi />} /> */}
       </Routes></main></div>
       </ThemeProvider>
     </ColorModeContext.Provider>)}

@@ -371,7 +371,7 @@ export default function Card() {
 
                     <div className="adresse_container">
                       <label className="offre_label">
-                        <LocationOnOutlinedIcon /> Address :
+                        <LocationOnOutlinedIcon /> Location :
                       </label>
 
                       {selectedOffer.address}
