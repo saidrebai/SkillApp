@@ -2,22 +2,18 @@ import React from "react";
 import "./index.css";
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
-// import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../dashboardAdmin/components/Header";
-// import LineChart from "../../dashboardAdmin/components/LineChart";
-// import BarChart from "../../dashboardAdmin/components/BarChart";
 import StatBox from "../../dashboardAdmin/components/StatBox";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import { useState, useEffect } from "react";
-// import ProgressCircle from "../../components/ProgressCircle";
 import axios from "axios";
 
 const DashboardA = () => {
   const id = localStorage.getItem("id");
-  // const ids = localStorage.getItem("ids");
+
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -95,21 +91,6 @@ const DashboardA = () => {
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
-
-        <Box>
-          <Button
-            sx={{
-              backgroundColor: colors.blueAccent[700],
-              color: colors.grey[100],
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-            }}
-          >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box>
       </Box>
 
       {/* GRID & CHARTS */}
@@ -215,18 +196,13 @@ const DashboardA = () => {
               <Typography
                 variant="h5"
                 fontWeight="1000"
+                marginBottom={2}
                 color={colors.greenAccent[500]}
               >
                 Power BI Dashboard
               </Typography>
             </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
-            </Box>
+
           </Box>
           <div className="powerbi">
             <iframe
@@ -234,7 +210,6 @@ const DashboardA = () => {
               title="Final BI"
               width="1140"
               height="541.25"
-              // src="https://app.powerbi.com/reportEmbed?reportId=bd9f6d82-454b-4057-a402-77f504ec6824&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61"
               frameborder="0"
               allowFullScreen="true"
             ></iframe>

@@ -111,6 +111,7 @@ const Candidacy = () => {
                 marginTop: "80px",
                 width: 1200,
                 flexGrow: 1,
+                className:"app_paper",
                 backgroundColor: (theme) =>
                   theme.palette.mode === "dark" ? "#1A2027" : "#fff",
               }}

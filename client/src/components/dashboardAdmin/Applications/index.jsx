@@ -348,7 +348,7 @@ export default function Application() {
                                       // type="date"
                                       selected={selectedDate}
                                       onChange={handleDateChange}
-                                      dateFormat="yyyy-MM-dd              HH:mm aa"
+                                      dateFormat="yyyy-MM-dd              HH:mm "
                                       showTimeInput
                                       placeholderText="Select a date and time"
                                       className="input__date"
