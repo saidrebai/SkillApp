@@ -3,8 +3,9 @@ import "./styles.modules.css";
 import { toast, ToastContainer } from "react-toastify";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import myImg from "../images/Capture.PNG";
-import ImgAu from "../images/about-us-page-1.png";
+import myImg from "../images/suivi-de-candidature-1.png";
+import ContactImg from "../images/contactez-nous-illustration-concept_114360-3147.avif";
+import ImgAu from "../images/concept-examen-ligne-test-ligne-formulaire-questionnaire-education-ligne-enquete-quiz-internet_269730-35.avif";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 
@@ -82,11 +83,11 @@ const Main = () => {
         <div className="main_content">
           <div id="home">
             <div className="home-left">
-              <h1 className="h1_main">HOME : </h1>
+              <h1 className="h1_main">WELCOME TO OUR APPLICATION </h1>
               <p>
-                Discover limitless possibilities at SkillsApp !  <br /> 
-                Connect, grow, and succeed in our thriving online community. Whether you're a professional, a talent, or just curious, <br /> 
-                we've got you covered. Join us now and unlock your potential!
+                Discover limitless possibilities at Skills !  <br /> 
+                Connect, grow, and succeed in our thriving online community. Whether you're a professional, a talent, or just curious,we've got you covered.  <br /> 
+                Join us now and unlock your potential!
 
               </p>
               {!token &&<button
@@ -103,11 +104,10 @@ const Main = () => {
           </div>
           <div id="aboutus">
             <div className="aboutus-left">
-              <h1 className="h1_main">ABOUT US : </h1>
-
               <img src={ImgAu} alt="" class="image_overlay" />
             </div>
             <div className="aboutus-right">
+            <h1 className="h2_main">ABOUT US </h1>
               <h6 class="text-overlay">
                 {showMore ? text : `${text.substring(0, 250)}`}
                 <button
@@ -121,7 +121,7 @@ const Main = () => {
           </div>
           <div id="contact">
             <div className="contact-right">
-              <h1 className="h1_main">Contact Us: </h1>
+              <h1 className="h3_main">Contact Us </h1>
               <form className="Form_contact" onSubmit={handleSubmit}>
                 <input
                   type="text"
@@ -192,6 +192,9 @@ const Main = () => {
                   <ToastContainer />
                 </div>
               </div>
+            </div>
+            <div className="contact_left_bottom">
+            <img className="contact_img" src={ContactImg} alt="" />
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const {offerModel} = require("./offersModel")
+const {ApplicationModel} = require("./ApplicationModel");
 
 const adminSchema = new mongoose.Schema(
   {
@@ -46,10 +47,29 @@ const adminSchema = new mongoose.Schema(
 );
 
 
+// adminSchema.pre("remove", async function (next) {
+//   const idAdmin = this._id;
+//   try {
+//     await offerModel.deleteMany({ admin: idAdmin });
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 adminSchema.pre("remove", async function (next) {
-  const idAdmin = this._id;
+  const adminId = this._id;
   try {
-    await offerModel.deleteMany({ admin: idAdmin });
+    // Find offers associated with the admin
+    const adminOffers = await offerModel.find({ admin: adminId });
+    console.log("offers",adminOffers);
+    const offerIds = adminOffers.map((offer) => offer._id);
+    console.log("ids",offerIds);
+    // Delete offers associated with the admin
+    await offerModel.deleteMany({ admin: adminId });
+
+    // Delete applications associated with the admin's offers
+    await ApplicationModel.deleteMany({ offer: { $in: offerIds } });
+
     next();
   } catch (error) {
     next(error);

@@ -80,7 +80,23 @@
   color: #030404;
 }
 .stylebutton:hover {
-  background-color: rgba(13, 88, 121, 0.54);
+  background-color: #389b5f;
+  border: 1px solid 147563;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+.stylbutton {
+  width: 150px;
+  height: 40px;
+  margin: 15px;
+  background-color: white;
+  border: 1px solid rgb(248, 241, 241);
+  border-radius: 4px;
+  color: #030404;
+}
+.stylbutton:hover {
+  background-color: #922020;
   border: 1px solid 147563;
   border-radius: 4px;
   color: white;

@@ -186,7 +186,7 @@ const addApplication = async (e) => {
         return true;
       }
       else{
-        toast.error("Adding score failed!");
+        toast.error("sorry your not succed!");
         return false;
       }
               

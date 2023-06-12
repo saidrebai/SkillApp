@@ -498,7 +498,7 @@ const AccountAdmin = () => {
               <button type="submit" className="style-button">
                 Update
               </button>
-              <button type="button" className="style-button" onClick={deleteAdmin}>
+              <button type="button" className="style-butto" onClick={deleteAdmin}>
                 Delete
               </button>
               <ToastContainer />
