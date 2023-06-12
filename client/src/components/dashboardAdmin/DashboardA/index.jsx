@@ -18,80 +18,80 @@ const DashboardA = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [offersCount, setOffersCount] = useState(0);
-  const [userCount, setUserCount] = useState(0);
-  const [pdfCount, setPdfCount] = useState(0);
-  const [countScores, setCountScores] = useState(0);
-  const [offerId, setOfferId] = useState({});
-  const [isTrue, setIsTrue] = useState(false);
-  const [isFetch, setIsFetch] = useState(false);
-  const [users, setUsers] = useState({});
+  // const [offersCount, setOffersCount] = useState(0);
+  // const [userCount, setUserCount] = useState(0);
+  // const [pdfCount, setPdfCount] = useState(0);
+  // const [countScores, setCountScores] = useState(0);
+  // const [offerId, setOfferId] = useState({});
+  // const [isTrue, setIsTrue] = useState(false);
+  // const [isFetch, setIsFetch] = useState(false);
+  // const [users, setUsers] = useState({});
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await axios.get(
-        `http://localhost:8080/api/offerRouter/getofferbyid/${id}`
-      );
-      const idOffers = response.data.offer.map((offer) => offer._id).join(",");
-      setOfferId(idOffers);
-      console.log("vvvv", idOffers);
-      setIsTrue(true);
-      const responseScores = await axios.get(
-        "http://localhost:8080/api/ApplicationRouter/getscoresbyid",
-        { params: { q: idOffers } }
-      );
-      setCountScores(responseScores?.data?.scoreCount);
-      console.log("pchpah", responseScores?.data?.scoreCount);
-      setOffersCount(response.data?.offer?.length);
-    }
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await axios.get(
+  //       `http://localhost:8080/api/offerRouter/getofferbyid/${id}`
+  //     );
+  //     const idOffers = response.data.offer.map((offer) => offer._id).join(",");
+  //     setOfferId(idOffers);
+  //     console.log("vvvv", idOffers);
+  //     setIsTrue(true);
+  //     const responseScores = await axios.get(
+  //       "http://localhost:8080/api/ApplicationRouter/getscoresbyid",
+  //       { params: { q: idOffers } }
+  //     );
+  //     setCountScores(responseScores?.data?.scoreCount);
+  //     console.log("pchpah", responseScores?.data?.scoreCount);
+  //     setOffersCount(response.data?.offer?.length);
+  //   }
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      if (isTrue) {
-        const response = await axios.get(
-          "http://localhost:8080/api/offerRouter/countuserbyofferid",
-          { params: { q: offerId } }
-        );
-        setUserCount(response?.data?.count);
-        const idUsers = response?.data?.result
-          ?.map((user) => user?.uniqueUserIds)
-          ?.join(",");
-        console.log("user=====>", idUsers);
-        setUsers(idUsers);
-        console.log("ff", response?.data?.count);
-        setIsFetch(true);
-        console.log("is", isFetch);
-      }
-    }
-    fetchData();
-  }, [isTrue]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     if (isTrue) {
+  //       const response = await axios.get(
+  //         "http://localhost:8080/api/offerRouter/countuserbyofferid",
+  //         { params: { q: offerId } }
+  //       );
+  //       setUserCount(response?.data?.count);
+  //       const idUsers = response?.data?.result
+  //         ?.map((user) => user?.uniqueUserIds)
+  //         ?.join(",");
+  //       console.log("user=====>", idUsers);
+  //       setUsers(idUsers);
+  //       console.log("ff", response?.data?.count);
+  //       setIsFetch(true);
+  //       console.log("is", isFetch);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [isTrue]);
 
-  useEffect(() => {
-    async function fetchData() {
-      if (isFetch) {
-        const response = await axios.get(
-          "http://localhost:8080/api/uploadRouter/pdfs",
-          { params: { q: users } }
-        );
-        setPdfCount(response?.data?.pdfCount);
-        console.log("===============", response?.data?.pdfCount);
-        setIsTrue(false);
-        setIsFetch(false);
-      }
-    }
-    fetchData();
-  }, [isFetch]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     if (isFetch) {
+  //       const response = await axios.get(
+  //         "http://localhost:8080/api/uploadRouter/pdfs",
+  //         { params: { q: users } }
+  //       );
+  //       setPdfCount(response?.data?.pdfCount);
+  //       console.log("===============", response?.data?.pdfCount);
+  //       setIsTrue(false);
+  //       setIsFetch(false);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [isFetch]);
 
   const reportURL = `https://app.powerbi.com/reportEmbed?reportId=bd9f6d82-454b-4057-a402-77f504ec6824&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61&filter=offermodels/admin eq '${id}'`;
   return (
     <Box m="20px">
       {/* HEADER */}
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      {/* <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
-      </Box>
+      </Box> */}
 
       {/* GRID & CHARTS */}
       <Box
@@ -101,7 +101,7 @@ const DashboardA = () => {
         gap="20px"
       >
         {/* ROW 1 */}
-        <Box
+        {/* <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
           display="flex"
@@ -177,31 +177,24 @@ const DashboardA = () => {
               />
             }
           />
-        </Box>
+        </Box> */}
 
         {/* ROW 2 */}
         <Box
           gridColumn="span 12"
-          gridRow="span 5"
+          gridRow="span 4"
           backgroundColor={colors.primary[400]}
         >
           <Box
-            mt="25px"
+            mt="20px"
             p="0 30px"
             display="flex "
             justifyContent="space-between"
             alignItems="center"
           >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="1000"
-                marginBottom={2}
-                color={colors.greenAccent[500]}
-              >
-                Power BI Dashboard
-              </Typography>
-            </Box>
+    <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+      </Box>
 
           </Box>
           <div className="powerbi">

@@ -24,7 +24,7 @@ root.render(
       window.location.pathname !== "/calendar" &&
       window.location.pathname !== "/ForgotPassword" &&
       window.location.pathname !== "/resetpassword" &&
-      window.location.pathname !== "/powerbi" &&
+      // window.location.pathname !== "/powerbi" &&
       window.location.pathname !== "/AccountA") && <ResponsiveAppBar />}
     <React.StrictMode>
       <App />
@@ -39,7 +39,7 @@ root.render(
       window.location.pathname !== "/calendar" &&
       window.location.pathname !== "/ForgotPassword" &&
       window.location.pathname !== "/resetpassword" &&
-      window.location.pathname !== "/powerbi" &&
+      // window.location.pathname !== "/powerbi" &&
       window.location.pathname !== "/AccountA") && <Footer />}
   </BrowserRouter>
 );
