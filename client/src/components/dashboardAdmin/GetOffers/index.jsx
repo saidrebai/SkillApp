@@ -300,7 +300,7 @@ const GetOffer = () => {
                         Update
                       </button>
                       <button
-                        className="buttons"
+                        className="butons"
                         onClick={() => {
                           toggleModal(selectedOffer);
                           fetchUser(selectedOffer);
@@ -310,7 +310,7 @@ const GetOffer = () => {
                       </button>
 
                       <button
-                        className="buttons"
+                        className="buttns"
                         onClick={() => handleDelete(selectedOffer)}
                       >
                         Delete
