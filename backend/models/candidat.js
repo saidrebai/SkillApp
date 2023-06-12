@@ -55,9 +55,6 @@ const userSchema = new mongoose.Schema({
 			type: Schema.Types.ObjectId,
 			ref: 'pdfs',
 		},
-  status:{
-    type: Boolean,
-  }
 },
 { timestamps: true }
 );

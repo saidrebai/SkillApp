@@ -340,7 +340,7 @@ export default function Application() {
                                         refuseCandidacy(score._id);
                                       }}
                                     >
-                                      Rejecte
+                                      Reject
                                     </button>
                                   </div>
                                   <div className="datepicker_container">

@@ -43,7 +43,7 @@ const Account = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.message)
+        toast.error("update failed!")
       });
     console.log("yess", updatedData);
   }
@@ -646,7 +646,7 @@ const Account = () => {
                 </button>
                 <button
                   type="button"
-                  className="stylebutton"
+                  className="stylbutton"
                   onClick={deleteUser}
                 >
                   Delete

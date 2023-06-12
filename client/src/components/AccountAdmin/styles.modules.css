@@ -76,6 +76,22 @@
   color: white;
   cursor: pointer;
 }
+.style-butto {
+  width: 150px;
+  height: 40px;
+  margin: 15px;
+  background-color: #922020;
+  border: 1px solid rgb(248, 241, 241);
+  border-radius: 4px;
+  color: #ffffff;
+}
+.style-butto:hover {
+  background-color: #530808;
+  border: 1px solid 147563;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
 .content-full {
   background-color: "white";
   border-radius: "100%";

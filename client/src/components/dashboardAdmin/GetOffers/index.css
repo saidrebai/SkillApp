@@ -34,7 +34,7 @@
   margin: 10px;
 }
 .update_botton button {
-  background-color: #389b5f;
+  /* background-color: #389b5f; */
   border: none;
   border-radius: 5px;
   font-size: 15px;
@@ -50,6 +50,15 @@
   transition-duration: 0.4s;
   color: white;
   margin-left: 10px;
+}
+.buttons{
+  background-color: #389b5f;
+}
+.butons{
+  background-color: gray;
+}
+.buttns{
+  background-color: rgb(170, 31, 31);
 }
 .pagiination_container {
   display: flex;
@@ -97,19 +106,7 @@
   min-width: 950px;
   height: fit-content;
 }
-/* .close_popup {
-  position: absolute;
-    top: 0;
-    right: 0;
-    padding: 5px 5px;
-    border-radius: 5px;
-    border: none;
-    width: 100px;
-    height: 35px;
-    background-color: #304f6d;
-    color: rgb(255, 255, 255);
-    cursor: pointer;
-} */
+
 .Save_popup {
   border-radius: 5px;
   border: none;
@@ -162,4 +159,18 @@ td {
 }
 .action{
   width: 120px;
+}
+.close_popup{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+  border-radius: 5px;
+  border: none;
+  width: 100px;
+  height: 40px;
+  margin: 10px;
+  background-color: rgb(170, 31, 31);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
 }
