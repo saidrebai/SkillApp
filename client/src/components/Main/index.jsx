@@ -3,9 +3,9 @@ import "./styles.modules.css";
 import { toast, ToastContainer } from "react-toastify";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import myImg from "../images/suivi-de-candidature-1.png";
+import myImg from "../images/351628671_256133553671561_94763177839267530_n.png";
 import ContactImg from "../images/contactez-nous-illustration-concept_114360-3147.avif";
-import ImgAu from "../images/concept-examen-ligne-test-ligne-formulaire-questionnaire-education-ligne-enquete-quiz-internet_269730-35.avif";
+import ImgAu from "../images/351107967_1310748676540659_8715024063190380340_n.png";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 

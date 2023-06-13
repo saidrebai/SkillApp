@@ -56,9 +56,7 @@ function ResponsiveAppBar() {
       window.location.href = "/AccountA";
     }
   };
-  const handleDashboardClick = () => {
-    window.location.href = "/dashboardA";
-  };
+
   const handleAppClick = () => {
     window.location.href = "/candidacy";
   };
@@ -291,6 +289,7 @@ function ResponsiveAppBar() {
                       horizontal: "right",
                     }}
                   >
+                    <h1 className="notifi">Notifications</h1>
                     <Typography className="nots" sx={{ p: 1 }}>
                       {notification?.map((not) => (
                         <div className="msg" key={not?._id}>

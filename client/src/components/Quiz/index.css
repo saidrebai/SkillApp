@@ -145,7 +145,7 @@
 }
 
 .timer.minute .hand span {
-  animation-duration: 10s;
+  animation-duration: 15s;
   border-top-color: rgb(252, 109, 1);
   border-right-color: rgb(252, 109, 1);
   border-width: 87.5px;
