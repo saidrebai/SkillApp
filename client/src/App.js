@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Main from "./components/Main";
 import Signup from "./components/signup";
@@ -22,12 +22,17 @@ import Calendar from "./components/dashboardAdmin/Calendar";
 import Candidacy from "./components/Candidacy";
 import Recrutments from "./components/dashboardAdmin/Recrutments";
 // import PowerBi from "./components/dashboardAdmin/PowerBi";
+import checkTokenExpiration from "./VerifyTokenExpiration";
 
 
 function App() {
 
   const user = localStorage.getItem("token");
   const isAdmin = localStorage.getItem("isAdmin");
+
+  useEffect(() => {
+    checkTokenExpiration();
+  }, []);
 
   console.log("isssss", isAdmin);
 

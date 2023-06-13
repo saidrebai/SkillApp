@@ -309,7 +309,7 @@ export default function Card() {
           </Search>
         </div>
         <table>
-          <tr className="table1">
+          <tr className="table11">
             {offers.length > 0 ? (
               offers
                 .filter((selectedOffer) => {

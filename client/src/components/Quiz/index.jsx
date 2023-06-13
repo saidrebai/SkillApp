@@ -8,7 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import ReactStoreIndicator from "react-score-indicator";
 import { toast, ToastContainer } from "react-toastify";
-// import { useTheme } from "@mui/material";
+
 
 const Quiz=()=> {
   const id = localStorage.getItem("id");
@@ -59,7 +59,7 @@ const Quiz=()=> {
   };
 
   const clearTimer = (e) => {
-    setTimer("00:00:10");
+    setTimer("00:00:15");
     if (Ref.current) clearInterval(Ref.current);
     const id = setInterval(() => {
       startTimer(e);
@@ -69,7 +69,7 @@ const Quiz=()=> {
 
   const getDeadTime = () => {
     let deadline = new Date();
-    deadline.setSeconds(deadline.getSeconds() + 10);
+    deadline.setSeconds(deadline.getSeconds() + 15);
     return deadline;
   };
 
@@ -97,17 +97,9 @@ const Quiz=()=> {
       console.log("==>", response.data.nbrOfQuestion);
       console.log("response", response.data);
       console.log("tag===>",offer);
-      // localStorage.removeItem("skills");
-      // console.log("tags",response?.data?.tags);
+
     }
-    // else if (hasSkill ===false){
-    //   const confirm = window.confirm("your resume do not contain the necessecary skill for the offer !\nplease select another offer ")
-    //   if(confirm){
-    //     window.location="/offers"
-    //   }else{
-    //     window.location="/offers"
-    //   }
-    // }
+
   }
     fetchData();
   }, [hasSkill,skills, offer]);
@@ -120,7 +112,7 @@ const Quiz=()=> {
       );
       setOffer(response?.data?.offer?.skills);
       console.log("==>", response.data.offer.skills);
-      // console.log("response", response.data);
+
     }
     fetchData();
   }, []);
