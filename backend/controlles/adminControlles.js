@@ -7,7 +7,6 @@ const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const { ContactModel } = require("../models/contactModel");
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -44,10 +43,12 @@ module.exports = {
 
       const token = admin.generateAuthToken();
       const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
+     const expiresIn = 60; // Expiration time in seconds
       res.status(200).send({
         data: token,
         _id: decoded._id,
         name: admin.name,
+        expiresIn: expiresIn,
         message: "logged in successfully",
       });
     } catch (error) {

@@ -47,15 +47,6 @@ const adminSchema = new mongoose.Schema(
 );
 
 
-// adminSchema.pre("remove", async function (next) {
-//   const idAdmin = this._id;
-//   try {
-//     await offerModel.deleteMany({ admin: idAdmin });
-//     next();
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 adminSchema.pre("remove", async function (next) {
   const adminId = this._id;
   try {
@@ -79,7 +70,7 @@ adminSchema.pre("remove", async function (next) {
 
 adminSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
-    expiresIn: 60,
+    expiresIn: 3600,
   });
   return token;
 };
