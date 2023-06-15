@@ -21,7 +21,6 @@ import Applications from "./components/dashboardAdmin/Applications";
 import Calendar from "./components/dashboardAdmin/Calendar";
 import Candidacy from "./components/Candidacy";
 import Recrutments from "./components/dashboardAdmin/Recrutments";
-// import PowerBi from "./components/dashboardAdmin/PowerBi";
 import checkTokenExpiration from "./VerifyTokenExpiration";
 
 
@@ -40,7 +39,10 @@ function App() {
   const [isSidebar, setIsSidebar] = useState(true);
 
   return (<>
-  {isAdmin==="true" && window.location.pathname !== "/" && window.location.pathname !== "/resetpassword" && window.location.pathname !== "/login" &&
+  {isAdmin==="true" && window.location.pathname !== "/" && window.location.pathname !== "/resetpassword"  && window.location.pathname !== "/ForgotPassword"
+  && window.location.pathname !== "/login" && window.location.pathname !== "/signup" && window.location.pathname !== "/signupAdmin" &&
+  window.location.pathname !== "/Account" && window.location.pathname !== "/candidacy" && window.location.pathname !== "/offers" &&
+  window.location.pathname !== "/answerquiz" &&
   (<ColorModeContext.Provider value={colorMode}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -55,7 +57,6 @@ function App() {
       <Route path="/recrutments" exact element={<Recrutments />} />
       <Route path="/calendar" exact element={<Calendar />} />
       <Route path="/AccountA" exact element={<AccountAdmin />} />
-      {/* <Route path="/powerbi" exact element={<PowerBi />} /> */}
       </Routes></main></div>
       </ThemeProvider>
     </ColorModeContext.Provider>)}
@@ -78,7 +79,7 @@ function App() {
 
       {!user && <Route path="/ForgotPassword" exact element={<ForgotPassword />} />}
       <Route path="/resetpassword" exact element={<ResetPassword />} />
-      <Route path="/answerquiz" exact element={<Quiz />} />
+      {isAdmin === "false"&& <Route path="/answerquiz" exact element={<Quiz />} />}
 
     </Routes></>
   );

@@ -60,6 +60,7 @@ const Main = () => {
       .then((response) => {
         console.log(response.data);
         toast.success("Email sent successfully");
+        window.location.reload();
         //Afficher un message de confirmation
       })
       .catch((error) => {
@@ -126,6 +127,7 @@ const Main = () => {
                 <input
                   type="text"
                   id="name"
+                  maxLength={20}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
@@ -136,6 +138,7 @@ const Main = () => {
                 <input
                   type="email"
                   id="email"
+                  maxLength={40}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required

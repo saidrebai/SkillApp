@@ -84,16 +84,9 @@ const AccountAdmin = () => {
       <div className="centerr-content">
         <div className="content-container">
           <div className="content-full">
-            {/* <img
-              className="full"
-              src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
-              alt=""
-            /> */}
             <h2 >My Account</h2>
           </div>
           <form onSubmit={handleUpdate}>
-
-          {/* <h2 className="titlee">My Account</h2> */}
 
           <div className="form-container">
             <div className="form-input-container-Name">
@@ -106,6 +99,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="name"
+                  maxLength={20}
                   required = {true}
                   value={updatedData.name}
                   onChange={(e) => {
@@ -122,22 +116,10 @@ const AccountAdmin = () => {
             <div className="form-input-container-country">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-stylee">country</label>
+                  <label className="title-stylee">Country</label>
                 </div>
               </div>
               <div className="input-style">
-                {/* <input
-                  type="text"
-                  name="country"
-                  value={updatedData.country}
-                  onChange={(e) => {
-                    setUpdatedData({
-                      ...updatedData,
-                      country: e.target.value,
-                    });
-                  }}
-                  className="style-input"
-                /> */}
                  <select className="style-input" name="country"  
                  value={updatedData.country}
                  onChange={(e) => {
@@ -399,13 +381,14 @@ const AccountAdmin = () => {
             <div className="form-input-container-town">
               <div className="title-input-style">
                 <div className="containertext-input">
-                  <label className="title-stylee">town</label>
+                  <label className="title-stylee">Town</label>
                 </div>
               </div>
               <div className="input-style">
                 <input
                   type="text"
                   name="town"
+                  maxLength={20}
                   required = {true}
                   value={updatedData.town}
                   onChange={(e) =>
@@ -429,6 +412,7 @@ const AccountAdmin = () => {
                 <input
                   type="text"
                   name="Address"
+                  maxLength={40}
                   required = {true}
                   value={updatedData.address}
                   onChange={(e) =>
@@ -451,8 +435,10 @@ const AccountAdmin = () => {
             </div>
             <div className="input-style">
               <input
-                type="Number"
+                type="Phone"
                 name="zipcode"
+                maxLength={4}
+                pattern="\d{4}"
                 required = {true}
                 value={updatedData.zipcode}
                 onChange={(e) =>

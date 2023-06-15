@@ -8,17 +8,19 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import ReactStoreIndicator from "react-score-indicator";
 import { toast, ToastContainer } from "react-toastify";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 
-const Quiz=()=> {
+
+const Quiz = () => {
   const id = localStorage.getItem("id");
   const offerId = localStorage.getItem("offerId");
   const skills = localStorage.getItem("skills");
-  
+
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [offer,setOffer] = useState("");
+  const [offer, setOffer] = useState("");
   const [hasSkill, setHasSkill] = useState(false);
 
   const [newApplication, setNewApplication] = useState({
@@ -85,24 +87,20 @@ const Quiz=()=> {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 
-  
-
   useEffect(() => {
     async function fetchData() {
-      if(hasSkill && offer){
-      const response = await axios.get(
-        `http://localhost:8080/api/quizRouter/getquiz?tags=${offer}`
-      );
-      setQuiz(response.data);
-      console.log("==>", response.data.nbrOfQuestion);
-      console.log("response", response.data);
-      console.log("tag===>",offer);
-
+      if (hasSkill && offer) {
+        const response = await axios.get(
+          `http://localhost:8080/api/quizRouter/getquiz?tags=${offer}`
+        );
+        setQuiz(response.data);
+        console.log("==>", response.data.nbrOfQuestion);
+        console.log("response", response.data);
+        console.log("tag===>", offer);
+      }
     }
-
-  }
     fetchData();
-  }, [hasSkill,skills, offer]);
+  }, [hasSkill, skills, offer]);
   // console.log("======>", quiz);
 
   useEffect(() => {
@@ -112,7 +110,6 @@ const Quiz=()=> {
       );
       setOffer(response?.data?.offer?.skills);
       console.log("==>", response.data.offer.skills);
-
     }
     fetchData();
   }, []);
@@ -124,11 +121,10 @@ const Quiz=()=> {
     } else {
       setHasSkill(false);
     }
-    console.log("skills",skills);
-    console.log("offer skill",offer);
-    console.log("is is",hasSkill);
+    console.log("skills", skills);
+    console.log("offer skill", offer);
+    console.log("is is", hasSkill);
   }, [skills, offer]);
-
 
   const handleNextQuestion = () => {
     if (document.querySelector('input[name="option"]:checked')) {
@@ -157,38 +153,33 @@ const Quiz=()=> {
     }
   };
 
-
-
-const addApplication = async (e) => {
+  const addApplication = async (e) => {
     const final = currentQuestionIndex === quiz.length - 1;
     console.log(final);
     if (final) {
       try {
-        if(score >5){
-        const response = await axios.post(
-          "http://localhost:8080/api/ApplicationRouter/addscore",
-          { ...newApplication, result: score }
-        );
-        console.log("newapp=====>", response.data);
-        toast.success("Adding successfully!");
-        localStorage.removeItem("score");
-        localStorage.removeItem("offerId");
+        if (score > 5) {
+          const response = await axios.post(
+            "http://localhost:8080/api/ApplicationRouter/addscore",
+            { ...newApplication, result: score }
+          );
+          console.log("newapp=====>", response.data);
+          toast.success("Adding successfully!");
+          localStorage.removeItem("score");
+          localStorage.removeItem("offerId");
 
-
-        return true;
-      }
-      else{
-        toast.error("sorry your not succed!");
-        return false;
-      }
-              
+          return true;
+        } else {
+          toast.error("sorry your not succed!");
+          return false;
+        }
       } catch (error) {
         if (
           error.response &&
           error.response.status >= 400 &&
           error.response.status <= 500
         ) {
-          toast.error(error.message)
+          toast.error(error.message);
         }
         return false;
       }
@@ -196,8 +187,13 @@ const addApplication = async (e) => {
     // console.log("id score",idScore);
   };
 
-
-
+  function handleClick() {
+    window.location = "/offers";
+  }
+  
+  function handleApplication() {
+    window.location = "/candidacy";
+  }
 
   return (
     <>
@@ -223,34 +219,34 @@ const addApplication = async (e) => {
             </div>
             <label>Question : </label>
             <div className="quiz">
-            <div className="question">
-              {quiz[currentQuestionIndex].question}
-            </div>
-            <div className="answers">
-              {Object.keys(quiz[currentQuestionIndex].answers)
-                .filter(
-                  (key) => quiz[currentQuestionIndex].answers[key] !== null
-                )
-                .map((key, index) => (
-                  <div className="answers_container" key={key}>
-                    <div className="radio_group">
-                      <>
-                        <label>
-                          <input
-                            className="radio"
-                            type="radio"
-                            name="option"
-                            value={key}
-                          />
-                          {quiz[currentQuestionIndex].answers[key]}
-                        </label>
-                      </>
+              <div className="question">
+                {quiz[currentQuestionIndex].question}
+              </div>
+              <div className="answers">
+                {Object.keys(quiz[currentQuestionIndex].answers)
+                  .filter(
+                    (key) => quiz[currentQuestionIndex].answers[key] !== null
+                  )
+                  .map((key, index) => (
+                    <div className="answers_container" key={key}>
+                      <div className="radio_group">
+                        <>
+                          <label>
+                            <input
+                              className="radio"
+                              type="radio"
+                              name="option"
+                              value={key}
+                            />
+                            {quiz[currentQuestionIndex].answers[key]}
+                          </label>
+                        </>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
-            
-          </div><div className="next_container">
+            <div className="next_container">
               <Stack spacing={2}>
                 {currentQuestionIndex <= quiz.length && (
                   <Button
@@ -270,7 +266,8 @@ const addApplication = async (e) => {
                   </Button>
                 )}
               </Stack>
-            </div></div>
+            </div>
+          </div>
         ) : (
           <div>
             {" "}
@@ -295,8 +292,20 @@ const addApplication = async (e) => {
                       style={{ color: "#aaa" }}
                     />
                   }
-                  {score > 15 &&<h2 className="cong_msg">Congratulation you passed the quiz successfully</h2>}
-                  {score <= 15 &&<h2 className="inf_msg">Sorry you did not passed the quiz</h2>}
+                  {score > 15 && (
+                    <h2 className="cong_msg">
+                      Congratulations! You have successfully passed the quiz.
+                    </h2>
+                  )}
+                  {score <= 15 && (
+                    <h2 className="inf_msg">
+                      Sorry, but you did not pass the quiz successfully.
+                    </h2>
+                  )}
+                  <button className="back_icon">
+                    <ArrowBackIcon onClick={handleClick} />
+                  </button>
+                  <button className="see_app" onClick={handleApplication}>Show Applications</button>
                 </div>
               </div>
             ) : (
@@ -309,6 +318,5 @@ const addApplication = async (e) => {
       </div>
     </>
   );
-}
+};
 export default Quiz;
-

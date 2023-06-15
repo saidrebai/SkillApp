@@ -91,7 +91,7 @@ export default function Application() {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  // const today = new Date()
+  const today = new Date()
 
   // const currentoffer = scores.slice(startIndex, endIndex);
 
@@ -305,7 +305,7 @@ export default function Application() {
                                   onClick={() => toggleModal(null)}
                                 ></div>
                                 <div className="modal_content" key={score._id}>
-                                  <div className="score" key={score._id}>
+                                  <div className="scoree" key={score._id}>
                                     <ReactStoreIndicator
                                       value={selectedScore.result}
                                       maxValue={20}
@@ -353,7 +353,7 @@ export default function Application() {
                                       showTimeInput
                                       placeholderText="Select a date and time"
                                       className="input__date"
-                                      // minDate={today}
+                                      minDate={today}
                                       // disabled={!selectedDate}
                                     />
                                   </div>
