@@ -91,6 +91,7 @@ export default function Application() {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+  const today = new Date()
 
   // const currentoffer = scores.slice(startIndex, endIndex);
 
@@ -110,7 +111,6 @@ export default function Application() {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
-
 
   useEffect(() => {
     async function fetchData() {
@@ -228,6 +228,7 @@ export default function Application() {
       console.error(error);
     }
   };
+  
 
   return (
     <>
@@ -352,6 +353,7 @@ export default function Application() {
                                       showTimeInput
                                       placeholderText="Select a date and time"
                                       className="input__date"
+                                      minDate={today}
                                       // disabled={!selectedDate}
                                     />
                                   </div>

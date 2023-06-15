@@ -163,8 +163,8 @@ module.exports = {
   ResetPassword: async (req, res, next) => {
     try {
       const password = randomString(
-        10,
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};':\"\\|,.<>/?"
+        16,
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{};':\"\\|,.<>/?"
       );
       console.log(password);
       let email = {};
@@ -172,9 +172,10 @@ module.exports = {
       let adminFinded = await Admin.findOne(email);
       console.log("adminfind===>", adminFinded);
       if (adminFinded !== null) {
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(16);
         const hashedPassword = await bcrypt.hash(password, salt);
         adminFinded.password = hashedPassword;
+
         const token = jwt.sign(
           { _id: adminFinded._id },
           process.env.RESET_PASSWORD_KEY,
@@ -224,7 +225,7 @@ module.exports = {
                 next(e);
               }
             })
-          );
+          );  
       } else {
         res
           .status(404)

@@ -221,7 +221,7 @@ module.exports = {
   resetPassword: async (req, res, next) => {
     try {
       const password = randomString(
-        10,
+        16,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};':\"\\|,.<>/?"
       );
       console.log(password);
@@ -230,7 +230,7 @@ module.exports = {
       let UserFinded = await User.findOne(email);
       console.log("userfind===>", UserFinded);
       if (UserFinded !== null) {
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(16);
 
         const hashedPassword = await bcrypt.hash(password, salt);
         UserFinded.password = hashedPassword;

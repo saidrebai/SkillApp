@@ -331,6 +331,7 @@ export default function Card() {
 
                       {selectedOffer.name}
                     </div>
+                    
                     <div className="offer_container_info">
                       <label className="offre_label">
                         <PermIdentityOutlinedIcon /> Position :{" "}

@@ -29,9 +29,9 @@ function App() {
   const user = localStorage.getItem("token");
   const isAdmin = localStorage.getItem("isAdmin");
 
-  useEffect(() => {
-    checkTokenExpiration();
-  }, []);
+  // useEffect(() => {
+  //   checkTokenExpiration();
+  // }, []);
 
   console.log("isssss", isAdmin);
 
