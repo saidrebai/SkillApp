@@ -16,6 +16,9 @@ import Stack from "@mui/material/Stack";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import Popover from "@mui/material/Popover";
 import Badge from "@mui/material/Badge";
+import LogoutIcon from '@mui/icons-material/Logout';
+import ContentPasteOutlinedIcon from '@mui/icons-material/ContentPasteOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import axios from "axios";
 
 function ResponsiveAppBar() {
@@ -342,22 +345,21 @@ function ResponsiveAppBar() {
                 >
                   {!isSuperAdmin && isAdmin === "false" && (
                     <MenuItem key="Account" onClick={handleAccountClick}>
+                      <AccountCircleOutlinedIcon className="icns"/>
                       <Typography textAlign="center">Profil</Typography>
                     </MenuItem>
                   )}
-                  {/* {isAdmin === "true" && (
-                    <MenuItem key="Dashboard" onClick={handleDashboardClick}>
-                      <Typography textAlign="center">Dashboard</Typography>
-                    </MenuItem>
-                  )} */}
+
                   {isAdmin === "false" && (
                     <MenuItem key="application" onClick={handleAppClick}>
+                      <ContentPasteOutlinedIcon className="icns"/>
                       <Typography textAlign="center">
                         my Applications
                       </Typography>
                     </MenuItem>
                   )}
                   <MenuItem key="logout" onClick={handlelogoutClick}>
+                    <LogoutIcon className="icns"/>
                     <Typography textAlign="center">logout</Typography>
                   </MenuItem>
                 </Menu>

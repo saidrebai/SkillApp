@@ -1,6 +1,6 @@
-.quiz{
+.quiz {
   margin-right: auto;
-    max-width: 1093px;
+  max-width: 1093px;
 }
 .q_container {
   min-height: 80%;
@@ -26,12 +26,12 @@
 }
 .answers {
   display: flex;
-    width: 1246px;
-    height: 434px;
-    flex-wrap: wrap;
-    flex-direction: row;
-    /* background-color: aquamarine; */
-    align-content: flex-start;
+  width: 1246px;
+  height: 434px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  /* background-color: aquamarine; */
+  align-content: flex-start;
 }
 .answers_container {
   font-size: larger;
@@ -48,17 +48,18 @@
 .score {
   font-family: sans-serif;
   text-align: center;
+  padding: 120px;
 }
 .timer_container {
   position: absolute;
   top: 30px;
   right: -221px;
 }
-.next_container{
+.next_container {
   display: flex;
-    justify-content: center;
-    margin: 5px;
-    /* background-color: rgb(199, 125, 29); */
+  justify-content: center;
+  margin: 5px;
+  /* background-color: rgb(199, 125, 29); */
 }
 
 @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400);
@@ -180,15 +181,35 @@
   left: 9px;
   margin-top: 33px;
 }
-.cong_msg{
+.cong_msg {
   color: green;
+  padding: 42px;
 }
-.inf_msg{
+.inf_msg {
   color: red;
+  padding: 42px;
 }
-.radio{
+.radio {
   cursor: pointer;
 }
+.see_app {
+  background-color: #8d1a97;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  /* pointer-events: all; */
+  cursor: pointer;
+  height: 45px;
+}
+.back_icon{
+  margin: 5px;
+  background-color: #dee2e6;
+  border-radius: 7px;
+  width: 40px;
+  height: 42px;
+  border: none;
+}
+
 @keyframes spin1 {
   0% {
     transform: rotate(225deg);

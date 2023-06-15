@@ -251,7 +251,7 @@ export default function Card() {
           if (skills?.includes(comp)) {
             const confirmed = window.confirm(
               "Are you ready to get started with the test ?\n" +
-                "the test contain 20 question with one ansewr every 10 sec"
+                "the test contain 20 question with one ansewr every 15 sec"
             );
 
             if (confirmed) {

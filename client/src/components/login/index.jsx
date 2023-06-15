@@ -104,7 +104,7 @@ const Login = () => {
       window.location = "/ForgotPassword";
     } else {
       const requiredMessage = document.createElement("p");
-      requiredMessage.textContent = "Please fill in the required fields of an administrator or a user.";
+      requiredMessage.textContent = "Please fill in the required fields of a Recruter or a Candidat.";
       requiredMessage.style.color = "red";
 
       const formContainer = document.querySelector(".from_container");

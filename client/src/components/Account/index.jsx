@@ -101,13 +101,14 @@ const Account = () => {
                 <div className="userid" value={updatedData._id}></div>
                 <div className="title-input-stylee">
                   <div className="container-text-input">
-                    <label className="title-style">First_Name</label>
+                    <label className="title-style">First Name</label>
                   </div>
                 </div>
                 <div className="input-style">
                   <input
                     type="text"
                     name="firstName"
+                    maxLength={20}
                     required={true}
                     value={updatedData.firstName}
                     onChange={(e) => {
@@ -124,13 +125,14 @@ const Account = () => {
               <div className="form-input-container">
                 <div className="title-input-stylee">
                   <div className="containertext-input">
-                    <label className="title-style">Last_Name</label>
+                    <label className="title-style">Last Name</label>
                   </div>
                 </div>
                 <div className="input-style">
                   <input
                     type="text"
                     name="lastName"
+                    maxLength={20}
                     required={true}
                     value={updatedData.lastName}
                     onChange={(e) => {
@@ -147,7 +149,7 @@ const Account = () => {
               <div className="form-input-container">
                 <div className="title-input-stylee">
                   <div className="containertext-input">
-                    <label className="title-style">gender</label>
+                    <label className="title-style">Gender</label>
                   </div>
                 </div>
                 <div className="input-style">
@@ -176,7 +178,7 @@ const Account = () => {
               <div className="form-input-container">
                 <div className="title-input-stylee">
                   <div className="containertext-input">
-                    <label className="title-style">birthDate</label>
+                    <label className="title-style">Birthdate</label>
                   </div>
                 </div>
                 <div className="input-style">
@@ -227,7 +229,7 @@ const Account = () => {
               <div className="form-input-container">
                 <div className="title-input-stylee">
                   <div className="containertext-input">
-                    <label className="title-style">country</label>
+                    <label className="title-style">Country</label>
                   </div>
                 </div>
                 <div className="input-style">
@@ -572,13 +574,14 @@ const Account = () => {
               <div className="form-input-container">
                 <div className="title-input-stylee">
                   <div className="containertext-input">
-                    <label className="title-style">town</label>
+                    <label className="title-style">Town</label>
                   </div>
                 </div>
                 <div className="input-style">
                   <input
                     type="text"
                     name="town"
+                    maxLength={20}
                     value={updatedData.town}
                     required={true}
                     onChange={(e) =>
@@ -602,6 +605,7 @@ const Account = () => {
                   <input
                     type="text"
                     name="Address"
+                    maxLength={35}
                     value={updatedData.address}
                     required={true}
                     onChange={(e) => {

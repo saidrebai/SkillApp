@@ -71,20 +71,13 @@ const Signup = () => {
               type="text"
               placeholder="Name"
               name="name"
+              maxLength={20}
               onChange={handleChange}
               value={data.name}
               required
               className="inpute-signup"
             />
-            {/* <input
-              type="text"
-              placeholder="country"
-              name="country"
-              onChange={handleChange}
-              value={data.country}
-              required
-              className="input"
-            /> */}
+
              <div class="custom-select">
               <select className="container-select" name="country" onChange={handleChange} value={data.country} required>
                 <option value = "" disabled selected>Country</option>
@@ -338,6 +331,7 @@ const Signup = () => {
               type="text"
               placeholder="town"
               name="town"
+              maxLength={20}
               onChange={handleChange}
               value={data.town}
               required
@@ -347,15 +341,18 @@ const Signup = () => {
               type="text"
               placeholder="address"
               name="address"
+              maxLength={40}
               onChange={handleChange}
               value={data.address}
               required
               className="inpute-signup"
             />
             <input
-              type="number"
+              type="Phone"
               placeholder="Zipcode"
               name="zipcode"
+              maxLength={4}
+              pattern="\d{4}"
               onChange={handleChange}
               value={data.zipcode}
               required
@@ -376,6 +373,7 @@ const Signup = () => {
               type="email"
               placeholder="email"
               name="email"
+              maxLength={50}
               onChange={handleChange}
               value={data.email}
               required

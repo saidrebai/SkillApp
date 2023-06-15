@@ -13,9 +13,7 @@
   font-weight: bold;
   color: #6a0174;
   font-family: inherit;
-  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
-    both;
-  animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+	animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
 }
 .h2_main {
   font-size: 55px;
@@ -23,9 +21,7 @@
   font-weight: bold;
   color: #6a0174;
   font-family: inherit;
-  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
-    both;
-  animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+	animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
 }
 .h3_main {
   font-size: 55px;
@@ -33,9 +29,7 @@
   color: #6a0174;
   font-family: inherit;
   border-bottom: 2px solid black;
-  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
-    both;
-  animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+	animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
 }
 .ova_text {
   font-size: x-large;
@@ -144,6 +138,7 @@
 
 .btn_send:hover {
   background-color: #6a0174;
+  animation: wobble-hor-bottom 0.8s both;
 }
 .text-overlay {
   padding: 20px;
@@ -179,6 +174,7 @@
 
 .btn_more:hover {
   background-color: #6a0174;
+  animation: wobble-hor-bottom 0.8s both;
 }
 
 .home-right {
@@ -281,6 +277,7 @@
 }
 .sign_up_button:hover {
   background-color: #6a0174;
+  animation: wobble-hor-bottom 0.8s both;
 }
 
 @-webkit-keyframes fade-in-right {
@@ -369,5 +366,40 @@
     -webkit-transform: translateX(0) rotate(0deg);
             transform: translateX(0) rotate(0deg);
     opacity: 1;
+  }
+}
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes wobble-hor-bottom {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
+  }
+  15% {
+    transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    transform: translateX(-6px) rotate(-1.2deg);
   }
 }
