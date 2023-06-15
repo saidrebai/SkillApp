@@ -9,13 +9,13 @@ const passwordComplexity = require("joi-password-complexity");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
-const { privateKey } = crypto.generateKeyPairSync("rsa", {
-  modulusLength: 4096,
-  privateKeyEncoding: {
-    type: "pkcs8",
-    format: "pem",
-  },
-});
+// const { privateKey } = crypto.generateKeyPairSync("rsa", {
+//   modulusLength: 4096,
+//   privateKeyEncoding: {
+//     type: "pkcs8",
+//     format: "pem",
+//   },
+// });
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -54,10 +54,10 @@ module.exports = {
         return res.status(401).send({ message: "Invalid Email or Password" });
 
       const token = user.generateAuthToken();
-
+      const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
       res.status(200).send({
         data: token,
-        userId: user._id,
+        userId: decoded._id,
         firstName: user.firstName,
         message: "logged in successfully",
       });
@@ -147,24 +147,7 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
-  // deleteUser: function (req, res) {
-  //   User.findByIdAndRemove({ _id: req.params.id }, (err, user) => {
-  //     if (err) {
-  //       res.status(500),
-  //         json({
-  //           msg: "erreur",
-  //           status: 500,
-  //           data: null,
-  //         });
-  //     } else {
-  //       res.status(200).json({
-  //         msg: "user deleted!",
-  //         status: 200,
-  //         data: user,
-  //       });
-  //     }
-  //   });
-  // },
+
   deleteUser: async function (req, res) {
     try {
       const idUser = req.params.id;
@@ -238,7 +221,7 @@ module.exports = {
   resetPassword: async (req, res, next) => {
     try {
       const password = randomString(
-        10,
+        16,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};':\"\\|,.<>/?"
       );
       console.log(password);
@@ -247,7 +230,7 @@ module.exports = {
       let UserFinded = await User.findOne(email);
       console.log("userfind===>", UserFinded);
       if (UserFinded !== null) {
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(16);
 
         const hashedPassword = await bcrypt.hash(password, salt);
         UserFinded.password = hashedPassword;

@@ -7,7 +7,6 @@ const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const { ContactModel } = require("../models/contactModel");
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -44,10 +43,12 @@ module.exports = {
 
       const token = admin.generateAuthToken();
       const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
+     const expiresIn = 60; // Expiration time in seconds
       res.status(200).send({
         data: token,
         _id: decoded._id,
         name: admin.name,
+        expiresIn: expiresIn,
         message: "logged in successfully",
       });
     } catch (error) {
@@ -162,8 +163,8 @@ module.exports = {
   ResetPassword: async (req, res, next) => {
     try {
       const password = randomString(
-        10,
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};':\"\\|,.<>/?"
+        16,
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{};':\"\\|,.<>/?"
       );
       console.log(password);
       let email = {};
@@ -171,9 +172,10 @@ module.exports = {
       let adminFinded = await Admin.findOne(email);
       console.log("adminfind===>", adminFinded);
       if (adminFinded !== null) {
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(16);
         const hashedPassword = await bcrypt.hash(password, salt);
         adminFinded.password = hashedPassword;
+
         const token = jwt.sign(
           { _id: adminFinded._id },
           process.env.RESET_PASSWORD_KEY,
@@ -223,7 +225,7 @@ module.exports = {
                 next(e);
               }
             })
-          );
+          );  
       } else {
         res
           .status(404)

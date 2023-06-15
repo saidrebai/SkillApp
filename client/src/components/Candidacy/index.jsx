@@ -55,7 +55,7 @@ const Candidacy = () => {
     maxHeight: "100%",
   });
 
-  const steps = ["Applied ", "Quiz Completed", "Accepted"];
+  const steps = ["Applied ", "Quiz Completed", "Confirmation"];
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -68,29 +68,32 @@ const Candidacy = () => {
     setCurrentPage(value);
   };
 
-  const step = (acc) => {
-    if (acc === false) {
+  const step = (acc,ref) => {
+    if (acc === false && ref === false) {
       return 2;
     }
     return 3;
   };
 
-  const getStepColor = (accepted, refused, theme) => {
+  const getStepColor = (accepted, refused) => {
     if (refused === true) {
-      return theme?.palette?.error?.main; // Red color for refused
+      return "red"; // Red color for refused
     }
     if (accepted === true) {
-      return theme?.palette?.success?.main; // Green color for accepted
+      return "green"; // Green color for accepted
     }
-    return theme?.palette?.primary?.main; // Default color for other steps
+    // if(step(acc,ref) === 2 ){
+    // return "blue"; // Default color for other steps
+    // }
+    // return "blue"
   };
 
-  const CustomStepper = styled(Stepper)(({ theme }) => ({
-    "& .MuiStepLabel-active": {
-      color: (props) => getStepColor(props?.accepted, props?.refused, theme),
+  const CustomStepper = styled(Stepper)(({  accepted, refused }) => ({
+    "& .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active": {
+      color: "gray",
     },
-    "& .MuiStepIcon-active": {
-      color: (props) => getStepColor(props?.accepted, props?.refused, theme),
+    "& .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed": {
+      color: getStepColor (accepted, refused),
     },
     "& .MuiStepIcon-text": {
       fill: "#fff",
@@ -149,14 +152,11 @@ const Candidacy = () => {
                     <Grid item>
                       <Typography sx={{ cursor: "pointer" }} variant="body2">
                         <Box sx={{ width: "100%" }}>
-                          <CustomStepper
-                            activeStep={step(cand.accepted)}
+                        <CustomStepper
+                            activeStep={step(cand.accepted,cand.refused)}
                             alternativeLabel
                             accepted={cand?.accepted}
                             refused={cand?.refused}
-                            onChange={
-                             getStepColor(cand.accepted, cand.refused) 
-                            }
                           >
                             {steps.map((label) => (
                               <Step key={label}>

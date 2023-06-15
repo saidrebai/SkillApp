@@ -309,7 +309,7 @@ export default function Card() {
           </Search>
         </div>
         <table>
-          <tr className="table1">
+          <tr className="table11">
             {offers.length > 0 ? (
               offers
                 .filter((selectedOffer) => {
@@ -331,6 +331,7 @@ export default function Card() {
 
                       {selectedOffer.name}
                     </div>
+                    
                     <div className="offer_container_info">
                       <label className="offre_label">
                         <PermIdentityOutlinedIcon /> Position :{" "}
