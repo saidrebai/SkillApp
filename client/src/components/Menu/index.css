@@ -69,3 +69,12 @@
     margin-top: 10px;
     color: #1564bf;
 }
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root:hover {
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    color: blue;
+    background-color: transparent;
+}
+.icns{
+    margin-right: 7px;
+}

@@ -304,7 +304,7 @@ export default function Application() {
                                   onClick={() => toggleModal(null)}
                                 ></div>
                                 <div className="modal_content" key={score._id}>
-                                  <div className="score" key={score._id}>
+                                  <div className="scoree" key={score._id}>
                                     <ReactStoreIndicator
                                       value={selectedScore.result}
                                       maxValue={20}
