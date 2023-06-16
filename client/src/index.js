@@ -7,14 +7,16 @@ import ResponsiveAppBar from "./components/Menu/menu";
 import Footer from "./components/Footer/index";
 
 
-
+  const token = localStorage.getItem("token");
+  const isAdmin = localStorage.getItem("isAdmin");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 
 root.render(
   <BrowserRouter>
-    {(window.location.pathname !== "/login" &&
+    {((token && isAdmin === "false"||!token)) &&
+    (window.location.pathname !== "/login" &&
       window.location.pathname !== "/signupAdmin" &&
       window.location.pathname !== "/signup" &&
       window.location.pathname !== "/dashboardA" &&
@@ -24,11 +26,16 @@ root.render(
       window.location.pathname !== "/calendar" &&
       window.location.pathname !== "/ForgotPassword" &&
       window.location.pathname !== "/resetpassword" &&
+      window.location.pathname !== "/Error" &&
+      // (!token && window.location.pathname !== "/answerquiz" )&&
+      // (!token && window.location.pathname !== "/candidacy" )&&
+      // (!token && window.location.pathname !== "/Account" )&&
       window.location.pathname !== "/AccountA") && <ResponsiveAppBar />}
     <React.StrictMode>
       <App />
     </React.StrictMode>
-    {(window.location.pathname !== "/login" &&
+    {((token && isAdmin === "false"||!token)) &&
+     (window.location.pathname !== "/login" &&
       window.location.pathname !== "/signupAdmin" &&
       window.location.pathname !== "/signup" &&
       window.location.pathname !== "/dashboardA" &&
@@ -38,6 +45,10 @@ root.render(
       window.location.pathname !== "/calendar" &&
       window.location.pathname !== "/ForgotPassword" &&
       window.location.pathname !== "/resetpassword" &&
+      window.location.pathname !== "/Error" &&
+      // (!token && window.location.pathname !== "/answerquiz" )&&
+      // (!token && window.location.pathname !== "/candidacy" )&&
+      // (!token && window.location.pathname !== "/Account" )&&
       window.location.pathname !== "/AccountA") && <Footer />}
   </BrowserRouter>
 );

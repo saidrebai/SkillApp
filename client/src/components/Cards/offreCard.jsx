@@ -187,7 +187,7 @@ export default function Card() {
           console.log("=>", response.data);
           setUsers(response.data);
           localStorage.setItem("offerId", updatedOffer._id);
-          // localStorage.removeItem("idpdf");
+          if(response){localStorage.removeItem("idpdf");}
         } catch (error) {
           console.error(error);
         }
@@ -211,7 +211,7 @@ export default function Card() {
             formData
           );
           console.log("frfr", res);
-          localStorage.setItem("skills", res.skills);
+          // localStorage.setItem("skills", res.skills);
           setSkills(res.skills);
           setIsAnalyse(true);
           if (res) {
@@ -248,7 +248,9 @@ export default function Card() {
           setSubmited(false);
           setIsOfferUpdated(false);
           setIsAnalyse(false);
-          if (skills?.includes(comp)) {
+          const commps = comp?.toString()?.toUpperCase();
+          const skill = skills.some((skill) => skill?.toUpperCase() === commps);
+          if (skill) {
             const confirmed = window.confirm(
               "Are you ready to get started with the test ?\n" +
                 "the test contain 20 question with one ansewr every 15 sec"

@@ -416,6 +416,7 @@ const GetOffer = () => {
                             className="inputt"
                             type="text"
                             name="name"
+                            maxLength={30}
                             required={true}
                             value={updatedOffer.name}
                             onChange={(e) => {
@@ -441,6 +442,7 @@ const GetOffer = () => {
                             className="inputt"
                             type="text"
                             name="description"
+                            maxLength={60}
                             required={true}
                             value={updatedOffer.description}
                             onChange={(e) => {
@@ -501,6 +503,7 @@ const GetOffer = () => {
                             className="inputt"
                             type="text"
                             name="address"
+                            maxLength={50}
                             required={true}
                             value={updatedOffer.address}
                             onChange={(e) => {

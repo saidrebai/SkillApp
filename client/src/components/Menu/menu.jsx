@@ -72,6 +72,9 @@ function ResponsiveAppBar() {
     localStorage.removeItem("firstName");
     localStorage.removeItem("isSuperAdmin");
     localStorage.removeItem("ids");
+    localStorage.removeItem("skills");
+    localStorage.removeItem("offerId");
+    localStorage.removeItem("myUser");
   };
   const handleHomeClick = () => {
     window.location.href = "/";

@@ -130,6 +130,7 @@ const AddOffers = () => {
                           <input
                             type="Text"
                             name="name"
+                            maxLength={30}
                             required
                             onChange={handleChange}
                             value={data.name}
@@ -150,6 +151,7 @@ const AddOffers = () => {
                           <input
                             type="Text"
                             name="description"
+                            maxLength={60}
                             required
                             onChange={handleChange}
                             value={data.description}
@@ -198,6 +200,7 @@ const AddOffers = () => {
                           <input
                             type="Text"
                             name="address"
+                            maxLength={50}
                             required
                             onChange={handleChange}
                             value={data.address}
