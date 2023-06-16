@@ -49,6 +49,8 @@ const Signup = () => {
     }
   };
 
+  
+
   return (
     <>
       <ToastContainer />
@@ -449,6 +451,7 @@ const Signup = () => {
                 value={data.birthDate}
                 required
                 className="inpute-signup"
+                max="2004-12-31"
               />
 
               <div class="custom-select">

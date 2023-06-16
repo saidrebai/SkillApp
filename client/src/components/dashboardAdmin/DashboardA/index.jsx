@@ -14,7 +14,9 @@ const DashboardA = () => {
 
   
 
+  
   const reportURL = `https://app.powerbi.com/reportEmbed?reportId=bd9f6d82-454b-4057-a402-77f504ec6824&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61&filter=offermodels/admin eq '${id}'`;
+  // const reportURL = `https://app.powerbi.com/reportEmbed?reportId=b13d6660-29f8-48c4-b227-37e4f332f33e&autoAuth=true&ctid=dbd6664d-4eb9-46eb-99d8-5c43ba153c61&filter=offermodels/admin eq '${id}'`
   return (
     <Box m="20px">
       {/* HEADER */}

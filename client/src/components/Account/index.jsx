@@ -187,6 +187,7 @@ const Account = () => {
                     name="birthDate"
                     value={updatedData.birthDate || newData.birthDate}
                     required={true}
+                    max="2004-12-31"
                     onChange={(e) =>
                       setUpdatedData({
                         ...updatedData,
