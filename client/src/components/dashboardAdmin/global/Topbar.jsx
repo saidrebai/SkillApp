@@ -20,6 +20,9 @@ const Topbar = () => {
     localStorage.removeItem("firstName");
     localStorage.removeItem("isSuperAdmin");
     localStorage.removeItem("ids");
+    localStorage.removeItem("skills")
+    localStorage.removeItem("offerId");
+    localStorage.removeItem("myUser");
   };
 
 
