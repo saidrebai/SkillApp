@@ -34,7 +34,7 @@ const DashboardA = () => {
         >
           <Box
             mt="20px"
-            p="0 30px"
+            p="0 20px"
             display="flex "
             justifyContent="space-between"
             alignItems="center"
@@ -48,8 +48,8 @@ const DashboardA = () => {
             <iframe
               src={reportURL}
               title="Final BI"
-              width="1140"
-              height="541.25"
+              width="1200"
+              height="490"
               frameborder="0"
               allowFullScreen="true"
             ></iframe>

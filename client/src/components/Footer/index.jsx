@@ -25,6 +25,7 @@ const handleContactClick = () => {
   const contactSection = document.getElementById("contact");
   contactSection.scrollIntoView({ behavior: "smooth" });
 };
+const token = localStorage.getItem("token");
 
 function Footer() {
   return (
@@ -40,7 +41,7 @@ function Footer() {
             <CDBBox alignSelf="center">
               <a href="/" className="d-flex align-items-center p-0 text-dark">
                 <img alt="logo" src={image} width="80px" />
-                <h2 className="ms-3 h5 font-weight-bold">Skills</h2>
+                {/* <h2 className="ms-3 h5 font-weight-bold">Skills</h2> */}
               </a>
               <CDBBox className="mt-5" display="flex">
                 <CDBBtn flat color="dark" className="p-2">
@@ -95,8 +96,8 @@ function Footer() {
                 flex="column"
                 style={{ cursor: "pointer" }}
               >
-                <p onClick={handleLoginClick}>Sign Up</p>
-                <p onClick={handleLoginClick}>Sign In</p>
+                {!token && <p onClick={handleLoginClick}>Sign Up</p>}
+                {!token && <p onClick={handleLoginClick}>Sign In</p>}
               </CDBBox>
             </CDBBox>
           </CDBBox>
