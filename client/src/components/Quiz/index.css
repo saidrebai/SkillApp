@@ -27,7 +27,7 @@
 .answers {
   display: flex;
   width: 1246px;
-  height: 434px;
+  height: 556px;
   flex-wrap: wrap;
   flex-direction: row;
   /* background-color: aquamarine; */
@@ -42,7 +42,7 @@
   border-radius: 7px;
   background-color: white;
   width: 500px;
-  height: 120px;
+  height: 160px;
   display: flex;
 }
 .score {
@@ -52,8 +52,9 @@
 }
 .timer_container {
   position: absolute;
-  top: 30px;
-  right: -221px;
+  right: 0;
+  /* top: 10px; */
+  left: 82%;
 }
 .next_container {
   display: flex;
@@ -68,14 +69,14 @@
   box-sizing: border-box;
 }
 
-.timer-group {
+/* .timer-group {
   height: 400px;
   margin: 0 auto;
   position: absolute;
   right: 50px;
   top: 50px;
   width: 400px;
-}
+} */
 
 .timer {
   border-radius: 50%;

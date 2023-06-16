@@ -22,16 +22,17 @@ import Calendar from "./components/dashboardAdmin/Calendar";
 import Candidacy from "./components/Candidacy";
 import Recrutments from "./components/dashboardAdmin/Recrutments";
 import checkTokenExpiration from "./VerifyTokenExpiration";
+import Error from "./components/Error";
 
 
 function App() {
 
-  const user = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const isAdmin = localStorage.getItem("isAdmin");
 
-  // useEffect(() => {
-  //   checkTokenExpiration();
-  // }, []);
+  useEffect(() => {
+    checkTokenExpiration();
+  }, []);
 
   console.log("isssss", isAdmin);
 
@@ -42,7 +43,7 @@ function App() {
   {isAdmin==="true" && window.location.pathname !== "/" && window.location.pathname !== "/resetpassword"  && window.location.pathname !== "/ForgotPassword"
   && window.location.pathname !== "/login" && window.location.pathname !== "/signup" && window.location.pathname !== "/signupAdmin" &&
   window.location.pathname !== "/Account" && window.location.pathname !== "/candidacy" && window.location.pathname !== "/offers" &&
-  window.location.pathname !== "/answerquiz" &&
+  window.location.pathname !== "/answerquiz" && window.location.pathname !== "/Error" &&
   (<ColorModeContext.Provider value={colorMode}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -61,26 +62,44 @@ function App() {
       </ThemeProvider>
     </ColorModeContext.Provider>)}
     <Routes>
-      {(isAdmin === "false" || !user) &&<Route path="/" exact element={<Main />} />}
-      {!user && <Route path="/signup" exact element={<Signup />} />}
-      {!user && <Route path="/signupAdmin" exact element={<SignupAdmin />} />}
-      {!user && <Route path="/login" exact element={<Login />} />}
-      {user && isAdmin === "false" && (
+      {(isAdmin === "false" || !token) &&<Route path="/" exact element={<Main />} />}
+      {!token && <Route path="/signup" exact element={<Signup />} />}
+      {!token && <Route path="/signupAdmin" exact element={<SignupAdmin />} />}
+      {!token && <Route path="/login" exact element={<Login />} />}
+      {!token && <Route path="/AccountA" exact element={<Login />} />}
+      {!token && <Route path="/Account" exact element={<Login />} />}
+      {!token && <Route path="/ForgotPassword" exact element={<ForgotPassword />} />}
+      {!token &&<Route path="/resetpassword" exact element={<ResetPassword />} />}
+      {token && isAdmin === "false" && (
         <Route path="/Account" exact element={<Account />} />
       )}
-      {user && isAdmin === "false" && (
+      {token && isAdmin === "false" && (
         <Route path="/candidacy" exact element={<Candidacy />} />
       )}
-      {!user && <Route path="/AccountA" exact element={<Login />} />}
+     
       {(isAdmin === "false" || !isAdmin) && (
         <Route path="/offers" exact element={<Offers />} />
       )}
-      <Route path="//" element={<Navigate replace to="/login" />} />
-
-      {!user && <Route path="/ForgotPassword" exact element={<ForgotPassword />} />}
-      <Route path="/resetpassword" exact element={<ResetPassword />} />
+      <Route path="//" element={<Navigate replace to="/login" />} />  
       {isAdmin === "false"&& <Route path="/answerquiz" exact element={<Quiz />} />}
 
+      <Route path="/Error" exact element={<Error />} />
+      <Route path="/offers" exact element={<Error />} />
+      <Route path="/signup" exact element={<Error />} />
+      <Route path="/signupAdmin" exact element={<Error />} />
+      <Route path="/login" exact element={<Error />} />
+      <Route path="/candidacy" exact element={<Error />} />
+      <Route path="/answerquiz" exact element={<Error />} />
+      {(!token || isAdmin === "false") && (<Route path="/dashboardA" exact element={<Error />} />)}
+      {(!token || isAdmin === "false") && (<Route path="/getoffers" exact element={<Error />} />)}
+      {(!token || isAdmin === "false" )&& (<Route path="/application" exact element={<Error />} />)}
+      {(!token || isAdmin === "false" )&& (<Route path="/recrutments" exact element={<Error />} />)}
+      {(!token || isAdmin === "false" )&& (<Route path="/calendar" exact element={<Error />} />)}
+      {(!token || isAdmin === "false") && (<Route path="/AccountA" exact element={<Error />} />)}
+      {isAdmin ==="true" && <Route path="/Account" exact element={<Error />} />}
+      {/* {token && <Route path="/ForgotPassword" exact element={<Error />} />}
+      {token && <Route path="/resetpassword" exact element={<Error />} />} */}
+    
     </Routes></>
   );
 }

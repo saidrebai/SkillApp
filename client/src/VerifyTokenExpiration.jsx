@@ -1,4 +1,3 @@
-import React,{useEffect,useState} from "react";
 import jwtDecode from 'jwt-decode';
 import axios from "axios";
 
@@ -14,6 +13,14 @@ axios.interceptors.request.use(
         if (decodedToken.exp < currentTime) {
           // Token has expired, remove it from local storage
           localStorage.removeItem('token');
+          localStorage.removeItem("id");
+          localStorage.removeItem("isAdmin");
+          localStorage.removeItem("firstName");
+          localStorage.removeItem("isSuperAdmin");
+          localStorage.removeItem("ids");
+          localStorage.removeItem("skills")
+          localStorage.removeItem("offerId");
+          localStorage.removeItem("myUser");
           window.location = "/login"
           // Perform any additional logout actions or redirects
           // e.g., redirect to the login page or show a logout message

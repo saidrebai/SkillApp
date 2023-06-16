@@ -15,13 +15,13 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 const Quiz = () => {
   const id = localStorage.getItem("id");
   const offerId = localStorage.getItem("offerId");
-  const skills = localStorage.getItem("skills");
+  // const skills = localStorage.getItem("skills");
 
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [offer, setOffer] = useState("");
-  const [hasSkill, setHasSkill] = useState(false);
+  // const [hasSkill, setHasSkill] = useState(false);
 
   const [newApplication, setNewApplication] = useState({
     offer: offerId,
@@ -89,7 +89,7 @@ const Quiz = () => {
 
   useEffect(() => {
     async function fetchData() {
-      if (hasSkill && offer) {
+      if (  offer) {
         const response = await axios.get(
           `http://localhost:8080/api/quizRouter/getquiz?tags=${offer}`
         );
@@ -100,7 +100,7 @@ const Quiz = () => {
       }
     }
     fetchData();
-  }, [hasSkill, skills, offer]);
+  }, [offer]);
   // console.log("======>", quiz);
 
   useEffect(() => {
@@ -114,17 +114,17 @@ const Quiz = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    // Check if competence contains skill
-    if (skills.includes(offer)) {
-      setHasSkill(true);
-    } else {
-      setHasSkill(false);
-    }
-    console.log("skills", skills);
-    console.log("offer skill", offer);
-    console.log("is is", hasSkill);
-  }, [skills, offer]);
+  // useEffect(() => {
+  //   // Check if competence contains skill
+  //   if (skills.includes(offer)) {
+  //     setHasSkill(true);
+  //   } else {
+  //     setHasSkill(false);
+  //   }
+  //   console.log("skills", skills);
+  //   console.log("offer skill", offer);
+  //   console.log("is is", hasSkill);
+  // }, [skills, offer]);
 
   const handleNextQuestion = () => {
     if (document.querySelector('input[name="option"]:checked')) {
