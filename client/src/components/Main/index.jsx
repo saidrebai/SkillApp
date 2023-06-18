@@ -84,7 +84,8 @@ const Main = () => {
         <div className="main_content">
           <div id="home">
             <div className="home-left">
-              <h1 className="h1_main">WELCOME TO OUR APPLICATION </h1>
+              <h1 className="h1_main">WELCOME TO OUR</h1>
+              <h1 className="h1_main">APPLICATION </h1>
               <p>
                 Discover limitless possibilities at Skills !  <br /> 
                 Connect, grow, and succeed in our thriving online community. Whether you're a professional, a talent, or just curious,we've got you covered.  <br /> 
