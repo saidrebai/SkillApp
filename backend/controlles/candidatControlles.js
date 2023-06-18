@@ -235,11 +235,11 @@ module.exports = {
         const hashedPassword = await bcrypt.hash(password, salt);
         UserFinded.password = hashedPassword;
 
-        const token = jwt.sign(
-          { _id: UserFinded._id },
-          process.env.RESET_PASSWORD_KEY,
-          { expiresIn: "20m" }
-        );
+        // const token = jwt.sign(
+        //   { _id: UserFinded._id },
+        //   process.env.RESET_PASSWORD_KEY,
+        //   { expiresIn: "20m" }
+        // );
         const transporter = nodemailer.createTransport({
           service: "Gmail",
           auth: {
@@ -283,7 +283,7 @@ module.exports = {
             })
           );
       } else {
-        res.status(404).json({ message: "No user found with ID supplied" });
+        res.status(404).json({ message: "No user found " });
       }
     } catch (error) {
       console.error(error);

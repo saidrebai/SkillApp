@@ -139,7 +139,7 @@ export default function Card() {
           toast.error("PDF file only");
         } else {
           console.error(error);
-          toast.error("err");
+          toast.error(error.message);
         }
       }
     }

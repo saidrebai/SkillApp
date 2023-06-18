@@ -43,12 +43,12 @@ module.exports = {
 
       const token = admin.generateAuthToken();
       const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
-     const expiresIn = 60; // Expiration time in seconds
+    //  const expiresIn = 60; // Expiration time in seconds
       res.status(200).send({
         data: token,
         _id: decoded._id,
         name: admin.name,
-        expiresIn: expiresIn,
+        // expiresIn: expiresIn,
         message: "logged in successfully",
       });
     } catch (error) {
@@ -176,11 +176,11 @@ module.exports = {
         const hashedPassword = await bcrypt.hash(password, salt);
         adminFinded.password = hashedPassword;
 
-        const token = jwt.sign(
-          { _id: adminFinded._id },
-          process.env.RESET_PASSWORD_KEY,
-          { expiresIn: "20m" }
-        );
+        // const token = jwt.sign(
+        //   { _id: adminFinded._id },
+        //   process.env.RESET_PASSWORD_KEY,
+        //   { expiresIn: "20m" }
+        // );
         const transporter = nodemailer.createTransport({
           service: "Gmail",
           auth: {
@@ -229,7 +229,7 @@ module.exports = {
       } else {
         res
           .status(404)
-          .json({ message: "No administrator found with ID supplied" });
+          .json({ message: "No administrator found " });
       }
     } catch (error) {
       console.error(error);
