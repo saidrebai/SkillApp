@@ -51,6 +51,10 @@ module.exports = {
       if (!req.file) {
         return res.status(400).json({ error: "No file uploaded" });
       }
+    // Check if the uploaded file is not a PDF
+    if (req.file.mimetype !== "application/pdf") {
+      throw new Error("PDF file only");
+    }
 
       // Create a new PDF document with the file data
       const pdf = new PDF({
@@ -72,7 +76,12 @@ module.exports = {
       });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Internal Server Error" });
+      if (error.message === "PDF file only") {
+        res.status(415).json({ message: "PDF file only" });
+      } else {
+        res.status(500).json({ message: "Internal Server Error" });
+      }
+  
     }
   },
 

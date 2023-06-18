@@ -211,7 +211,11 @@ export default function Application() {
       );
       setAccepted(response?.data);
       console.log("candidacy accepted", response.data);
-      window.location.reload();
+      toast.success("email sent succesfully");
+      const isTrue = true ;
+      if (isTrue){
+        window.location.reload();
+      }
     } catch (error) {
       console.error(error);
     }
@@ -223,7 +227,11 @@ export default function Application() {
       );
       setRefused(response?.data);
       console.log("candidacy refused", response.data);
-      window.location.reload();
+      toast.success("email sent succesfully");
+      const isTrue = true ;
+      if (isTrue){
+        window.location.reload();
+      }
     } catch (error) {
       console.error(error);
     }
