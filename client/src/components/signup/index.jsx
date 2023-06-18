@@ -19,6 +19,8 @@ const Signup = () => {
     gender: "",
     age: "",
   });
+
+  const [type, setType] = useState("password");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -48,8 +50,13 @@ const Signup = () => {
       }
     }
   };
-
-  
+  const handleToggle = () => {
+    if (type === "password") {
+      setType("text");
+    } else {
+      setType("password");
+    }
+  };
 
   return (
     <>
@@ -491,7 +498,7 @@ const Signup = () => {
                 className="inpute-signup"
               />
               <input
-                type="password"
+                type={type}
                 placeholder="password"
                 name="password"
                 onChange={handleChange}
@@ -499,6 +506,11 @@ const Signup = () => {
                 required
                 className="inpute-signup"
               />
+
+              <div className="pass_pass">
+                <input type="checkbox" onClick={handleToggle} />
+              </div>
+
               {error && <div className="error_msg">{error}</div>}
               <button type="submit" className="white_btn">
                 Sign Up
