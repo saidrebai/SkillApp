@@ -240,7 +240,7 @@ const GetOffer = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Deletion failed!");
+        toast.error("Delete failed!");
       });
   };
 
