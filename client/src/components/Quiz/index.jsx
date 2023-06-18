@@ -158,7 +158,7 @@ const Quiz = () => {
     console.log(final);
     if (final) {
       try {
-        if (score > 5) {
+        if (score >= 15) {
           const response = await axios.post(
             "http://localhost:8080/api/ApplicationRouter/addscore",
             { ...newApplication, result: score }
@@ -170,7 +170,7 @@ const Quiz = () => {
 
           return true;
         } else {
-          toast.error("sorry your not succed!");
+          toast.error("sorry you failed!");
           return false;
         }
       } catch (error) {
@@ -292,12 +292,12 @@ const Quiz = () => {
                       style={{ color: "#aaa" }}
                     />
                   }
-                  {score > 15 && (
+                  {score >= 15 && (
                     <h2 className="cong_msg">
                       Congratulations! You have successfully passed the quiz.
                     </h2>
                   )}
-                  {score <= 15 && (
+                  {score < 15 && (
                     <h2 className="inf_msg">
                       Sorry, but you did not pass the quiz successfully.
                     </h2>

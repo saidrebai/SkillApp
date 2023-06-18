@@ -135,11 +135,11 @@ export default function Card() {
         setSubmited(true);
         toast.success("uploaded succesfuly");
       } catch (error) {
-        if (error.response && error.response.status === 415) {
-          toast.error("PDF file only");
+        if (error.response.status === 415) {
+          toast.error("PDF file only!");
         } else {
-          console.error(error);
-          toast.error(error.message);
+          console.error(error.response.status===500);
+          toast.error("Erreur Network");
         }
       }
     }
